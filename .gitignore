@@ -4,6 +4,8 @@
 /Temp/
 /Obj/
 /node_modules/
+# Next.js build output
+/.next/
 
 *.csproj.user
 *.sln

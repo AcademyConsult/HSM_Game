@@ -156,6 +156,50 @@ body {
   padding: 6px 12px;
 }
 
+/* Standard-Chevron ausblenden */
+.accordion-trigger svg,
+[data-state] svg,
+.accordion-chevron,
+[class*="chevron"],
+[class*="Chevron"] {
+  display: none !important;
+}
+
+/* Standard-Chevron komplett ausblenden - spezifischere Selektoren */
+.accordion-trigger svg:not(.custom-accordion-icon svg),
+.accordion-trigger [data-state] svg,
+.accordion-trigger .accordion-chevron,
+[data-radix-collection-item] svg,
+button[data-state] svg,
+[class*="AccordionChevron"],
+[class*="accordion-chevron"] {
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+/* Benutzerdefiniertes Accordion-Element anzeigen */
+.custom-accordion-icon {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease;
+}
+
+/* Rotation des benutzerdefinierten Icons bei geöffnetem Zustand */
+[data-state="open"] .custom-accordion-icon {
+  transform: rotate(180deg);
+}
+
+/* Stelle sicher, dass dein benutzerdefiniertes Element immer sichtbar ist */
+.accordion-trigger .custom-accordion-icon {
+  opacity: 1;
+  visibility: visible;
+}
+
 /* Einheitliche Abstandsgestaltung */
 .section-divider {
   margin-top: 4rem;

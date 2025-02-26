@@ -310,7 +310,27 @@ export default function Home() {
                           </CardHeader>
                           
                           <AccordionTrigger className="accordion-trigger px-2">
-                            {/* Chevron entfernt */}
+                            {/* Benutzerdefiniertes animiertes Icon */}
+                            <div className="h-8 w-8 flex items-center justify-center relative custom-accordion-icon">
+                              <motion.span 
+                                className="absolute h-0.5 w-5 bg-black"
+                                initial={{ y: -2.5 }}
+                                animate={{ 
+                                  rotate: openItems[`game${index+1}`] ? 45 : 0, 
+                                  y: openItems[`game${index+1}`] ? 0 : -2.5
+                                }}
+                                transition={{ duration: 0.3, ease: "easeInOut" }}
+                              />
+                              <motion.span 
+                                className="absolute h-0.5 w-5 bg-black"
+                                initial={{ y: 2.5 }}
+                                animate={{ 
+                                  rotate: openItems[`game${index+1}`] ? -45 : 0, 
+                                  y: openItems[`game${index+1}`] ? 0 : 2.5
+                                }}
+                                transition={{ duration: 0.3, ease: "easeInOut" }}
+                              />
+                            </div>
                           </AccordionTrigger>
                         </div>
                         
