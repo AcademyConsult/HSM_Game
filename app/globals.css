@@ -103,5 +103,15 @@ body {
 }
 
 .animate-ticker {
-  animation: ticker 30s linear infinite;
+  animation: ticker 20s linear infinite; /* Angepasst von 30s auf 20s */
+}
+
+.ticker-container {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.ticker-track {
+  width: 200%; /* Platz für zwei Sponsor-Sets */
 }
