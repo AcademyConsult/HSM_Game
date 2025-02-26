@@ -202,7 +202,7 @@ export default function Home() {
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-6">Sponsoren</h2>
 
-          <div className="ticker-container overflow-hidden relative">
+          <div className="ticker-container">
             <div className="ticker-track animate-ticker flex whitespace-nowrap">
               {/* Erstes Set */}
               {Array(20).fill(null).map((_, i) => (
@@ -227,28 +227,6 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <style jsx>{`
-          .ticker-container {
-            width: 100%;
-            overflow: hidden;
-            position: relative;
-          }
-          .ticker-track {
-            width: 200%; /* Platz für zwei Sponsor-Sets */
-          }
-
-          @keyframes ticker {
-            0% {
-              transform: translateX(0%);
-            }
-            100% {
-              transform: translateX(-50%);
-            }
-          }
-          .animate-ticker {
-            animation: ticker 20s linear infinite;
-          }
-        `}</style>
       </section>
 
       {/* Trennleiste unter Sponsoren */}
