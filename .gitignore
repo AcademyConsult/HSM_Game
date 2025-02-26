@@ -1,0 +1,14 @@
+.DS_Store
+/build/
+/Library/
+/Temp/
+/Obj/
+
+*.csproj.user
+*.sln
+*.swp
+*.pid
+*.log
+*.bak
+*.tmp
+*.lock
