@@ -10,6 +10,7 @@ import { EventCarousel } from "@/components/ui/event-carousel";
 import { motion, HTMLMotionProps } from "framer-motion";
 import { Separator } from "@/components/ui/separator";
 import { SectionDivider } from "@/components/ui/SectionDivider";
+import { SwiperEventCarousel } from "@/components/ui/SwiperEventCarousel";
 
 // Typdefinition für AccordionRenderProps
 type AccordionRenderProps = {
@@ -65,7 +66,7 @@ export default function Home() {
       time: "19:00",
       location: "RWTH Aachen, Templergraben 55",
       description: "Netzwerken Sie mit Studenten und Alumnis von Academy Consult.",
-      image: "https://academyconsult.sharepoint.com/sites/All-HandsForum/_layouts/15/embed.aspx?UniqueId=0b8d11e9-6fba-43c8-9a6d-352d0fa61b71",
+      image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/AC%20Hintergrund%202-tH8JYEwhI9ZvKdJvkZJ21BJ3ZHAgrd.png",
     },
     {
       id: 2,
@@ -74,7 +75,7 @@ export default function Home() {
       time: "14:00",
       location: "Coworking Space, Pontstraße 41",
       description: "Lösen Sie spannende Fallstudien und gewinnen Sie attraktive Preise.",
-      image: "https://academyconsult.sharepoint.com/sites/All-HandsForum/_layouts/15/embed.aspx?UniqueId=0b8d11e9-6fba-43c8-9a6d-352d0fa61b71",
+      image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/AC%20Hintergrund%202-tH8JYEwhI9ZvKdJvkZJ21BJ3ZHAgrd.png",
       },
     {
       id: 3,
@@ -83,7 +84,7 @@ export default function Home() {
       time: "16:00",
       location: "Westpark, Aachen",
       description: "Feiern Sie den Sommer mit uns bei Grill und Getränken.",
-      image: "https://academyconsult.sharepoint.com/sites/All-HandsForum/_layouts/15/embed.aspx?UniqueId=0b8d11e9-6fba-43c8-9a6d-352d0fa61b71",
+      image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/AC%20Hintergrund%202-tH8JYEwhI9ZvKdJvkZJ21BJ3ZHAgrd.png",
       },
     {
       id: 4,
@@ -101,7 +102,7 @@ export default function Home() {
       time: "10:00",
       location: "RWTH Aachen, Kackertstraße 7",
       description: "Praxisnaher Workshop zu agilen Projektmanagement-Methoden.",
-      image: "https://academyconsult.sharepoint.com/sites/All-HandsForum/_layouts/15/embed.aspx?UniqueId=0b8d11e9-6fba-43c8-9a6d-352d0fa61b71",
+      image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/AC%20Hintergrund%202-tH8JYEwhI9ZvKdJvkZJ21BJ3ZHAgrd.png",
       },
     {
       id: 6,
@@ -110,7 +111,16 @@ export default function Home() {
       time: "20:00",
       location: "Pontstraße 141-149, 52062 Aachen",
       description: "Jahresabschluss und gemütliches Beisammensein.",
-      image: "https://academyconsult.sharepoint.com/sites/All-HandsForum/_layouts/15/embed.aspx?UniqueId=0b8d11e9-6fba-43c8-9a6d-352d0fa61b71",
+      image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/AC%20Hintergrund%202-tH8JYEwhI9ZvKdJvkZJ21BJ3ZHAgrd.png",
+      },
+    {
+      id: 7,
+      title: "AC Weihnachtsfeier",
+      date: "2025-12-18",
+      time: "20:00",
+      location: "Pontstraße 141-149, 52062 Aachen",
+      description: "Jahresabschluss und gemütliches Beisammensein.",
+      image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/AC%20Hintergrund%202-tH8JYEwhI9ZvKdJvkZJ21BJ3ZHAgrd.png",
       },
   ];
 
@@ -445,28 +455,8 @@ export default function Home() {
       {/* Event-Sektion – Hintergrund weiß */}
       <section id="events-section" className="bg-white py-12 md:py-24">
         <SectionDivider title="Deine Next Steps" />
-        <div className="container mx-auto px-4">
-          <EventCarousel events={events} />
-          {/* Platzhalter, sodass (events.length + Platzhalter) ein Vielfaches von 3 ist */}
-          <div className="mt-4 flex gap-4">
-            {Array(eventPlaceholders)
-              .fill(null)
-              .map((_, index) => (
-                <div key={`placeholder-${index}`} className="flex-1" />
-              ))}
-          </div>
-          <div ref={eventsContainerRef} className="events-container overflow-x-auto">
-            {/* Deine Events hier */}
-          </div>
-
-          <div className="event-scroll-indicator">
-            {Array(Math.ceil(events.length / 3)).fill(null).map((_, i) => (
-              <div 
-                key={i}
-                className={`event-scroll-indicator-item ${i === activeEventIndex ? 'active' : ''}`} 
-              />
-            ))}
-          </div>
+        <div className="container mx-auto px-4 mt-12">
+          <SwiperEventCarousel events={events} />
         </div>
       </section>
 
