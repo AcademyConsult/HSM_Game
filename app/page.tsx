@@ -5,15 +5,32 @@ import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/componen
 import { Instagram, Linkedin, Youtube, Check, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger, AccordionItemProps } from "@/components/ui/accordion";
 import { EventCarousel } from "@/components/ui/event-carousel";
-import { motion } from "framer-motion";
+import { motion, HTMLMotionProps } from "framer-motion";
 import { Separator } from "@/components/ui/separator";
+
+// Typdefinition für AccordionRenderProps
+type AccordionRenderProps = {
+  open: boolean;
+};
+
+type MotionSpanProps = {
+  className: string;
+  animate: {
+    rotate: number;
+    y: number;
+  };
+  transition: {
+    duration: number;
+  };
+};
 
 export default function Home() {
   const [email, setEmail] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
+  const [openItems, setOpenItems] = useState<{[key: string]: boolean}>({});
 
   const prizes = [
     {
@@ -193,37 +210,35 @@ export default function Home() {
       <Separator className="my-12 h-[2px] bg-black" />
 
       {/* Sponsoren Sektion */}
-      <section className="bg-white py-6 overflow-hidden">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-6">Sponsoren</h2>
-
-          <div className="ticker-container">
-            <div className="ticker-track animate-ticker">
-              {/* Erster Satz Logos */}
-              <div className="ticker-content">
-                {Array(10).fill(null).map((_, i) => (
-                  <img
-                    key={`sponsor-1-${i}`}
-                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/Celonis_Logo.png/1280px-Celonis_Logo.png"
-                    alt="Celonis Logo"
-                    className="mx-8"
-                    style={{ height: "50px", width: "auto" }}
-                  />
-                ))}
-              </div>
-              
-              {/* Zweiter identischer Satz für nahtlose Schleife */}
-              <div className="ticker-content">
-                {Array(10).fill(null).map((_, i) => (
-                  <img
-                    key={`sponsor-2-${i}`}
-                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/Celonis_Logo.png/1280px-Celonis_Logo.png"
-                    alt="Celonis Logo"
-                    className="mx-8"
-                    style={{ height: "50px", width: "auto" }}
-                  />
-                ))}
-              </div>
+      <section className="bg-white py-6 w-screen overflow-hidden relative">
+        <h2 className="text-3xl font-bold text-center mb-6">Sponsoren</h2>
+        
+        <div className="ticker-container w-screen">
+          <div className="ticker-track animate-ticker">
+            {/* Erster Satz Logos */}
+            <div className="ticker-content">
+              {Array(10).fill(null).map((_, i) => (
+                <img
+                  key={`sponsor-1-${i}`}
+                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/Celonis_Logo.png/1280px-Celonis_Logo.png"
+                  alt="Celonis Logo"
+                  className="mx-8"
+                  style={{ height: "50px", width: "auto" }}
+                />
+              ))}
+            </div>
+            
+            {/* Zweiter identischer Satz für nahtlose Schleife */}
+            <div className="ticker-content">
+              {Array(10).fill(null).map((_, i) => (
+                <img
+                  key={`sponsor-2-${i}`}
+                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/Celonis_Logo.png/1280px-Celonis_Logo.png"
+                  alt="Celonis Logo"
+                  className="mx-8"
+                  style={{ height: "50px", width: "auto" }}
+                />
+              ))}
             </div>
           </div>
         </div>
@@ -244,14 +259,24 @@ export default function Home() {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {/* Spiele Cards mit Accordion */}
             <div className="lg:col-span-2 space-y-6">
-              <Accordion type="single" collapsible className="space-y-6">
+              <Accordion 
+                type="single" 
+                collapsible 
+                className="space-y-6"
+                onValueChange={(value) => {
+                  const newOpenItems: {[key: string]: boolean} = {};
+                  games.forEach((_, idx) => {
+                    newOpenItems[`game${idx+1}`] = `game${idx+1}` === value;
+                  });
+                  setOpenItems(newOpenItems);
+                }}
+              >
                 {games.map((game, index) => (
                   <Card key={index} className="overflow-hidden accordion-card">
                     <div 
                       className={`border-l-4 ${game.completed ? 'border-green-500' : 'border-[#993333]'}`}
                     >
                       <AccordionItem value={`game${index+1}`} className="border-none">
-                        {({ open }) => (
                           <>
                             <div className="flex items-center p-4 hover:bg-gray-50">
                               <div
@@ -269,12 +294,18 @@ export default function Home() {
                                 <div className="h-8 w-8 flex items-center justify-center relative">
                                   <motion.span 
                                     className="absolute h-0.5 w-5 bg-black"
-                                    animate={{ rotate: open ? 45 : 0, y: open ? 0 : -2 }}
+                                    animate={{ 
+                                      rotate: openItems[`game${index+1}`] ? 45 : 0, 
+                                      y: openItems[`game${index+1}`] ? 0 : -2 
+                                    }}
                                     transition={{ duration: 0.2 }}
                                   />
                                   <motion.span 
                                     className="absolute h-0.5 w-5 bg-black"
-                                    animate={{ rotate: open ? -45 : 0, y: open ? 0 : 2 }}
+                                    animate={{ 
+                                      rotate: openItems[`game${index+1}`] ? -45 : 0, 
+                                      y: openItems[`game${index+1}`] ? 0 : 2 
+                                    }}
                                     transition={{ duration: 0.2 }}
                                   />
                                 </div>
@@ -326,7 +357,6 @@ export default function Home() {
                               </CardFooter>
                             </AccordionContent>
                           </>
-                        )}
                       </AccordionItem>
                     </div>
                   </Card>

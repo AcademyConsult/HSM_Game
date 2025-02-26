@@ -111,15 +111,19 @@ body {
 }
 
 .ticker-container {
-  width: 100%;
+  width: 100vw;
   overflow: hidden;
   position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
 }
 
 .ticker-track {
   display: flex;
   white-space: nowrap;
-  width: 200%;
+  width: 300%;
 }
 
 .ticker-content {
@@ -128,7 +132,6 @@ body {
   align-items: center;
   justify-content: space-around;
   min-width: 100%;
-  padding: 0 20px;
 }
 
 /* Accordion-Styles verbessern */
@@ -155,4 +158,19 @@ body {
   height: 2px;
   background-color: black;
   border: none;
+}
+
+/* Game Section Fix - am Ende der Datei hinzufügen */
+#games-section {
+  display: block !important;
+  visibility: visible !important;
+  position: relative;
+  z-index: 10;
+}
+
+.accordion-card, 
+.accordion-trigger,
+.accordion-content {
+  display: block !important;
+  visibility: visible !important;
 }
