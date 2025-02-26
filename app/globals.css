@@ -93,18 +93,21 @@ body {
   }
 }
 
-/* Ticker-Animation verbessern */
+/* Verbesserte Ticker-Animation */
 @keyframes ticker {
   0% {
     transform: translateX(0);
   }
   100% {
-    transform: translateX(-50%);  /* Auf -50% ändern für nahtlosen Loop */
+    transform: translateX(-50%);
   }
 }
 
 .animate-ticker {
-  animation: ticker 30s linear infinite;  /* Auf 30s verlängern für gleichmäßigere Bewegung */
+  animation: ticker 30s linear infinite;
+  /* Prevent animation jumps on page reload */
+  will-change: transform;
+  backface-visibility: hidden;
 }
 
 .ticker-container {
@@ -116,20 +119,16 @@ body {
 .ticker-track {
   display: flex;
   white-space: nowrap;
-  width: 200%;  /* Breite verdoppeln */
+  width: 200%;
 }
 
-/* Nicht mehr benötigt, ersetzt durch width: 200% */
-.ticker-track::after {
-  content: none;
-}
-
-/* Neue Klasse für die innere Schleife */
 .ticker-content {
   display: flex;
   flex-shrink: 0;
   align-items: center;
+  justify-content: space-around;
   min-width: 100%;
+  padding: 0 20px;
 }
 
 /* Accordion-Styles verbessern */
