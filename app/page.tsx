@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { Trophy, Medal, Gift, Instagram, Linkedin, Youtube, Check, X, ChevronRight, ArrowRight } from "lucide-react";
+import { Instagram, Linkedin, Youtube, Check, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
@@ -14,11 +14,6 @@ export default function Home() {
   const [email, setEmail] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-  const [gameProgress, setGameProgress] = useState({
-    game1: false,
-    game2: false,
-    game3: false,
-  });
 
   const prizes = [
     {
@@ -195,7 +190,7 @@ export default function Home() {
       </section>
 
       {/* Trennleiste nach dem Header */}
-      <hr className="my-12 border-black" style={{ borderWidth: "2px" }} />
+      <Separator className="my-12 h-[2px] bg-black" />
 
       {/* Sponsoren Sektion */}
       <section className="bg-white py-6 overflow-hidden">
@@ -203,21 +198,10 @@ export default function Home() {
           <h2 className="text-3xl font-bold text-center mb-6">Sponsoren</h2>
 
           <div className="ticker-container">
-            <div className="ticker-track animate-ticker flex whitespace-nowrap">
-              {/* Erstes Set */}
+            <div className="ticker-track animate-ticker flex items-center">
               {Array(20).fill(null).map((_, i) => (
                 <img
                   key={`sponsor-${i}`}
-                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/Celonis_Logo.png/1280px-Celonis_Logo.png"
-                  alt="Celonis Logo"
-                  className="mx-8"
-                  style={{ height: "50px", width: "auto" }}
-                />
-              ))}
-              {/* Zweites Set (identisch) */}
-              {Array(20).fill(null).map((_, i) => (
-                <img
-                  key={`sponsor-dup-${i}`}
                   src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/Celonis_Logo.png/1280px-Celonis_Logo.png"
                   alt="Celonis Logo"
                   className="mx-8"
@@ -230,7 +214,7 @@ export default function Home() {
       </section>
 
       {/* Trennleiste unter Sponsoren */}
-      <hr className="my-12 border-black" style={{ borderWidth: "2px" }} />
+      <Separator className="my-12 h-[2px] bg-black" />
 
       {/* Games Section */}
       <section id="games-section" className="bg-white py-12 md:py-24">
@@ -251,74 +235,83 @@ export default function Home() {
                       className={`border-l-4 ${game.completed ? 'border-green-500' : 'border-[#993333]'}`}
                     >
                       <AccordionItem value={`game${index+1}`} className="border-none">
-                        <div className="flex items-center p-4">
-                          <div
-                            className={`h-8 w-8 rounded-full flex items-center justify-center mr-3 
-                            ${game.completed ? "bg-green-500 text-white" : "border-2 border-[#993333]"}`}
-                          >
-                            {game.completed ? <Check className="h-5 w-5" /> : null}
-                          </div>
-                          
-                          <CardHeader className="p-0 flex-1">
-                            <CardTitle className="text-2xl">{game.title}</CardTitle>
-                          </CardHeader>
-                          
-                          
-                          <AccordionTrigger className="px-2">
-                            <motion.div
-                              animate={{ rotate: false ? 45 : 0 }}
-                              initial={false}
-                              className="h-8 w-8 flex items-center justify-center"
-                            >
-                              <span className="text-2xl font-bold">=</span>
-                            </motion.div>
-                          </AccordionTrigger>
-                        </div>
-
-                        <AccordionContent className="pt-0 px-4 pb-6">
-                          <CardContent className="p-0">
-                            {/* Spielinhalt */}
-                            {game.id === 1 && (
-                              <div className="aspect-video relative bg-muted rounded-lg overflow-hidden">
-                                <img
-                                  src="/placeholder.svg?height=400&width=800"
-                                  alt="Wimmelbild"
-                                  className="w-full h-full object-cover"
-                                />
+                        {({ open }) => (
+                          <>
+                            <div className="flex items-center p-4">
+                              <div
+                                className={`h-8 w-8 rounded-full flex items-center justify-center mr-3 
+                                ${game.completed ? "bg-green-500 text-white" : "border-2 border-[#993333]"}`}
+                              >
+                                {game.completed ? <Check className="h-5 w-5" /> : null}
                               </div>
-                            )}
+                              
+                              <CardHeader className="p-0 flex-1">
+                                <CardTitle className="text-2xl">{game.title}</CardTitle>
+                              </CardHeader>
+                              
+                              
+                              <AccordionTrigger className="px-2">
+                                <div className="h-8 w-8 flex items-center justify-center relative">
+                                  <motion.span 
+                                    className="absolute h-0.5 w-5 bg-black"
+                                    animate={{ rotate: open ? 45 : 0, y: open ? 0 : -2 }}
+                                    transition={{ duration: 0.2 }}
+                                  />
+                                  <motion.span 
+                                    className="absolute h-0.5 w-5 bg-black"
+                                    animate={{ rotate: open ? -45 : 0, y: open ? 0 : 2 }}
+                                    transition={{ duration: 0.2 }}
+                                  />
+                                </div>
+                              </AccordionTrigger>
+                            </div>
                             
-                            {game.id === 2 && (
-                              <div className="flex justify-center">
-                                <iframe
-                                  width="100%"
-                                  height="600"
-                                  style={{ border: "none", maxWidth: "800px" }}
-                                  frameBorder="0"
-                                  src="https://crosswordlabs.com/embed/2025-02-24-879"
-                                ></iframe>
-                              </div>
-                            )}
-                            
-                            {game.id === 3 && (
-                              <div className="space-y-4">
-                                <p className="text-lg">
-                                  Wie viele Studierende gibt es aktuell an der RWTH Aachen?
-                                </p>
-                                <Input type="number" placeholder="Ihre Schätzung" className="max-w-xs" />
-                              </div>
-                            )}
-                          </CardContent>
-                          
-                          <CardFooter className="pt-4 px-0 pb-0">
-                            <Button 
-                              onClick={() => markGameAsCompleted(game.id)} 
-                              className="bg-[#993333] hover:bg-[#993333]/90"
-                            >
-                              Spiel abschließen
-                            </Button>
-                          </CardFooter>
-                        </AccordionContent>
+                            <AccordionContent className="pt-0 px-4 pb-6">
+                              <CardContent className="p-0">
+                                {/* Spielinhalt */}
+                                {game.id === 1 && (
+                                  <div className="aspect-video relative bg-muted rounded-lg overflow-hidden">
+                                    <img
+                                      src="/placeholder.svg?height=400&width=800"
+                                      alt="Wimmelbild"
+                                      className="w-full h-full object-cover"
+                                    />
+                                  </div>
+                                )}
+                                
+                                {game.id === 2 && (
+                                  <div className="flex justify-center">
+                                    <iframe
+                                      width="100%"
+                                      height="600"
+                                      style={{ border: "none", maxWidth: "800px" }}
+                                      frameBorder="0"
+                                      src="https://crosswordlabs.com/embed/2025-02-24-879"
+                                    ></iframe>
+                                  </div>
+                                )}
+                                
+                                {game.id === 3 && (
+                                  <div className="space-y-4">
+                                    <p className="text-lg">
+                                      Wie viele Studierende gibt es aktuell an der RWTH Aachen?
+                                    </p>
+                                    <Input type="number" placeholder="Ihre Schätzung" className="max-w-xs" />
+                                  </div>
+                                )}
+                              </CardContent>
+                              
+                              <CardFooter className="pt-4 px-0 pb-0">
+                                <Button 
+                                  onClick={() => markGameAsCompleted(game.id)} 
+                                  className="bg-[#993333] hover:bg-[#993333]/90"
+                                >
+                                  Spiel abschließen
+                                </Button>
+                              </CardFooter>
+                            </AccordionContent>
+                          </>
+                        )}
                       </AccordionItem>
                     </div>
                   </Card>
@@ -389,7 +382,7 @@ export default function Home() {
       </section>
 
       {/* Trennleiste vor Events */}
-      <hr className="my-12 border-black" style={{ borderWidth: "2px" }} />
+      <Separator className="my-12 h-[2px] bg-black" />
 
       {/* Event-Sektion – Hintergrund weiß */}
       <section id="events-section" className="bg-white py-12 md:py-24">
@@ -408,7 +401,7 @@ export default function Home() {
       </section>
 
       {/* Trennleiste unter Events */}
-      <hr className="my-12 border-black" style={{ borderWidth: "2px" }} />
+      <Separator className="my-12 h-[2px] bg-black" />
 
       {/* Footer mit Header-Hintergrundbild */}
       <footer className="text-white py-12"
