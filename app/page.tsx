@@ -129,99 +129,7 @@ export default function Home() {
 
   // Berechnung der Anzahl an Platzhaltern, sodass (events.length + Platzhalter) ein Vielfaches von 3 ist
   const eventPlaceholders = events.length % 3 === 0 ? 0 : 3 - (events.length % 3);
-
-  // Event-Listener für Kreuzworträtsel-Nachrichten
-  useEffect(() => {
-    const messageHandler = (event: MessageEvent) => {
-      // Ursprungsprüfung: Nur Nachrichten von crosswordlabs.com verarbeiten
-      if (event.origin !== "https://crosswordlabs.com") {
-        return;
-      }
-    
-      // Ausgabe der Daten aus der Nachricht für Debug-Zwecke
-      console.log("Event data from Crossword Labs:", event.data);
-    
-      // Prüfung, ob der Puzzle-Abschlusssignal vorliegt
-      if (event.data && event.data.status === "completed") {
-        console.log("Kreuzworträtsel abgeschlossen!");
-        markGameAsCompleted(2);
-      }
-    };
-
-    // Event-Listener für Messages hinzufügen
-    window.addEventListener("message", messageHandler);
-    
-    // Spezifische Erkennung der star.svg-Requests über das Fetch-API
-    const originalFetch = window.fetch;
-    window.fetch = function(input, init) {
-      // URL des Requests als String erhalten
-      const url = typeof input === 'string' ? input : input instanceof URL ? input.href : input.url;
-      
-      // Wenn die URL star.svg?t= enthält (mit vollständigem Pfad), handelt es sich um die Stern-Animation
-      if (typeof url === 'string' && 
-         (url.includes('star.svg?t=') || url.includes('/img/star.svg?t=') || 
-          url.includes('/static/') && url.includes('/img/star.svg?t='))) {
-        console.log("Star Animation Request erkannt:", url);
-        markGameAsCompleted(2);
-      }
-      
-      // Original Fetch-Aufruf ausführen
-      return originalFetch(input, init);
-    };
-    
-    // Alternative: Netzwerkanfragen über PerformanceObserver überwachen
-    if (typeof PerformanceObserver !== 'undefined') {
-      const observer = new PerformanceObserver((list) => {
-        list.getEntries().forEach((entry) => {
-          // Vollständigere URL-Prüfung
-          if (entry.name.includes('star.svg?t=') || 
-              entry.name.includes('/img/star.svg?t=') || 
-              (entry.name.includes('/static/') && entry.name.includes('/img/star.svg?t='))) {
-            console.log("Star SVG Request über PerformanceObserver erkannt:", entry.name);
-            markGameAsCompleted(2);
-          }
-        });
-      });
-      
-      try {
-        observer.observe({entryTypes: ['resource']});
-      } catch (e) {
-        console.warn("PerformanceObserver nicht unterstützt:", e);
-      }
-    }
-
-    // XHR-Monitoring (erfasst auch in iframes ausgeführte Anfragen)
-    const originalXhrOpen = XMLHttpRequest.prototype.open;
-    XMLHttpRequest.prototype.open = function(method: string, url: string | URL, async?: boolean, username?: string | null, password?: string | null) {
-      if (typeof url === 'string' && url.includes('star.svg')) {
-        console.log("Star SVG über XHR angefordert:", url);
-        markGameAsCompleted(2);
-      }
-      return originalXhrOpen.call(this, method, url, async ?? true, username, password);
-    };
-    
-    // Zusätzlich: Image-Monitoring
-    const originalImageSrc = Object.getOwnPropertyDescriptor(HTMLImageElement.prototype, 'src')?.set;
-    if (originalImageSrc) {
-      Object.defineProperty(HTMLImageElement.prototype, 'src', {
-        set: function(value) {
-          if (value && value.includes('star.svg')) {
-            console.log("Star SVG Bild-Quelle gesetzt:", value);
-            markGameAsCompleted(2);
-          }
-          originalImageSrc.call(this, value);
-        }
-      });
-    }
-    
-    // Cleanup-Funktion
-    return () => {
-      window.removeEventListener("message", messageHandler);
-      window.fetch = originalFetch;
-      XMLHttpRequest.prototype.open = originalXhrOpen;
-    };
-  }, []); // Leeres Dependency-Array, damit der Effect nur einmal ausgeführt wird
-
+  
   return (
     <main className="min-h-screen">
       {/* Landing Section (behält individuellen Hintergrund) */}
@@ -556,4 +464,3 @@ export default function Home() {
     </main>
   );
 }
-
