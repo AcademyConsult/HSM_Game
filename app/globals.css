@@ -98,12 +98,12 @@ body {
     transform: translateX(0);
   }
   100% {
-    transform: translateX(-50%);
+    transform: translateX(-100%);
   }
 }
 
 .animate-ticker {
-  animation: ticker 20s linear infinite; /* Angepasst von 30s auf 20s */
+  animation: ticker 20s linear infinite;
 }
 
 .ticker-container {
@@ -113,5 +113,23 @@ body {
 }
 
 .ticker-track {
-  width: 200%; /* Platz für zwei Sponsor-Sets */
+  display: flex;
+  white-space: nowrap;
+}
+
+.ticker-track::after {
+  content: "";
+  display: block;
+  flex: 0 0 auto;
+  min-width: 100%;
+  background-repeat: repeat-x;
+  background-position: 0;
+}
+
+.section-divider {
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+  height: 2px;
+  background-color: black;
+  border: none;
 }
