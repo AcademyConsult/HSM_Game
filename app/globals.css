@@ -93,17 +93,18 @@ body {
   }
 }
 
+/* Ticker-Animation verbessern */
 @keyframes ticker {
   0% {
     transform: translateX(0);
   }
   100% {
-    transform: translateX(-100%);
+    transform: translateX(-50%);  /* Auf -50% ändern für nahtlosen Loop */
   }
 }
 
 .animate-ticker {
-  animation: ticker 20s linear infinite;
+  animation: ticker 30s linear infinite;  /* Auf 30s verlängern für gleichmäßigere Bewegung */
 }
 
 .ticker-container {
@@ -115,15 +116,38 @@ body {
 .ticker-track {
   display: flex;
   white-space: nowrap;
+  width: 200%;  /* Breite verdoppeln */
 }
 
+/* Nicht mehr benötigt, ersetzt durch width: 200% */
 .ticker-track::after {
-  content: "";
-  display: block;
-  flex: 0 0 auto;
+  content: none;
+}
+
+/* Neue Klasse für die innere Schleife */
+.ticker-content {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
   min-width: 100%;
-  background-repeat: repeat-x;
-  background-position: 0;
+}
+
+/* Accordion-Styles verbessern */
+.accordion-card {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.accordion-card:hover {
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+.accordion-trigger {
+  cursor: pointer;
+  background-color: rgba(153, 51, 51, 0.03);  /* Leichter Farbton für Sichtbarkeit */
+  border-radius: 4px;
+  padding: 6px 12px;
 }
 
 .section-divider {

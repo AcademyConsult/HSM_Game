@@ -198,16 +198,32 @@ export default function Home() {
           <h2 className="text-3xl font-bold text-center mb-6">Sponsoren</h2>
 
           <div className="ticker-container">
-            <div className="ticker-track animate-ticker flex items-center">
-              {Array(20).fill(null).map((_, i) => (
-                <img
-                  key={`sponsor-${i}`}
-                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/Celonis_Logo.png/1280px-Celonis_Logo.png"
-                  alt="Celonis Logo"
-                  className="mx-8"
-                  style={{ height: "50px", width: "auto" }}
-                />
-              ))}
+            <div className="ticker-track animate-ticker">
+              {/* Erster Satz Logos */}
+              <div className="ticker-content">
+                {Array(10).fill(null).map((_, i) => (
+                  <img
+                    key={`sponsor-1-${i}`}
+                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/Celonis_Logo.png/1280px-Celonis_Logo.png"
+                    alt="Celonis Logo"
+                    className="mx-8"
+                    style={{ height: "50px", width: "auto" }}
+                  />
+                ))}
+              </div>
+              
+              {/* Zweiter identischer Satz für nahtlose Schleife */}
+              <div className="ticker-content">
+                {Array(10).fill(null).map((_, i) => (
+                  <img
+                    key={`sponsor-2-${i}`}
+                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/Celonis_Logo.png/1280px-Celonis_Logo.png"
+                    alt="Celonis Logo"
+                    className="mx-8"
+                    style={{ height: "50px", width: "auto" }}
+                  />
+                ))}
+              </div>
             </div>
           </div>
         </div>
@@ -230,14 +246,14 @@ export default function Home() {
             <div className="lg:col-span-2 space-y-6">
               <Accordion type="single" collapsible className="space-y-6">
                 {games.map((game, index) => (
-                  <Card key={index} className="overflow-hidden">
+                  <Card key={index} className="overflow-hidden accordion-card">
                     <div 
                       className={`border-l-4 ${game.completed ? 'border-green-500' : 'border-[#993333]'}`}
                     >
                       <AccordionItem value={`game${index+1}`} className="border-none">
                         {({ open }) => (
                           <>
-                            <div className="flex items-center p-4">
+                            <div className="flex items-center p-4 hover:bg-gray-50">
                               <div
                                 className={`h-8 w-8 rounded-full flex items-center justify-center mr-3 
                                 ${game.completed ? "bg-green-500 text-white" : "border-2 border-[#993333]"}`}
@@ -249,8 +265,7 @@ export default function Home() {
                                 <CardTitle className="text-2xl">{game.title}</CardTitle>
                               </CardHeader>
                               
-                              
-                              <AccordionTrigger className="px-2">
+                              <AccordionTrigger className="accordion-trigger px-2">
                                 <div className="h-8 w-8 flex items-center justify-center relative">
                                   <motion.span 
                                     className="absolute h-0.5 w-5 bg-black"
