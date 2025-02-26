@@ -123,7 +123,7 @@ body {
 .ticker-track {
   display: flex;
   white-space: nowrap;
-  width: 300%;
+  width: 100%;
 }
 
 .ticker-content {
@@ -140,24 +140,66 @@ body {
   transition: all 0.3s ease;
 }
 
+/* Hover-Effekt entfernen */
+/* Die folgende Regel entfernen:
 .accordion-card:hover {
   box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
   transform: translateY(-2px);
 }
+*/
 
 .accordion-trigger {
   cursor: pointer;
-  background-color: rgba(153, 51, 51, 0.03);  /* Leichter Farbton für Sichtbarkeit */
+  /* Hintergrund entfernen für subtileres Aussehen */
+  background-color: transparent;
   border-radius: 4px;
   padding: 6px 12px;
 }
 
+/* Einheitliche Abstandsgestaltung */
 .section-divider {
-  margin-top: 3rem;
-  margin-bottom: 3rem;
+  margin-top: 4rem;
+  margin-bottom: 4rem; /* Konsistenter Abstand */
   height: 2px;
   background-color: black;
   border: none;
+}
+
+/* Neuer Event-Scroll-Indikator */
+.event-scroll-indicator {
+  display: flex;
+  justify-content: center;
+  margin-top: 1.5rem;
+  gap: 0.5rem;
+}
+
+.event-scroll-indicator-item {
+  width: 2.5rem;
+  height: 4px;
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+.event-scroll-indicator-item.active {
+  background-color: #993333;
+  width: 3rem;
+}
+
+/* Subtiler Scrollhinweis für Events */
+.events-container {
+  position: relative;
+}
+
+.events-container::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 60px;
+  background: linear-gradient(to right, rgba(255,255,255,0), rgba(255,255,255,0.9));
+  pointer-events: none;
 }
 
 /* Game Section Fix - am Ende der Datei hinzufügen */

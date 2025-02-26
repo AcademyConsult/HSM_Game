@@ -1,11 +1,11 @@
 "use client"
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Instagram, Linkedin, Youtube, Check, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger, AccordionItemProps } from "@/components/ui/accordion";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { EventCarousel } from "@/components/ui/event-carousel";
 import { motion, HTMLMotionProps } from "framer-motion";
 import { Separator } from "@/components/ui/separator";
@@ -141,6 +141,26 @@ export default function Home() {
 
   // Berechnung der Anzahl an Platzhaltern, sodass (events.length + Platzhalter) ein Vielfaches von 3 ist
   const eventPlaceholders = events.length % 3 === 0 ? 0 : 3 - (events.length % 3);
+
+  // Innerhalb deiner Komponente
+  const eventsContainerRef = useRef<HTMLDivElement>(null);
+  const [activeEventIndex, setActiveEventIndex] = useState(0);
+
+  // Scroll-Listener für Events
+  useEffect(() => {
+    const container = eventsContainerRef.current;
+    if (!container) return;
+    
+    const handleScroll = () => {
+      const scrollLeft = container.scrollLeft;
+      const itemWidth = container.clientWidth / 3;
+      const index = Math.floor(scrollLeft / itemWidth);
+      setActiveEventIndex(Math.min(Math.floor(index / 3), Math.ceil(events.length / 3) - 1));
+    };
+    
+    container.addEventListener('scroll', handleScroll);
+    return () => container.removeEventListener('scroll', handleScroll);
+  }, [events.length]);
   
   return (
     <main className="min-h-screen">
@@ -277,86 +297,67 @@ export default function Home() {
                       className={`border-l-4 ${game.completed ? 'border-green-500' : 'border-[#993333]'}`}
                     >
                       <AccordionItem value={`game${index+1}`} className="border-none">
-                          <>
-                            <div className="flex items-center p-4 hover:bg-gray-50">
-                              <div
-                                className={`h-8 w-8 rounded-full flex items-center justify-center mr-3 
-                                ${game.completed ? "bg-green-500 text-white" : "border-2 border-[#993333]"}`}
-                              >
-                                {game.completed ? <Check className="h-5 w-5" /> : null}
+                        <div className="flex items-center p-4">
+                          <div
+                            className={`h-8 w-8 rounded-full flex items-center justify-center mr-3 
+                            ${game.completed ? "bg-green-500 text-white" : "border-2 border-[#993333]"}`}
+                          >
+                            {game.completed ? <Check className="h-5 w-5" /> : null}
+                          </div>
+                          
+                          <CardHeader className="p-0 flex-1">
+                            <CardTitle className="text-2xl">{game.title}</CardTitle>
+                          </CardHeader>
+                          
+                          <AccordionTrigger className="accordion-trigger px-2">
+                            {/* Chevron entfernt */}
+                          </AccordionTrigger>
+                        </div>
+                        
+                        <AccordionContent className="pt-0 px-4 pb-6">
+                          <CardContent className="p-0">
+                            {/* Spielinhalt */}
+                            {game.id === 1 && (
+                              <div className="aspect-video relative bg-muted rounded-lg overflow-hidden">
+                                <img
+                                  src="/placeholder.svg?height=400&width=800"
+                                  alt="Wimmelbild"
+                                  className="w-full h-full object-cover"
+                                />
                               </div>
-                              
-                              <CardHeader className="p-0 flex-1">
-                                <CardTitle className="text-2xl">{game.title}</CardTitle>
-                              </CardHeader>
-                              
-                              <AccordionTrigger className="accordion-trigger px-2">
-                                <div className="h-8 w-8 flex items-center justify-center relative">
-                                  <motion.span 
-                                    className="absolute h-0.5 w-5 bg-black"
-                                    animate={{ 
-                                      rotate: openItems[`game${index+1}`] ? 45 : 0, 
-                                      y: openItems[`game${index+1}`] ? 0 : -2 
-                                    }}
-                                    transition={{ duration: 0.2 }}
-                                  />
-                                  <motion.span 
-                                    className="absolute h-0.5 w-5 bg-black"
-                                    animate={{ 
-                                      rotate: openItems[`game${index+1}`] ? -45 : 0, 
-                                      y: openItems[`game${index+1}`] ? 0 : 2 
-                                    }}
-                                    transition={{ duration: 0.2 }}
-                                  />
-                                </div>
-                              </AccordionTrigger>
-                            </div>
+                            )}
                             
-                            <AccordionContent className="pt-0 px-4 pb-6">
-                              <CardContent className="p-0">
-                                {/* Spielinhalt */}
-                                {game.id === 1 && (
-                                  <div className="aspect-video relative bg-muted rounded-lg overflow-hidden">
-                                    <img
-                                      src="/placeholder.svg?height=400&width=800"
-                                      alt="Wimmelbild"
-                                      className="w-full h-full object-cover"
-                                    />
-                                  </div>
-                                )}
-                                
-                                {game.id === 2 && (
-                                  <div className="flex justify-center">
-                                    <iframe
-                                      width="100%"
-                                      height="600"
-                                      style={{ border: "none", maxWidth: "800px" }}
-                                      frameBorder="0"
-                                      src="https://crosswordlabs.com/embed/2025-02-24-879"
-                                    ></iframe>
-                                  </div>
-                                )}
-                                
-                                {game.id === 3 && (
-                                  <div className="space-y-4">
-                                    <p className="text-lg">
-                                      Wie viele Studierende gibt es aktuell an der RWTH Aachen?
-                                    </p>
-                                    <Input type="number" placeholder="Ihre Schätzung" className="max-w-xs" />
-                                  </div>
-                                )}
-                              </CardContent>
-                              
-                              <CardFooter className="pt-4 px-0 pb-0">
-                                <Button 
-                                  onClick={() => markGameAsCompleted(game.id)} 
-                                  className="bg-[#993333] hover:bg-[#993333]/90"
-                                >
-                                  Spiel abschließen
-                                </Button>
-                              </CardFooter>
-                            </AccordionContent>
-                          </>
+                            {game.id === 2 && (
+                              <div className="flex justify-center">
+                                <iframe
+                                  width="100%"
+                                  height="600"
+                                  style={{ border: "none", maxWidth: "800px" }}
+                                  frameBorder="0"
+                                  src="https://crosswordlabs.com/embed/2025-02-24-879"
+                                ></iframe>
+                              </div>
+                            )}
+                            
+                            {game.id === 3 && (
+                              <div className="space-y-4">
+                                <p className="text-lg">
+                                  Wie viele Studierende gibt es aktuell an der RWTH Aachen?
+                                </p>
+                                <Input type="number" placeholder="Ihre Schätzung" className="max-w-xs" />
+                              </div>
+                            )}
+                          </CardContent>
+                          
+                          <CardFooter className="pt-4 px-0 pb-0">
+                            <Button 
+                              onClick={() => markGameAsCompleted(game.id)} 
+                              className="bg-[#993333] hover:bg-[#993333]/90"
+                            >
+                              Spiel abschließen
+                            </Button>
+                          </CardFooter>
+                        </AccordionContent>
                       </AccordionItem>
                     </div>
                   </Card>
@@ -441,6 +442,18 @@ export default function Home() {
               .map((_, index) => (
                 <div key={`placeholder-${index}`} className="flex-1" />
               ))}
+          </div>
+          <div ref={eventsContainerRef} className="events-container overflow-x-auto">
+            {/* Deine Events hier */}
+          </div>
+
+          <div className="event-scroll-indicator">
+            {Array(Math.ceil(events.length / 3)).fill(null).map((_, i) => (
+              <div 
+                key={i}
+                className={`event-scroll-indicator-item ${i === activeEventIndex ? 'active' : ''}`} 
+              />
+            ))}
           </div>
         </div>
       </section>
