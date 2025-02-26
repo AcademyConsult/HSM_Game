@@ -3,6 +3,7 @@
 /Library/
 /Temp/
 /Obj/
+/node_modules/
 
 *.csproj.user
 *.sln
