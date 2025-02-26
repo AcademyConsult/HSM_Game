@@ -91,16 +91,16 @@ Mehr Infos: ${currentUrl}
           <Share2 className="h-4 w-4" />
         </Button>
         <div className="w-full h-40">
-        <iframe
-          src={event.embedUrl}
-          width="640"
-          height="360"
-          frameBorder="0"
-          scrolling="no"
-          allowFullScreen
-          title={event.title}
-          className="w-full h-full"
-        />
+          <iframe
+            src="https://academyconsult.sharepoint.com/sites/All-HandsForum/_layouts/15/embed.aspx?UniqueId=8503c410-5b30-4e6e-9e68-e4e479f2c5c5"
+            width="640"
+            height="360"
+            frameBorder="0"
+            scrolling="no"
+            allowFullScreen
+            title="L1220383"
+            className="w-full h-full"
+          />
         </div>
         <CardHeader>
           <CardTitle className="text-lg">{event.title}</CardTitle>
@@ -153,7 +153,7 @@ Mehr Infos: ${currentUrl}
           <Textarea value={shareText} readOnly onClick={(e) => e.currentTarget.select()} className="h-[200px]" />
           <div className="flex justify-between">
             <Button onClick={copyShareText}>Text kopieren</Button>
-            {navigator.share && <Button onClick={() => navigator.share({ text: shareText })}>Teilen</Button>}
+            {typeof navigator !== 'undefined' && navigator.share && <Button onClick={() => navigator.share({ text: shareText })}>Teilen</Button>}
           </div>
         </DialogContent>
       </Dialog>
