@@ -9,6 +9,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { EventCarousel } from "@/components/ui/event-carousel";
 import { motion, HTMLMotionProps } from "framer-motion";
 import { Separator } from "@/components/ui/separator";
+import { SectionDivider } from "@/components/ui/SectionDivider";
 
 // Typdefinition für AccordionRenderProps
 type AccordionRenderProps = {
@@ -226,14 +227,11 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Trennleiste nach dem Header */}
-      <Separator className="my-12 h-[2px] bg-black" />
-
       {/* Sponsoren Sektion */}
       <section className="bg-white py-6 w-screen overflow-hidden relative">
-        <h2 className="text-3xl font-bold text-center mb-6">Sponsoren</h2>
+        <SectionDivider title="Sponsoren" />
         
-        <div className="ticker-container w-screen">
+        <div className="ticker-container w-screen mt-16">
           <div className="ticker-track animate-ticker">
             {/* Erster Satz Logos */}
             <div className="ticker-content">
@@ -264,13 +262,10 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Trennleiste unter Sponsoren */}
-      <Separator className="my-12 h-[2px] bg-black" />
-
       {/* Games Section */}
-      <section id="games-section" className="bg-white py-12 md:py-24">
+      <section id="games-section" className="bg-white pt-14 pb-6 w-screen overflow-hidden relative">
+        <SectionDivider title="Unsere Spiele Challenge" />
         <div className="container mx-auto px-4">
-          <h2 className="text-4xl font-bold text-center mb-8">Unsere Spiele-Challenge</h2>
           <p className="text-lg md:text-xl text-center mb-12 max-w-3xl mx-auto">
             Löse die folgenden Spiele und reiche deine Ergebnisse ein, um am Gewinnspiel teilzunehmen.
             Basierend auf deinen Ergebnissen erhöht sich deine Gewinnwahrscheinlichkeit.
@@ -447,13 +442,10 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Trennleiste vor Events */}
-      <Separator className="my-12 h-[2px] bg-black" />
-
       {/* Event-Sektion – Hintergrund weiß */}
       <section id="events-section" className="bg-white py-12 md:py-24">
+        <SectionDivider title="Deine Next Steps" />
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-12">Kommende Events</h2>
           <EventCarousel events={events} />
           {/* Platzhalter, sodass (events.length + Platzhalter) ein Vielfaches von 3 ist */}
           <div className="mt-4 flex gap-4">
@@ -477,9 +469,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
-      {/* Trennleiste unter Events */}
-      <Separator className="my-12 h-[2px] bg-black" />
 
       {/* Footer mit Header-Hintergrundbild */}
       <footer className="text-white py-12"
