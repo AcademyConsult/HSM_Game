@@ -591,7 +591,7 @@ export default function Home() {
                                   onClick={handleWimmelbildClick}
                                 >
                                   <img
-                                    src="/placeholder.svg?height=400&width=800"
+                                    src="https://raw.githubusercontent.com/AcademyConsult/HSM_Game/main/public/placeholder.svg?height=400&width=800"
                                     alt="Wimmelbild"
                                     className="w-full h-full object-cover"
                                   />
@@ -606,7 +606,7 @@ export default function Home() {
                                       }}
                                     >
                                       <img
-                                        src="/lupe_better_centered.png"
+                                        src="https://raw.githubusercontent.com/AcademyConsult/HSM_Game/main/public/lupe_better_centered.png"
                                         alt="Lupe"
                                         className="w-full h-full object-contain"
                                       />
