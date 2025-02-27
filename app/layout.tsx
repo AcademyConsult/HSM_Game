@@ -8,9 +8,9 @@ export const metadata = {
   title: 'AC-Challenge',
   description: 'Spiele und gewinne mit Academy Consult',
   icons: {
-    icon: '/logo.png', // Standard-Favicon
-    apple: '/logo.png', // Apple Touch Icon
-    shortcut: '/logo.png', // Shortcut Icon
+    icon: 'https://raw.githubusercontent.com/AcademyConsult/HSM_Game/main/public/logo.png', // Standard-Favicon
+    apple: 'https://raw.githubusercontent.com/AcademyConsult/HSM_Game/main/public/logo.png', // Apple Touch Icon
+    shortcut: 'https://raw.githubusercontent.com/AcademyConsult/HSM_Game/main/public/logo.png', // Shortcut Icon
   },
 };
 
