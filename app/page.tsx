@@ -11,6 +11,8 @@ import { motion, HTMLMotionProps } from "framer-motion";
 import { Separator } from "@/components/ui/separator";
 import { SectionDivider } from "@/components/ui/SectionDivider";
 import { SwiperEventCarousel } from "@/components/ui/SwiperEventCarousel";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Label } from "@/components/ui/label";
 
 // Typdefinition für AccordionRenderProps
 type AccordionRenderProps = {
@@ -33,6 +35,7 @@ export default function Home() {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [openItems, setOpenItems] = useState<{[key: string]: boolean}>({});
+  const [consentGiven, setConsentGiven] = useState(false);
 
   const prizes = [
     {
@@ -172,6 +175,9 @@ export default function Home() {
     container.addEventListener('scroll', handleScroll);
     return () => container.removeEventListener('scroll', handleScroll);
   }, [events.length]);
+
+  // Überprüfung für beide Bedingungen (Spiele abgeschlossen und Einwilligung gegeben)
+  const canSubmit = allGamesCompleted && consentGiven;
   
   return (
     <main className="min-h-screen">
@@ -190,58 +196,110 @@ export default function Home() {
             <img 
               src="https://spreadly.app/storage/view/-/984a834393716c80e787b227b43cfbe2/avatars/28/TiugXb12LRXMJmTEvyHSDxOH09U0rK0wv3D1OEPB.png" 
               alt="Academy Consult Logo" 
-              className="h-24 w-auto mb-6"
+              className="h-32 md:h-48 w-auto mb-6"
             />
-            <h1 className="text-4xl md:text-5xl font-bold text-center">Willkommen</h1>
           </div>
           <div className="mt-6">
             <div className="max-w-3xl mx-auto text-center space-y-6">
               <h1 className="text-4xl md:text-6xl font-bold">
-                Willkommen bei dem AC Game Gewinnspiel
+                Willkommen!<br />
+                zur AC-Challenge
               </h1>
               <p className="text-lg md:text-xl">
-                Tauchen Sie ein in unsere spannende Spielewelt und gewinnen Sie tolle Preise! Testen Sie Ihr Geschick in drei verschiedenen Herausforderungen.
+                Denkst du du hast das Zeug zum Gewinner? Löse die Spiele und gewinne tolle Preise!
               </p>
             </div>
-            <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
-              {prizes.map((prize, index) => (
-                <Card key={index} className="bg-white/10 backdrop-blur-md text-white border-none">
-                  <CardHeader>
-                    <CardTitle className="text-center">
-                      {prize.position}. {prize.title}
-                    </CardTitle>
+            <div className="mt-20"> {/* Erhöht von mt-12 auf mt-20 */}
+              {/* Hauptpreise in der Reihe - mit angepasster Hierarchie */}
+              <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8 px-4">
+                {/* 2. Preis - links */}
+                <Card 
+                  key="prize-2" 
+                  className="bg-white/10 backdrop-blur-md text-white border-none shadow-[4px_6px_10px_rgba(0,0,0,0.15)] w-full md:w-1/4 h-auto md:h-[350px] transform transition-transform hover:scale-105 duration-300"
+                >
+                  <CardHeader className="relative pb-0 pt-6">
+                    <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-[#c0c0c0] to-[#e0e0e0] text-gray-800 px-4 py-1 rounded-full shadow-md">
+                      <span className="font-bold">2. Preis</span>
+                    </div>
                   </CardHeader>
-                  <CardContent className="flex flex-col items-center">
-                    <div className="w-32 h-32 mb-4 overflow-hidden rounded-lg">
+                  <CardContent className="flex flex-col items-center pt-4">
+                    <div className="w-24 h-24 mb-4 overflow-hidden rounded-lg bg-white/20 p-2 flex items-center justify-center">
                       <img
-                        src={prize.image || "/placeholder.svg"}
-                        alt={prize.title}
+                        src={prizes[1].image || "/placeholder.svg"}
+                        alt={prizes[1].title}
                         className="w-full h-full object-contain"
                       />
                     </div>
-                    <p className="text-center">{prize.description}</p>
+                    <h3 className="text-xl font-semibold text-center mb-2">{prizes[1].title}</h3>
+                    <p className="text-center text-white/80">{prizes[1].description}</p>
                   </CardContent>
                 </Card>
-              ))}
-            </div>
-            <div className="mt-6">
-              <Card className="bg-white/10 backdrop-blur-md text-white border-none">
-                <CardHeader>
-                  <CardTitle className="text-center">
-                    4. Trostpreis
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="flex flex-col items-center">
-                  <div className="w-full h-16 mb-4 overflow-hidden rounded-lg">
-                    <img
-                      src="https://example.com/trostpreis.png"
-                      alt="Trostpreis"
-                      className="w-full h-full object-contain"
-                    />
+
+                {/* 1. Preis - mitte (größer) */}
+                <Card 
+                  key="prize-1" 
+                  className="bg-white/15 backdrop-blur-md text-white border-none shadow-[4px_6px_15px_rgba(0,0,0,0.2)] w-full md:w-1/3 h-auto md:h-[400px] transform transition-transform hover:scale-105 duration-300 z-10"
+                >
+                  <CardHeader className="relative pb-0 pt-8">
+                    <div className="absolute -top-5 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-[#ffd700] to-[#ffec8b] text-gray-800 px-6 py-2 rounded-full shadow-md">
+                      <span className="font-bold text-lg">1. Preis</span>
+                    </div>
+                  </CardHeader>
+                  <CardContent className="flex flex-col items-center pt-6">
+                    <div className="w-36 h-36 mb-6 overflow-hidden rounded-lg bg-white/20 p-3 flex items-center justify-center shadow-inner">
+                      <img
+                        src={prizes[0].image || "/placeholder.svg"}
+                        alt={prizes[0].title}
+                        className="w-full h-full object-contain"
+                      />
+                    </div>
+                    <h3 className="text-2xl font-bold text-center mb-3">{prizes[0].title}</h3>
+                    <p className="text-center text-white/90 text-lg">{prizes[0].description}</p>
+                  </CardContent>
+                </Card>
+
+                {/* 3. Preis - rechts */}
+                <Card 
+                  key="prize-3" 
+                  className="bg-white/10 backdrop-blur-md text-white border-none shadow-[4px_6px_10px_rgba(0,0,0,0.15)] w-full md:w-1/4 h-auto md:h-[350px] transform transition-transform hover:scale-105 duration-300"
+                >
+                  <CardHeader className="relative pb-0 pt-6">
+                    <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-[#cd7f32] to-[#dea47e] text-white px-4 py-1 rounded-full shadow-md">
+                      <span className="font-bold">3. Preis</span>
+                    </div>
+                  </CardHeader>
+                  <CardContent className="flex flex-col items-center pt-4">
+                    <div className="w-24 h-24 mb-4 overflow-hidden rounded-lg bg-white/20 p-2 flex items-center justify-center">
+                      <img
+                        src={prizes[2].image || "/placeholder.svg"}
+                        alt={prizes[2].title}
+                        className="w-full h-full object-contain"
+                      />
+                    </div>
+                    <h3 className="text-xl font-semibold text-center mb-2">{prizes[2].title}</h3>
+                    <p className="text-center text-white/80">{prizes[2].description}</p>
+                  </CardContent>
+                </Card>
+              </div>
+              
+              {/* Trostpreis - flacher und unten */}
+              <div className="mt-8 px-4 container mx-auto max-w-5xl"> {/* max-w-5xl begrenzt die Breite */}
+                <Card className="bg-white/10 backdrop-blur-md text-white border-none shadow-[4px_6px_10px_rgba(0,0,0,0.15)] transform transition-transform hover:scale-101 duration-300">
+                  <div className="flex flex-col md:flex-row md:items-center py-5"> {/* py-5 statt py-4 für mehr Höhe */}
+                    <CardHeader className="relative pb-0 md:w-1/4 flex-shrink-0">
+                      <div className="md:absolute md:top-1/2 md:-translate-y-1/2 left-1/2 md:-translate-x-1/2 bg-gradient-to-r from-[#a9a9a9] to-[#d3d3d3] text-gray-700 px-10 py-2 rounded-full shadow-md inline-block text-center"> {/* px-10 und py-2 für größere Badge, text-center hinzugefügt */}
+                        <span className="font-medium">Trostpreis</span>
+                      </div>
+                    </CardHeader>
+                    <CardContent className="flex items-center md:w-3/4">
+                      <div>
+                        <h3 className="text-lg font-semibold mb-1">Kleine Überraschung</h3>
+                        <p className="text-white/80">Für alle weiteren Teilnehmer gibt es kleine Überraschungen.</p>
+                      </div>
+                    </CardContent>
                   </div>
-                  <p className="text-center">Ein Trostpreis für alle Teilnehmer</p>
-                </CardContent>
-              </Card>
+                </Card>
+              </div>
             </div>
           </div>
         </div>
@@ -313,11 +371,14 @@ export default function Home() {
                     >
                       <AccordionItem value={`game${index+1}`} className="border-none">
                         <div className="flex items-center p-4">
-                          <div
-                            className={`h-8 w-8 rounded-full flex items-center justify-center mr-3 
-                            ${game.completed ? "bg-green-500 text-white" : "border-2 border-[#993333]"}`}
-                          >
-                            {game.completed ? <Check className="h-5 w-5" /> : null}
+                          {/* Entferne den Kreis hier und füge stattdessen Sterne für die Schwierigkeit ein */}
+                          <div className="flex items-center gap-1 mr-3">
+                            {/* Zeige 1, 2 oder 3 goldene Sterne je nach Schwierigkeit */}
+                            {Array(game.id === 1 ? 1 : game.id === 2 ? 2 : 3).fill(null).map((_, i) => (
+                              <svg key={i} xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="#ffd700">
+                                <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+                              </svg>
+                            ))}
                           </div>
                           
                           <CardHeader className="p-0 flex-1">
@@ -416,16 +477,25 @@ export default function Home() {
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                     />
-                    <p className="text-sm text-muted-foreground">
-                      Mit dem Einreichen meiner Lösungen bestätige ich, dass mich Academy Consult mit einer
-                      Rückmeldung zum Gewinnspiel benachrichtigen darf.
-                    </p>
+                    <div className="flex items-start space-x-2 my-4">
+                      <Checkbox 
+                        id="consent" 
+                        checked={consentGiven}
+                        onCheckedChange={(checked) => setConsentGiven(checked as boolean)}
+                        className="mt-1 text-white border-gray-400 data-[state=checked]:bg-[#993333] data-[state=checked]:border-[#993333]"
+                        required
+                      />
+                      <Label htmlFor="consent" className="text-sm font-normal">
+                        Mit dem Einreichen meiner Lösungen bestätige ich, dass mich Academy Consult mit einer Rückmeldung zum Gewinnspiel benachrichtigen darf.
+                      </Label>
+                    </div>
                   </div>
                 </CardContent>
                 <CardFooter>
                   <Button 
-                    className="w-full bg-[#993333] hover:bg-[#993333]/90"
-                    disabled={!allGamesCompleted}
+                    type="submit" 
+                    className="bg-[#993333] hover:bg-[#7a2828] text-white rounded-full w-full md:w-auto px-8"
+                    disabled={!canSubmit}
                   >
                     Lösungen einreichen
                   </Button>
@@ -444,7 +514,9 @@ export default function Home() {
                         <div className={`h-6 w-6 rounded-full flex items-center justify-center 
                           ${game.completed ? "bg-green-500 text-white" : "border border-gray-300 bg-gray-100"}`}>
                           {game.completed ? (
-                            <ArrowRight className="h-4 w-4" />
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                              <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
                           ) : (
                             <span className="text-xs">{index + 1}</span>
                           )}
@@ -481,16 +553,8 @@ export default function Home() {
       >
         <div className="container mx-auto px-4">
           <div className="flex flex-col items-center">
-            <div className="mb-6">
-              <img 
-                src="https://spreadly.app/storage/view/-/984a834393716c80e787b227b43cfbe2/avatars/28/TiugXb12LRXMJmTEvyHSDxOH09U0rK0wv3D1OEPB.png" 
-                alt="Academy Consult Logo" 
-                className="h-16 w-auto"
-              />
-            </div>
-            
             <div className="text-center mb-8">
-              <p className="text-lg font-medium mb-2">Folge uns auf:</p>
+              <p className="text-lg font-medium mb-2">Hyped? Dann schau hier vorbei!</p>
               <div className="flex space-x-6 justify-center">
                 {/* LinkedIn */}
                 <a href="https://www.linkedin.com/company/academy-consult/mycompany/" target="_blank" rel="noopener noreferrer"
