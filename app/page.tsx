@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, FormEvent } from "react";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Instagram, Linkedin, Youtube, Check, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -13,6 +13,12 @@ import { SectionDivider } from "@/components/ui/SectionDivider";
 import { SwiperEventCarousel } from "@/components/ui/SwiperEventCarousel";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
+import { Terminal } from "lucide-react";
+import {
+  Alert,
+  AlertDescription,
+  AlertTitle,
+} from "@/components/ui/alert";
 
 // Typdefinition für AccordionRenderProps
 type AccordionRenderProps = {
@@ -36,6 +42,14 @@ export default function Home() {
   const [lastName, setLastName] = useState("");
   const [openItems, setOpenItems] = useState<{ [key: string]: boolean }>({});
   const [consentGiven, setConsentGiven] = useState(false);
+  const [estimationValue, setEstimationValue] = useState<number | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitSuccess, setSubmitSuccess] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
+  const [markerPosition, setMarkerPosition] = useState<{ left: string; top: string } | null>(null);
+  const [selectedCoordinates, setSelectedCoordinates] = useState<{ x: number; y: number } | null>(null);
+  const [incorrectAttempts, setIncorrectAttempts] = useState(0);
+  const [wimmelbildAlert, setWimmelbildAlert] = useState<{title: string; description: string} | null>(null);
 
   const prizes = [
     {
@@ -178,6 +192,149 @@ export default function Home() {
 
   // Überprüfung für beide Bedingungen (Spiele abgeschlossen und Einwilligung gegeben)
   const canSubmit = allGamesCompleted && consentGiven;
+
+  // Funktion zum Verarbeiten der Einreichung
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+    
+    if (!canSubmit) return;
+    
+    // Validieren, dass alle erforderlichen Felder ausgefüllt sind
+    if (!firstName || !lastName || !email || estimationValue === null) {
+      setSubmitError("Bitte füllen Sie alle Felder aus.");
+      return;
+    }
+    
+    // Submission Payload erstellen
+    const payload = {
+      email: email,
+      vorname: firstName,
+      nachname: lastName,
+      schaetzwert: estimationValue
+    };
+    
+    // Einreichung starten
+    setIsSubmitting(true);
+    setSubmitError(null);
+    
+    try {
+      const response = await fetch(
+        "https://prod-95.westeurope.logic.azure.com:443/workflows/bbcb61dde4284b33b6fbf5faaff61a26/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=6xJfQrKL4Vy-uDFGwtHR4OrwRqJHGAid8vpL6Y0L0ag",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(payload),
+        }
+      );
+      
+      if (response.ok) {
+        // Erfolgreiche Einreichung
+        setSubmitSuccess(true);
+        
+        // Formular zurücksetzen
+        setFirstName("");
+        setLastName("");
+        setEmail("");
+        setConsentGiven(false);
+      } else {
+        // Fehler bei der Einreichung
+        const errorData = await response.text();
+        setSubmitError(`Fehler beim Einreichen: ${errorData || response.statusText}`);
+      }
+    } catch (error) {
+      setSubmitError(`Netzwerkfehler: ${error instanceof Error ? error.message : String(error)}`);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+  
+  // Aktualisiere den Schätzwert, wenn das dritte Spiel ausgefüllt wird
+  const handleEstimationChange = (value: string) => {
+    const parsedValue = parseInt(value, 10);
+    setEstimationValue(isNaN(parsedValue) ? null : parsedValue);
+  };
+
+  const wimmelbildRef = useRef<HTMLDivElement>(null);
+
+  const handleWimmelbildClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!wimmelbildRef.current) return;
+  
+    const rect = wimmelbildRef.current.getBoundingClientRect();
+    const clickX = (e.clientX - rect.left) / rect.width;
+    const clickY = (e.clientY - rect.top) / rect.height;
+    
+    setMarkerPosition({
+      left: `${(clickX) * 100}%`,
+      top: `${(clickY) * 100}%`
+    });
+    
+    setSelectedCoordinates({ x: clickX, y: clickY }); // Speichere die tatsächlichen Klickkoordinaten
+  };
+
+  // Funktion zum Überprüfen, ob die ausgewählte Position korrekt ist
+  const checkWimmelbildSolution = () => {
+    if (!selectedCoordinates) {
+      setWimmelbildAlert({
+        title: "Bitte wählen Sie einen Punkt",
+        description: "Bitte wähle zuerst einen Punkt auf dem Bild aus."
+      });
+      return false;
+    }
+    
+    // Für Demo-Zwecke: Der korrekte Punkt ist die Schnittstelle der Diagonalen (0.5, 0.5)
+    const centerX = 0.5;
+    const centerY = 0.5;
+    
+    // Toleranzbereich verkleinern für höhere Genauigkeit (5% des Bildes statt 10%)
+    const tolerance = 0.01;
+    
+    const isCorrect = 
+      Math.abs(selectedCoordinates.x - centerX) <= tolerance && 
+      Math.abs(selectedCoordinates.y - centerY) <= tolerance;
+    
+    if (isCorrect) {
+      markGameAsCompleted(1);
+      return true;
+    } else {
+      // Falsche Antwort
+      setIncorrectAttempts(prev => prev + 1);
+      
+      // Feedback anzeigen
+      if (incorrectAttempts >= 2) {
+        setWimmelbildAlert({
+          title: "Noch nicht gefunden",
+          description: "Tipp: Suche in der Mitte des Bildes!"
+        });
+      } else {
+        setWimmelbildAlert({
+          title: "Leider nicht richtig",
+          description: "Versuche es noch einmal!"
+        });
+      }
+      return false;
+    }
+  };
+
+  // Modifizierte Version der markGameAsCompleted für Spiel 1 mit Überprüfung
+  const handleGameCompletion = (gameId: number) => {
+    if (gameId === 1) {
+      const isCorrect = checkWimmelbildSolution();
+      
+      // Wenn die Lösung korrekt ist, zeige einen Erfolgs-Alert an
+      if (isCorrect) {
+        setWimmelbildAlert({
+          title: "Super! Lösung gefunden",
+          description: "Du hast Leo den Löwen gefunden!"
+        });
+      }
+      
+      if (!isCorrect) return;
+    }
+    
+    markGameAsCompleted(gameId);
+  };
 
   return (
     <main className="min-h-screen">
@@ -424,12 +581,89 @@ export default function Home() {
                           <CardContent className="p-0">
                             {/* Spielinhalt */}
                             {game.id === 1 && (
-                              <div className="aspect-video relative bg-muted rounded-lg overflow-hidden">
-                                <img
-                                  src="/placeholder.svg?height=400&width=800"
-                                  alt="Wimmelbild"
-                                  className="w-full h-full object-cover"
-                                />
+                              <div className="space-y-4">
+                                <p className="text-lg">
+                                  Klicke auf die Stelle, wo du ihn siehst.
+                                </p>
+                                <div 
+                                  ref={wimmelbildRef}
+                                  className="aspect-video relative bg-muted rounded-lg overflow-hidden cursor-crosshair"
+                                  onClick={handleWimmelbildClick}
+                                >
+                                  <img
+                                    src="/placeholder.svg?height=400&width=800"
+                                    alt="Wimmelbild"
+                                    className="w-full h-full object-cover"
+                                  />
+                                  
+                                  {/* Marker für ausgewählte Position */}
+                                  {markerPosition && (
+                                    <div 
+                                      className="absolute w-24 h-24 transform -translate-x-1/2 -translate-y-1/2 pointer-events-none"
+                                      style={{ 
+                                        left: markerPosition.left, 
+                                        top: markerPosition.top,
+                                      }}
+                                    >
+                                      <img
+                                        src="/lupe_better_centered.png"
+                                        alt="Lupe"
+                                        className="w-full h-full object-contain"
+                                      />
+                                    </div>
+                                  )}
+                                </div>
+                                
+                                {/* Alert für Wimmelbild-Feedback */}
+                                {wimmelbildAlert && (
+                                  <Alert 
+                                    className={`mt-4 border-l-4 ${
+                                      wimmelbildAlert.title.toLowerCase().includes("nicht") || 
+                                      wimmelbildAlert.title.toLowerCase().includes("bitte") 
+                                        ? "border-amber-500 bg-amber-50" 
+                                        : wimmelbildAlert.title.toLowerCase().includes("super") 
+                                          ? "border-green-500 bg-green-50"
+                                          : "border-[#993333] bg-red-50"
+                                    } shadow-sm`} 
+                                    variant="default"
+                                  >
+                                    <div className="flex">
+                                      {wimmelbildAlert.title.toLowerCase().includes("nicht") || wimmelbildAlert.title.toLowerCase().includes("bitte") ? (
+                                        <svg className="h-5 w-5 text-amber-600 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                          <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clipRule="evenodd" />
+                                        </svg>
+                                      ) : wimmelbildAlert.title.toLowerCase().includes("super") ? (
+                                        <svg className="h-5 w-5 text-green-600 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                          <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                                        </svg>
+                                      ) : (
+                                        <svg className="h-5 w-5 text-[#993333] mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                          <path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+                                        </svg>
+                                      )}
+                                      <div>
+                                        <AlertTitle className={`font-semibold ${
+                                          wimmelbildAlert.title.toLowerCase().includes("nicht") || wimmelbildAlert.title.toLowerCase().includes("bitte")
+                                            ? "text-amber-900" 
+                                            : wimmelbildAlert.title.toLowerCase().includes("super")
+                                              ? "text-green-900"
+                                              : "text-[#993333]"
+                                        }`}>
+                                          {wimmelbildAlert.title}
+                                        </AlertTitle>
+                                        <AlertDescription className={
+                                          wimmelbildAlert.title.toLowerCase().includes("nicht") || wimmelbildAlert.title.toLowerCase().includes("bitte")
+                                            ? "text-amber-800" 
+                                            : wimmelbildAlert.title.toLowerCase().includes("super")
+                                              ? "text-green-800"
+                                              : "text-[#7a2828]"
+                                        }>
+                                          {wimmelbildAlert.description}
+                                        </AlertDescription>
+                                      </div>
+                                    </div>
+                                  </Alert>
+                                )}
                               </div>
                             )}
 
@@ -450,17 +684,27 @@ export default function Home() {
                                 <p className="text-lg">
                                   Wie viele Studierende gibt es aktuell an der RWTH Aachen?
                                 </p>
-                                <Input type="number" placeholder="Ihre Schätzung" className="max-w-xs" />
+                                <Input 
+                                  type="number" 
+                                  placeholder="Ihre Schätzung" 
+                                  className="max-w-xs" 
+                                  value={estimationValue || ""}
+                                  onChange={(e) => handleEstimationChange(e.target.value)}
+                                />
                               </div>
                             )}
                           </CardContent>
 
                           <CardFooter className="pt-4 px-0 pb-0">
                             <Button
-                              onClick={() => markGameAsCompleted(game.id)}
-                              className="bg-[#993333] hover:bg-[#993333]/90"
+                              onClick={() => handleGameCompletion(game.id)}
+                              className={`${
+                                game.id === 1 ? 
+                                  (game.completed ? "bg-green-500 hover:bg-green-600" : "bg-[#993333] hover:bg-[#993333]/90") 
+                                  : "bg-[#993333] hover:bg-[#993333]/90"
+                              }`}
                             >
-                              Spiel abschließen
+                              {game.id === 1 ? "Lösung überprüfen" : "Spiel abschließen"}
                             </Button>
                           </CardFooter>
                         </AccordionContent>
@@ -477,58 +721,92 @@ export default function Home() {
                 <CardHeader>
                   <CardTitle className="text-2xl">Teilnahme einreichen</CardTitle>
                 </CardHeader>
-                <CardContent>
-                  <div className="space-y-4">
-                    <Input placeholder="Vorname" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
-                    <Input placeholder="Nachname" value={lastName} onChange={(e) => setLastName(e.target.value)} />
-                    <Input
-                      type="email"
-                      placeholder="E-Mail Adresse"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                    />
-                    <div className="flex items-start space-x-2 my-4">
-                      <div className="relative">
-                        <Checkbox
-                          id="consent"
-                          checked={consentGiven}
-                          onCheckedChange={(checked) => setConsentGiven(checked === true)}
-                          className="mt-1 text-white border-gray-400 data-[state=checked]:bg-[#993333] data-[state=checked]:border-[#993333]"
-                          required
-                        />
-                        {consentGiven && (
-                          <svg
-                            className="absolute left-[1px] top-[5px] h-3.5 w-3.5 text-white pointer-events-none"
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="3"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          >
-                            <polyline points="20 6 9 17 4 12"></polyline>
-                          </svg>
-                        )}
+                <form onSubmit={handleSubmit}>
+                  <CardContent>
+                    <div className="space-y-4">
+                      <Input 
+                        placeholder="Vorname" 
+                        value={firstName} 
+                        onChange={(e) => setFirstName(e.target.value)} 
+                        required
+                      />
+                      <Input 
+                        placeholder="Nachname" 
+                        value={lastName} 
+                        onChange={(e) => setLastName(e.target.value)} 
+                        required
+                      />
+                      <Input
+                        type="email"
+                        placeholder="E-Mail Adresse"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        required
+                      />
+                      <div className="flex items-start space-x-2 my-4">
+                        <div className="relative">
+                          <Checkbox
+                            id="consent"
+                            checked={consentGiven}
+                            onCheckedChange={(checked) => setConsentGiven(checked === true)}
+                            className="mt-1 text-white border-gray-400 data-[state=checked]:bg-[#993333] data-[state=checked]:border-[#993333]"
+                            required
+                          />
+                          {consentGiven && (
+                            <svg
+                              className="absolute left-[1px] top-[5px] h-3.5 w-3.5 text-white pointer-events-none"
+                              xmlns="http://www.w3.org/2000/svg"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              stroke="currentColor"
+                              strokeWidth="3"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            >
+                              <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                          )}
+                        </div>
+                        <Label
+                          htmlFor="consent"
+                          className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                        >
+                          Mit dem Einreichen meiner Lösungen bestätige ich, dass ich unsere <a href="https://academyconsult.de/unternehmen/impressum/" target="_blank" rel="noopener noreferrer" className="text-[#993333] hover:underline">AGBs</a> akzeptiere.
+                        </Label>
                       </div>
-                      <Label
-                        htmlFor="consent"
-                        className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                      >
-                        Mit dem Einreichen meiner Lösungen bestätige ich, dass ich unsere <a href="https://academyconsult.de/unternehmen/impressum/" target="_blank" rel="noopener noreferrer" className="text-[#993333] hover:underline">AGBs</a> akzeptiere.
-                      </Label>
+                      
+                      {/* Feedback nach der Einreichung */}
+                      {submitSuccess && (
+                        <div className="p-3 bg-green-50 text-green-700 rounded-md">
+                          Vielen Dank für Ihre Teilnahme! Ihre Lösungen wurden erfolgreich eingereicht.
+                        </div>
+                      )}
+                      
+                      {submitError && (
+                        <div className="p-3 bg-red-50 text-red-700 rounded-md">
+                          {submitError}
+                        </div>
+                      )}
                     </div>
-                  </div>
-                </CardContent>
-                <CardFooter>
-                  <Button
-                    type="submit"
-                    className="bg-[#993333] hover:bg-[#7a2828] text-white rounded-full w-full md:w-auto px-8"
-                    disabled={!canSubmit}
-                  >
-                    Lösungen einreichen
-                  </Button>
-                </CardFooter>
+                  </CardContent>
+                  <CardFooter>
+                    <Button
+                      type="submit"
+                      className="bg-[#993333] hover:bg-[#7a2828] text-white rounded-full w-full md:w-auto px-8"
+                      disabled={!canSubmit || isSubmitting}
+                    >
+                      {isSubmitting ? (
+                        <div className="flex items-center">
+                          <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                          </svg>
+                          Wird eingereicht...
+                        </div>
+                      ) : "Lösungen einreichen"}
+                    </Button>
+                  </CardFooter>
+                </form>
               </Card>
 
               {/* Timeline */}
