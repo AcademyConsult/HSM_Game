@@ -613,7 +613,7 @@ export default function Home() {
                               <div className="space-y-4">
                                 <p className="text-lg">
                                   Klicke auf die Stelle, wo du ihn siehst.
-                                  <img src="/leoKopf.png" alt="Leo der Löwe" className="inline-block ml-2 h-8 w-auto align-middle" />
+                                  <img src="https://raw.githubusercontent.com/AcademyConsult/HSM_Game/main/public/leoKopf.png" alt="Leo der Löwe" className="inline-block ml-2 h-8 w-auto align-middle" />
                                 </p>
                                 <div 
                                   ref={wimmelbildRef}
