@@ -283,16 +283,41 @@ export default function Home() {
       return false;
     }
     
-    // Für Demo-Zwecke: Der korrekte Punkt ist die Schnittstelle der Diagonalen (0.5, 0.5)
-    const centerX = 0.5;
-    const centerY = 0.5;
+    // Der korrekte Punkt ist bei exakten Pixelkoordinaten (1270, 598) in einem 1621×1080 Bild
+    // Umrechnung in relative Koordinaten:
+    //const targetX = 1270 / 1621; // ca. 0,7835
+    //const targetY = 598 / 1080;  // ca. 0,5537
     
-    // Toleranzbereich verkleinern für höhere Genauigkeit (5% des Bildes statt 10%)
-    const tolerance = 0.01;
+    const targetX = 731 / 800;
+    const targetY = 304 / 400;
+
+    console.log("Klickposition:", {
+      x: selectedCoordinates.x.toFixed(4), 
+      y: selectedCoordinates.y.toFixed(4)
+    });
+    console.log("Zielposition:", { 
+      x: targetX.toFixed(4), 
+      y: targetY.toFixed(4) 
+    });
     
-    const isCorrect = 
-      Math.abs(selectedCoordinates.x - centerX) <= tolerance && 
-      Math.abs(selectedCoordinates.y - centerY) <= tolerance;
+    // Toleranzbereich für höhere Genauigkeit
+    const tolerance = 0.085; // Erhöht auf 0.07
+    
+    // Berechne den Abstand für bessere Diagnose
+    const distanceX = Math.abs(selectedCoordinates.x - targetX);
+    const distanceY = Math.abs(selectedCoordinates.y - targetY);
+    console.log("Abstand:", { 
+      x: distanceX.toFixed(4), 
+      y: distanceY.toFixed(4),
+      tolerance: tolerance.toFixed(4)
+    });
+    
+    const isCorrectX = distanceX <= tolerance;
+    const isCorrectY = distanceY <= tolerance;
+    const isCorrect = isCorrectX && isCorrectY;
+    
+    console.log("Treffer X:", isCorrectX, "Treffer Y:", isCorrectY);
+    console.log("Ist korrekt:", isCorrect);
     
     if (isCorrect) {
       markGameAsCompleted(1);
@@ -305,12 +330,16 @@ export default function Home() {
       if (incorrectAttempts >= 2) {
         setWimmelbildAlert({
           title: "Noch nicht gefunden",
-          description: "Tipp: Suche in der Mitte des Bildes!"
+          description: `Tipp: Schau im rechten mittleren Bereich des Bildes nach! Du bist ${
+            distanceX < tolerance ? 'horizontal richtig,' : 'horizontal noch nicht nah genug,'
+          } aber ${
+            distanceY < tolerance ? 'vertikal richtig.' : 'vertikal noch nicht nah genug.'
+          }`
         });
       } else {
         setWimmelbildAlert({
           title: "Leider nicht richtig",
-          description: "Versuche es noch einmal!"
+          description: "Versuche es noch einmal! Der Löwe ist gut versteckt."
         });
       }
       return false;
@@ -584,6 +613,7 @@ export default function Home() {
                               <div className="space-y-4">
                                 <p className="text-lg">
                                   Klicke auf die Stelle, wo du ihn siehst.
+                                  <img src="/leoKopf.png" alt="Leo der Löwe" className="inline-block ml-2 h-8 w-auto align-middle" />
                                 </p>
                                 <div 
                                   ref={wimmelbildRef}
@@ -591,7 +621,7 @@ export default function Home() {
                                   onClick={handleWimmelbildClick}
                                 >
                                   <img
-                                    src="https://raw.githubusercontent.com/AcademyConsult/HSM_Game/main/public/placeholder.svg?height=400&width=800"
+                                    src="https://raw.githubusercontent.com/AcademyConsult/HSM_Game/main/public/wimmelbild.png"
                                     alt="Wimmelbild"
                                     className="w-full h-full object-cover"
                                   />
