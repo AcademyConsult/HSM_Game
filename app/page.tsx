@@ -149,7 +149,7 @@ export default function Home() {
     },
     {
       id: 2,
-      title: "Kreuzworträtsel (medium)",
+      title: "Multiple Choice Quiz (medium)",
       completed: false,
     },
     {
@@ -158,6 +158,16 @@ export default function Home() {
       completed: false,
     }
   ]);
+
+  // Neue State-Variablen für das Multiple-Choice-Quiz
+  const [quizAnswers, setQuizAnswers] = useState<{
+    question1: string | null;
+    question2: string | null;
+  }>({
+    question1: null,
+    question2: null
+  });
+  const [quizFeedback, setQuizFeedback] = useState<{ title: string; description: string; type: 'warning' | 'success' | 'error' } | null>(null);
 
   const allGamesCompleted = games.every(game => game.completed);
 
@@ -357,12 +367,59 @@ export default function Home() {
           title: "Super! Lösung gefunden",
           description: "Du hast Leo den Löwen gefunden!"
         });
+        markGameAsCompleted(1);
       }
-      
-      if (!isCorrect) return;
+    } else if (gameId === 2) {
+      // Quiz überprüfen statt direkt markieren
+      checkQuizAnswers();
+    } else {
+      // Für Spiel 3 direkt markieren
+      markGameAsCompleted(gameId);
     }
-    
-    markGameAsCompleted(gameId);
+  };
+
+  // Funktion zum Überprüfen der Quiz-Antworten
+  const checkQuizAnswers = () => {
+    // Richtige Antworten: 1. Frage: B, 2. Frage: C
+    const correctAnswers = {
+      question1: 'B',
+      question2: 'C'
+    };
+
+    // Prüfen, ob beide Fragen beantwortet wurden
+    if (!quizAnswers.question1 || !quizAnswers.question2) {
+      setQuizFeedback({
+        title: "Bitte beantworten Sie alle Fragen",
+        description: "Beide Fragen müssen beantwortet werden.",
+        type: "warning"
+      });
+      return false;
+    }
+
+    // Prüfen, ob die Antworten richtig sind
+    const question1Correct = quizAnswers.question1 === correctAnswers.question1;
+    const question2Correct = quizAnswers.question2 === correctAnswers.question2;
+    const allCorrect = question1Correct && question2Correct;
+
+    if (allCorrect) {
+      setQuizFeedback({
+        title: "Super! Lösung gefunden",
+        description: "Alle Antworten sind richtig!",
+        type: "success"
+      });
+      markGameAsCompleted(2);
+      return true;
+    } else {
+      setQuizFeedback({
+        title: "Leider nicht richtig",
+        description: `Folgende Fragen sind ${!question1Correct && !question2Correct ? 'nicht' : 'teilweise'} richtig beantwortet: 
+          ${!question1Correct ? 'Frage 1' : ''} 
+          ${!question1Correct && !question2Correct ? ' und ' : ''}
+          ${!question2Correct ? 'Frage 2' : ''}`,
+        type: "error"
+      });
+      return false;
+    }
   };
 
   return (
@@ -698,14 +755,152 @@ export default function Home() {
                             )}
 
                             {game.id === 2 && (
-                              <div className="flex justify-center">
-                                <iframe
-                                  width="100%"
-                                  height="600"
-                                  style={{ border: "none", maxWidth: "800px" }}
-                                  frameBorder="0"
-                                  src="https://crosswordlabs.com/embed/2025-02-24-879"
-                                ></iframe>
+                              <div className="space-y-6">
+                                {/* Frage 1 */}
+                                <div className="space-y-3">
+                                  <h3 className="font-semibold text-lg">1. In welchem Jahr wurde Academy Consult gegründet?</h3>
+                                  <div className="space-y-2">
+                                    <div className="flex items-center">
+                                      <input 
+                                        type="radio" 
+                                        id="q1-a" 
+                                        name="question1" 
+                                        className="mr-2 h-4 w-4 accent-[#993333]"
+                                        checked={quizAnswers.question1 === 'A'}
+                                        onChange={() => setQuizAnswers({...quizAnswers, question1: 'A'})}
+                                      />
+                                      <label htmlFor="q1-a">A: 1995</label>
+                                    </div>
+                                    <div className="flex items-center">
+                                      <input 
+                                        type="radio" 
+                                        id="q1-b" 
+                                        name="question1" 
+                                        className="mr-2 h-4 w-4 accent-[#993333]"
+                                        checked={quizAnswers.question1 === 'B'}
+                                        onChange={() => setQuizAnswers({...quizAnswers, question1: 'B'})}
+                                      />
+                                      <label htmlFor="q1-b">B: 1986</label>
+                                    </div>
+                                    <div className="flex items-center">
+                                      <input 
+                                        type="radio" 
+                                        id="q1-c" 
+                                        name="question1" 
+                                        className="mr-2 h-4 w-4 accent-[#993333]"
+                                        checked={quizAnswers.question1 === 'C'}
+                                        onChange={() => setQuizAnswers({...quizAnswers, question1: 'C'})}
+                                      />
+                                      <label htmlFor="q1-c">C: 1990</label>
+                                    </div>
+                                    <div className="flex items-center">
+                                      <input 
+                                        type="radio" 
+                                        id="q1-d" 
+                                        name="question1" 
+                                        className="mr-2 h-4 w-4 accent-[#993333]"
+                                        checked={quizAnswers.question1 === 'D'}
+                                        onChange={() => setQuizAnswers({...quizAnswers, question1: 'D'})}
+                                      />
+                                      <label htmlFor="q1-d">D: 2001</label>
+                                    </div>
+                                  </div>
+                                </div>
+                                
+                                {/* Frage 2 */}
+                                <div className="space-y-3">
+                                  <h3 className="font-semibold text-lg">2. Welche Art von Beratung bietet Academy Consult hauptsächlich an?</h3>
+                                  <div className="space-y-2">
+                                    <div className="flex items-center">
+                                      <input 
+                                        type="radio" 
+                                        id="q2-a" 
+                                        name="question2" 
+                                        className="mr-2 h-4 w-4 accent-[#993333]"
+                                        checked={quizAnswers.question2 === 'A'}
+                                        onChange={() => setQuizAnswers({...quizAnswers, question2: 'A'})}
+                                      />
+                                      <label htmlFor="q2-a">A: Finanzdienstleistungen</label>
+                                    </div>
+                                    <div className="flex items-center">
+                                      <input 
+                                        type="radio" 
+                                        id="q2-b" 
+                                        name="question2" 
+                                        className="mr-2 h-4 w-4 accent-[#993333]"
+                                        checked={quizAnswers.question2 === 'B'}
+                                        onChange={() => setQuizAnswers({...quizAnswers, question2: 'B'})}
+                                      />
+                                      <label htmlFor="q2-b">B: IT-Beratung</label>
+                                    </div>
+                                    <div className="flex items-center">
+                                      <input 
+                                        type="radio" 
+                                        id="q2-c" 
+                                        name="question2" 
+                                        className="mr-2 h-4 w-4 accent-[#993333]"
+                                        checked={quizAnswers.question2 === 'C'}
+                                        onChange={() => setQuizAnswers({...quizAnswers, question2: 'C'})}
+                                      />
+                                      <label htmlFor="q2-c">C: Unternehmensberatung</label>
+                                    </div>
+                                    <div className="flex items-center">
+                                      <input 
+                                        type="radio" 
+                                        id="q2-d" 
+                                        name="question2" 
+                                        className="mr-2 h-4 w-4 accent-[#993333]"
+                                        checked={quizAnswers.question2 === 'D'}
+                                        onChange={() => setQuizAnswers({...quizAnswers, question2: 'D'})}
+                                      />
+                                      <label htmlFor="q2-d">D: Rechtsberatung</label>
+                                    </div>
+                                  </div>
+                                </div>
+                                
+                                {/* Feedback-Alert für das Quiz */}
+                                {quizFeedback && (
+                                  <Alert 
+                                    className={`mt-4 border-l-4 ${
+                                      quizFeedback.type === 'warning' ? 'border-amber-500 bg-amber-50' :
+                                      quizFeedback.type === 'success' ? 'border-green-500 bg-green-50' :
+                                      'border-[#993333] bg-red-50'
+                                    } shadow-sm`} 
+                                    variant="default"
+                                  >
+                                    <div className="flex">
+                                      {quizFeedback.type === 'warning' ? (
+                                        <svg className="h-5 w-5 text-amber-600 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                          <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clipRule="evenodd" />
+                                        </svg>
+                                      ) : quizFeedback.type === 'success' ? (
+                                        <svg className="h-5 w-5 text-green-600 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                          <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                                        </svg>
+                                      ) : (
+                                        <svg className="h-5 w-5 text-[#993333] mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                          <path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+                                        </svg>
+                                      )}
+                                      <div>
+                                        <AlertTitle className={`font-semibold ${
+                                          quizFeedback.type === 'warning' ? 'text-amber-900' :
+                                          quizFeedback.type === 'success' ? 'text-green-900' :
+                                          'text-[#993333]'
+                                        }`}>
+                                          {quizFeedback.title}
+                                        </AlertTitle>
+                                        <AlertDescription className={
+                                          quizFeedback.type === 'warning' ? 'text-amber-800' :
+                                          quizFeedback.type === 'success' ? 'text-green-800' :
+                                          'text-[#7a2828]'
+                                        }>
+                                          {quizFeedback.description}
+                                        </AlertDescription>
+                                      </div>
+                                    </div>
+                                  </Alert>
+                                )}
                               </div>
                             )}
 
@@ -725,16 +920,17 @@ export default function Home() {
                             )}
                           </CardContent>
 
+                          {/* CardFooter mit korrektem Button-Text und Farbe */}
                           <CardFooter className="pt-4 px-0 pb-0">
                             <Button
                               onClick={() => handleGameCompletion(game.id)}
                               className={`${
-                                game.id === 1 ? 
+                                (game.id === 1 || game.id === 2) ? 
                                   (game.completed ? "bg-green-500 hover:bg-green-600" : "bg-[#993333] hover:bg-[#993333]/90") 
                                   : "bg-[#993333] hover:bg-[#993333]/90"
                               }`}
                             >
-                              {game.id === 1 ? "Lösung überprüfen" : "Spiel abschließen"}
+                              {(game.id === 1 || game.id === 2) ? "Lösung überprüfen" : "Spiel abschließen"}
                             </Button>
                           </CardFooter>
                         </AccordionContent>
