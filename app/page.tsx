@@ -55,23 +55,23 @@ export default function Home() {
     {
       position: "1",
       title: "Hauptpreis",
-      description: "X-Box One",
+      description: "MacBook Pro 16 Zoll",
       image:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Microsoft-Xbox-One-X-Console.png/800px-Microsoft-Xbox-One-X-Console.png?20230905163012",
+        "https://cdsassets.apple.com/live/SZLF0YNV/images/sp/111901_mbp16-gray.png",
     },
     {
       position: "2",
       title: "Zweiter Preis",
-      description: "Nintendo Switch",
+      description: "MacBook Pro 16 Zoll",
       image:
-        "https://e7.pngegg.com/pngimages/349/579/png-clipart-nintendo-switch-splatoon-2-nintendo-64-super-mario-odyssey-nintendo-electronics-gadget.png",
+        "https://cdsassets.apple.com/live/SZLF0YNV/images/sp/111901_mbp16-gray.png",
     },
     {
       position: "3",
       title: "Dritter Preis",
-      description: "800 Liter RedBull",
+      description: "MacBook Pro 16 Zoll",
       image:
-        "https://dosenmatrosen.imgbolt.de/media/c9/5a/63/1694594528/GL007311-24-1-Red-Bull-Summer-Edition-Juneberry.png?ts=1694594528",
+        "https://cdsassets.apple.com/live/SZLF0YNV/images/sp/111901_mbp16-gray.png",
     },
   ];
 
@@ -214,6 +214,15 @@ export default function Home() {
       return;
     }
     
+    /*
+    // E-Mail-Validierung mit RegEx
+    const emailRegex = /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/;
+    if (!emailRegex.test(email)) {
+      setSubmitError("Bitte geben Sie eine gültige E-Mail-Adresse ein.");
+      return;
+    }
+    */
+
     // Submission Payload erstellen
     const payload = {
       email: email,
@@ -486,27 +495,26 @@ export default function Home() {
                   className="bg-white/10 backdrop-blur-md text-white border-none shadow-[4px_6px_10px_rgba(0,0,0,0.15)] w-full md:w-1/4 h-auto md:h-[350px] transform transition-transform hover:scale-105 duration-300"
                 >
                   <CardHeader className="relative pb-0 pt-6">
-                    <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-[#c0c0c0] to-[#e0e0e0] text-gray-800 px-4 py-1 rounded-full shadow-md">
+                    <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-[#cd7f32] to-[#dea47e] text-white px-4 py-1 rounded-full shadow-md">
                       <span className="font-bold">2. Platz</span>
                     </div>
                   </CardHeader>
                   <CardContent className="flex flex-col items-center pt-4">
-                    <div className="w-24 h-24 mb-4 overflow-hidden rounded-lg bg-white/20 p-2 flex items-center justify-center">
+                    <h3 className="text-xl font-semibold text-center mb-6">{prizes[1].description}</h3>
+                    <div className="w-full h-32 mt-5 mb-6 overflow-hidden rounded-xl flex items-center justify-center">
                       <img
                         src={prizes[1].image || "/placeholder.svg"}
                         alt={prizes[1].title}
-                        className="w-full h-full object-contain"
+                        className="w-auto h-full object-contain rounded-xl mx-auto"
                       />
                     </div>
-                    <h3 className="text-xl font-semibold text-center mb-2">{prizes[1].title}</h3>
-                    <p className="text-center text-white/80">{prizes[1].description}</p>
                   </CardContent>
                 </Card>
 
                 {/* 1. Preis - mitte (größer) */}
                 <Card
                   key="prize-1"
-                  className="bg-white/15 backdrop-blur-md text-white border-none shadow-[4px_6px_15px_rgba(0,0,0,0.2)] w-full md:w-1/3 h-auto md:h-[400px] transform transition-transform hover:scale-105 duration-300 z-10"
+                  className="bg-white/15 backdrop-blur-md text-white border-none shadow-[4px_6px_15px_rgba(0,0,0,0.2)] w-full md:w-1/3 h-auto md:h-[500px] transform transition-transform hover:scale-105 duration-300 z-10"
                 >
                   <CardHeader className="relative pb-0 pt-8">
                     <div className="absolute -top-5 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-[#ffd700] to-[#ffec8b] text-gray-800 px-6 py-2 rounded-full shadow-md">
@@ -514,15 +522,28 @@ export default function Home() {
                     </div>
                   </CardHeader>
                   <CardContent className="flex flex-col items-center pt-6">
-                    <div className="w-36 h-36 mb-6 overflow-hidden rounded-lg bg-white/20 p-3 flex items-center justify-center shadow-inner">
+                    <h3 className="text-2xl font-bold text-center mb-5">{prizes[0].description}</h3>
+                    <div className="w-full h-40 mb-6 overflow-hidden rounded-lg flex items-center justify-center">
                       <img
                         src={prizes[0].image || "/placeholder.svg"}
                         alt={prizes[0].title}
                         className="w-full h-full object-contain"
                       />
                     </div>
-                    <h3 className="text-2xl font-bold text-center mb-3">{prizes[0].title}</h3>
-                    <p className="text-center text-white/90 text-lg">{prizes[0].description}</p>
+                    <div className={`flex w-full items-center`}>
+                      <div className="flex-1 my-12 h-[1px] bg-white"></div>
+                      <span className="text-2xl font-bold text-center mx-8 py-3">
+                        Sponsor
+                      </span>
+                      <div className="flex-1 my-12 h-[1px] bg-white"></div>
+                    </div>
+                    <div className="mt-3 flex justify-center">
+                      <img 
+                        src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/Celonis_Logo.png/1280px-Celonis_Logo.png" 
+                        alt="Celonis Logo" 
+                        className="h-12" 
+                      />
+                    </div>
                   </CardContent>
                 </Card>
 
@@ -537,15 +558,14 @@ export default function Home() {
                     </div>
                   </CardHeader>
                   <CardContent className="flex flex-col items-center pt-4">
-                    <div className="w-24 h-24 mb-4 overflow-hidden rounded-lg bg-white/20 p-2 flex items-center justify-center">
+                    <h3 className="text-xl font-semibold text-center mb-6">{prizes[2].description}</h3>
+                    <div className="w-full h-32 mt-5 mb-6 overflow-hidden rounded-xl flex items-center justify-center">
                       <img
                         src={prizes[2].image || "/placeholder.svg"}
                         alt={prizes[2].title}
-                        className="w-full h-full object-contain"
+                        className="w-auto h-full object-contain rounded-xl mx-auto"
                       />
                     </div>
-                    <h3 className="text-xl font-semibold text-center mb-2">{prizes[2].title}</h3>
-                    <p className="text-center text-white/80">{prizes[2].description}</p>
                   </CardContent>
                 </Card>
               </div>
@@ -559,8 +579,8 @@ export default function Home() {
                         <span className="font-medium">Trostpreis</span>
                       </div>
                     </CardHeader>
-                    <CardContent className="flex items-center md:w-3/4">
-                      <div>
+                    <CardContent className="flex items-center md:w-3/4 h-full">
+                      <div className="flex flex-col justify-center items-center text-center h-full">
                         <h3 className="text-lg font-semibold mb-1">Kleine Überraschung</h3>
                         <p className="text-white/80">Für alle weiteren Teilnehmer gibt es kleine Überraschungen.</p>
                       </div>
