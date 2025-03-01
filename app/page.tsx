@@ -42,7 +42,7 @@ export default function Home() {
   const [lastName, setLastName] = useState("");
   const [openItems, setOpenItems] = useState<{ [key: string]: boolean }>({});
   const [consentGiven, setConsentGiven] = useState(false);
-  const [estimationValue, setEstimationValue] = useState<number | null>(null);
+  const [estimationFeedback, setEstimationFeedback] = useState<{title: string; description: string} | null>(null);  const [estimationValue, setEstimationValue] = useState<number | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
@@ -78,65 +78,64 @@ export default function Home() {
   const events = [
     {
       id: 1,
-      title: "AC Networking Night",
-      date: "2025-03-15",
-      time: "19:00",
-      location: "RWTH Aachen, Templergraben 55",
-      description: "Netzwerken Sie mit Studenten und Alumnis von Academy Consult.",
+      title: "Infoabend Online (Zoom)",
+      date: "2025-04-16",
+      time: "20:00",
+      location: "Zoom",
+      description: "Hier erfährst du alles, was Dich bei uns erwartet und kommst mit uns ins Gespräch!",
       image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/AC%20Hintergrund%202-tH8JYEwhI9ZvKdJvkZJ21BJ3ZHAgrd.png",
     },
     {
       id: 2,
-      title: "Fallstudienwettbewerb",
-      date: "2025-04-02",
-      time: "14:00",
-      location: "Coworking Space, Pontstraße 41",
-      description: "Lösen Sie spannende Fallstudien und gewinnen Sie attraktive Preise.",
-      image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/AC%20Hintergrund%202-tH8JYEwhI9ZvKdJvkZJ21BJ3ZHAgrd.png",
-    },
+      title: "Infoabend LMU",
+      date: "2025-04-22",
+      time: "19:00",
+      location: "LMU, Raum tbd",
+      description: "Hier erfährst du alles, was Dich bei uns erwartet und danach gehen wir noch ganz locker in eine Bar.",
+      image: "https://raw.githubusercontent.com/AcademyConsult/HSM_Game/main/public/InfoAbendLMU.jpg",    },
     {
       id: 3,
-      title: "AC Sommerfest",
-      date: "2025-07-10",
-      time: "16:00",
-      location: "Westpark, Aachen",
-      description: "Feiern Sie den Sommer mit uns bei Grill und Getränken.",
+      title: "Open Büro Day",
+      date: "2025-04-23",
+      time: "15:00",
+      location: "AC Büro, Leopoldstraße 62",
+      description: "Beim Open Büro Day kannst Du Dir anschauen, wo du zukünftig arbeiten könntest ;)",
       image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/AC%20Hintergrund%202-tH8JYEwhI9ZvKdJvkZJ21BJ3ZHAgrd.png",
     },
     {
       id: 4,
-      title: "Unternehmensvorstellung: Tech AG",
-      date: "2025-09-05",
+      title: "Case Training",
+      date: "2025-04-23",
       time: "18:00",
-      location: "Online (Zoom)",
-      description: "Lernen Sie einen führenden Tech-Arbeitgeber kennen.",
+      location: "AC Büro, Leopoldstraße 62",
+      description: "Beim Case Training könnt ihr zusammen mit AClern casen und kommt ins Gespräch.",
       image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/AC%20Hintergrund%202-tH8JYEwhI9ZvKdJvkZJ21BJ3ZHAgrd.png",
     },
     {
       id: 5,
-      title: "Workshop: Projektmanagement",
-      date: "2025-10-20",
-      time: "10:00",
-      location: "RWTH Aachen, Kackertstraße 7",
-      description: "Praxisnaher Workshop zu agilen Projektmanagement-Methoden.",
+      title: "Infoabend Online (Zoom)",
+      date: "2025-04-23",
+      time: "20:00",
+      location: "Zoom",
+      description: "Hier erfährst du alles, was Dich bei uns erwartet und kommst mit uns ins Gespräch!",
       image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/AC%20Hintergrund%202-tH8JYEwhI9ZvKdJvkZJ21BJ3ZHAgrd.png",
     },
     {
       id: 6,
-      title: "AC Weihnachtsfeier",
-      date: "2025-12-18",
-      time: "20:00",
-      location: "Pontstraße 141-149, 52062 Aachen",
-      description: "Jahresabschluss und gemütliches Beisammensein.",
+      title: "Bewerbertraining",
+      date: "2025-04-17",
+      time: "17:00",
+      location: "AC Büro, Leopoldstraße 62",
+      description: "Beim Bewerbertraining lernst du das wichtigste was du vor einem Bewerbungsprozess wissen musst.",
       image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/AC%20Hintergrund%202-tH8JYEwhI9ZvKdJvkZJ21BJ3ZHAgrd.png",
     },
     {
       id: 7,
-      title: "AC Weihnachtsfeier",
-      date: "2025-12-18",
-      time: "20:00",
-      location: "Pontstraße 141-149, 52062 Aachen",
-      description: "Jahresabschluss und gemütliches Beisammensein.",
+      title: "Infoabend TUM",
+      date: "2025-04-26",
+      time: "19:00",
+      location: "TUM Stammgelände, Raum tbd",
+      description: "Hier erfährst du alles, was Dich bei uns erwartet und danach gehen wir noch ganz locker in eine Bar.",
       image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/AC%20Hintergrund%202-tH8JYEwhI9ZvKdJvkZJ21BJ3ZHAgrd.png",
     },
   ];
@@ -260,10 +259,19 @@ export default function Home() {
     }
   };
   
-  // Aktualisiere den Schätzwert, wenn das dritte Spiel ausgefüllt wird
+  // Aktualisiere den Schätzwert, nur für numerische Eingaben
   const handleEstimationChange = (value: string) => {
-    const parsedValue = parseInt(value, 10);
-    setEstimationValue(isNaN(parsedValue) ? null : parsedValue);
+    // Wenn leer, auf null setzen
+    if (value === "") {
+      setEstimationValue(null);
+      return;
+    }
+    
+    // Nur gültige Zahlen akzeptieren
+    const numValue = parseInt(value, 10);
+    if (!isNaN(numValue) && numValue >= 0) {
+      setEstimationValue(numValue);
+    }
   };
 
   const wimmelbildRef = useRef<HTMLDivElement>(null);
@@ -337,21 +345,10 @@ export default function Home() {
       setIncorrectAttempts(prev => prev + 1);
       
       // Feedback anzeigen
-      if (incorrectAttempts >= 2) {
-        setWimmelbildAlert({
-          title: "Noch nicht gefunden",
-          description: `Tipp: Schau im rechten mittleren Bereich des Bildes nach! Du bist ${
-            distanceX < tolerance ? 'horizontal richtig,' : 'horizontal noch nicht nah genug,'
-          } aber ${
-            distanceY < tolerance ? 'vertikal richtig.' : 'vertikal noch nicht nah genug.'
-          }`
-        });
-      } else {
-        setWimmelbildAlert({
-          title: "Leider nicht richtig",
-          description: "Versuche es noch einmal! Der Löwe ist gut versteckt."
-        });
-      }
+      setWimmelbildAlert({
+        title: "Leider nicht richtig",
+        description: "Versuche es noch einmal! Der Löwe ist gut versteckt."
+      });
       return false;
     }
   };
@@ -372,9 +369,32 @@ export default function Home() {
     } else if (gameId === 2) {
       // Quiz überprüfen statt direkt markieren
       checkQuizAnswers();
-    } else {
-      // Für Spiel 3 direkt markieren
-      markGameAsCompleted(gameId);
+    } else if (gameId === 3) {
+      // Für Spiel 3 prüfen, ob eine Schätzung eingegeben wurde
+      if (estimationValue === null) {
+        // Zeige Warnung dauerhaft an (Timer entfernt)
+        setSubmitError("Bitte gib eine Schätzung ein!");
+        return;
+      }
+      
+      // Schätzung wurde eingegeben, markiere Spiel als abgeschlossen
+      markGameAsCompleted(3);
+      
+      // Wenn das Spiel bereits abgeschlossen ist, zeige Feedback zum aktuellen Schätzwert
+      if (games.find(g => g.id === 3)?.completed) {
+        setEstimationFeedback({
+          title: "Schätzwert aktualisiert",
+          description: `Dein aktueller Schätzwert: ${estimationValue} Mitglieder`
+        });
+      } else {
+        setEstimationFeedback({
+          title: "Schätzwert gespeichert",
+          description: `Dein Schätzwert: ${estimationValue} Mitglieder`
+        });
+      }
+      
+      // Fehler zurücksetzen, wenn die Schätzung erfolgreich war
+      setSubmitError(null);
     }
   };
 
@@ -412,14 +432,19 @@ export default function Home() {
     } else {
       setQuizFeedback({
         title: "Leider nicht richtig",
-        description: `Folgende Fragen sind ${!question1Correct && !question2Correct ? 'nicht' : 'teilweise'} richtig beantwortet: 
-          ${!question1Correct ? 'Frage 1' : ''} 
-          ${!question1Correct && !question2Correct ? ' und ' : ''}
-          ${!question2Correct ? 'Frage 2' : ''}`,
+        description: `Folgende Fragen sind nicht richtig beantwortet: 
+          ${!question1Correct && !question2Correct ? 'Frage 1 und Frage 2' : ''}
+          ${question1Correct ? 'Frage 2' : ''}
+          ${question2Correct ? 'Frage 1' : ''}`,
         type: "error"
       });
       return false;
     }
+  };
+
+  // Füge diese Scroll-Funktion zu den anderen Funktionen hinzu
+  const scrollToFooter = () => {
+    document.querySelector('footer')?.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
@@ -642,22 +667,24 @@ export default function Home() {
                             {/* Benutzerdefiniertes animiertes Icon */}
                             <div className="h-8 w-8 flex items-center justify-center relative custom-accordion-icon">
                               <motion.span
-                                className="absolute h-0.5 w-5 bg-black"
+                                className="absolute w-5 bg-black"
                                 initial={{ y: -2.5 }}
                                 animate={{
                                   rotate: openItems[`game${index + 1}`] ? 45 : 0,
                                   y: openItems[`game${index + 1}`] ? 0 : -2.5
                                 }}
                                 transition={{ duration: 0.3, ease: "easeInOut" }}
+                                style={{ height: "2px" }}
                               />
                               <motion.span
-                                className="absolute h-0.5 w-5 bg-black"
+                                className="absolute w-5 bg-black"
                                 initial={{ y: 2.5 }}
                                 animate={{
                                   rotate: openItems[`game${index + 1}`] ? -45 : 0,
                                   y: openItems[`game${index + 1}`] ? 0 : 2.5
                                 }}
                                 transition={{ duration: 0.3, ease: "easeInOut" }}
+                                style={{ height: "2px" }}
                               />
                             </div>
                           </AccordionTrigger>
@@ -670,8 +697,7 @@ export default function Home() {
                               <div className="space-y-4">
                                 <p className="text-lg">
                                   Klicke auf die Stelle, wo du ihn siehst.
-                                  <img src="https://raw.githubusercontent.com/AcademyConsult/HSM_Game/main/public/leoKopf.png" alt="Leo der Löwe" className="inline-block ml-2 h-8 w-auto align-middle" />
-                                </p>
+                                  <img src="https://raw.githubusercontent.com/AcademyConsult/HSM_Game/main/public/leoKopf.png" alt="Leo der Löwe" className="inline-block ml-2 h-8 w-auto align-middle drop-shadow-md" />                                </p>
                                 <div 
                                   ref={wimmelbildRef}
                                   className="aspect-video relative bg-muted rounded-lg overflow-hidden cursor-crosshair"
@@ -717,15 +743,15 @@ export default function Home() {
                                     <div className="flex">
                                       {wimmelbildAlert.title.toLowerCase().includes("nicht") || wimmelbildAlert.title.toLowerCase().includes("bitte") ? (
                                         <svg className="h-5 w-5 text-amber-600 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                                          <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clipRule="evenodd" />
+                                          <path fillRule="evenodd" d="M18 10a8 8 0 0 0-16 0 8 8 0 0 0 16 0zm-7-4a1 1 0 0 0-.867.5 1 1 0 1 1-1.731-1A3 3 0 0 1 13 8a3.001 3.001 0 0 1-2 2.83V11a1 1 0 1 1-2 0v-1a1 1 0 0 1 1-1 1 1 0 1 0 0-2zm0 8a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" clipRule="evenodd" />
                                         </svg>
                                       ) : wimmelbildAlert.title.toLowerCase().includes("super") ? (
                                         <svg className="h-5 w-5 text-green-600 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                                          <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                                          <path fillRule="evenodd" d="M10 18a8 8 0 1 0-16 0 8 8 0 0 0 16 0zm3.707-9.293a1 1 0 0 0-1.414-1.414L9 10.586 7.707 9.293a1 1 0 0 0-1.414 1.414l2 2a1 1 0 0 0 1.414 0l4-4z" clipRule="evenodd" />
                                         </svg>
                                       ) : (
                                         <svg className="h-5 w-5 text-[#993333] mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                                          <path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+                                          <path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm-1-8a1 1 0 0 0-1 1v3a1 1 0 0 0 2 0V6a1 1 0 0 0-1-1z" clipRule="evenodd" />
                                         </svg>
                                       )}
                                       <div>
@@ -758,7 +784,7 @@ export default function Home() {
                               <div className="space-y-6">
                                 {/* Frage 1 */}
                                 <div className="space-y-3">
-                                  <h3 className="font-semibold text-lg">1. In welchem Jahr wurde Academy Consult gegründet?</h3>
+                                  <h3 className="font-semibold text-lg">1. Welcher dieser Partner ist unser ältester Partner bei AC?</h3>
                                   <div className="space-y-2">
                                     <div className="flex items-center">
                                       <input 
@@ -769,7 +795,7 @@ export default function Home() {
                                         checked={quizAnswers.question1 === 'A'}
                                         onChange={() => setQuizAnswers({...quizAnswers, question1: 'A'})}
                                       />
-                                      <label htmlFor="q1-a">A: 1995</label>
+                                      <label htmlFor="q1-a">A: BCG</label>
                                     </div>
                                     <div className="flex items-center">
                                       <input 
@@ -780,7 +806,7 @@ export default function Home() {
                                         checked={quizAnswers.question1 === 'B'}
                                         onChange={() => setQuizAnswers({...quizAnswers, question1: 'B'})}
                                       />
-                                      <label htmlFor="q1-b">B: 1986</label>
+                                      <label htmlFor="q1-b">B: Simon Kucher</label>
                                     </div>
                                     <div className="flex items-center">
                                       <input 
@@ -791,7 +817,7 @@ export default function Home() {
                                         checked={quizAnswers.question1 === 'C'}
                                         onChange={() => setQuizAnswers({...quizAnswers, question1: 'C'})}
                                       />
-                                      <label htmlFor="q1-c">C: 1990</label>
+                                      <label htmlFor="q1-c">C: McKinsey</label>
                                     </div>
                                     <div className="flex items-center">
                                       <input 
@@ -802,14 +828,15 @@ export default function Home() {
                                         checked={quizAnswers.question1 === 'D'}
                                         onChange={() => setQuizAnswers({...quizAnswers, question1: 'D'})}
                                       />
-                                      <label htmlFor="q1-d">D: 2001</label>
+                                      <label htmlFor="q1-d">D: Celonis</label>
                                     </div>
                                   </div>
                                 </div>
                                 
                                 {/* Frage 2 */}
                                 <div className="space-y-3">
-                                  <h3 className="font-semibold text-lg">2. Welche Art von Beratung bietet Academy Consult hauptsächlich an?</h3>
+                                  <h3 className="font-semibold text-lg">2. Welcher der folgenden Begriffe entspricht <span className="font-bold">nicht</span> unseren Unternehmenswerten?
+                                  </h3>
                                   <div className="space-y-2">
                                     <div className="flex items-center">
                                       <input 
@@ -820,7 +847,7 @@ export default function Home() {
                                         checked={quizAnswers.question2 === 'A'}
                                         onChange={() => setQuizAnswers({...quizAnswers, question2: 'A'})}
                                       />
-                                      <label htmlFor="q2-a">A: Finanzdienstleistungen</label>
+                                      <label htmlFor="q2-a">A: Eigeninitiativ</label>
                                     </div>
                                     <div className="flex items-center">
                                       <input 
@@ -831,7 +858,7 @@ export default function Home() {
                                         checked={quizAnswers.question2 === 'B'}
                                         onChange={() => setQuizAnswers({...quizAnswers, question2: 'B'})}
                                       />
-                                      <label htmlFor="q2-b">B: IT-Beratung</label>
+                                      <label htmlFor="q2-b">B: Verantwortungsbewusst</label>
                                     </div>
                                     <div className="flex items-center">
                                       <input 
@@ -842,7 +869,7 @@ export default function Home() {
                                         checked={quizAnswers.question2 === 'C'}
                                         onChange={() => setQuizAnswers({...quizAnswers, question2: 'C'})}
                                       />
-                                      <label htmlFor="q2-c">C: Unternehmensberatung</label>
+                                      <label htmlFor="q2-c">C: Jung, brutal und gutaussehend</label>
                                     </div>
                                     <div className="flex items-center">
                                       <input 
@@ -853,7 +880,7 @@ export default function Home() {
                                         checked={quizAnswers.question2 === 'D'}
                                         onChange={() => setQuizAnswers({...quizAnswers, question2: 'D'})}
                                       />
-                                      <label htmlFor="q2-d">D: Rechtsberatung</label>
+                                      <label htmlFor="q2-d">D: Vielfältig</label>
                                     </div>
                                   </div>
                                 </div>
@@ -871,15 +898,15 @@ export default function Home() {
                                     <div className="flex">
                                       {quizFeedback.type === 'warning' ? (
                                         <svg className="h-5 w-5 text-amber-600 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                                          <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clipRule="evenodd" />
+                                          <path fillRule="evenodd" d="M18 10a8 8 0 1 0-16 0 8 8 0 0 0 16 0zm-7-4a1 1 0 1 0-.867.5 1 1 0 1 1-1.731-1A3 3 0 0 1 13 8a3.001 3.001 0 0 1-2 2.83V11a1 1 0 1 1-2 0v-1a1 1 0 0 1 1-1 1 1 0 1 0 0-2zm0 8a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" clipRule="evenodd" />
                                         </svg>
                                       ) : quizFeedback.type === 'success' ? (
                                         <svg className="h-5 w-5 text-green-600 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                                          <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                                          <path fillRule="evenodd" d="M10 18a8 8 0 1 0-16 0 8 8 0 0 0 16 0zm3.707-9.293a1 1 0 0 0-1.414-1.414L9 10.586 7.707 9.293a1 1 0 0 0-1.414 1.414l2 2a1 1 0 0 0 1.414 0l4-4z" clipRule="evenodd" />
                                         </svg>
                                       ) : (
                                         <svg className="h-5 w-5 text-[#993333] mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                                          <path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+                                          <path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm-1-8a1 1 0 0 0-1 1v3a1 1 0 0 0 2 0V6a1 1 0 0 0-1-1z" clipRule="evenodd" />
                                         </svg>
                                       )}
                                       <div>
@@ -905,17 +932,110 @@ export default function Home() {
                             )}
 
                             {game.id === 3 && (
-                              <div className="space-y-4">
-                                <p className="text-lg">
-                                  Wie viele Studierende gibt es aktuell an der RWTH Aachen?
-                                </p>
-                                <Input 
-                                  type="number" 
-                                  placeholder="Ihre Schätzung" 
-                                  className="max-w-xs" 
-                                  value={estimationValue || ""}
-                                  onChange={(e) => handleEstimationChange(e.target.value)}
-                                />
+                              <div className="space-y-6">
+                                <div className="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200">
+                                  <div className="aspect-video relative overflow-hidden">
+                                    <img 
+                                      src="https://github.com/AcademyConsult/HSM_Game/raw/main/public/mitgliederfoto.jpg" 
+                                      alt="Academy Consult" 
+                                      className="w-full h-full object-cover"
+                                    />
+                                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end">
+                                      <div className="p-4 text-white">
+                                        <h3 className="text-xl font-bold">Academy Consult</h3>
+                                        <p className="text-sm opacity-90">Eine starke Gemeinschaft kann alles erreichen!</p>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  
+                                  <div className="p-5 space-y-4">                                    
+                                    <p className="text-sm text-gray-600">
+                                      Mit einer genauen Schätzung kannst du deine Gewinnchancen deutlich erhöhen! 
+                                      Recherchiere und nutze die <span 
+                                        className="text-[#993333] font-medium underline cursor-pointer" 
+                                        onClick={scrollToFooter}>
+                                        bereitgestellten Informationen
+                                      </span> unserer Websites im Footer.
+                                    </p>
+                                    
+                                    <div className="rounded-lg border border-gray-200 overflow-hidden shadow-md" 
+                                      style={{
+                                        backgroundColor: "#f3f4f6",
+                                        borderRadius: "0.5rem"
+                                      }}
+                                    >
+                                      <div className="p-6 rounded-lg">
+                                      <p className="font-medium text-xl mb-4 text-black">
+                                        Wie viele Mitglieder hat Academy Consult zum Stand 01.01.2025 aufgenommen?
+                                      </p>
+                                        <div className="relative mb-4">
+                                          <Input 
+                                            type="number" 
+                                            placeholder="Deine Schätzung" 
+                                            className="pl-10 pr-20 py-6 text-lg [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none bg-white/95 backdrop-blur-sm rounded-md border border-gray-200 shadow-md"
+                                            value={estimationValue || ""}
+                                            onChange={(e) => handleEstimationChange(e.target.value)}
+                                            min="0"
+                                            step="1"
+                                          />
+                                          <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-600">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                              <circle cx="9" cy="7" r="4"></circle>
+                                              <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                                              <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                                            </svg>
+                                          </span>
+                                          <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-600">Mitglieder</span>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    
+                                    {/* Feedback zum Schätzwert anzeigen */}
+                                    {estimationFeedback && (
+                                      <Alert 
+                                        className="border-l-4 border-green-500 bg-green-50 shadow-sm mt-3" 
+                                        variant="default"
+                                      >
+                                        <div className="flex">
+                                          <svg className="h-5 w-5 text-green-600 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                            <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                                          </svg>
+                                          <div>
+                                            <AlertTitle className="font-semibold text-green-900">
+                                              {estimationFeedback.title}
+                                            </AlertTitle>
+                                            <AlertDescription className="text-green-800">
+                                              {estimationFeedback.description}
+                                            </AlertDescription>
+                                          </div>
+                                        </div>
+                                      </Alert>
+                                    )}
+
+                                    {/* Fehlermeldung als Alert anzeigen, wenn submitError gesetzt ist */}
+                                    {submitError && (
+                                      <Alert 
+                                        className="border-l-4 border-amber-500 bg-amber-50 shadow-sm" 
+                                        variant="default"
+                                      >
+                                        <div className="flex">
+                                          <svg className="h-5 w-5 text-amber-600 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                            <path fillRule="evenodd" d="M18 10a8 8 0 1 0-16 0 8 8 0 0 0 16 0zm-8-3a1 1 0 0 0-.867.5 1 1 0 1 1-1.731-1A3 3 0 0 1 13 8a3.001 3.001 0 0 1-2 2.83V11a1 1 0 1 1-2 0v-1a1 1 0 0 1 1-1 1 1 0 1 0 0-2zm0 8a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" clipRule="evenodd" />
+                                          </svg>
+                                          <div>
+                                            <AlertTitle className="font-semibold text-amber-900">
+                                              Achtung
+                                            </AlertTitle>
+                                            <AlertDescription className="text-amber-800">
+                                              {submitError}
+                                            </AlertDescription>
+                                          </div>
+                                        </div>
+                                      </Alert>
+                                    )}
+                                  </div>
+                                </div>
                               </div>
                             )}
                           </CardContent>
@@ -927,10 +1047,12 @@ export default function Home() {
                               className={`${
                                 (game.id === 1 || game.id === 2) ? 
                                   (game.completed ? "bg-green-500 hover:bg-green-600" : "bg-[#993333] hover:bg-[#993333]/90") 
-                                  : "bg-[#993333] hover:bg-[#993333]/90"
-                              }`}
+                                  : game.completed ? "bg-green-500 hover:bg-green-600" : "bg-[#993333] hover:bg-[#993333]/90"
+                              } transition-all duration-300`}
                             >
-                              {(game.id === 1 || game.id === 2) ? "Lösung überprüfen" : "Spiel abschließen"}
+                              {game.id === 1 || game.id === 2 ? 
+                                "Lösung überprüfen" : 
+                                game.completed ? "Schätzung aktualisieren" : "Meine Schätzung einreichen"}
                             </Button>
                           </CardFooter>
                         </AccordionContent>
@@ -975,22 +1097,10 @@ export default function Home() {
                             id="consent"
                             checked={consentGiven}
                             onCheckedChange={(checked) => setConsentGiven(checked === true)}
-                            className="mt-1 text-white border-gray-400 data-[state=checked]:bg-[#993333] data-[state=checked]:border-[#993333]"
-                            required
+                            className="border-gray-300 data-[state=checked]:bg-[#993333] data-[state=checked]:border-[#993333] cursor-pointer"
                           />
                           {consentGiven && (
-                            <svg
-                              className="absolute left-[1px] top-[5px] h-3.5 w-3.5 text-white pointer-events-none"
-                              xmlns="http://www.w3.org/2000/svg"
-                              viewBox="0 0 24 24"
-                              fill="none"
-                              stroke="currentColor"
-                              strokeWidth="3"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                            >
-                              <polyline points="20 6 9 17 4 12"></polyline>
-                            </svg>
+                            <Check className="h-4 w-4 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white pointer-events-none font-bold" strokeWidth={3} />
                           )}
                         </div>
                         <Label
@@ -1000,17 +1110,10 @@ export default function Home() {
                           Mit dem Einreichen meiner Lösungen bestätige ich, dass ich unsere <a href="https://academyconsult.de/unternehmen/impressum/" target="_blank" rel="noopener noreferrer" className="text-[#993333] hover:underline">AGBs</a> akzeptiere.
                         </Label>
                       </div>
-                      
                       {/* Feedback nach der Einreichung */}
                       {submitSuccess && (
                         <div className="p-3 bg-green-50 text-green-700 rounded-md">
                           Vielen Dank für Ihre Teilnahme! Ihre Lösungen wurden erfolgreich eingereicht.
-                        </div>
-                      )}
-                      
-                      {submitError && (
-                        <div className="p-3 bg-red-50 text-red-700 rounded-md">
-                          {submitError}
                         </div>
                       )}
                     </div>
@@ -1130,7 +1233,7 @@ export default function Home() {
                   className="hover:opacity-80 transition-opacity">
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
                     <path d="M12 2.04c-5.5 0-10 4.49-10 10.02 0 5 3.66 9.15 8.44 9.9v-7H7.9v-2.9h2.54V9.85c0-2.51 1.49-3.89 3.78-3.89 1.09 0 2.23.19 2.23.19v2.47h-1.26c-1.24 0-1.63.77-1.63 1.56v1.88h2.78l-.45 2.9h-2.33v7a10 10 0 0 0 8.44-9.9c0-5.53-4.5-10.02-10-10.02z" />
-                  </svg>
+                </svg>
                 </a>
 
                 {/* Instagram */}
