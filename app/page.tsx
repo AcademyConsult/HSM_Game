@@ -136,8 +136,7 @@ export default function Home() {
       time: "17:00",
       location: "AC Büro, Leopoldstraße 62",
       description: "Beim Bewerbertraining lernst du das wichtigste was du vor einem Bewerbungsprozess wissen musst.",
-      image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/AC%20Hintergrund%202-tH8JYEwhI9ZvKdJvkZJ21BJ3ZHAgrd.png",
-    },
+      image: "https://raw.githubusercontent.com/AcademyConsult/HSM_Game/main/public/bewerbertraining.jpg"    },
     {
       id: 7,
       title: "Infoabend TUM",
