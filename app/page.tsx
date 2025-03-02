@@ -270,7 +270,7 @@ export default function Home() {
         
         // Spezifische Fehlermeldung für bereits teilgenommene E-Mail
         if (errorData.includes("This email has already taken part.")) {
-          setSubmitError("Diese E-Mail hat bereits an der Challenge teilgenommen. Bitte verwende eine andere E-Mail-Adresse.");
+          setSubmitError("Diese E-Mail hat bereits an der Challenge teilgenommen.");
         } else {
           setSubmitError(`Fehler beim Einreichen, überprüfe deine Daten und versuche es erneut.`);
           //setSubmitError(`Fehler beim Einreichen: ${errorData || response.statusText}`);
@@ -899,34 +899,33 @@ export default function Home() {
                       className={`border-l-4 ${game.completed ? 'border-green-500' : 'border-[#993333]'}`}
                     >
                       <AccordionItem value={`game${index + 1}`} className="border-none">
-                        <div className="flex items-center p-4">
-                          <CardHeader className="p-0 flex-1">
-                            <div className="flex items-center">
-                              <CardTitle className="text-2xl">{game.title.replace(/\s*\([^)]*\)\s*/, '')}</CardTitle>
+                        <AccordionTrigger className="w-full p-0 hover:no-underline">
+                          <div className="flex items-center p-4 w-full">
+                            <CardHeader className="p-0 flex-1">
+                              <div className="flex items-center">
+                                <CardTitle className="text-2xl text-left">{game.title.replace(/\s*\([^)]*\)\s*/, '')}</CardTitle>
 
-                              {/* Sterne rechts neben dem Titel */}
-                              <div className="flex items-center ml-3">
-                                {/* Erster Stern für alle Schwierigkeitsgrade */}
-                                <svg className="w-5 h-5 text-yellow-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
-                                  <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                                </svg>
+                                {/* Sterne rechts neben dem Titel */}
+                                <div className="flex items-center ml-3">
+                                  {/* Erster Stern für alle Schwierigkeitsgrade */}
+                                  <svg className="w-5 h-5 text-yellow-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+                                    <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
+                                  </svg>
 
-                                {/* Zweiter Stern für mittlere und schwere Schwierigkeit */}
-                                <svg className={`w-5 h-5 ms-1 ${game.id >= 2 ? 'text-yellow-300' : 'text-gray-300'}`} aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
-                                  <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                                </svg>
+                                  {/* Zweiter Stern für mittlere und schwere Schwierigkeit */}
+                                  <svg className={`w-5 h-5 ms-1 ${game.id >= 2 ? 'text-yellow-300' : 'text-gray-300'}`} aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+                                    <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
+                                  </svg>
 
-                                {/* Dritter Stern nur für schwere Schwierigkeit */}
-                                <svg className={`w-5 h-5 ms-1 ${game.id >= 3 ? 'text-yellow-300' : 'text-gray-300'}`} aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
-                                  <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                                </svg>
+                                  {/* Dritter Stern nur für schwere Schwierigkeit */}
+                                  <svg className={`w-5 h-5 ms-1 ${game.id >= 3 ? 'text-yellow-300' : 'text-gray-300'}`} aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+                                    <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
+                                  </svg>
+                                </div>
                               </div>
-                            </div>
-                          </CardHeader>
+                            </CardHeader>
 
-                          <AccordionTrigger className="accordion-trigger px-2">
-                            {/* Benutzerdefiniertes animiertes Icon */}
-                            <div className="h-8 w-8 flex items-center justify-center relative custom-accordion-icon">
+                            <div className="h-8 w-8 flex items-center justify-center relative custom-accordion-icon accordion-trigger-icon">
                               <motion.span
                                 className="absolute w-5 bg-black"
                                 initial={{ y: -2.5 }}
@@ -948,8 +947,8 @@ export default function Home() {
                                 style={{ height: "2px" }}
                               />
                             </div>
-                          </AccordionTrigger>
-                        </div>
+                          </div>
+                        </AccordionTrigger>
 
                         <AccordionContent className="pt-0 px-4 pb-6">
                           <CardContent className="p-0">
@@ -1231,7 +1230,7 @@ export default function Home() {
                                           <Input
                                             type="number"
                                             placeholder="Deine Schätzung"
-                                            className="pl-2 md:pl-10 pr-10 md:pr-20 py-2 md:py-6 text-base md:text-lg [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none bg-white/95 backdrop-blur-sm rounded-md border border-gray-200 shadow-md"
+                                            className="pl-2 md:pl-2 pr-10 md:pr-20 py-2 md:py-6 text-base md:text-lg [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none bg-white/95 backdrop-blur-sm rounded-md border border-gray-200 shadow-md"
                                             value={estimationValue || ""}
                                             onChange={(e) => handleEstimationChange(e.target.value)}
                                             min="0"
