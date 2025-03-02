@@ -8,58 +8,64 @@
 </head>
 <body>
   <main class="min-h-screen">
-    <!-- Landing Section mit individuellem Hintergrund -->
-    <section class="min-h-[600px] relative flex items-center" style="background-image: url('https://hebbkx1anhila5yf.public.blob.vercel-storage.com/AC%20Hintergrund%202-tH8JYEwhI9ZvKdJvkZJ21BJ3ZHAgrd.png'); background-size: cover; background-position: center;">
+    <!-- Landing Section: Vollbild-Hintergrund -->
+    <section class="h-screen relative flex items-center" style="background-image: url('https://hebbkx1anhila5yf.public.blob.vercel-storage.com/AC%20Hintergrund%202-tH8JYEwhI9ZvKdJvkZJ21BJ3ZHAgrd.png'); background-size: cover; background-position: center;">
       <div class="container mx-auto px-4 py-24 text-white text-center">
         <div class="flex flex-col items-center mb-8">
           <img src="https://spreadly.app/storage/view/-/984a834393716c80e787b227b43cfbe2/avatars/28/TiugXb12LRXMJmTEvyHSDxOH09U0rK0wv3D1OEPB.png" alt="Academy Consult Logo" class="h-32 md:h-48 w-auto mb-6" />
         </div>
-        <!-- Bereich für die Verifizierungsnachricht -->
-        <div id="verification-message" class="mt-6">
-          <h1 class="text-4xl md:text-6xl font-bold">AC-Challenge Verifizierung</h1>
-          <p class="text-lg md:text-xl">Bitte warte, während wir deine Email verifizieren...</p>
+        <!-- Begrüßungsnachricht (wird immer angezeigt) -->
+        <div id="greeting">
+          <h1 class="text-4xl md:text-6xl font-bold">Hallo, bitte warte, während wir deine Email verifizieren...</h1>
         </div>
+        <!-- Container für den Alert (Erfolgs- oder Fehlermeldung) -->
+        <div id="alert" class="mt-4"></div>
       </div>
     </section>
   </main>
   <script>
-    // Token aus der URL abrufen
-    const urlParams = new URLSearchParams(window.location.search);
-    const token = urlParams.get('token');
-    const messageContainer = document.getElementById('verification-message');
-
-    if (token) {
-      // 1. Token an neuen Endpoint senden, um den Namen zu erhalten
-      fetch('https://prod-243.westeurope.logic.azure.com:443/workflows/1d5a894ef5b84cd1a69e0bc92879cac3/triggers/manual/paths/invoke?api-version=2016-06-01', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ token: token })
-      })
-      .then(response => response.json())
-      .then(data => {
-        // Annahme: Die Antwort enthält ein Feld "name"
-        const firstName = data.name || 'Benutzer';
-        messageContainer.innerHTML = `<h2 class="text-3xl font-bold">Hallo ${firstName}, bitte warte, während wir deine Email verifizieren.</h2>`;
-        
-        // 2. Anschließend den ursprünglichen Endpoint für die Email-Verifizierung aufrufen
-        return fetch('https://prod-68.westeurope.logic.azure.com:443/workflows/270c59bf12d847cdb8e00eb279cc3186/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=cyxWdcPlG-yCkrhFrv8UAlSd6o_4uWtNgZlCC9CVYOI', {
+    async function verifyEmail() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const token = urlParams.get('token');
+      const greetingContainer = document.getElementById('greeting');
+      const alertContainer = document.getElementById('alert');
+      
+      if (!token) {
+        greetingContainer.innerHTML = `<h1 class="text-4xl md:text-6xl font-bold">Kein Verifizierungstoken in der URL gefunden.</h1>`;
+        return;
+      }
+      
+      try {
+        // 1. Name des Nutzers abrufen
+        let response = await fetch('https://prod-243.westeurope.logic.azure.com:443/workflows/1d5a894ef5b84cd1a69e0bc92879cac3/triggers/manual/paths/invoke?api-version=2016-06-01', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ token: token })
         });
-      })
-      .then(response => response.json())
-      .then(data => {
-        // Bei erfolgreicher Verifizierung kann optional eine weitere Nachricht angezeigt werden
-        messageContainer.innerHTML += `<p class="mt-4 text-2xl">Email verified successfully!</p>`;
-      })
-      .catch(err => {
+        let data = await response.json();
+        const userName = data.name || 'Benutzer';
+        
+        // Begrüßung mit Namen aktualisieren
+        greetingContainer.innerHTML = `<h1 class="text-4xl md:text-6xl font-bold">Hallo ${userName}, bitte warte, während wir deine Email verifizieren...</h1>`;
+        
+        // 2. Email-Verifizierung durchführen
+        response = await fetch('https://prod-68.westeurope.logic.azure.com:443/workflows/270c59bf12d847cdb8e00eb279cc3186/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=cyxWdcPlG-yCkrhFrv8UAlSd6o_4uWtNgZlCC9CVYOI', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ token: token })
+        });
+        data = await response.json();
+        
+        // Erfolgreiche Verifizierung: Alert anzeigen
+        alertContainer.innerHTML = `<div class="bg-green-500 text-white p-4 rounded">Hallo ${userName}, deine Email wurde erfolgreich verifiziert.</div>`;
+      } catch (err) {
         console.error(err);
-        messageContainer.innerHTML = '<h2 class="text-3xl font-bold">Verification failed. Please try again later.</h2>';
-      });
-    } else {
-      messageContainer.innerHTML = '<h2 class="text-3xl font-bold">No verification token found in the URL.</h2>';
+        // Fehlerfall: Fehlermeldung anzeigen
+        alertContainer.innerHTML = `<div class="bg-red-500 text-white p-4 rounded">Verifizierung fehlgeschlagen. Bitte versuche es später erneut.</div>`;
+      }
     }
+    
+    verifyEmail();
   </script>
 </body>
 </html>
