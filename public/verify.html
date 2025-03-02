@@ -19,7 +19,7 @@
         <div id="greeting">
           <h1 class="text-4xl md:text-6xl font-bold">Hallo <span id="userNamePlaceholder">Benutzer</span>,</h1>
         </div>
-        <!-- Statusbereich: Ladeanimation (später ersetzt) -->
+        <!-- Statusbereich: Ladeanimation (wird später ersetzt) -->
         <div id="statusMessage" class="mt-6">
           <div id="spinner" class="flex items-center justify-center">
             <div class="animate-spin rounded-full h-12 w-12 border-t-4 border-white"></div>
@@ -44,16 +44,16 @@
       }
       
       let userName = "Benutzer";
-      // 1. Versuche, den Namen des Nutzers (Attribut "vorname") abzurufen
+      // 1. Versuche, den Namen des Nutzers (Attribut "vorname") abzurufen.
+      // Hinweis: Wenn du hier einen 401-Fehler erhältst, überprüfe, ob der Endpoint
+      // zusätzliche Authentifizierungsparameter (z. B. "sig") benötigt.
+      const nameEndpoint = 'https://prod-243.westeurope.logic.azure.com:443/workflows/1d5a894ef5b84cd1a69e0bc92879cac3/triggers/manual/paths/invoke?api-version=2016-06-01';
       try {
-        const responseName = await fetch(
-          'https://prod-243.westeurope.logic.azure.com:443/workflows/1d5a894ef5b84cd1a69e0bc92879cac3/triggers/manual/paths/invoke?api-version=2016-06-01',
-          {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ token: token })
-          }
-        );
+        const responseName = await fetch(nameEndpoint, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ token: token })
+        });
         if (responseName.ok) {
           try {
             const data = await responseName.json();
@@ -62,34 +62,32 @@
             console.error("Fehler beim Parsen der Namensdaten:", e);
           }
         } else {
-          console.error("Fehler beim Abrufen des Namens: " + responseName.status);
+          console.error("Name-Endpoint-Fehler:", responseName.status);
         }
       } catch(err) {
         console.error("Netzwerkfehler beim Abrufen des Namens:", err);
       }
       
-      // Aktualisiere den Namen in der Begrüßung
+      // Aktualisiere den Namen in der Begrüßung.
       userNamePlaceholder.textContent = userName;
   
-      // 2. Email-Verifizierung durchführen – unabhängig vom Ergebnis des Namensabrufs
+      // 2. Führe die Email-Verifizierung durch – achte darauf, dass hier POST verwendet wird.
+      const verificationEndpoint = 'https://prod-68.westeurope.logic.azure.com:443/workflows/270c59bf12d847cdb8e00eb279cc3186/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=cyxWdcPlG-yCkrhFrv8UAlSd6o_4uWtNgZlCC9CVYOI';
       try {
-        const responseVerification = await fetch(
-          'https://prod-68.westeurope.logic.azure.com:443/workflows/270c59bf12d847cdb8e00eb279cc3186/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=cyxWdcPlG-yCkrhFrv8UAlSd6o_4uWtNgZlCC9CVYOI',
-          {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ token: token })
-          }
-        );
+        const responseVerification = await fetch(verificationEndpoint, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ token: token })
+        });
         if (!responseVerification.ok) {
-          throw new Error("Fehler bei der Email-Verifizierung: " + responseVerification.status);
+          throw new Error("Verification-Endpoint-Fehler: " + responseVerification.status);
         }
         try {
           await responseVerification.json();
         } catch(e) {
-          // Ignorieren, falls die Antwort kein JSON ist
+          // Ignorieren, falls die Antwort kein JSON ist.
         }
-        // Erfolgreiche Verifizierung: Status aktualisieren
+        // Erfolgreiche Verifizierung: Anzeige aktualisieren.
         statusContainer.innerHTML = `
           <div class="flex items-center justify-center bg-green-600 p-4 rounded mt-4">
             <svg class="w-8 h-8 text-white mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -99,7 +97,7 @@
           </div>
         `;
       } catch (err) {
-        console.error("Verifizierungsfehler:", err);
+        console.error("Verification-Endpoint-Fehler:", err);
         statusContainer.innerHTML = `
           <div class="flex items-center justify-center bg-red-600 p-4 rounded mt-4">
             <svg class="w-8 h-8 text-white mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -110,7 +108,7 @@
         `;
       }
     }
-  
+    
     verifyEmail();
   </script>
 </body>
