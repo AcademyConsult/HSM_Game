@@ -1347,7 +1347,7 @@ export default function Home() {
                         required
                       />
                       <div className="flex items-start space-x-2 my-4">
-                        <div className="relative">
+                        <div className="relative flex items-center justify-center">
                           <Checkbox
                             id="consent"
                             checked={consentGiven}
@@ -1355,7 +1355,9 @@ export default function Home() {
                             className="border-gray-300 data-[state=checked]:bg-[#993333] data-[state=checked]:border-[#993333] cursor-pointer"
                           />
                           {consentGiven && (
-                            <Check className="h-4 w-4 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white pointer-events-none font-bold" strokeWidth={3} />
+                            <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                              <Check className="h-4 w-4 text-white font-bold" strokeWidth={3} />
+                            </div>
                           )}
                         </div>
                         <Label
