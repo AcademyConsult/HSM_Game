@@ -8,18 +8,25 @@
 </head>
 <body>
   <main class="min-h-screen">
-    <!-- Landing Section: Vollbild-Hintergrund -->
+    <!-- Landing Section: Hintergrund deckt die gesamte Bildschirmhöhe ab -->
     <section class="h-screen relative flex items-center" style="background-image: url('https://hebbkx1anhila5yf.public.blob.vercel-storage.com/AC%20Hintergrund%202-tH8JYEwhI9ZvKdJvkZJ21BJ3ZHAgrd.png'); background-size: cover; background-position: center;">
       <div class="container mx-auto px-4 py-24 text-white text-center">
+        <!-- Logo -->
         <div class="flex flex-col items-center mb-8">
           <img src="https://spreadly.app/storage/view/-/984a834393716c80e787b227b43cfbe2/avatars/28/TiugXb12LRXMJmTEvyHSDxOH09U0rK0wv3D1OEPB.png" alt="Academy Consult Logo" class="h-32 md:h-48 w-auto mb-6" />
         </div>
-        <!-- Begrüßungsnachricht (wird immer angezeigt) -->
+        <!-- Begrüßung: "Hallo [Vorname]," -->
         <div id="greeting">
           <h1 class="text-4xl md:text-6xl font-bold">Hallo, bitte warte, während wir deine Email verifizieren...</h1>
         </div>
-        <!-- Container für den Alert (Erfolgs- oder Fehlermeldung) -->
-        <div id="alert" class="mt-4"></div>
+        <!-- Statusbereich: Ladeanimation und später Bestätigung oder Fehlermeldung -->
+        <div id="statusMessage" class="mt-6">
+          <!-- Initial: Ladeanimation -->
+          <div id="spinner" class="flex items-center justify-center">
+            <div class="animate-spin rounded-full h-12 w-12 border-t-4 border-white"></div>
+            <span class="ml-4 text-xl">Verifiziere deine Email...</span>
+          </div>
+        </div>
       </div>
     </section>
   </main>
@@ -28,25 +35,33 @@
       const urlParams = new URLSearchParams(window.location.search);
       const token = urlParams.get('token');
       const greetingContainer = document.getElementById('greeting');
-      const alertContainer = document.getElementById('alert');
+      const statusContainer = document.getElementById('statusMessage');
       
       if (!token) {
         greetingContainer.innerHTML = `<h1 class="text-4xl md:text-6xl font-bold">Kein Verifizierungstoken in der URL gefunden.</h1>`;
+        statusContainer.innerHTML = '';
         return;
       }
       
       try {
-        // 1. Name des Nutzers abrufen
+        // 1. Namen des Nutzers abrufen (Attribut "vorname")
         let response = await fetch('https://prod-243.westeurope.logic.azure.com:443/workflows/1d5a894ef5b84cd1a69e0bc92879cac3/triggers/manual/paths/invoke?api-version=2016-06-01', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ token: token })
         });
-        let data = await response.json();
-        const userName = data.name || 'Benutzer';
-        
-        // Begrüßung mit Namen aktualisieren
-        greetingContainer.innerHTML = `<h1 class="text-4xl md:text-6xl font-bold">Hallo ${userName}, bitte warte, während wir deine Email verifizieren...</h1>`;
+        if (!response.ok) {
+          throw new Error("Fehler beim Abrufen des Namens: " + response.status);
+        }
+        let data;
+        try {
+          data = await response.json();
+        } catch(e) {
+          data = {};
+        }
+        const userName = data.vorname || 'Benutzer';
+        // Aktualisiere die Begrüßung
+        greetingContainer.innerHTML = `<h1 class="text-4xl md:text-6xl font-bold">Hallo ${userName},</h1>`;
         
         // 2. Email-Verifizierung durchführen
         response = await fetch('https://prod-68.westeurope.logic.azure.com:443/workflows/270c59bf12d847cdb8e00eb279cc3186/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=cyxWdcPlG-yCkrhFrv8UAlSd6o_4uWtNgZlCC9CVYOI', {
@@ -54,14 +69,34 @@
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ token: token })
         });
-        data = await response.json();
-        
-        // Erfolgreiche Verifizierung: Alert anzeigen
-        alertContainer.innerHTML = `<div class="bg-green-500 text-white p-4 rounded">Hallo ${userName}, deine Email wurde erfolgreich verifiziert.</div>`;
+        if (!response.ok) {
+          throw new Error("Fehler bei der Email-Verifizierung: " + response.status);
+        }
+        try {
+          await response.json();
+        } catch(e) {
+          // Falls die Antwort nicht im JSON-Format ist, ignorieren
+        }
+        // Bei Erfolg: Ladeanimation durch Bestätigung ersetzen
+        statusContainer.innerHTML = `
+          <div class="flex items-center justify-center bg-red-600 p-4 rounded mt-4">
+            <svg class="w-8 h-8 text-white mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+            </svg>
+            <span class="text-2xl">Hallo ${userName}, deine Email wurde erfolgreich verifiziert.</span>
+          </div>
+        `;
       } catch (err) {
         console.error(err);
-        // Fehlerfall: Fehlermeldung anzeigen
-        alertContainer.innerHTML = `<div class="bg-red-500 text-white p-4 rounded">Verifizierung fehlgeschlagen. Bitte versuche es später erneut.</div>`;
+        // Bei einem Fehler: Ladeanimation durch Fehlermeldung ersetzen
+        statusContainer.innerHTML = `
+          <div class="flex items-center justify-center bg-red-600 p-4 rounded mt-4">
+            <svg class="w-8 h-8 text-white mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+            <span class="text-2xl">Verifizierung fehlgeschlagen. Bitte versuche es später erneut.</span>
+          </div>
+        `;
       }
     }
     
