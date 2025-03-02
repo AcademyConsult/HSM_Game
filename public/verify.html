@@ -9,20 +9,37 @@
 <body>
   <main class="min-h-screen">
     <!-- Landing Section: Hintergrund deckt die gesamte Bildschirmhöhe ab -->
-    <section class="h-screen relative flex items-center" style="background-image: url('https://hebbkx1anhila5yf.public.blob.vercel-storage.com/AC%20Hintergrund%202-tH8JYEwhI9ZvKdJvkZJ21BJ3ZHAgrd.png'); background-size: cover; background-position: center;">
+    <section
+      class="h-screen relative flex items-center"
+      style="
+        background-image: url('https://hebbkx1anhila5yf.public.blob.vercel-storage.com/AC%20Hintergrund%202-tH8JYEwhI9ZvKdJvkZJ21BJ3ZHAgrd.png');
+        background-size: cover;
+        background-position: center;
+      "
+    >
       <div class="container mx-auto px-4 py-24 text-white text-center">
         <!-- Logo -->
         <div class="flex flex-col items-center mb-8">
-          <img src="https://spreadly.app/storage/view/-/984a834393716c80e787b227b43cfbe2/avatars/28/TiugXb12LRXMJmTEvyHSDxOH09U0rK0wv3D1OEPB.png" alt="Academy Consult Logo" class="h-32 md:h-48 w-auto mb-6" />
+          <img
+            src="https://spreadly.app/storage/view/-/984a834393716c80e787b227b43cfbe2/avatars/28/TiugXb12LRXMJmTEvyHSDxOH09U0rK0wv3D1OEPB.png"
+            alt="Academy Consult Logo"
+            class="h-32 md:h-48 w-auto mb-6"
+          />
         </div>
-        <!-- Begrüßung: "Hallo [vorname]," -->
+        <!-- Begrüßung: "Hallo [Name]," -->
         <div id="greeting">
-          <h1 class="text-4xl md:text-6xl font-bold">Hallo <span id="userNamePlaceholder">Benutzer</span>,</h1>
+          <h1 class="text-4xl md:text-6xl font-bold">
+            Hallo <span id="userNamePlaceholder">Benutzer</span>,
+          </h1>
         </div>
+
         <!-- Statusbereich: Ladeanimation (wird später ersetzt) -->
         <div id="statusMessage" class="mt-6">
           <div id="spinner" class="flex items-center justify-center">
-            <div class="animate-spin rounded-full h-12 w-12 border-t-4 border-white"></div>
+            <!-- Spinner -->
+            <div
+              class="animate-spin rounded-full h-12 w-12 border-t-4 border-white"
+            ></div>
             <span class="ml-4 text-xl">Verifiziere deine Email...</span>
           </div>
         </div>
@@ -32,83 +49,105 @@
   <script>
     async function verifyEmail() {
       const urlParams = new URLSearchParams(window.location.search);
-      const token = urlParams.get('token');
-      const greetingContainer = document.getElementById('greeting');
-      const statusContainer = document.getElementById('statusMessage');
-      const userNamePlaceholder = document.getElementById('userNamePlaceholder');
-      
+      const token = urlParams.get("token");
+      const userNamePlaceholder = document.getElementById("userNamePlaceholder");
+      const statusContainer = document.getElementById("statusMessage");
+
       if (!token) {
-        greetingContainer.innerHTML = `<h1 class="text-4xl md:text-6xl font-bold">Kein Verifizierungstoken in der URL gefunden.</h1>`;
-        statusContainer.innerHTML = '';
+        // Kein Token in der URL
+        document.getElementById("greeting").innerHTML = `
+          <h1 class="text-4xl md:text-6xl font-bold">
+            Kein Verifizierungstoken in der URL gefunden.
+          </h1>`;
+        statusContainer.innerHTML = "";
         return;
       }
-      
+
       let userName = "Benutzer";
-      // 1. Versuche, den Namen des Nutzers (Attribut "vorname") abzurufen.
-      // Hinweis: Wenn du hier einen 401-Fehler erhältst, überprüfe, ob der Endpoint
-      // zusätzliche Authentifizierungsparameter (z. B. "sig") benötigt.
-      const nameEndpoint = 'https://prod-243.westeurope.logic.azure.com:443/workflows/1d5a894ef5b84cd1a69e0bc92879cac3/triggers/manual/paths/invoke?api-version=2016-06-01';
+
+      // 1. Namen abrufen (Achte darauf, dass der Flow hier "name" zurückgibt)
       try {
-        const responseName = await fetch(nameEndpoint, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ token: token })
-        });
-        if (responseName.ok) {
-          try {
-            const data = await responseName.json();
-            userName = data.vorname || userName;
-          } catch(e) {
-            console.error("Fehler beim Parsen der Namensdaten:", e);
+        const responseName = await fetch(
+          "https://prod-243.westeurope.logic.azure.com/workflows/1d5a894ef5b84cd1a69e0bc92879cac3/triggers/manual/paths/invoke?api-version=2016-06-01",
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ token: token }),
           }
+        );
+        if (responseName.ok) {
+          // JSON parsen und "name" auslesen
+          const data = await responseName.json();
+          userName = data.name || userName;
         } else {
           console.error("Name-Endpoint-Fehler:", responseName.status);
         }
-      } catch(err) {
+      } catch (err) {
         console.error("Netzwerkfehler beim Abrufen des Namens:", err);
       }
-      
-      // Aktualisiere den Namen in der Begrüßung.
+
+      // Begrüßung aktualisieren
       userNamePlaceholder.textContent = userName;
-  
-      // 2. Führe die Email-Verifizierung durch – achte darauf, dass hier POST verwendet wird.
-      const verificationEndpoint = 'https://prod-68.westeurope.logic.azure.com:443/workflows/270c59bf12d847cdb8e00eb279cc3186/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=cyxWdcPlG-yCkrhFrv8UAlSd6o_4uWtNgZlCC9CVYOI';
+
+      // 2. Email-Verifizierung durchführen
       try {
-        const responseVerification = await fetch(verificationEndpoint, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ token: token })
-        });
+        const responseVerification = await fetch(
+          "https://prod-68.westeurope.logic.azure.com/workflows/270c59bf12d847cdb8e00eb279cc3186/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=cyxWdcPlG-yCkrhFrv8UAlSd6o_4uWtNgZlCC9CVYOI",
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ token: token }),
+          }
+        );
         if (!responseVerification.ok) {
-          throw new Error("Verification-Endpoint-Fehler: " + responseVerification.status);
+          throw new Error(
+            "Verification-Endpoint-Fehler: " + responseVerification.status
+          );
         }
+        // Optional: Antwort parsen, falls JSON
         try {
           await responseVerification.json();
-        } catch(e) {
-          // Ignorieren, falls die Antwort kein JSON ist.
+        } catch (e) {
+          // ignorieren, wenn kein JSON
         }
-        // Erfolgreiche Verifizierung: Anzeige aktualisieren.
+
+        // Erfolg: Ladeanimation durch einen schöneren Alert ersetzen
         statusContainer.innerHTML = `
-          <div class="flex items-center justify-center bg-green-600 p-4 rounded mt-4">
-            <svg class="w-8 h-8 text-white mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-            </svg>
-            <span class="text-2xl">Hallo ${userName}, deine Email wurde erfolgreich verifiziert.</span>
+          <div class="bg-green-600 text-white p-6 rounded shadow-lg max-w-md mx-auto mt-8">
+            <div class="flex items-center space-x-3">
+              <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M5 13l4 4L19 7"
+                />
+              </svg>
+              <p class="text-xl font-semibold">Email erfolgreich verifiziert</p>
+            </div>
+            <p class="mt-3 text-lg">
+              Hallo ${userName}, deine Email wurde erfolgreich verifiziert.
+            </p>
           </div>
         `;
       } catch (err) {
         console.error("Verification-Endpoint-Fehler:", err);
+        // Fehler: Ladeanimation durch einen Fehler-Alert ersetzen
         statusContainer.innerHTML = `
-          <div class="flex items-center justify-center bg-red-600 p-4 rounded mt-4">
-            <svg class="w-8 h-8 text-white mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-            </svg>
-            <span class="text-2xl">Verifizierung fehlgeschlagen. Bitte versuche es später erneut.</span>
+          <div class="bg-red-600 text-white p-6 rounded shadow-lg max-w-md mx-auto mt-8">
+            <div class="flex items-center space-x-3">
+              <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
+              <p class="text-xl font-semibold">Fehler bei der Verifizierung</p>
+            </div>
+            <p class="mt-3 text-lg">
+              Bitte versuche es später erneut.
+            </p>
           </div>
         `;
       }
     }
-    
+
     verifyEmail();
   </script>
 </body>
