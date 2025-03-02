@@ -93,21 +93,37 @@ body {
   }
 }
 
-/* Verbesserte Ticker-Animation */
+@keyframes ticker-fast {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+.animate-ticker-fast {
+  animation: ticker-fast 15s linear infinite !important; /* Schnellere Animation für Mobilgeräte */
+  will-change: transform; /* Gibt dem Browser einen Hinweis zur Optimierung */
+  backface-visibility: hidden; /* Verhindert Rendering-Probleme */
+  transform: translateZ(0); /* GPU-Beschleunigung erzwingen */
+}
+
+/* Bestehende Animation, falls du sie anpassen musst */
 @keyframes ticker {
   0% {
     transform: translateX(0);
   }
   100% {
-    transform: translateX(-50%);
+    transform: translateX(-100%);
   }
 }
 
 .animate-ticker {
-  animation: ticker 30s linear infinite;
-  /* Prevent animation jumps on page reload */
+  animation: ticker 30s linear infinite !important; /* Standardgeschwindigkeit für Desktop */
   will-change: transform;
   backface-visibility: hidden;
+  transform: translateZ(0);
 }
 
 .ticker-container {
@@ -124,6 +140,12 @@ body {
   display: flex;
   white-space: nowrap;
   width: 100%;
+  animation-duration: 30s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  will-change: transform;
+  backface-visibility: hidden;
+  transform: translate3d(0, 0, 0);
 }
 
 .ticker-content {
@@ -132,6 +154,12 @@ body {
   align-items: center;
   justify-content: space-around;
   min-width: 100%;
+  transform: translateZ(0);
+}
+
+.ticker-content img {
+  backface-visibility: hidden;
+  transform: translate3d(0, 0, 0);
 }
 
 /* Accordion-Styles verbessern */
@@ -300,4 +328,25 @@ button[data-state] svg,
 .swiper-pagination-bullet-active {
   background: #993333;
   opacity: 1;
+}
+
+/* Animation-Pause */
+.paused {
+  animation-play-state: paused !important;
+}
+
+@media (max-width: 767px) {
+  .ticker-track {
+    display: none !important;
+  }
+  
+  .mobile-optimized-ticker {
+    display: flex !important;
+  }
+}
+
+@media (min-width: 768px) {
+  .mobile-optimized-ticker {
+    display: none !important;
+  }
 }
