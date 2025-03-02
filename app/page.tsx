@@ -272,7 +272,8 @@ export default function Home() {
         if (errorData.includes("This email has already taken part.")) {
           setSubmitError("Diese E-Mail hat bereits an der Challenge teilgenommen. Bitte verwende eine andere E-Mail-Adresse.");
         } else {
-          setSubmitError(`Fehler beim Einreichen: ${errorData || response.statusText}`);
+          setSubmitError(`Fehler beim Einreichen, überprüfe deine Daten und versuche es erneut.`);
+          //setSubmitError(`Fehler beim Einreichen: ${errorData || response.statusText}`);
         }
       }
     } catch (error) {
