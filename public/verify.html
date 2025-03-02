@@ -68,7 +68,7 @@
       // 1. Namen abrufen (Achte darauf, dass der Flow hier "name" zurückgibt)
       try {
         const responseName = await fetch(
-          "https://prod-243.westeurope.logic.azure.com/workflows/1d5a894ef5b84cd1a69e0bc92879cac3/triggers/manual/paths/invoke?api-version=2016-06-01",
+          "https://prod-243.westeurope.logic.azure.com/workflows/1d5a894ef5b84cd1a69e0bc92879cac3/triggers/manual/paths/invoke?api-version=2016-06-01?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=cyxWdcPlG-yCkrhFrv8UAlSd6o_4uWtNgZlCC9CVYOI",
           {
             method: "POST",
             headers: { "Content-Type": "application/json" },
