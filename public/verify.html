@@ -15,13 +15,12 @@
         <div class="flex flex-col items-center mb-8">
           <img src="https://spreadly.app/storage/view/-/984a834393716c80e787b227b43cfbe2/avatars/28/TiugXb12LRXMJmTEvyHSDxOH09U0rK0wv3D1OEPB.png" alt="Academy Consult Logo" class="h-32 md:h-48 w-auto mb-6" />
         </div>
-        <!-- Begrüßung: "Hallo [Vorname]," -->
+        <!-- Begrüßung: "Hallo [vorname]," -->
         <div id="greeting">
-          <h1 class="text-4xl md:text-6xl font-bold">Hallo, bitte warte, während wir deine Email verifizieren...</h1>
+          <h1 class="text-4xl md:text-6xl font-bold">Hallo <span id="userNamePlaceholder">Benutzer</span>,</h1>
         </div>
-        <!-- Statusbereich: Ladeanimation und später Bestätigung oder Fehlermeldung -->
+        <!-- Statusbereich: Ladeanimation (später ersetzt) -->
         <div id="statusMessage" class="mt-6">
-          <!-- Initial: Ladeanimation -->
           <div id="spinner" class="flex items-center justify-center">
             <div class="animate-spin rounded-full h-12 w-12 border-t-4 border-white"></div>
             <span class="ml-4 text-xl">Verifiziere deine Email...</span>
@@ -36,6 +35,7 @@
       const token = urlParams.get('token');
       const greetingContainer = document.getElementById('greeting');
       const statusContainer = document.getElementById('statusMessage');
+      const userNamePlaceholder = document.getElementById('userNamePlaceholder');
       
       if (!token) {
         greetingContainer.innerHTML = `<h1 class="text-4xl md:text-6xl font-bold">Kein Verifizierungstoken in der URL gefunden.</h1>`;
@@ -43,43 +43,55 @@
         return;
       }
       
+      let userName = "Benutzer";
+      // 1. Versuche, den Namen des Nutzers (Attribut "vorname") abzurufen
       try {
-        // 1. Namen des Nutzers abrufen (Attribut "vorname")
-        let response = await fetch('https://prod-243.westeurope.logic.azure.com:443/workflows/1d5a894ef5b84cd1a69e0bc92879cac3/triggers/manual/paths/invoke?api-version=2016-06-01', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ token: token })
-        });
-        if (!response.ok) {
-          throw new Error("Fehler beim Abrufen des Namens: " + response.status);
+        const responseName = await fetch(
+          'https://prod-243.westeurope.logic.azure.com:443/workflows/1d5a894ef5b84cd1a69e0bc92879cac3/triggers/manual/paths/invoke?api-version=2016-06-01',
+          {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ token: token })
+          }
+        );
+        if (responseName.ok) {
+          try {
+            const data = await responseName.json();
+            userName = data.vorname || userName;
+          } catch(e) {
+            console.error("Fehler beim Parsen der Namensdaten:", e);
+          }
+        } else {
+          console.error("Fehler beim Abrufen des Namens: " + responseName.status);
         }
-        let data;
+      } catch(err) {
+        console.error("Netzwerkfehler beim Abrufen des Namens:", err);
+      }
+      
+      // Aktualisiere den Namen in der Begrüßung
+      userNamePlaceholder.textContent = userName;
+  
+      // 2. Email-Verifizierung durchführen – unabhängig vom Ergebnis des Namensabrufs
+      try {
+        const responseVerification = await fetch(
+          'https://prod-68.westeurope.logic.azure.com:443/workflows/270c59bf12d847cdb8e00eb279cc3186/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=cyxWdcPlG-yCkrhFrv8UAlSd6o_4uWtNgZlCC9CVYOI',
+          {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ token: token })
+          }
+        );
+        if (!responseVerification.ok) {
+          throw new Error("Fehler bei der Email-Verifizierung: " + responseVerification.status);
+        }
         try {
-          data = await response.json();
+          await responseVerification.json();
         } catch(e) {
-          data = {};
+          // Ignorieren, falls die Antwort kein JSON ist
         }
-        const userName = data.vorname || 'Benutzer';
-        // Aktualisiere die Begrüßung
-        greetingContainer.innerHTML = `<h1 class="text-4xl md:text-6xl font-bold">Hallo ${userName},</h1>`;
-        
-        // 2. Email-Verifizierung durchführen
-        response = await fetch('https://prod-68.westeurope.logic.azure.com:443/workflows/270c59bf12d847cdb8e00eb279cc3186/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=cyxWdcPlG-yCkrhFrv8UAlSd6o_4uWtNgZlCC9CVYOI', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ token: token })
-        });
-        if (!response.ok) {
-          throw new Error("Fehler bei der Email-Verifizierung: " + response.status);
-        }
-        try {
-          await response.json();
-        } catch(e) {
-          // Falls die Antwort nicht im JSON-Format ist, ignorieren
-        }
-        // Bei Erfolg: Ladeanimation durch Bestätigung ersetzen
+        // Erfolgreiche Verifizierung: Status aktualisieren
         statusContainer.innerHTML = `
-          <div class="flex items-center justify-center bg-red-600 p-4 rounded mt-4">
+          <div class="flex items-center justify-center bg-green-600 p-4 rounded mt-4">
             <svg class="w-8 h-8 text-white mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
             </svg>
@@ -87,8 +99,7 @@
           </div>
         `;
       } catch (err) {
-        console.error(err);
-        // Bei einem Fehler: Ladeanimation durch Fehlermeldung ersetzen
+        console.error("Verifizierungsfehler:", err);
         statusContainer.innerHTML = `
           <div class="flex items-center justify-center bg-red-600 p-4 rounded mt-4">
             <svg class="w-8 h-8 text-white mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -99,7 +110,7 @@
         `;
       }
     }
-    
+  
     verifyEmail();
   </script>
 </body>
