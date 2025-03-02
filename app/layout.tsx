@@ -1,5 +1,6 @@
 import './globals.css'
 import { Inter } from 'next/font/google'
+import Head from 'next/head';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -33,6 +34,11 @@ export const metadata = {
     description: 'Spiele und gewinne mit Academy Consult',
     images: ['https://raw.githubusercontent.com/AcademyConsult/HSM_Game/main/public/logo.png'], // Verwenden Sie hier ein eigenes Vorschaubild
   },
+  // Zusätzliche Metadaten für Telegram
+  other: {
+    'telegram:channel': '@AcademyConsult', // Falls vorhanden
+    'telegram:image': 'https://raw.githubusercontent.com/AcademyConsult/HSM_Game/main/public/og-image.jpg',
+  }
 };
 
 export const viewport = {
@@ -46,6 +52,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="de">
+      <head>
+        {/* Explizite Meta-Tags für Telegram (zusätzlich zu Next.js Metadaten) */}
+        <meta property="og:title" content="AC-Challenge" />
+        <meta property="og:description" content="Spiele und gewinne mit Academy Consult" />
+      </head>
       <body className={inter.className}>{children}</body>
     </html>
   )
