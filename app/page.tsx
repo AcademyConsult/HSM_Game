@@ -57,6 +57,7 @@ export default function Home() {
   const [selectedCoordinates, setSelectedCoordinates] = useState<{ x: number; y: number } | null>(null);
   const [incorrectAttempts, setIncorrectAttempts] = useState(0);
   const [wimmelbildAlert, setWimmelbildAlert] = useState<{ title: string; description: string } | null>(null);
+  const [estimationError, setEstimationError] = useState<string | null>(null);
 
   const prizes = [
     {
@@ -117,7 +118,7 @@ export default function Home() {
       time: "18:00",
       location: "AC Büro, Leopoldstraße 62",
       description: "Beim Case Training könnt ihr zusammen mit AClern casen und kommt ins Gespräch.",
-      image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/AC%20Hintergrund%202-tH8JYEwhI9ZvKdJvkZJ21BJ3ZHAgrd.png",
+      image: "https://raw.githubusercontent.com/AcademyConsult/HSM_Game/main/public/caseTraining.jpg"
     },
     {
       id: 5,
@@ -267,7 +268,13 @@ export default function Home() {
       } else {
         // Fehler bei der Einreichung
         const errorData = await response.text();
-        setSubmitError(`Fehler beim Einreichen: ${errorData || response.statusText}`);
+        
+        // Spezifische Fehlermeldung für bereits teilgenommene E-Mail
+        if (errorData.includes("This email has already taken part.")) {
+          setSubmitError("Diese E-Mail hat bereits an der Challenge teilgenommen. Bitte verwende eine andere E-Mail-Adresse.");
+        } else {
+          setSubmitError(`Fehler beim Einreichen: ${errorData || response.statusText}`);
+        }
       }
     } catch (error) {
       setSubmitError(`Netzwerkfehler: ${error instanceof Error ? error.message : String(error)}`);
@@ -389,8 +396,8 @@ export default function Home() {
     } else if (gameId === 3) {
       // Für Spiel 3 prüfen, ob eine Schätzung eingegeben wurde
       if (estimationValue === null) {
-        // Zeige Warnung dauerhaft an (Timer entfernt)
-        setSubmitError("Bitte gib eine Schätzung ein!");
+        // Zeige Warnung nur bei Game 3
+        setEstimationError("Bitte gib eine Schätzung ein!");
         return;
       }
 
@@ -411,7 +418,7 @@ export default function Home() {
       }
 
       // Fehler zurücksetzen, wenn die Schätzung erfolgreich war
-      setSubmitError(null);
+      setEstimationError(null);
     }
   };
 
@@ -786,7 +793,7 @@ export default function Home() {
                           <h3 className="text-xl font-semibold text-center mb-6">AC Goodie Bag</h3>
                           <div className="w-full h-40 mt-5 mb-6 overflow-hidden rounded-xl flex items-center justify-center">
                             <img
-                              src="/placeholder.svg"
+                              src="https://raw.githubusercontent.com/AcademyConsult/HSM_Game/main/public/placeholder.svg"
                               alt="AC Goodie Bag"
                               className="w-auto h-full object-contain rounded-xl mx-auto"
                             />
@@ -966,10 +973,12 @@ export default function Home() {
                                   {/* Marker für ausgewählte Position */}
                                   {markerPosition && (
                                     <div
-                                      className="absolute w-24 h-24 transform -translate-x-1/2 -translate-y-1/2 pointer-events-none"
+                                      className="absolute transform -translate-x-1/2 -translate-y-1/2 pointer-events-none"
                                       style={{
                                         left: markerPosition.left,
                                         top: markerPosition.top,
+                                        width: "clamp(60px, 15%, 100px)",  // Min 60px, Max 100px, ideal 15% der Container-Breite
+                                        height: "clamp(60px, 15%, 100px)"  // Min 60px, Max 100px, ideal 15% der Container-Breite
                                       }}
                                     >
                                       <img
@@ -1222,7 +1231,7 @@ export default function Home() {
                                           <Input
                                             type="number"
                                             placeholder="Deine Schätzung"
-                                            className="pl-2 md:pl-10 pr-16 md:pr-20 py-4 md:py-6 text-base md:text-lg [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none bg-white/95 backdrop-blur-sm rounded-md border border-gray-200 shadow-md"
+                                            className="pl-2 md:pl-10 pr-10 md:pr-20 py-2 md:py-6 text-base md:text-lg [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none bg-white/95 backdrop-blur-sm rounded-md border border-gray-200 shadow-md"
                                             value={estimationValue || ""}
                                             onChange={(e) => handleEstimationChange(e.target.value)}
                                             min="0"
@@ -1263,22 +1272,19 @@ export default function Home() {
                                       </Alert>
                                     )}
 
-                                    {/* Fehlermeldung als Alert anzeigen, wenn submitError gesetzt ist */}
-                                    {submitError && (
+                                    {/* Fehlermeldung anzeigen */}
+                                    {estimationError && (
                                       <Alert
-                                        className="border-l-4 border-amber-500 bg-amber-50 shadow-sm"
+                                        className="border-l-4 border-amber-500 bg-amber-50 shadow-sm mt-3"
                                         variant="default"
                                       >
                                         <div className="flex">
-                                          <svg className="h-5 w-5 text-amber-600 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                                            <path fillRule="evenodd" d="M18 10a8 8 0 1 0-16 0 8 8 0 0 0 16 0zm-8-3a1 1 0 0 0-.867.5 1 1 0 1 1-1.731-1A3 3 0 0 1 13 8a3.001 3.001 0 0 1-2 2.83V11a1 1 0 1 1-2 0v-1a1 1 0 0 1 1-1 1 1 0 1 0 0-2zm0 8a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" clipRule="evenodd" />
-                                          </svg>
                                           <div>
                                             <AlertTitle className="font-semibold text-amber-900">
                                               Achtung
                                             </AlertTitle>
                                             <AlertDescription className="text-amber-800">
-                                              {submitError}
+                                              {estimationError}
                                             </AlertDescription>
                                           </div>
                                         </div>
@@ -1362,8 +1368,26 @@ export default function Home() {
                       {/* Feedback nach der Einreichung */}
                       {submitSuccess && (
                         <div className="p-3 bg-green-50 text-green-700 rounded-md">
-                          Vielen Dank für deine Teilnahme! Deine Lösungen wurden erfolgreich eingereicht.
+                          Vielen Dank für deine Teilnahme! Bitte überprüfe deine E-Mails, um die Bestätigung zu vervollständigen.
                         </div>
+                      )}
+                      {/* Fehlermeldung anzeigen */}
+                      {submitError && (
+                        <Alert
+                          className="border-l-4 border-amber-500 bg-amber-50 shadow-sm"
+                          variant="default"
+                        >
+                          <div className="flex">
+                            <div>
+                              <AlertTitle className="font-semibold text-amber-900">
+                                Achtung
+                              </AlertTitle>
+                              <AlertDescription className="text-amber-800">
+                                {submitError}
+                              </AlertDescription>
+                            </div>
+                          </div>
+                        </Alert>
                       )}
                     </div>
                   </CardContent>
@@ -1482,7 +1506,7 @@ export default function Home() {
                   className="hover:opacity-80 transition-opacity">
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
                     <path d="M12 2.04c-5.5 0-10 4.49-10 10.02 0 5 3.66 9.15 8.44 9.9v-7H7.9v-2.9h2.54V9.85c0-2.51 1.49-3.89 3.78-3.89 1.09 0 2.23.19 2.23.19v2.47h-1.26c-1.24 0-1.63.77-1.63 1.56v1.88h2.78l-.45 2.9h-2.33v7a10 10 0 0 0 8.44-9.9c0-5.53-4.5-10.02-10-10.02z" />
-                  </svg>
+                </svg>
                 </a>
 
                 {/* Instagram */}
