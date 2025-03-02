@@ -26,6 +26,7 @@
             class="h-32 md:h-48 w-auto mb-6"
           />
         </div>
+        
         <!-- Begrüßung: "Hallo [Name]," -->
         <div id="greeting">
           <h1 class="text-4xl md:text-6xl font-bold">
@@ -52,10 +53,11 @@
       const token = urlParams.get("token");
       const userNamePlaceholder = document.getElementById("userNamePlaceholder");
       const statusContainer = document.getElementById("statusMessage");
+      const greetingContainer = document.getElementById("greeting");
 
       if (!token) {
         // Kein Token in der URL
-        document.getElementById("greeting").innerHTML = `
+        greetingContainer.innerHTML = `
           <h1 class="text-4xl md:text-6xl font-bold">
             Kein Verifizierungstoken in der URL gefunden.
           </h1>`;
@@ -65,7 +67,10 @@
 
       let userName = "Benutzer";
 
-      // 1. Namen abrufen (Achte darauf, dass der Flow hier "name" zurückgibt)
+      /* 
+         1. ZUERST: Namen abrufen
+         (Der Flow sollte hier ein JSON-Objekt wie {"name":"valentin"} zurückgeben.)
+      */
       try {
         const responseName = await fetch(
           "https://prod-243.westeurope.logic.azure.com:443/workflows/1d5a894ef5b84cd1a69e0bc92879cac3/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=YMkhhZcBA0vZAExCoUAJIw8XW1Kl28WJc9rRWwH5bQw",
@@ -75,9 +80,15 @@
             body: JSON.stringify({ token: token }),
           }
         );
-        const data = await responseName.json();
-        userName = data.name || userName;
-        
+
+        if (!responseName.ok) {
+          // Falls z. B. 401, 404 oder ein anderer Fehler kommt
+          console.error("Name-Endpoint-Fehler:", responseName.status);
+        } else {
+          // Antwort parsen und Name auslesen
+          const data = await responseName.json();
+          userName = data.name || userName;
+        }
       } catch (err) {
         console.error("Netzwerkfehler beim Abrufen des Namens:", err);
       }
@@ -85,7 +96,10 @@
       // Begrüßung aktualisieren
       userNamePlaceholder.textContent = userName;
 
-      // 2. Email-Verifizierung durchführen
+      /* 
+         2. DANACH: Email-Verifizierung
+         (Unabhängig davon, ob der Name erfolgreich geladen wurde oder nicht.)
+      */
       try {
         const responseVerification = await fetch(
           "https://prod-68.westeurope.logic.azure.com/workflows/270c59bf12d847cdb8e00eb279cc3186/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=cyxWdcPlG-yCkrhFrv8UAlSd6o_4uWtNgZlCC9CVYOI",
@@ -107,10 +121,10 @@
           // ignorieren, wenn kein JSON
         }
 
-        // Erfolg: Ladeanimation durch einen schöneren Alert ersetzen
+        // Erfolg: Ladeanimation durch einen schöneren (zentrierten) Alert ersetzen
         statusContainer.innerHTML = `
-          <div class="bg-green-600 text-white p-6 rounded shadow-lg max-w-md mx-auto mt-8">
-            <div class="flex items-center space-x-3">
+          <div class="bg-green-600 text-white p-6 rounded shadow-lg max-w-md mx-auto mt-8 text-center">
+            <div class="flex items-center justify-center space-x-3">
               <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                   d="M5 13l4 4L19 7"
@@ -118,14 +132,20 @@
               </svg>
               <p class="text-xl font-semibold">Email erfolgreich verifiziert</p>
             </div>
+            <p class="mt-3 text-lg">
+              Hallo ${userName}, deine Email wurde erfolgreich verifiziert.
+            </p>
+            <p class="mt-2 text-lg">
+              Wir wünschen dir viel Erfolg beim Gewinnspiel!
+            </p>
           </div>
         `;
       } catch (err) {
         console.error("Verification-Endpoint-Fehler:", err);
-        // Fehler: Ladeanimation durch einen Fehler-Alert ersetzen
+        // Fehler: Ladeanimation durch einen Fehler-Alert ersetzen (ebenfalls zentriert)
         statusContainer.innerHTML = `
-          <div class="bg-red-600 text-white p-6 rounded shadow-lg max-w-md mx-auto mt-8">
-            <div class="flex items-center space-x-3">
+          <div class="bg-red-600 text-white p-6 rounded shadow-lg max-w-md mx-auto mt-8 text-center">
+            <div class="flex items-center justify-center space-x-3">
               <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                   d="M6 18L18 6M6 6l12 12"
@@ -141,6 +161,7 @@
       }
     }
 
+    // Starten
     verifyEmail();
   </script>
 </body>
