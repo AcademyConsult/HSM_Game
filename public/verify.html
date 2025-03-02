@@ -75,13 +75,9 @@
             body: JSON.stringify({ token: token }),
           }
         );
-        if (responseName.ok) {
-          // JSON parsen und "name" auslesen
-          const data = await responseName.json();
-          userName = data.name || userName;
-        } else {
-          console.error("Name-Endpoint-Fehler:", responseName.status);
-        }
+        const data = await responseName.json();
+        userName = data.name || userName;
+        
       } catch (err) {
         console.error("Netzwerkfehler beim Abrufen des Namens:", err);
       }
@@ -122,9 +118,6 @@
               </svg>
               <p class="text-xl font-semibold">Email erfolgreich verifiziert</p>
             </div>
-            <p class="mt-3 text-lg">
-              Hallo ${userName}, deine Email wurde erfolgreich verifiziert.
-            </p>
           </div>
         `;
       } catch (err) {
