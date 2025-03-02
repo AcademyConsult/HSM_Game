@@ -10,7 +10,7 @@ import 'swiper/css/navigation';
 import { Card, CardContent, CardHeader, CardTitle, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { formatDate } from "@/lib/utils";
-import { FaApple, FaGoogle } from 'react-icons/fa'; // Icons importieren
+import { FaApple, FaGoogle, FaSignOutAlt } from 'react-icons/fa'; // Exit-Icon hinzugefügt
 
 interface Event {
   id: number;
@@ -62,7 +62,7 @@ const createCalendarLinks = (event: Event) => {
 };
 
 // Benutzerdefinierte Paginierung als separate Komponente
-function CustomPagination({ totalSlides, activeIndex, onSlideChange, swiperInstance }: {
+export function CustomPagination({ totalSlides, activeIndex, onSlideChange, swiperInstance }: {
   totalSlides: number, 
   activeIndex: number, 
   onSlideChange: (index: number) => void,
@@ -174,7 +174,22 @@ export function SwiperEventCarousel({ events }: SwiperEventCarouselProps) {
               </div>
               
               <CardHeader className="p-4">
-                <CardTitle className="text-xl font-semibold text-gray-800">{event.title}</CardTitle>
+              <div className="flex justify-between items-start">
+                  <CardTitle className="text-xl font-semibold text-gray-800">{event.title}</CardTitle>
+                  
+                  {/* Anmeldungs-Button mit Notausgang-Icon */}
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className="text-[#993333] hover:bg-[#99333315] p-1"
+                    onClick={() => window.open("https://academyconsult.de", "_blank")}
+                  >
+                    <span className="flex items-center gap-1.5">
+                      <span className="text-sm font-medium">Zur Anmeldung!</span>
+                      <FaSignOutAlt className="h-4 w-4" />
+                    </span>
+                  </Button>
+                </div>
                 <div className="flex flex-col mt-2 gap-1 text-sm text-gray-600">
                   <p>{formatDate(event.date)} • {event.time}</p>
                   <p>{event.location}</p>
