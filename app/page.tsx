@@ -24,6 +24,7 @@ import {
 } from "@/components/ui/alert";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
+import ReCAPTCHA from "react-google-recaptcha"; // Neuer Import
 
 // Typdefinition für AccordionRenderProps
 type AccordionRenderProps = {
@@ -58,6 +59,9 @@ export default function Home() {
   const [incorrectAttempts, setIncorrectAttempts] = useState(0);
   const [wimmelbildAlert, setWimmelbildAlert] = useState<{ title: string; description: string } | null>(null);
   const [estimationError, setEstimationError] = useState<string | null>(null);
+  const [captchaToken, setCaptchaToken] = useState<string | null>(null);
+  const [captchaError, setCaptchaError] = useState<string | null>(null);
+  const recaptchaRef = useRef<ReCAPTCHA>(null);
 
   const prizes = [
     {
@@ -208,13 +212,19 @@ export default function Home() {
   }, [events.length]);
 
   // Überprüfung für beide Bedingungen (Spiele abgeschlossen und Einwilligung gegeben)
-  const canSubmit = allGamesCompleted && consentGiven;
+  const canSubmit = allGamesCompleted && consentGiven && captchaToken !== null;
 
   // Funktion zum Verarbeiten der Einreichung
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
     if (!canSubmit) return;
+
+    // Captcha-Token überprüfen
+    if (!captchaToken) {
+      setCaptchaError("Bitte bestätigen Sie, dass Sie kein Roboter sind.");
+      return;
+    }
 
     // Validieren, dass alle erforderlichen Felder ausgefüllt sind
     if (!firstName || !lastName || !email || estimationValue === null) {
@@ -236,7 +246,8 @@ export default function Home() {
       email: email,
       vorname: firstName,
       nachname: lastName,
-      schaetzwert: estimationValue
+      schaetzwert: estimationValue,
+      captchaToken: captchaToken // Token zum Payload hinzufügen
     };
 
     // Einreichung starten
@@ -522,6 +533,14 @@ export default function Home() {
       if (resizeTimeout) clearTimeout(resizeTimeout);
     };
   }, []);
+
+  // Callback-Funktion für reCAPTCHA
+  const handleCaptchaChange = (token: string | null) => {
+    setCaptchaToken(token);
+    if (token) {
+      setCaptchaError(null);
+    }
+  };
 
   return (
     <main className="min-h-screen">
@@ -1366,7 +1385,35 @@ export default function Home() {
                           Mit dem Einreichen meiner Lösungen bestätige ich, dass ich die <a href="https://academyconsult.de/unternehmen/impressum/" target="_blank" rel="noopener noreferrer" className="text-[#993333] hover:underline">AGB</a> akzeptiere.
                         </Label>
                       </div>
-                      {/* Feedback nach der Einreichung */}
+                      
+                      {/* Hier fügen wir das Captcha ein */}
+                      <div className="my-6 flex justify-center">
+                        <ReCAPTCHA
+                          ref={recaptchaRef}
+                          sitekey="6LfoKugqAAAAAKc5SE8o6yJQXuI_zTxcmmy_tZjm" 
+                          onChange={handleCaptchaChange}
+                          hl="de"
+                        />
+                      </div>
+                      {captchaError && (
+                        <Alert
+                          className="border-l-4 border-amber-500 bg-amber-50 shadow-sm"
+                          variant="default"
+                        >
+                          <div className="flex">
+                            <div>
+                              <AlertTitle className="font-semibold text-amber-900">
+                                Achtung
+                              </AlertTitle>
+                              <AlertDescription className="text-amber-800">
+                                {captchaError}
+                              </AlertDescription>
+                            </div>
+                          </div>
+                        </Alert>
+                      )}
+                      
+                      {/* Bestehender Feedback-Code */}
                       {submitSuccess && (
                         <div className="p-3 bg-green-50 text-green-700 rounded-md">
                           Vielen Dank für deine Teilnahme! Bitte überprüfe deine E-Mails, um die Bestätigung zu vervollständigen.
