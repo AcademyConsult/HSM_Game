@@ -24,7 +24,7 @@ import {
 } from "@/components/ui/alert";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
-import ReCAPTCHA from "react-google-recaptcha"; // Neuer Import
+import { GoogleReCaptchaProvider, useGoogleReCaptcha } from 'react-google-recaptcha-v3';
 
 // Typdefinition für AccordionRenderProps
 type AccordionRenderProps = {
@@ -42,7 +42,8 @@ type MotionSpanProps = HTMLMotionProps<"span"> & {
   };
 };
 
-export default function Home() {
+// Wrapper-Komponente für reCAPTCHA v3
+function ChallengeApp() {
   const [mobileSwiper, setMobileSwiper] = useState<SwiperType | null>(null);
   const [activeSlide, setActiveSlide] = useState(0);
   const [email, setEmail] = useState("");
@@ -59,9 +60,7 @@ export default function Home() {
   const [incorrectAttempts, setIncorrectAttempts] = useState(0);
   const [wimmelbildAlert, setWimmelbildAlert] = useState<{ title: string; description: string } | null>(null);
   const [estimationError, setEstimationError] = useState<string | null>(null);
-  const [captchaToken, setCaptchaToken] = useState<string | null>(null);
-  const [captchaError, setCaptchaError] = useState<string | null>(null);
-  const recaptchaRef = useRef<ReCAPTCHA>(null);
+  const { executeRecaptcha } = useGoogleReCaptcha();
 
   const prizes = [
     {
@@ -212,7 +211,7 @@ export default function Home() {
   }, [events.length]);
 
   // Überprüfung für beide Bedingungen (Spiele abgeschlossen und Einwilligung gegeben)
-  const canSubmit = allGamesCompleted && consentGiven && captchaToken !== null;
+  const canSubmit = allGamesCompleted && consentGiven;
 
   // Funktion zum Verarbeiten der Einreichung
   const handleSubmit = async (e: FormEvent) => {
@@ -220,9 +219,8 @@ export default function Home() {
 
     if (!canSubmit) return;
 
-    // Captcha-Token überprüfen
-    if (!captchaToken) {
-      setCaptchaError("Bitte bestätigen Sie, dass Sie kein Roboter sind.");
+    if (!executeRecaptcha) {
+      setSubmitError("reCAPTCHA konnte nicht geladen werden. Bitte laden Sie die Seite neu.");
       return;
     }
 
@@ -232,29 +230,23 @@ export default function Home() {
       return;
     }
 
-    /*
-    // E-Mail-Validierung mit RegEx
-    const emailRegex = /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/;
-    if (!emailRegex.test(email)) {
-      setSubmitError("Bitte geben Sie eine gültige E-Mail-Adresse ein.");
-      return;
-    }
-    */
-
-    // Submission Payload erstellen
-    const payload = {
-      email: email,
-      vorname: firstName,
-      nachname: lastName,
-      schaetzwert: estimationValue,
-      captchaToken: captchaToken // Token zum Payload hinzufügen
-    };
-
     // Einreichung starten
     setIsSubmitting(true);
     setSubmitError(null);
 
     try {
+      // reCAPTCHA v3 Token im Hintergrund abrufen
+      const captchaToken = await executeRecaptcha('form_submit');
+      
+      // Submission Payload erstellen
+      const payload = {
+        email: email,
+        vorname: firstName,
+        nachname: lastName,
+        schaetzwert: estimationValue,
+        captchaToken: captchaToken // Token zum Payload hinzufügen
+      };
+
       const response = await fetch(
         "https://prod-95.westeurope.logic.azure.com:443/workflows/bbcb61dde4284b33b6fbf5faaff61a26/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=6xJfQrKL4Vy-uDFGwtHR4OrwRqJHGAid8vpL6Y0L0ag",
         {
@@ -533,14 +525,6 @@ export default function Home() {
       if (resizeTimeout) clearTimeout(resizeTimeout);
     };
   }, []);
-
-  // Callback-Funktion für reCAPTCHA
-  const handleCaptchaChange = (token: string | null) => {
-    setCaptchaToken(token);
-    if (token) {
-      setCaptchaError(null);
-    }
-  };
 
   return (
     <main className="min-h-screen">
@@ -1386,33 +1370,6 @@ export default function Home() {
                         </Label>
                       </div>
                       
-                      {/* Hier fügen wir das Captcha ein */}
-                      <div className="my-6 flex justify-center">
-                        <ReCAPTCHA
-                          ref={recaptchaRef}
-                          sitekey="6LfoKugqAAAAAKc5SE8o6yJQXuI_zTxcmmy_tZjm" 
-                          onChange={handleCaptchaChange}
-                          hl="de"
-                        />
-                      </div>
-                      {captchaError && (
-                        <Alert
-                          className="border-l-4 border-amber-500 bg-amber-50 shadow-sm"
-                          variant="default"
-                        >
-                          <div className="flex">
-                            <div>
-                              <AlertTitle className="font-semibold text-amber-900">
-                                Achtung
-                              </AlertTitle>
-                              <AlertDescription className="text-amber-800">
-                                {captchaError}
-                              </AlertDescription>
-                            </div>
-                          </div>
-                        </Alert>
-                      )}
-                      
                       {/* Bestehender Feedback-Code */}
                       {submitSuccess && (
                         <div className="p-3 bg-green-50 text-green-700 rounded-md">
@@ -1582,5 +1539,22 @@ export default function Home() {
         </div>
       </footer>
     </main>
+  );
+}
+
+// Haupt-Export-Funktion
+export default function Home() {
+  return (
+    <GoogleReCaptchaProvider
+      reCaptchaKey="6LfoKugqAAAAAKc5SE8o6yJQXuI_zTxcmmy_tZjm"
+      scriptProps={{
+        async: true,
+        defer: true,
+        appendTo: 'head',
+      }}
+      language="de"
+    >
+      <ChallengeApp />
+    </GoogleReCaptchaProvider>
   );
 }
