@@ -1532,6 +1532,26 @@ function ChallengeApp() {
               </div>
             </div>
 
+            {/* reCAPTCHA Hinweis */}
+            <div className="text-xs opacity-80 mb-4">
+              Diese Seite ist durch reCAPTCHA geschützt.
+              <a 
+                href="https://policies.google.com/privacy" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="ml-1 underline hover:opacity-90">
+                Datenschutz
+              </a>
+              <span className="mx-1">-</span>
+              <a 
+                href="https://policies.google.com/terms" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="underline hover:opacity-90">
+                Nutzungsbedingungen
+              </a>
+            </div>
+
             <div className="text-sm opacity-80">
               © {new Date().getFullYear()} Academy Consult. Alle Rechte vorbehalten.
             </div>
@@ -1553,7 +1573,17 @@ export default function Home() {
         appendTo: 'head',
       }}
       language="de"
+      container={{
+        parameters: {
+          badge: 'inline', // Badge komplett ausblenden
+        }
+      }}
     >
+      <style jsx global>{`
+        .grecaptcha-badge { 
+          visibility: hidden !important;
+        }
+      `}</style>
       <ChallengeApp />
     </GoogleReCaptchaProvider>
   );
