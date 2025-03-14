@@ -49,7 +49,7 @@ function ChallengeApp() {
   const [email, setEmail] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-  const [openItems, setOpenItems] = useState<{ [key: string]: boolean }>({});
+  const [openItems, setOpenItems] = useState<{ [key: string]: boolean }>({ game1: true });
   const [consentGiven, setConsentGiven] = useState(false);
   const [estimationFeedback, setEstimationFeedback] = useState<{ title: string; description: string } | null>(null); const [estimationValue, setEstimationValue] = useState<number | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -429,7 +429,7 @@ function ChallengeApp() {
   const checkQuizAnswers = () => {
     // Richtige Antworten: 1. Frage: B, 2. Frage: C
     const correctAnswers = {
-      question1: 'B',
+      question1: 'C',
       question2: 'C'
     };
 
@@ -525,6 +525,11 @@ function ChallengeApp() {
       if (resizeTimeout) clearTimeout(resizeTimeout);
     };
   }, []);
+
+  // Berechnung der bisher gesammelten Tickets
+const completedTickets = (games[0].completed ? 20 : 0) + 
+                         (games[1].completed ? 20 : 0) + 
+                         (games[2].completed ? Math.min(60, estimationValue || 0) : 0);
 
   return (
     <main className="min-h-screen">
@@ -888,6 +893,7 @@ function ChallengeApp() {
                 type="single"
                 collapsible
                 className="space-y-6"
+                defaultValue="game1"
                 onValueChange={(value) => {
                   const newOpenItems: { [key: string]: boolean } = {};
                   games.forEach((_, idx) => {
@@ -929,25 +935,30 @@ function ChallengeApp() {
                             </CardHeader>
 
                             <div className="h-8 w-8 flex items-center justify-center relative custom-accordion-icon accordion-trigger-icon">
+                              {/* Obere Linie des Pfeils (wird zur oberen Linie des X) */}
                               <motion.span
-                                className="absolute w-5 bg-black"
-                                initial={{ y: -2.5 }}
+                                className="absolute bg-black"
+                                initial={{ width: "12px", height: "2px", rotate: 45, y: -4, x: 2 }}
                                 animate={{
-                                  rotate: openItems[`game${index + 1}`] ? 45 : 0,
-                                  y: openItems[`game${index + 1}`] ? 0 : -2.5
+                                  rotate: openItems[`game${index + 1}`] ? 45 : 45,
+                                  width: openItems[`game${index + 1}`] ? "20px" : "12px",
+                                  y: openItems[`game${index + 1}`] ? 0 : -4,
+                                  x: openItems[`game${index + 1}`] ? 0 : 2
                                 }}
                                 transition={{ duration: 0.3, ease: "easeInOut" }}
-                                style={{ height: "2px" }}
                               />
+                              
+                              {/* Untere Linie des Pfeils (wird zur unteren Linie des X) */}
                               <motion.span
-                                className="absolute w-5 bg-black"
-                                initial={{ y: 2.5 }}
+                                className="absolute bg-black"
+                                initial={{ width: "12px", height: "2px", rotate: -45, y: 4, x: 2 }}
                                 animate={{
-                                  rotate: openItems[`game${index + 1}`] ? -45 : 0,
-                                  y: openItems[`game${index + 1}`] ? 0 : 2.5
+                                  rotate: openItems[`game${index + 1}`] ? -45 : -45,
+                                  width: openItems[`game${index + 1}`] ? "20px" : "12px",
+                                  y: openItems[`game${index + 1}`] ? 0 : 4,
+                                  x: openItems[`game${index + 1}`] ? 0 : 2
                                 }}
                                 transition={{ duration: 0.3, ease: "easeInOut" }}
-                                style={{ height: "2px" }}
                               />
                             </div>
                           </div>
@@ -959,8 +970,7 @@ function ChallengeApp() {
                             {game.id === 1 && (
                               <div className="space-y-4">
                                 <p className="text-lg">
-                                  Klicke auf die Stelle, wo du ihn siehst.
-                                  <img src="https://raw.githubusercontent.com/AcademyConsult/HSM_Game/main/public/leoKopf.png" alt="Leo der Löwe" className="inline-block ml-2 h-8 w-auto align-middle drop-shadow-md" />                                </p>
+                                  Klicke auf die Stelle, wo unser Maskottchen Leo zu sehen ist.                                  <img src="https://raw.githubusercontent.com/AcademyConsult/HSM_Game/main/public/leoKopf.png" alt="Leo der Löwe" className="inline-block ml-2 h-8 w-auto align-middle drop-shadow-md" />                                </p>
                                 <div
                                   ref={wimmelbildRef}
                                   className="aspect-video relative bg-muted rounded-lg overflow-hidden cursor-crosshair"
@@ -1047,7 +1057,7 @@ function ChallengeApp() {
                               <div className="space-y-6">
                                 {/* Frage 1 */}
                                 <div className="space-y-3">
-                                  <h3 className="font-semibold text-lg">1. Welcher dieser Partner ist unser ältester Partner bei AC?</h3>
+                                  <h3 className="font-semibold text-lg">1. Wie viele Projekte wurden bereits umgesetzt?</h3>
                                   <div className="space-y-2">
                                     <div className="flex items-center">
                                       <input
@@ -1058,7 +1068,7 @@ function ChallengeApp() {
                                         checked={quizAnswers.question1 === 'A'}
                                         onChange={() => setQuizAnswers({ ...quizAnswers, question1: 'A' })}
                                       />
-                                      <label htmlFor="q1-a">A: BCG</label>
+                                      <label htmlFor="q1-a">A: &lt; 250</label>
                                     </div>
                                     <div className="flex items-center">
                                       <input
@@ -1069,7 +1079,7 @@ function ChallengeApp() {
                                         checked={quizAnswers.question1 === 'B'}
                                         onChange={() => setQuizAnswers({ ...quizAnswers, question1: 'B' })}
                                       />
-                                      <label htmlFor="q1-b">B: Simon Kucher</label>
+                                      <label htmlFor="q1-b">B: 250 bis 500</label>
                                     </div>
                                     <div className="flex items-center">
                                       <input
@@ -1080,7 +1090,7 @@ function ChallengeApp() {
                                         checked={quizAnswers.question1 === 'C'}
                                         onChange={() => setQuizAnswers({ ...quizAnswers, question1: 'C' })}
                                       />
-                                      <label htmlFor="q1-c">C: McKinsey</label>
+                                      <label htmlFor="q1-c">C: 500 bis 750</label>
                                     </div>
                                     <div className="flex items-center">
                                       <input
@@ -1091,14 +1101,14 @@ function ChallengeApp() {
                                         checked={quizAnswers.question1 === 'D'}
                                         onChange={() => setQuizAnswers({ ...quizAnswers, question1: 'D' })}
                                       />
-                                      <label htmlFor="q1-d">D: Celonis</label>
+                                      <label htmlFor="q1-d">D: &gt; 750</label>
                                     </div>
                                   </div>
                                 </div>
 
                                 {/* Frage 2 */}
                                 <div className="space-y-3">
-                                  <h3 className="font-semibold text-lg">2. Welcher der folgenden Begriffe entspricht <span className="font-bold">nicht</span> unseren Unternehmenswerten?
+                                  <h3 className="font-semibold text-lg">2. Welcher der folgenden Begriffe entspricht <span className="font-bold">nicht</span> unseren Prinzipien?
                                   </h3>
                                   <div className="space-y-2">
                                     <div className="flex items-center">
@@ -1227,8 +1237,7 @@ function ChallengeApp() {
                                     >
                                       <div className="p-6 rounded-lg">
                                         <p className="font-medium text-xl mb-4 text-black">
-                                          Wie viele Mitglieder hat Academy Consult zum Stand 01.01.2025 aufgenommen?
-                                        </p>
+                                          Wie viele Mitglieder hat Academy Consult seit der Gründung bis zum 01.01.2025 aufgenommen?                                        </p>
                                         <div className="relative mb-4">
                                           <Input
                                             type="number"
@@ -1255,18 +1264,18 @@ function ChallengeApp() {
                                     {/* Feedback zum Schätzwert anzeigen */}
                                     {estimationFeedback && (
                                       <Alert
-                                        className="border-l-4 border-green-500 bg-green-50 shadow-sm mt-3"
+                                        className="border-l-4 border-amber-500 bg-amber-50 shadow-sm mt-3"
                                         variant="default"
                                       >
                                         <div className="flex">
-                                          <svg className="h-5 w-5 text-green-600 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                                            <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                                          <svg className="h-5 w-5 text-amber-600 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                            <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2h-1V9a1 1 0 00-1-1z" clipRule="evenodd" />
                                           </svg>
                                           <div>
-                                            <AlertTitle className="font-semibold text-green-900">
+                                            <AlertTitle className="font-semibold text-amber-900">
                                               {estimationFeedback.title}
                                             </AlertTitle>
-                                            <AlertDescription className="text-green-800">
+                                            <AlertDescription className="text-amber-800">
                                               {estimationFeedback.description}
                                             </AlertDescription>
                                           </div>
@@ -1370,12 +1379,46 @@ function ChallengeApp() {
                         </Label>
                       </div>
                       
-                      {/* Bestehender Feedback-Code */}
+                      {/* Bestehenden Success-Alert entfernen und durch Modal ersetzen */}
                       {submitSuccess && (
-                        <div className="p-3 bg-green-50 text-green-700 rounded-md">
-                          Vielen Dank für deine Teilnahme! Bitte überprüfe deine E-Mails, um die Bestätigung zu vervollständigen.
-                        </div>
+                        <>
+                          {/* Overlay mit Hintergrundverdunkelung */}
+                          <div 
+                            className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center"
+                            onClick={() => setSubmitSuccess(false)}
+                          >
+                            {/* Modal-Inhalt, stoppt Klick-Propagation */}
+                            <div 
+                              className="bg-white rounded-lg shadow-xl max-w-md w-full mx-4 animate-in fade-in duration-300"
+                              onClick={(e) => e.stopPropagation()}
+                            >
+                              <div className="p-5 flex items-start">
+                                <div className="mr-4 bg-green-100 p-2 rounded-full">
+                                  <svg className="h-6 w-6 text-green-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+                                  </svg>
+                                </div>
+                                <div className="flex-1">
+                                  <h3 className="text-lg font-medium text-gray-900">Fast fertig!</h3>
+                                  <p className="mt-2 text-sm text-gray-600">
+                                      Danke für deine Teilnahme! Bestätige deine E-Mail, um am Gewinnspiel teilzunehmen. Deine Lösungen sind erfolgreich eingereicht.
+                                  </p>
+                                </div>
+                              </div>
+                              <div className="bg-white px-5 py-3 rounded-b-lg flex justify-center">
+                                <Button
+                                  type="button"
+                                  onClick={() => setSubmitSuccess(false)}
+                                  className="bg-[#993333] hover:bg-[#7a2828] text-white"
+                                >
+                                  Schließen
+                                </Button>
+                              </div>
+                            </div>
+                          </div>
+                        </>
                       )}
+
                       {/* Fehlermeldung anzeigen */}
                       {submitError && (
                         <Alert
@@ -1418,51 +1461,86 @@ function ChallengeApp() {
 
               {/* Timeline */}
               <Card>
-                <CardHeader>
-                  <CardTitle className="text-xl">Fortschritt</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="space-y-4">
-                    {games.map((game, index) => (
-                      <div key={index} className="flex items-center gap-3">
-                        <div className={`h-6 w-6 rounded-full flex items-center justify-center 
-                          ${game.completed ? "bg-green-500 text-white" : "border border-gray-300 bg-gray-100"}`}>
-                          {game.completed ? (
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-                              <polyline points="20 6 9 17 4 12"></polyline>
-                            </svg>
-                          ) : (
-                            <span className="text-xs">{index + 1}</span>
-                          )}
-                        </div>
-                        <div className="flex items-center"> {/* Flex direction geändert von column zu row */}
-                          <p className={game.completed ? "text-green-500" : "text-gray-500"}>
-                            {game.title.replace(/\s*\([^)]*\)\s*/, '')}
-                          </p>
+  <CardHeader>
+    <CardTitle className="text-xl">Fortschritt & Gewinntickets</CardTitle>
+    <p className="text-sm text-gray-600 mt-1 mb-3">
+      Mit jedem Spiel sammelst du Gewinntickets. Maximal 100 Tickets sind möglich!
+    </p>
+  </CardHeader>
+  
+  <CardContent className="pt-0">
 
-                          {/* Sterne direkt hinter dem Titel */}
-                          <div className="flex items-center ml-2">
-                            {/* Immer drei Sterne anzeigen, aber nur entsprechend der Schwierigkeit ausgefüllt */}
-                            <svg className="w-3 h-3 text-yellow-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
-                              <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                            </svg>
-
-                            {/* Zweiter Stern - ausgefüllt oder leer je nach Schwierigkeitsgrad */}
-                            <svg className={`w-3 h-3 ms-0.5 ${game.id >= 2 ? 'text-yellow-300' : 'text-gray-300'}`} aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
-                              <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                            </svg>
-
-                            {/* Dritter Stern - ausgefüllt oder leer je nach Schwierigkeitsgrad */}
-                            <svg className={`w-3 h-3 ms-0.5 ${game.id >= 3 ? 'text-yellow-300' : 'text-gray-300'}`} aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
-                              <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                            </svg>
-                          </div>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
+    {/* Spiele mit integrierten Ticket-Informationen */}
+    <div className="space-y-4">
+      {games.map((game, index) => (
+        <div key={index} className="flex flex-col bg-white rounded-md border border-gray-200 overflow-hidden">
+          <div className="flex items-center p-3">
+            <div className={`h-7 w-7 rounded-full flex items-center justify-center overflow-hidden mr-3
+              ${game.completed ? "bg-green-500 text-white" : "border border-gray-300 bg-gray-100"}`}>
+              {game.completed ? (
+                <svg 
+                  xmlns="http://www.w3.org/2000/svg" 
+                  width="14" 
+                  height="14" 
+                  viewBox="0 0 24 24" 
+                  fill="none" 
+                  stroke="currentColor" 
+                  strokeWidth="3" 
+                  strokeLinecap="round" 
+                  strokeLinejoin="round"
+                  className="transform translate-y-[0.5px]"
+                >
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+              ) : (
+                <span className="text-xs">{index + 1}</span>
+              )}
+            </div>
+            
+            <div className="flex-1 min-w-0">
+              <p className={`font-medium ${game.completed ? "text-green-600" : "text-gray-700"} truncate`}>
+                {game.title.replace(/\s*\([^)]*\)\s*/, '')}
+              </p>
+            </div>
+            
+            <div className="flex items-center gap-3 ml-2">
+              <div className="flex bg-gray-100 rounded-full px-2 py-1 items-center">
+              <img 
+    src="https://static.vecteezy.com/system/resources/thumbnails/001/189/271/small_2x/tickets.png"
+    alt="Ticket"
+    className="w-4 h-4 mr-1 object-contain"
+  />
+                <span className="text-xs font-medium">
+                  {game.id === 1 && (games[0].completed ? "20" : "0")}
+                  {game.id === 2 && (games[1].completed ? "20" : "0")}
+                  {game.id === 3 && (games[2].completed ? "?" : "0")}
+                  {game.id === 1 || game.id === 2 ? "/20" : "/60"}
+                </span>
+              </div>
+              
+              <span className={`px-2 py-0.5 text-xs font-medium rounded-full text-white inline-flex justify-center min-w-[60px] ${
+                game.id === 1 ? "bg-green-500" : 
+                game.id === 2 ? "bg-yellow-500" : 
+                "bg-red-500"
+              }`}>
+                {game.id === 1 ? "Leicht" : game.id === 2 ? "Mittel" : "Schwer"}
+              </span>
+            </div>
+          </div>
+          
+          {/* Ticketdetails */}
+          {game.id === 3 && game.completed && (
+            <div className="bg-amber-50 px-3 py-2 border-t border-amber-100">
+              <p className="text-xs text-amber-800">
+                <span className="font-medium">Schätzung:</span> Je näher an der korrekten Zahl, desto mehr Tickets erhältst du (bis zu 60).
+              </p>
+            </div>
+          )}
+        </div>
+      ))}
+    </div>
+  </CardContent>
+</Card>
             </div>
           </div>
         </div>
