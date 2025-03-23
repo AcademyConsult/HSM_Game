@@ -66,23 +66,23 @@ function ChallengeApp() {
     {
       position: "1",
       title: "Hauptpreis",
-      description: "MacBook Pro 16 Zoll",
+      description: "Mystery Preis",
       image:
-        "https://cdsassets.apple.com/live/SZLF0YNV/images/sp/111901_mbp16-gray.png",
+        "https://www.citypng.com/public/uploads/preview/super-mario-yellow-3d-mystery-box-hd-png-735811697027180vaj1as8yg2.png",
     },
     {
       position: "2",
       title: "Zweiter Preis",
-      description: "MacBook Pro 16 Zoll",
+      description: "Mystery Preis",
       image:
-        "https://cdsassets.apple.com/live/SZLF0YNV/images/sp/111901_mbp16-gray.png",
+        "https://www.citypng.com/public/uploads/preview/super-mario-yellow-3d-mystery-box-hd-png-735811697027180vaj1as8yg2.png",
     },
     {
       position: "3",
       title: "Dritter Preis",
-      description: "MacBook Pro 16 Zoll",
+      description: "Mystery Preis",
       image:
-        "https://cdsassets.apple.com/live/SZLF0YNV/images/sp/111901_mbp16-gray.png",
+        "https://www.citypng.com/public/uploads/preview/super-mario-yellow-3d-mystery-box-hd-png-735811697027180vaj1as8yg2.png",
     },
   ];
 
@@ -832,8 +832,8 @@ const completedTickets = (games[0].completed ? 20 : 0) +
         className="w-auto h-10 object-contain"
       />
       <img
-        src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/McKinsey_Script_Mark_2019.svg/1024px-McKinsey_Script_Mark_2019.svg.png?20210417140111"
-        alt="McKinsey Logo"
+        src="https://digitalestadtmuenchen.de/wp-content/uploads/2018/10/logo-4c-1.png"
+        alt="4C Group"
         className="w-auto h-10 object-contain"
       />
     </div>
@@ -848,8 +848,8 @@ const completedTickets = (games[0].completed ? 20 : 0) +
           key={`sponsor-1-${i}`}
           src={i % 2 === 0 
             ? "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/Celonis_Logo.png/1280px-Celonis_Logo.png"
-            : "https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/McKinsey_Script_Mark_2019.svg/1024px-McKinsey_Script_Mark_2019.svg.png?20210417140111"}
-          alt={i % 2 === 0 ? "Celonis Logo" : "McKinsey Logo"}
+            : "https://digitalestadtmuenchen.de/wp-content/uploads/2018/10/logo-4c-1.png"}
+          alt={i % 2 === 0 ? "Celonis Logo" : "4C Group Logo"}
           className="mx-8"
           loading="eager" // Ändere zu eager für bessere Performance
           style={{ height: "50px", width: "auto", transform: "translateZ(0)" }} // Hardware-Beschleunigung
@@ -864,8 +864,8 @@ const completedTickets = (games[0].completed ? 20 : 0) +
           key={`sponsor-2-${i}`}
           src={i % 2 === 0 
             ? "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/Celonis_Logo.png/1280px-Celonis_Logo.png"
-            : "https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/McKinsey_Script_Mark_2019.svg/1024px-McKinsey_Script_Mark_2019.svg.png?20210417140111"}
-          alt={i % 2 === 0 ? "Celonis Logo" : "McKinsey Logo"}
+            : "https://digitalestadtmuenchen.de/wp-content/uploads/2018/10/logo-4c-1.png"}
+          alt={i % 2 === 0 ? "Celonis Logo" : "4C Group Logo"}
           className="mx-8"
           loading="eager" // Ändere zu eager für bessere Performance
           style={{ height: "50px", width: "auto", transform: "translateZ(0)" }} // Hardware-Beschleunigung
