@@ -66,23 +66,25 @@ function ChallengeApp() {
     {
       position: "1",
       title: "Hauptpreis",
-      description: "Mystery Preis",
+      description: "Air Pods Pro 2",
       image:
-        "https://www.citypng.com/public/uploads/preview/super-mario-yellow-3d-mystery-box-hd-png-735811697027180vaj1as8yg2.png",
+        "https://cdsassets.apple.com/live/7WUAS350/images/tech-specs/airpods-pro-2.png",
     },
     {
       position: "2",
       title: "Zweiter Preis",
-      description: "Mystery Preis",
+      description: "2x Tickets und Cocktails für die Bayern3 Beach Party",
       image:
-        "https://www.citypng.com/public/uploads/preview/super-mario-yellow-3d-mystery-box-hd-png-735811697027180vaj1as8yg2.png",
+        "https://img.br.de/2dcb69b4-aae2-4d30-97ef-698f0489a175.jpeg?rect=0,60,1920,960&_naturalWidth=1920&_naturalHeight=1080",
+        //"https://img.br.de/3b42b4d7-5188-4b0d-a644-51c5aa1df94c.jpeg?_naturalWidth=1920&_naturalHeight=1080&rect=0%2C0%2C1920%2C1080&q=70",
     },
     {
-      position: "3",
+      position: "3-5",
       title: "Dritter Preis",
-      description: "Mystery Preis",
+      description: "Rewe Gutschein im Wert von 50€",
       image:
-        "https://www.citypng.com/public/uploads/preview/super-mario-yellow-3d-mystery-box-hd-png-735811697027180vaj1as8yg2.png",
+        //"https://kartedirekt.de/images/products/rewe-geschenkkarte-50-eur-1702903315.png",
+        "https://upload.wikimedia.org/wikipedia/commons/5/5a/REWE_Dein_Markt-Logo_neu.png",
     },
   ];
 
@@ -91,64 +93,82 @@ function ChallengeApp() {
       id: 1,
       title: "Infoabend Online",
       date: "2025-04-16",
-      time: "20:00",
-      location: "Zoom",
+      time: "19:00-20:30",
+      location: "Teams",
       description: "Hier erfährst du alles, was Dich bei uns erwartet und kommst mit uns ins Gespräch!",
+      eventbride: "https://www.eventbrite.com/e/digitaler-infoabend-academy-consult-tickets-1307910147459?aff=oddtdtcreator",
       image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/AC%20Hintergrund%202-tH8JYEwhI9ZvKdJvkZJ21BJ3ZHAgrd.png",
     },
     {
       id: 2,
-      title: "Infoabend LMU",
-      date: "2025-04-22",
-      time: "19:00",
-      location: "LMU, Raum tbd",
-      description: "Hier erfährst du alles, was Dich bei uns erwartet und danach gehen wir noch ganz locker in eine Bar.",
+      title: "Case Training",
+      date: "2025-04-18",
+      time: "15:00-19:00",
+      location: "LMU Hauptgebäude, Hörsaal A199",
+      description: "Beim Case Training hast du die Möglichkeit, gemeinsam mit erfahrenen AClern zu casen und dich dabei ganz entspannt auszutauschen.",
+      eventbride: "none",
       image: "https://raw.githubusercontent.com/AcademyConsult/HSM_Game/main/public/InfoAbendLMU.jpg",
     },
     {
       id: 3,
       title: "Open Büro Day",
-      date: "2025-04-23",
-      time: "15:00",
+      date: "2025-04-22",
+      time: "15:00-17:30",
       location: "AC Büro, Leopoldstraße 62",
       description: "Beim Open Büro Day kannst Du Dir anschauen, wo du zukünftig arbeiten könntest ;)",
+      eventbride: "https://www.eventbrite.com/e/open-buro-day-academy-consult-tickets-1308092021449?aff=oddtdtcreator",
       image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/AC%20Hintergrund%202-tH8JYEwhI9ZvKdJvkZJ21BJ3ZHAgrd.png",
     },
     {
       id: 4,
-      title: "Case Training",
-      date: "2025-04-23",
-      time: "18:00",
-      location: "AC Büro, Leopoldstraße 62",
-      description: "Beim Case Training könnt ihr zusammen mit AClern casen und kommt ins Gespräch.",
+      title: "Infoabend Online",
+      date: "2025-04-22",
+      time: "19:00-20:30",
+      location: "Teams",
+      description: "Hier erfährst du alles, was Dich bei uns erwartet und danach gehen wir noch ganz locker in eine Bar.",
+      eventbride: "https://www.eventbrite.com/e/digitaler-infoabend-academy-consult-tickets-1308099363409?aff=oddtdtcreator",
       image: "https://raw.githubusercontent.com/AcademyConsult/HSM_Game/main/public/caseTraining.jpg"
     },
     {
       id: 5,
-      title: "Infoabend Online",
+      title: "Case Training",
       date: "2025-04-23",
-      time: "20:00",
-      location: "Zoom",
-      description: "Hier erfährst du alles, was Dich bei uns erwartet und kommst mit uns ins Gespräch!",
-      image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/AC%20Hintergrund%202-tH8JYEwhI9ZvKdJvkZJ21BJ3ZHAgrd.png",
+      time: "15:00-19:00",
+      location: "AC Büro, Leopoldstraße 62",
+      description: "Beim Case Training hast du die Möglichkeit, gemeinsam mit erfahrenen AClern zu casen und dich dabei ganz entspannt auszutauschen.",
+      eventbride: "none",
+      image: "https://raw.githubusercontent.com/AcademyConsult/HSM_Game/main/public/bewerbertraining.jpg"    
     },
     {
       id: 6,
-      title: "Bewerbertraining",
-      date: "2025-04-17",
-      time: "17:00",
-      location: "AC Büro, Leopoldstraße 62",
+      title: "Infoabend LMU",
+      date: "2025-04-23",
+      time: "19:00-20:00",
+      location: "LMU Hauptgebäude, Hörsaal A199",
       description: "Beim Bewerbertraining lernst du das wichtigste was du vor einem Bewerbungsprozess wissen musst.",
-      image: "https://raw.githubusercontent.com/AcademyConsult/HSM_Game/main/public/bewerbertraining.jpg"    },
+      eventbride: "https://www.eventbrite.com/e/infoabend-academy-consult-lmu-tickets-1308198560109?aff=oddtdtcreator",
+      image: "https://raw.githubusercontent.com/AcademyConsult/HSM_Game/main/public/bewerbertraining.jpg"    
+    },
     {
       id: 7,
-      title: "Infoabend TUM",
-      date: "2025-04-26",
-      time: "19:00",
-      location: "TUM Stammgelände, Raum tbd",
-      description: "Hier erfährst du alles, was Dich bei uns erwartet und danach gehen wir noch ganz locker in eine Bar.",
-      image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/AC%20Hintergrund%202-tH8JYEwhI9ZvKdJvkZJ21BJ3ZHAgrd.png",
+      title: "Bewerbertraining",
+      date: "2025-04-24",
+      time: "17:00-18:00",
+      location: "AC Büro, Leopoldstraße 62",
+      description: "Beim Bewerbertraining lernst du das wichtigste was du vor einem Bewerbungsprozess wissen musst.",
+      eventbride: "none",
+      image: "https://raw.githubusercontent.com/AcademyConsult/HSM_Game/main/public/bewerbertraining.jpg"    
     },
+    {
+      id: 8,
+      title: "Infoabend TUM",
+      date: "2025-04-24",
+      time: "19:00-20:00",
+      location: "TUM Stammgelände, Raum 0601",
+      description: "Hier erfährst du alles, was Dich bei uns erwartet und danach gehen wir noch ganz locker in eine Bar.",
+      eventbride: "https://www.eventbrite.com/e/infoabend-academy-consult-tum-tickets-1308194076699?aff=oddtdtcreator",
+      image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/AC%20Hintergrund%202-tH8JYEwhI9ZvKdJvkZJ21BJ3ZHAgrd.png",
+    }
   ];
 
   const [games, setGames] = useState([
@@ -346,7 +366,7 @@ function ChallengeApp() {
     });
 
     // Toleranzbereich für höhere Genauigkeit
-    const tolerance = 0.085; // Erhöht auf 0.07
+    const tolerance = 0.09; // Erhöht auf 0.07
 
     // Berechne den Abstand für bessere Diagnose
     const distanceX = Math.abs(selectedCoordinates.x - targetX);
@@ -589,34 +609,20 @@ const completedTickets = (games[0].completed ? 20 : 0) +
                 {/* 1. Preis - mitte (größer) */}
                 <Card
                   key="prize-1"
-                  className="bg-white/15 backdrop-blur-md text-white border-none shadow-[4px_6px_15px_rgba(0,0,0,0.2)] w-full sm:w-11/12 md:w-1/3 h-auto md:h-[500px] transform transition-transform hover:scale-105 duration-300 z-10"
+                  className="bg-white/15 backdrop-blur-md text-white border-none shadow-[4px_6px_15px_rgba(0,0,0,0.2)] w-full sm:w-11/12 md:w-1/3 h-auto md:h-[450px] transform transition-transform hover:scale-105 duration-300 z-10"
                 >
                   <CardHeader className="relative pb-0 pt-8">
                     <div className="absolute -top-5 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-[#ffd700] to-[#ffec8b] text-gray-800 px-6 py-2 rounded-full shadow-md">
                       <span className="font-bold text-lg">1. Platz</span>
                     </div>
                   </CardHeader>
-                  <CardContent className="flex flex-col items-center pt-6">
+                  <CardContent className="flex flex-col items-center justify-center pt-6 h-full">
                     <h3 className="text-2xl font-bold text-center mb-5">{prizes[0].description}</h3>
-                    <div className="w-full h-40 mb-6 overflow-hidden rounded-lg flex items-center justify-center">
+                    <div className="flex-1 w-full flex items-center justify-center overflow-hidden rounded-xl">
                       <img
                         src={prizes[0].image || "/placeholder.svg"}
                         alt={prizes[0].title}
-                        className="w-full h-full object-contain"
-                      />
-                    </div>
-                    <div className="flex w-full items-center">
-                      <div className="flex-1 my-12 h-[1px] bg-white"></div>
-                      <span className="text-2xl font-bold text-center mx-8 py-3">
-                        Sponsor
-                      </span>
-                      <div className="flex-1 my-12 h-[1px] bg-white"></div>
-                    </div>
-                    <div className="mt-3 flex justify-center">
-                      <img
-                        src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/Celonis_Logo.png/1280px-Celonis_Logo.png"
-                        alt="Celonis Logo"
-                        className="h-12"
+                        className="w-auto h-auto max-h-48 max-w-[80%] object-contain rounded-xl transform scale-110"
                       />
                     </div>
                   </CardContent>
@@ -629,7 +635,7 @@ const completedTickets = (games[0].completed ? 20 : 0) +
                 >
                   <CardHeader className="relative pb-0 pt-6">
                     <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-[#cd7f32] to-[#dea47e] text-white px-4 py-1 rounded-full shadow-md">
-                      <span className="font-bold">3. Platz</span>
+                      <span className="font-bold">3-5. Platz</span>
                     </div>
                   </CardHeader>
                   <CardContent className="flex flex-col items-center pt-4">
@@ -645,23 +651,30 @@ const completedTickets = (games[0].completed ? 20 : 0) +
                 </Card>
               </div>
               {/* Trostpreis - flacher und unten */}
-              <div className="hidden md:block mt-8 px-4 container mx-auto max-w-5xl"> {/* max-w-5xl begrenzt die Breite */}
-                <Card className="bg-white/10 backdrop-blur-md text-white border-none shadow-[4px_6px_10px_rgba(0,0,0,0.15)] transform transition-transform hover:scale-101 duration-300">
-                  <div className="flex flex-col md:flex-row md:items-center py-5"> {/* py-5 statt py-4 für mehr Höhe */}
-                    <CardHeader className="relative pb-0 md:w-1/4 flex-shrink-0">
-                      <div className="md:absolute md:top-1/2 md:-translate-y-1/2 left-1/2 md:-translate-x-1/2 bg-gradient-to-r from-[#a9a9a9] to-[#d3d3d3] text-gray-700 px-10 py-2 rounded-full shadow-md inline-block text-center"> {/* px-10 und py-2 für größere Badge, text-center hinzugefügt */}
-                        <span className="font-medium">Trostpreis</span>
+                <div className="hidden md:block mt-8 px-4 container mx-auto max-w-5xl">
+                  <Card className="bg-white/10 backdrop-blur-md text-white border-none shadow-[4px_6px_10px_rgba(0,0,0,0.15)] transform transition-transform hover:scale-101 duration-300">
+                    <div className="flex flex-col md:flex-row md:items-center py-5">
+                      <CardHeader className="relative pb-0 md:w-1/4 flex-shrink-0">
+                        <div className="md:absolute md:top-1/2 md:-translate-y-1/2 left-1/2 md:-translate-x-1/2 bg-gradient-to-r from-[#a9a9a9] to-[#d3d3d3] text-gray-700 px-10 py-2 rounded-full shadow-md inline-block text-center">
+                          <span className="font-medium">6-10. Platz</span>
+                        </div>
+                      </CardHeader>
+                      <CardContent className="flex items-center md:w-2/4 h-full">
+                        <div className="flex flex-col justify-center items-center text-center h-full">
+                          <h3 className="text-lg font-semibold mb-1">AC Goodie Bag</h3>
+                          <p className="text-white/80">Die AC Goodie Bag enthält jeweils 10 Dosen Red Bull.</p>
+                        </div>
+                      </CardContent>
+                      <div className="md:w-1/4 flex justify-center items-center p-2">
+                        <img 
+                          src="https://dosenmatrosen.imgbolt.de/media/c8/c0/15/1691505124/GL005263-24-1-Red-Bull-Energy-Drink.png?ts=1691505124" 
+                          alt="Red Bull Dosen" 
+                          className="h-24 w-auto object-contain"
+                        />
                       </div>
-                    </CardHeader>
-                    <CardContent className="flex items-center md:w-3/4 h-full">
-                      <div className="flex flex-col justify-center items-center text-center h-full">
-                        <h3 className="text-lg font-semibold mb-1">Kleine Überraschung</h3>
-                        <p className="text-white/80">Für alle weiteren Teilnehmer gibt es kleine Überraschungen.</p>
-                      </div>
-                    </CardContent>
-                  </div>
-                </Card>
-              </div>
+                    </div>
+                  </Card>
+                </div>
 
               {/* Mobile-Ansicht: Preise im Carousel */}
 
@@ -706,27 +719,13 @@ const completedTickets = (games[0].completed ? 20 : 0) +
                             <span className="font-bold text-lg">1. Platz</span>
                           </div>
                         </CardHeader>
-                        <CardContent className="flex flex-col items-center pt-6">
+                        <CardContent className="flex flex-col items-center justify-center pt-6">
                           <h3 className="text-2xl font-bold text-center mb-5">{prizes[0].description}</h3>
-                          <div className="w-full h-40 mb-2 overflow-hidden rounded-lg flex items-center justify-center">
+                          <div className="w-full mb-2 overflow-hidden rounded-lg flex items-center justify-center h-full">
                             <img
                               src={prizes[0].image || "/placeholder.svg"}
                               alt={prizes[0].title}
-                              className="w-full h-full object-contain"
-                            />
-                          </div>
-                          <div className="flex w-full items-center">
-                            <div className="flex-1 my-6 h-[1px] bg-white"></div>
-                            <span className="text-xl font-bold text-center mx-4 py-1">
-                              Sponsor
-                            </span>
-                            <div className="flex-1 my-6 h-[1px] bg-white"></div>
-                          </div>
-                          <div className="mt-1 flex justify-center">
-                            <img
-                              src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/Celonis_Logo.png/1280px-Celonis_Logo.png"
-                              alt="Celonis Logo"
-                              className="h-12"
+                              className="w-auto max-w-[90%] h-full object-contain rounded-xl mx-auto"
                             />
                           </div>
                         </CardContent>
@@ -748,11 +747,11 @@ const completedTickets = (games[0].completed ? 20 : 0) +
                         </CardHeader>
                         <CardContent className="flex flex-col items-center pt-6">
                           <h3 className="text-xl font-semibold text-center mb-6">{prizes[1].description}</h3>
-                          <div className="w-full h-40 mt-5 mb-6 overflow-hidden rounded-xl flex items-center justify-center">
+                          <div className="pt-7 w-full mb-2 overflow-hidden rounded-lg flex items-center justify-center h-full">
                             <img
                               src={prizes[1].image || "/placeholder.svg"}
                               alt={prizes[1].title}
-                              className="w-auto h-full object-contain rounded-xl mx-auto"
+                              className="w-auto h-full object-contain rounded-md mx-auto"
                             />
                           </div>
                         </CardContent>
@@ -768,7 +767,7 @@ const completedTickets = (games[0].completed ? 20 : 0) +
                       >
                         <CardHeader className="relative pb-0 pt-8">
                           <div className="absolute -top-5 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-[#cd7f32] to-[#dea47e] text-white px-6 py-2 rounded-full shadow-md">
-                            <span className="font-bold text-lg">3. Platz</span>
+                            <span className="font-bold text-lg">3-5. Platz</span>
                           </div>
                         </CardHeader>
                         <CardContent className="flex flex-col items-center pt-6">
@@ -785,7 +784,7 @@ const completedTickets = (games[0].completed ? 20 : 0) +
                     </div>
                   </SwiperSlide>
                   
-                  {/* Neuer Trostpreis */}
+                  {/* 6-10. Platz */}
                   <SwiperSlide>
                     <div className="flex items-center justify-center h-full">
                       <Card
@@ -794,14 +793,14 @@ const completedTickets = (games[0].completed ? 20 : 0) +
                       >
                         <CardHeader className="relative pb-0 pt-8">
                           <div className="absolute -top-5 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-[#808080] to-[#a9a9a9] text-white px-6 py-2 rounded-full shadow-md">
-                            <span className="font-bold text-lg">Trostpreis</span>
+                            <span className="font-bold text-lg">6-10. Platz</span>
                           </div>
                         </CardHeader>
                         <CardContent className="flex flex-col items-center pt-6">
-                          <h3 className="text-xl font-semibold text-center mb-6">AC Goodie Bag</h3>
+                          <h3 className="text-xl font-semibold text-center mb-6">AC Goodie Bag inkl. 10 Dosen Red Bull</h3>
                           <div className="w-full h-40 mt-5 mb-6 overflow-hidden rounded-xl flex items-center justify-center">
                             <img
-                              src="https://raw.githubusercontent.com/AcademyConsult/HSM_Game/main/public/placeholder.svg"
+                              src="https://dosenmatrosen.imgbolt.de/media/c8/c0/15/1691505124/GL005263-24-1-Red-Bull-Energy-Drink.png?ts=1691505124"
                               alt="AC Goodie Bag"
                               className="w-auto h-full object-contain rounded-xl mx-auto"
                             />
@@ -811,7 +810,6 @@ const completedTickets = (games[0].completed ? 20 : 0) +
                     </div>
                   </SwiperSlide>
                 </Swiper>
-
               </div>
             </div>
 
@@ -821,20 +819,16 @@ const completedTickets = (games[0].completed ? 20 : 0) +
 
       {/* Sponsoren Sektion */}
       <section className="bg-white py-6 w-screen overflow-hidden relative">
-        <SectionDivider title="Sponsoren" />
+        <SectionDivider title="Unser Sponsor" />
 
         {/* Mobile: Statische Logos in einem Grid */}
-  <div className="md:hidden container mx-auto pt-10 pb-4">
-    <div className="grid grid-cols-2 gap-8 place-items-center">
+  <div className="md:hidden container mx-auto">
+    <div className="flex justify-center items-center">
       <img
-        src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/Celonis_Logo.png/1280px-Celonis_Logo.png"
-        alt="Celonis Logo"
-        className="w-auto h-10 object-contain"
-      />
-      <img
-        src="https://digitalestadtmuenchen.de/wp-content/uploads/2018/10/logo-4c-1.png"
-        alt="4C Group"
-        className="w-auto h-10 object-contain"
+        src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/Logo_TWE_gross.jpg/1200px-Logo_TWE_gross.jpg"
+        alt="Terme Erding Logo"
+        className="rounded-lg"
+        style={{ height: "110px", width: "auto", transform: "translateZ(0)" }}
       />
     </div>
   </div>
@@ -843,40 +837,61 @@ const completedTickets = (games[0].completed ? 20 : 0) +
   <div className="ticker-track" data-mobile-animation>
     {/* Erster Satz Logos */}
     <div className="ticker-content">
-      {Array(10).fill(null).map((_, i) => (
-        <img
-          key={`sponsor-1-${i}`}
-          src={i % 2 === 0 
-            ? "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/Celonis_Logo.png/1280px-Celonis_Logo.png"
-            : "https://digitalestadtmuenchen.de/wp-content/uploads/2018/10/logo-4c-1.png"}
-          alt={i % 2 === 0 ? "Celonis Logo" : "4C Group Logo"}
-          className="mx-8"
-          loading="eager" // Ändere zu eager für bessere Performance
-          style={{ height: "50px", width: "auto", transform: "translateZ(0)" }} // Hardware-Beschleunigung
-        />
-      ))}
+      {Array(10).fill(null).map((_, i) => {
+        // Nur ein Logo im Array
+        const logos = [
+          {src: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/Logo_TWE_gross.jpg/1200px-Logo_TWE_gross.jpg", alt: "Therme Erding Logo"},
+          {src: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/Logo_TWE_gross.jpg/1200px-Logo_TWE_gross.jpg", alt: "Therme Erding Logo"},
+          {src: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/Logo_TWE_gross.jpg/1200px-Logo_TWE_gross.jpg", alt: "Therme Erding Logo"},
+          {src: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/Logo_TWE_gross.jpg/1200px-Logo_TWE_gross.jpg", alt: "Therme Erding Logo"}
+        ];
+        
+        // Verwende den Modulo-Operator, um durch die Logos zu rotieren
+        const logo = logos[i % 4];
+        
+        return (
+          <img
+            key={`sponsor-2-${i}`}
+            src={logo.src}
+            alt={logo.alt}
+            className="mx-10 rounded-lg"
+            loading="eager"
+            style={{ height: "70px", width: "auto", transform: "translateZ(0)" }}
+          />
+        );
+      })}
     </div>
 
     {/* Zweiter identischer Satz - reduziere auf 6 statt 10 für bessere Performance */}
     <div className="ticker-content">
-      {Array(10).fill(null).map((_, i) => (
-        <img
-          key={`sponsor-2-${i}`}
-          src={i % 2 === 0 
-            ? "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/Celonis_Logo.png/1280px-Celonis_Logo.png"
-            : "https://digitalestadtmuenchen.de/wp-content/uploads/2018/10/logo-4c-1.png"}
-          alt={i % 2 === 0 ? "Celonis Logo" : "4C Group Logo"}
-          className="mx-8"
-          loading="eager" // Ändere zu eager für bessere Performance
-          style={{ height: "50px", width: "auto", transform: "translateZ(0)" }} // Hardware-Beschleunigung
-        />
-      ))}
+      {Array(10).fill(null).map((_, i) => {
+        // Nur ein Logo im Array
+        const logos = [
+          {src: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/Logo_TWE_gross.jpg/1200px-Logo_TWE_gross.jpg", alt: "Therme Erding Logo"},
+          {src: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/Logo_TWE_gross.jpg/1200px-Logo_TWE_gross.jpg", alt: "Therme Erding Logo"},
+          {src: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/Logo_TWE_gross.jpg/1200px-Logo_TWE_gross.jpg", alt: "Therme Erding Logo"},
+          {src: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/Logo_TWE_gross.jpg/1200px-Logo_TWE_gross.jpg", alt: "Therme Erding Logo"}
+        ];
+        
+        // Verwende den Modulo-Operator, um durch die Logos zu rotieren
+        const logo = logos[i % 4];
+        
+        return (
+          <img
+            key={`sponsor-2-${i}`}
+            src={logo.src}
+            alt={logo.alt}
+            className="mx-10 rounded-lg"
+            loading="eager"
+            style={{ height: "70px", width: "auto", transform: "translateZ(0)" }}
+          />
+        );
+      })}
     </div>
-    
   </div>
 </div>
       </section>
-
+ 
       {/* Games Section */}
       <section id="games-section" className="bg-white pt-14 pb-6 w-screen overflow-hidden relative">
         <SectionDivider title="Die Challenge" />
@@ -977,7 +992,7 @@ const completedTickets = (games[0].completed ? 20 : 0) +
                                   onClick={handleWimmelbildClick}
                                 >
                                   <img
-                                    src="https://raw.githubusercontent.com/AcademyConsult/HSM_Game/main/public/wimmelbild.png"
+                                    src="https://raw.githubusercontent.com/AcademyConsult/HSM_Game/main/public/AC_Gewinnspiel_Wimmelbild_1.1.jpg"
                                     alt="Wimmelbild"
                                     className="w-full h-full object-cover"
                                   />
@@ -1375,7 +1390,7 @@ const completedTickets = (games[0].completed ? 20 : 0) +
                           htmlFor="consent"
                           className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                         >
-                          Mit dem Einreichen meiner Lösungen bestätige ich, dass ich die <a href="https://academyconsult.de/unternehmen/impressum/" target="_blank" rel="noopener noreferrer" className="text-[#993333] hover:underline">AGB</a> akzeptiere.
+                          Mit dem Einreichen meiner Lösungen bestätige ich, dass ich die <a href="https://polydactyl-course-f91.notion.site/Teilnahmebedingungen-1cd3d6763f7b80ea9060d5f84e1649d3" target="_blank" rel="noopener noreferrer" className="text-[#993333] hover:underline">AGB</a> akzeptiere.
                         </Label>
                       </div>
                       
@@ -1546,6 +1561,36 @@ const completedTickets = (games[0].completed ? 20 : 0) +
         </div>
       </section>
 
+      {/* Bewerbung Sektion */}
+<section className="bg-white py-6 w-screen overflow-hidden relative">
+  <SectionDivider title="Zur Bewerbung" />
+  <div className="container mx-auto px-4">
+    <p className="text-lg md:text-xl text-center mb-12 max-w-3xl mx-auto">
+      Du bist motiviert, Dich bei uns zu bewerben? Dann klick direkt hier:
+    </p>
+    
+    <div className="flex justify-center mt-6">
+      <a 
+        href="https://bewerben.academyconsult.de/s/-1" 
+        target="_blank"
+        rel="noopener noreferrer"
+        className="inline-block transform hover:scale-105 transition-transform duration-300"
+      >
+        <div 
+          className="px-8 py-4 rounded-xl shadow-lg text-center"
+          style={{
+            backgroundImage: "url(https://hebbkx1anhila5yf.public.blob.vercel-storage.com/AC%20Hintergrund%202-tH8JYEwhI9ZvKdJvkZJ21BJ3ZHAgrd.png)",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }}
+        >
+          <span className="text-white font-bold text-xl md:text-2xl drop-shadow-md">Jetzt bis zum 27.04 bewerben!</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
       {/* Event-Sektion – Hintergrund weiß */}
       <section id="events-section" className="bg-white py-12 md:py-24">
         <SectionDivider title="Lust auf mehr?" />
@@ -1553,6 +1598,7 @@ const completedTickets = (games[0].completed ? 20 : 0) +
           <SwiperEventCarousel events={events} />
         </div>
       </section>
+
 
       {/* Footer mit Header-Hintergrundbild */}
       <footer className="text-white py-12"
