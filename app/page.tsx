@@ -73,7 +73,7 @@ function ChallengeApp() {
     {
       position: "2",
       title: "Zweiter Preis",
-      description: "2x Tickets und Cocktails für die Bayern3 Beach Party",
+      description: "2 Tickets: Therme Erding Bayern3 Beachparty",
       image:
         "https://img.br.de/2dcb69b4-aae2-4d30-97ef-698f0489a175.jpeg?rect=0,60,1920,960&_naturalWidth=1920&_naturalHeight=1080",
         //"https://img.br.de/3b42b4d7-5188-4b0d-a644-51c5aa1df94c.jpeg?_naturalWidth=1920&_naturalHeight=1080&rect=0%2C0%2C1920%2C1080&q=70",
@@ -99,6 +99,7 @@ function ChallengeApp() {
       eventbride: "https://www.eventbrite.com/e/digitaler-infoabend-academy-consult-tickets-1307910147459?aff=oddtdtcreator",
       image: "https://raw.githubusercontent.com/AcademyConsult/HSM_Game/main/public/OnlineInfo.jpeg",
     },
+    /*
     {
       id: 2,
       title: "Case Training 1",
@@ -109,6 +110,7 @@ function ChallengeApp() {
       eventbride: "none",
       image: "https://raw.githubusercontent.com/AcademyConsult/HSM_Game/main/public/InfoAbendLMU.jpg",
     },
+    */
     {
       id: 3,
       title: "Open Büro Day",
@@ -131,7 +133,7 @@ function ChallengeApp() {
     },
     {
       id: 5,
-      title: "Case Training 2",
+      title: "Case Training",
       date: "2025-04-23",
       time: "15:00-19:00",
       location: "AC Büro, Leopoldstraße 62",
@@ -149,6 +151,7 @@ function ChallengeApp() {
       eventbride: "https://www.eventbrite.com/e/infoabend-academy-consult-lmu-tickets-1308198560109?aff=oddtdtcreator",
       image: "https://raw.githubusercontent.com/AcademyConsult/HSM_Game/main/public/LMU.jpg"    
     },
+    /*
     {
       id: 7,
       title: "Bewerbertraining",
@@ -159,6 +162,7 @@ function ChallengeApp() {
       eventbride: "none",
       image: "https://raw.githubusercontent.com/AcademyConsult/HSM_Game/main/public/bewerbertraining.jpg"    
     },
+    */
     {
       id: 8,
       title: "Infoabend TUM",
@@ -578,7 +582,7 @@ const completedTickets = (games[0].completed ? 20 : 0) +
                 Academy Consult Challenge
               </h1>
               <p className="text-lg md:text-xl">
-                Denkst du du hast das Zeug zum Gewinner? Beweise es!<br /> Löse die Spiele und gewinne tolle Preise
+                Denkst du du hast das Zeug zum Gewinner? Beweise es!<br /> Löse die Spiele und gewinne tolle Preise zum Semesterstart
               </p>
             </div>
             <div className="mt-20">
@@ -896,10 +900,10 @@ const completedTickets = (games[0].completed ? 20 : 0) +
       <section id="games-section" className="bg-white pt-14 pb-6 w-screen overflow-hidden relative">
         <SectionDivider title="Die Challenge" />
         <div className="container mx-auto px-4">
-          <p className="text-lg md:text-xl text-center mb-12 max-w-3xl mx-auto">
-            Löse die folgenden Spiele und reiche deine Ergebnisse ein, um am Gewinnspiel teilzunehmen.
-            Basierend auf deinen Ergebnissen erhöht sich deine Gewinnwahrscheinlichkeit.
-          </p>
+        <p className="text-lg md:text-xl text-center mb-12 max-w-3xl mx-auto">
+          Löse <span className="text-[#993333] font-bold">bis zum 8.05</span> die folgenden Spiele und reiche deine Ergebnisse ein, um am Gewinnspiel teilzunehmen.
+          Basierend auf deinen Ergebnissen erhöht sich deine Gewinnwahrscheinlichkeit.
+        </p>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {/* Spiele Cards mit Accordion */}
