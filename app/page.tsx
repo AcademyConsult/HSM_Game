@@ -101,7 +101,7 @@ function ChallengeApp() {
     },
     {
       id: 2,
-      title: "Case Training",
+      title: "Case Training 1",
       date: "2025-04-18",
       time: "15:00-19:00",
       location: "LMU Hauptgebäude, Hörsaal A199",
@@ -125,13 +125,13 @@ function ChallengeApp() {
       date: "2025-04-22",
       time: "19:00-20:30",
       location: "Teams",
-      description: "Hier erfährst du alles, was Dich bei uns erwartet und danach gehen wir noch ganz locker in eine Bar.",
+      description: "Hier erfährst du alles, was Dich bei uns erwartet und kommst mit uns ins Gespräch!",
       eventbride: "https://www.eventbrite.com/e/digitaler-infoabend-academy-consult-tickets-1308099363409?aff=oddtdtcreator",
       image: "https://raw.githubusercontent.com/AcademyConsult/HSM_Game/main/public/OnlineInfo.jpeg"
     },
     {
       id: 5,
-      title: "Case Training",
+      title: "Case Training 2",
       date: "2025-04-23",
       time: "15:00-19:00",
       location: "AC Büro, Leopoldstraße 62",
@@ -145,7 +145,7 @@ function ChallengeApp() {
       date: "2025-04-23",
       time: "19:00-20:00",
       location: "LMU Hauptgebäude, Hörsaal A199",
-      description: "Beim Bewerbertraining lernst du das wichtigste was du vor einem Bewerbungsprozess wissen musst.",
+      description: "Hier erfährst du alles, was Dich bei uns erwartet und danach gehen wir noch ganz locker in eine Bar.",
       eventbride: "https://www.eventbrite.com/e/infoabend-academy-consult-lmu-tickets-1308198560109?aff=oddtdtcreator",
       image: "https://raw.githubusercontent.com/AcademyConsult/HSM_Game/main/public/LMU.jpg"    
     },
