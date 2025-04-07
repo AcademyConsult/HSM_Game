@@ -75,7 +75,8 @@ function ChallengeApp() {
       title: "Zweiter Preis",
       description: "2 Tickets: Therme Erding Bayern3 Beachparty",
       image:
-        "https://img.br.de/2dcb69b4-aae2-4d30-97ef-698f0489a175.jpeg?rect=0,60,1920,960&_naturalWidth=1920&_naturalHeight=1080",
+        "https://raw.githubusercontent.com/AcademyConsult/HSM_Game/main/public/Erding.jpeg",
+        //"https://img.br.de/2dcb69b4-aae2-4d30-97ef-698f0489a175.jpeg?rect=0,60,1920,960&_naturalWidth=1920&_naturalHeight=1080",
         //"https://img.br.de/3b42b4d7-5188-4b0d-a644-51c5aa1df94c.jpeg?_naturalWidth=1920&_naturalHeight=1080&rect=0%2C0%2C1920%2C1080&q=70",
     },
     {
@@ -737,31 +738,30 @@ const completedTickets = (games[0].completed ? 20 : 0) +
   </div>
 </SwiperSlide>
 
-                  <SwiperSlide>
-                    <div className="flex items-center justify-center h-full">
-                      {/* Für mobile Ansicht overflow-visible setzen, damit der Badge nicht abgeschnitten wird */}
-                      <Card
-                        key="prize-2"
-                        className="overflow-visible bg-white/15 backdrop-blur-md text-white border-none shadow-[4px_6px_15px_rgba(0,0,0,0.2)] w-full h-[420px]"
-                      >
-                        <CardHeader className="relative pb-0 pt-8">
-                          <div className="absolute -top-5 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-[#C0C0C0] to-[#E8E8E8] text-gray-800 px-6 py-2 rounded-full shadow-md">
-                            <span className="font-bold text-lg">2. Platz</span>
-                          </div>
-                        </CardHeader>
-                        <CardContent className="flex flex-col items-center pt-6">
-                          <h3 className="text-xl font-semibold text-center mb-6">{prizes[1].description}</h3>
-                          <div className="pt-7 w-full mb-2 overflow-hidden rounded-lg flex items-center justify-center h-full">
-                            <img
-                              src={prizes[1].image || "/placeholder.svg"}
-                              alt={prizes[1].title}
-                              className="w-auto h-full object-contain rounded-md mx-auto"
-                            />
-                          </div>
-                        </CardContent>
-                      </Card>
-                    </div>
-                  </SwiperSlide>
+<SwiperSlide>
+  <div className="flex items-center justify-center h-full">
+    <Card
+      key="prize-2"
+      className="overflow-visible bg-white/15 backdrop-blur-md text-white border-none shadow-[4px_6px_15px_rgba(0,0,0,0.2)] w-full h-[420px]"
+    >
+      <CardHeader className="relative pb-0 pt-8">
+        <div className="absolute -top-5 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-[#C0C0C0] to-[#E8E8E8] text-gray-800 px-6 py-2 rounded-full shadow-md">
+          <span className="font-bold text-lg">2. Platz</span>
+        </div>
+      </CardHeader>
+      <CardContent className="flex flex-col items-center pt-6">
+        <h3 className="text-xl font-semibold text-center mb-6">{prizes[1].description}</h3>
+        <div className="w-full overflow-hidden flex items-center justify-center">
+          <img
+            src={prizes[1].image || "/placeholder.svg"}
+            alt={prizes[1].title}
+            className="w-auto max-h-[180px] object-contain mx-auto rounded-xl"
+          />
+        </div>
+      </CardContent>
+    </Card>
+  </div>
+</SwiperSlide>
 
                   <SwiperSlide>
                     <div className="flex items-center justify-center h-full">
