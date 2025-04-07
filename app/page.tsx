@@ -91,13 +91,13 @@ function ChallengeApp() {
   const events = [
     {
       id: 1,
-      title: "Infoabend Online",
+      title: "Infoabend Online 1",
       date: "2025-04-16",
       time: "19:00-20:30",
       location: "Teams",
       description: "Hier erfährst du alles, was Dich bei uns erwartet und kommst mit uns ins Gespräch!",
       eventbride: "https://www.eventbrite.com/e/digitaler-infoabend-academy-consult-tickets-1307910147459?aff=oddtdtcreator",
-      image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/AC%20Hintergrund%202-tH8JYEwhI9ZvKdJvkZJ21BJ3ZHAgrd.png",
+      image: "https://raw.githubusercontent.com/AcademyConsult/HSM_Game/main/public/OnlineInfo.jpeg",
     },
     {
       id: 2,
@@ -117,17 +117,17 @@ function ChallengeApp() {
       location: "AC Büro, Leopoldstraße 62",
       description: "Beim Open Büro Day kannst Du Dir anschauen, wo du zukünftig arbeiten könntest ;)",
       eventbride: "https://www.eventbrite.com/e/open-buro-day-academy-consult-tickets-1308092021449?aff=oddtdtcreator",
-      image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/AC%20Hintergrund%202-tH8JYEwhI9ZvKdJvkZJ21BJ3ZHAgrd.png",
+      image: "https://raw.githubusercontent.com/AcademyConsult/HSM_Game/main/public/B%C3%BCro.jpg",
     },
     {
       id: 4,
-      title: "Infoabend Online",
+      title: "Infoabend Online 2",
       date: "2025-04-22",
       time: "19:00-20:30",
       location: "Teams",
       description: "Hier erfährst du alles, was Dich bei uns erwartet und danach gehen wir noch ganz locker in eine Bar.",
       eventbride: "https://www.eventbrite.com/e/digitaler-infoabend-academy-consult-tickets-1308099363409?aff=oddtdtcreator",
-      image: "https://raw.githubusercontent.com/AcademyConsult/HSM_Game/main/public/caseTraining.jpg"
+      image: "https://raw.githubusercontent.com/AcademyConsult/HSM_Game/main/public/OnlineInfo.jpeg"
     },
     {
       id: 5,
@@ -137,7 +137,7 @@ function ChallengeApp() {
       location: "AC Büro, Leopoldstraße 62",
       description: "Beim Case Training hast du die Möglichkeit, gemeinsam mit erfahrenen AClern zu casen und dich dabei ganz entspannt auszutauschen.",
       eventbride: "none",
-      image: "https://raw.githubusercontent.com/AcademyConsult/HSM_Game/main/public/bewerbertraining.jpg"    
+      image: "https://raw.githubusercontent.com/AcademyConsult/HSM_Game/main/public/caseTraining.jpg"
     },
     {
       id: 6,
@@ -147,7 +147,7 @@ function ChallengeApp() {
       location: "LMU Hauptgebäude, Hörsaal A199",
       description: "Beim Bewerbertraining lernst du das wichtigste was du vor einem Bewerbungsprozess wissen musst.",
       eventbride: "https://www.eventbrite.com/e/infoabend-academy-consult-lmu-tickets-1308198560109?aff=oddtdtcreator",
-      image: "https://raw.githubusercontent.com/AcademyConsult/HSM_Game/main/public/bewerbertraining.jpg"    
+      image: "https://raw.githubusercontent.com/AcademyConsult/HSM_Game/main/public/LMU.jpg"    
     },
     {
       id: 7,
@@ -167,7 +167,7 @@ function ChallengeApp() {
       location: "TUM Stammgelände, Raum 0601",
       description: "Hier erfährst du alles, was Dich bei uns erwartet und danach gehen wir noch ganz locker in eine Bar.",
       eventbride: "https://www.eventbrite.com/e/infoabend-academy-consult-tum-tickets-1308194076699?aff=oddtdtcreator",
-      image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/AC%20Hintergrund%202-tH8JYEwhI9ZvKdJvkZJ21BJ3ZHAgrd.png",
+      image: "https://raw.githubusercontent.com/AcademyConsult/HSM_Game/main/public/TUM.jpeg",
     }
   ];
 

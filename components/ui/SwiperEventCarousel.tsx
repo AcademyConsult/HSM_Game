@@ -27,21 +27,38 @@ interface SwiperEventCarouselProps {
   events: Event[];
 }
 
-// Funktion zum Erstellen der Kalender-URLs
+// Funktion um Kalendar-Links für Google und iCal zu erstellen
 const createCalendarLinks = (event: Event) => {
-  // Zeitangaben formatieren (yyyy-MM-ddTHH:mm:ss)
-  const startDate = new Date(event.date + 'T' + event.time);
-  // Annahme: Event dauert 2 Stunden
-  const endDate = new Date(startDate.getTime() + 2 * 60 * 60 * 1000);
+  // Datum und Zeit korrekt extrahieren
+  const [startTime, endTime] = event.time.split("-");
   
-  // Format für Google Kalender
+  // Startdatum und -zeit
+  const startDate = new Date(`${event.date}T${startTime}:00`);
+  
+  // Enddatum und -zeit
+  const endDate = new Date(`${event.date}T${endTime}:00`);
+  
+  // Beschreibung mit Anmeldelink ergänzen, wenn verfügbar
+  let description = event.description;
+  if (event.eventbride && event.eventbride !== "none") {
+    description += `\n\nZur Anmeldung: ${event.eventbride}`;
+  }
+  
+  // Formate für Google Kalender und iCal
   const startDateStr = startDate.toISOString().replace(/-|:|\.\d+/g, '');
   const endDateStr = endDate.toISOString().replace(/-|:|\.\d+/g, '');
   
-  // Google Kalender Link
-  const googleURL = `https://www.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(event.title)}&dates=${startDateStr}/${endDateStr}&details=${encodeURIComponent(event.description)}&location=${encodeURIComponent(event.location)}`;
+  // Stelle sicher, dass der vollständige Ort korrekt kodiert wird
+  const locationParam = encodeURIComponent(event.location);
   
-  // iCal Format
+  // Google Kalender Link
+  const googleURL = `https://www.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(event.title)}&dates=${startDateStr}/${endDateStr}&details=${encodeURIComponent(description)}&location=${locationParam}`;
+  
+  // iCal Format - Location mit speziellem Escape für Kommas und Umlaute
+  const safeLocation = event.location
+    .replace(/,/g, "\\,")
+    .replace(/;/g, "\\;");
+  
   const iCalData = [
     'BEGIN:VCALENDAR',
     'VERSION:2.0',
@@ -49,8 +66,8 @@ const createCalendarLinks = (event: Event) => {
     `DTSTART:${startDateStr}`,
     `DTEND:${endDateStr}`,
     `SUMMARY:${event.title}`,
-    `DESCRIPTION:${event.description}`,
-    `LOCATION:${event.location}`,
+    `DESCRIPTION:${description.replace(/\n/g, '\\n')}`,
+    `LOCATION:${safeLocation}`,
     'END:VEVENT',
     'END:VCALENDAR'
   ].join('\n');
@@ -165,7 +182,7 @@ export function SwiperEventCarousel({ events }: SwiperEventCarouselProps) {
       >
         {events.map((event) => (
           <SwiperSlide key={event.id} className="pb-4"> {/* Padding unten hinzufügen */}
-            <Card className="bg-white shadow-[0_4px_10px_rgba(0,0,0,0.1)] hover:shadow-[0_8px_16px_rgba(0,0,0,0.12)] transition-shadow rounded-2xl h-[450px] flex flex-col overflow-hidden border border-gray-100">
+            <Card className="bg-white shadow-[0_4px_10px_rgba(0,0,0,0.1)] hover:shadow-[0_8px_16px_rgba(0,0,0,0.12)] transition-shadow rounded-2xl h-[420px] flex flex-col overflow-hidden border border-gray-100">
               <div className="relative h-40 overflow-hidden">
                 <img
                   src={event.image || "/placeholder.svg"}
