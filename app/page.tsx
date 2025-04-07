@@ -152,18 +152,16 @@ function ChallengeApp() {
       eventbride: "https://www.eventbrite.com/e/infoabend-academy-consult-lmu-tickets-1308198560109?aff=oddtdtcreator",
       image: "https://raw.githubusercontent.com/AcademyConsult/HSM_Game/main/public/LMU.jpg"    
     },
-    /*
     {
       id: 7,
       title: "Bewerbertraining",
       date: "2025-04-24",
-      time: "17:00-18:00",
+      time: "19:00-20:00",
       location: "AC Büro, Leopoldstraße 62",
       description: "Beim Bewerbertraining lernst du das wichtigste was du vor einem Bewerbungsprozess wissen musst.",
       eventbride: "none",
       image: "https://raw.githubusercontent.com/AcademyConsult/HSM_Game/main/public/bewerbertraining.jpg"    
     },
-    */
     {
       id: 8,
       title: "Infoabend TUM",
