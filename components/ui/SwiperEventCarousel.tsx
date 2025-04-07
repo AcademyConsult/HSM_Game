@@ -19,6 +19,7 @@ interface Event {
   time: string;
   location: string;
   description: string;
+  eventbride: string;
   image: string;
 }
 
@@ -164,7 +165,7 @@ export function SwiperEventCarousel({ events }: SwiperEventCarouselProps) {
       >
         {events.map((event) => (
           <SwiperSlide key={event.id} className="pb-4"> {/* Padding unten hinzufügen */}
-            <Card className="bg-white shadow-[0_4px_10px_rgba(0,0,0,0.1)] hover:shadow-[0_8px_16px_rgba(0,0,0,0.12)] transition-shadow rounded-2xl h-96 flex flex-col overflow-hidden border border-gray-100">
+            <Card className="bg-white shadow-[0_4px_10px_rgba(0,0,0,0.1)] hover:shadow-[0_8px_16px_rgba(0,0,0,0.12)] transition-shadow rounded-2xl h-[450px] flex flex-col overflow-hidden border border-gray-100">
               <div className="relative h-40 overflow-hidden">
                 <img
                   src={event.image || "/placeholder.svg"}
@@ -173,22 +174,27 @@ export function SwiperEventCarousel({ events }: SwiperEventCarouselProps) {
                 />
               </div>
               
-              <CardHeader className="p-4">
-              <div className="flex justify-between items-start">
+              <CardHeader className="p-4 h-[120px] overflow-hidden"> {/* Feste Höhe hinzugefügt */}
+                <div className="flex justify-between items-start">
                   <CardTitle className="text-xl font-semibold text-gray-800">{event.title}</CardTitle>
                   
-                  {/* Anmeldungs-Button mit Notausgang-Icon */}
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    className="text-[#993333] hover:bg-[#99333315] p-1"
-                    onClick={() => window.open("https://academyconsult.de", "_blank")}
-                  >
-                    <span className="flex items-center gap-1.5">
-                      <span className="text-sm font-medium">Zur Anmeldung!</span>
-                      <FaSignOutAlt className="h-4 w-4" />
-                    </span>
-                  </Button>
+                  {/* Container mit fester Position für den Button */}
+                  <div className="min-w-[120px] flex justify-end">
+                    {/* Anmeldungs-Button nur anzeigen, wenn eventbride nicht "none" ist */}
+                    {event.eventbride && event.eventbride !== "none" && (
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        className="text-[#993333] hover:bg-[#99333315] p-1"
+                        onClick={() => window.open(event.eventbride, "_blank")}
+                      >
+                        <span className="flex items-center gap-1.5">
+                          <span className="text-sm font-medium">Zur Anmeldung!</span>
+                          <FaSignOutAlt className="h-4 w-4" />
+                        </span>
+                      </Button>
+                    )}
+                  </div>
                 </div>
                 <div className="flex flex-col mt-2 gap-1 text-sm text-gray-600">
                   <p>{formatDate(event.date)} • {event.time}</p>
@@ -200,7 +206,7 @@ export function SwiperEventCarousel({ events }: SwiperEventCarouselProps) {
                 <p className="text-sm text-gray-600 line-clamp-3">{event.description}</p>
               </CardContent>
               
-              <CardFooter className="p-4 pt-0">
+              <CardFooter className="p-4 pt-0 mt-auto">
                 <div className="w-full flex gap-2">
                   {/* Apple Kalender Button */}
                   <Button 
