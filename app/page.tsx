@@ -77,7 +77,7 @@ function ChallengeApp() {
       image:
         "https://raw.githubusercontent.com/AcademyConsult/HSM_Game/main/public/Erding.jpeg",
         //"https://img.br.de/2dcb69b4-aae2-4d30-97ef-698f0489a175.jpeg?rect=0,60,1920,960&_naturalWidth=1920&_naturalHeight=1080",
-        //"https://img.br.de/3b42b4d7-5188-4b0d-a644-51c5aa1df94c.jpeg?_naturalWidth=1920&_naturalHeight=1080&rect=0%2C0%2C1920%2C1080&q=70",
+        //"https://img.br.de/3b42b4d7-5188-4d0d-a644-51c5aa1df94c.jpeg?_naturalWidth=1920&_naturalHeight=1080&rect=0%2C0%2C1920%2C1080&q=70",
     },
     {
       position: "3-5",
@@ -590,7 +590,7 @@ const completedTickets = (games[0].completed ? 20 : 0) +
                 {/* 2. Preis - links */}
                 <Card
                   key="prize-2"
-                  className="bg-white/10 backdrop-blur-md text-white border-none shadow-[4px_6px_10px_rgba(0,0,0,0.15)] w-full sm:w-1/2 md:w-1/4 h-auto md:h-[350px] transform transition-transform hover:scale-105 duration-300"
+                  className="bg-white/10 backdrop-blur-md text-white border-none shadow-[4px_6px_10px_rgba(0,0,0,0.15)] w-full sm:w-1/2 md:w-1/4 h-auto md:h-[380px] transform transition-transform hover:scale-105 duration-300"
                 >
                   <CardHeader className="relative pb-0 pt-6">
                     <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-gradient-to-r bg-gradient-to-r from-[#C0C0C0] to-[#E8E8E8] text-gray-800 px-4 py-1 rounded-full shadow-md">
@@ -598,8 +598,9 @@ const completedTickets = (games[0].completed ? 20 : 0) +
                     </div>
                   </CardHeader>
                   <CardContent className="flex flex-col items-center pt-4">
-                    <h3 className="text-xl font-semibold text-center mb-6">{prizes[1].description}</h3>
-                    <div className="w-full h-32 mt-5 mb-6 overflow-hidden rounded-xl flex items-center justify-center">
+                    <h3 className="text-xl font-semibold text-center mb-3">{prizes[1].description}</h3>
+                    <p className="text-center text-white/80 mb-4">Für die perfekte Erholungspause während des Semesters 🏝️</p>
+                    <div className="w-full h-32 mt-2 overflow-hidden rounded-xl flex items-center justify-center">
                       <img
                         src={prizes[1].image || "/placeholder.svg"}
                         alt={prizes[1].title}
@@ -612,7 +613,7 @@ const completedTickets = (games[0].completed ? 20 : 0) +
                 {/* 1. Preis - mitte (größer) */}
                 <Card
                   key="prize-1"
-                  className="bg-white/15 backdrop-blur-md text-white border-none shadow-[4px_6px_15px_rgba(0,0,0,0.2)] w-full sm:w-11/12 md:w-1/3 h-auto md:h-[450px] transform transition-transform hover:scale-105 duration-300 z-10"
+                  className="bg-white/15 backdrop-blur-md text-white border-none shadow-[4px_6px_15px_rgba(0,0,0,0.2)] w-full sm:w-11/12 md:w-1/3 h-auto md:h-[480px] transform transition-transform hover:scale-105 duration-300 z-10"
                 >
                   <CardHeader className="relative pb-0 pt-8">
                     <div className="absolute -top-5 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-[#ffd700] to-[#ffec8b] text-gray-800 px-6 py-2 rounded-full shadow-md">
@@ -620,12 +621,13 @@ const completedTickets = (games[0].completed ? 20 : 0) +
                     </div>
                   </CardHeader>
                   <CardContent className="flex flex-col items-center justify-center pt-6 h-full">
-                    <h3 className="text-2xl font-bold text-center mb-5">{prizes[0].description}</h3>
+                    <h3 className="text-2xl font-bold text-center mb-3">{prizes[0].description}</h3>
+                    <p className="text-center text-white/80 mb-6">Für eine ungestörte Study-Session 🎵 📚</p>
                     <div className="flex-1 w-full flex items-center justify-center overflow-hidden rounded-xl">
                       <img
                         src={prizes[0].image || "/placeholder.svg"}
                         alt={prizes[0].title}
-                        className="w-auto h-auto max-h-48 max-w-[80%] object-contain rounded-xl transform scale-110"
+                        className="w-auto h-auto max-h-56 max-w-[80%] object-contain rounded-xl transform scale-110 mt-4"
                       />
                     </div>
                   </CardContent>
@@ -634,7 +636,7 @@ const completedTickets = (games[0].completed ? 20 : 0) +
                 {/* 3. Preis - rechts */}
                 <Card
                   key="prize-3"
-                  className="bg-white/10 backdrop-blur-md text-white border-none shadow-[4px_6px_10px_rgba(0,0,0,0.15)] w-full sm:w-1/2 md:w-1/4 h-auto md:h-[350px] transform transition-transform hover:scale-105 duration-300"
+                  className="bg-white/10 backdrop-blur-md text-white border-none shadow-[4px_6px_10px_rgba(0,0,0,0.15)] w-full sm:w-1/2 md:w-1/4 h-auto md:h-[380px] transform transition-transform hover:scale-105 duration-300"
                 >
                   <CardHeader className="relative pb-0 pt-6">
                     <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-[#cd7f32] to-[#dea47e] text-white px-4 py-1 rounded-full shadow-md">
@@ -642,8 +644,9 @@ const completedTickets = (games[0].completed ? 20 : 0) +
                     </div>
                   </CardHeader>
                   <CardContent className="flex flex-col items-center pt-4">
-                    <h3 className="text-xl font-semibold text-center mb-6">{prizes[2].description}</h3>
-                    <div className="w-full h-32 mt-5 mb-6 overflow-hidden rounded-xl flex items-center justify-center">
+                    <h3 className="text-xl font-semibold text-center mb-3">{prizes[2].description}</h3>
+                    <p className="text-center text-white/80 mb-4">We got you! Dein nächster Einkauf geht auf uns 🛍️</p>
+                    <div className="w-full h-32 mt-2 overflow-hidden rounded-xl flex items-center justify-center">
                       <img
                         src={prizes[2].image || "/placeholder.svg"}
                         alt={prizes[2].title}
@@ -665,7 +668,7 @@ const completedTickets = (games[0].completed ? 20 : 0) +
                       <CardContent className="flex items-center md:w-2/4 h-full">
                         <div className="flex flex-col justify-center items-center text-center h-full">
                           <h3 className="text-lg font-semibold mb-1">AC Goodie Bag</h3>
-                          <p className="text-white/80">Die AC Goodie Bag enthält jeweils 10 Dosen Red Bull.</p>
+                          <p className="text-white/80">Neben coolen Goodies sind 10 Dosen Red Bull für maximale Produktivität enthalten 🚀</p>
                         </div>
                       </CardContent>
                       <div className="md:w-1/4 flex justify-center items-center p-2">
@@ -724,6 +727,7 @@ const completedTickets = (games[0].completed ? 20 : 0) +
                         </CardHeader>
                         <CardContent className="flex flex-col items-center justify-center pt-6 h-[320px]">
                           <h3 className="text-2xl font-bold text-center mb-5">{prizes[0].description}</h3>
+                          <p className="text-center text-white/80 mb-5">Für eine ungestörte Study-Session 🎵 📚</p>
                           <div className="flex-1 w-full flex items-center justify-center">
                             <img
                               src={prizes[0].image || "/placeholder.svg"}
@@ -749,6 +753,7 @@ const completedTickets = (games[0].completed ? 20 : 0) +
                         </CardHeader>
                         <CardContent className="flex flex-col items-center pt-6">
                           <h3 className="text-xl font-semibold text-center mb-6">{prizes[1].description}</h3>
+                          <p className="text-center text-white/80 mb-6">Für die perfekte Erholungspause während des Semesters 🏝️</p>
                           <div className="w-full overflow-hidden flex items-center justify-center">
                             <img
                               src={prizes[1].image || "/placeholder.svg"}
@@ -774,6 +779,7 @@ const completedTickets = (games[0].completed ? 20 : 0) +
                         </CardHeader>
                         <CardContent className="flex flex-col items-center pt-6">
                           <h3 className="text-xl font-semibold text-center mb-6">{prizes[2].description}</h3>
+                          <p className="text-center text-white/80 mb-6">We got you! Dein nächster Einkauf geht auf uns 🛍️</p>
                           <div className="w-full h-40 mt-5 mb-6 overflow-hidden rounded-xl flex items-center justify-center">
                             <img
                               src={prizes[2].image || "/placeholder.svg"}
@@ -800,6 +806,7 @@ const completedTickets = (games[0].completed ? 20 : 0) +
                         </CardHeader>
                         <CardContent className="flex flex-col items-center pt-6">
                           <h3 className="text-xl font-semibold text-center mb-6">AC Goodie Bag inkl. 10 Dosen Red Bull</h3>
+                          <p className="text-center text-white/80 mb-6">Neben coolen Goodies sind 10 Dosen Red Bull für maximale Produktivität enthalten 🚀</p>
                           <div className="w-full h-40 mt-5 mb-6 overflow-hidden rounded-xl flex items-center justify-center">
                             <img
                               src="https://dosenmatrosen.imgbolt.de/media/c8/c0/15/1691505124/GL005263-24-1-Red-Bull-Energy-Drink.png?ts=1691505124"
@@ -899,7 +906,7 @@ const completedTickets = (games[0].completed ? 20 : 0) +
         <SectionDivider title="Die Challenge" />
         <div className="container mx-auto px-4">
         <p className="text-lg md:text-xl text-center mb-12 max-w-3xl mx-auto">
-          Löse <span className="text-[#993333] font-bold">bis zum 8.05</span> die folgenden Spiele und reiche deine Ergebnisse ein, um am Gewinnspiel teilzunehmen.
+          Löse <span className="text-[#993333] font-bold">bis zum 8.05.</span> die folgenden Spiele und reiche deine Ergebnisse ein, um am Gewinnspiel teilzunehmen.
           Basierend auf deinen Ergebnissen erhöht sich deine Gewinnwahrscheinlichkeit.
         </p>
 
@@ -1568,7 +1575,9 @@ const completedTickets = (games[0].completed ? 20 : 0) +
   <SectionDivider title="Zur Bewerbung" />
   <div className="container mx-auto px-4">
     <p className="text-lg md:text-xl text-center mb-12 max-w-3xl mx-auto">
-      Du bist motiviert, Dich bei uns zu bewerben? Dann klick direkt hier:
+      Du studierst in München und willst neben deinem eher theoretischen Studium echte Beratungserfahrung sammeln und dich persönlich weiterentwickeln?<br />
+      Dann ist Academy Consult genau das richtige für dich! Lerne uns bei einem unserer Events näher kennen oder bewerbe dich direkt über den folgenden Link.<br />
+      <span className="text-[#993333] font-bold">Wir freuen uns auf dich!</span>
     </p>
     
     <div className="flex justify-center mt-6">
@@ -1586,7 +1595,7 @@ const completedTickets = (games[0].completed ? 20 : 0) +
             backgroundPosition: "center",
           }}
         >
-          <span className="text-white font-bold text-xl md:text-2xl drop-shadow-md">Jetzt bis zum 27.04 bewerben!</span>
+          <span className="text-white font-bold text-xl md:text-2xl drop-shadow-md">Jetzt bis zum 27.04. bewerben!</span>
         </div>
       </a>
     </div>
@@ -1595,7 +1604,12 @@ const completedTickets = (games[0].completed ? 20 : 0) +
 
       {/* Event-Sektion – Hintergrund weiß */}
       <section id="events-section" className="bg-white py-12 md:py-24">
-        <SectionDivider title="Lust auf mehr?" />
+        <SectionDivider title="Lerne uns kennen!" />
+        <div className="container mx-auto px-4">
+          <p className="text-lg md:text-xl text-center mb-12 max-w-3xl mx-auto">
+            Auf Infoabenden stellen wir uns genauer vor, klären deine Fragen und tauschen uns aus. Melde dich an und füge die Events deinem Kalernder hinzu. 📅
+          </p>
+        </div>
         <div className="container mx-auto px-4 mt-12">
           <SwiperEventCarousel events={events} />
         </div>
@@ -1659,7 +1673,7 @@ const completedTickets = (games[0].completed ? 20 : 0) +
             </div>
 
             {/* reCAPTCHA Hinweis */}
-            <div className="text-xs opacity-80 mb-4">
+            <div className="text-xs opacity-80 mb-4 text-center w-full">
               Diese Seite ist durch reCAPTCHA geschützt.
               <a 
                 href="https://policies.google.com/privacy" 
