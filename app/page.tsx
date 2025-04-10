@@ -73,7 +73,7 @@ function ChallengeApp() {
     {
       position: "2",
       title: "Zweiter Preis",
-      description: "2 Tickets: Therme Erding Bayern3 Beachparty",
+      description: "2 Tickets für die BAYERN 3 Beachparty in der Therme Erding",
       image:
         "https://raw.githubusercontent.com/AcademyConsult/HSM_Game/main/public/Erding.jpeg",
         //"https://img.br.de/2dcb69b4-aae2-4d30-97ef-698f0489a175.jpeg?rect=0,60,1920,960&_naturalWidth=1920&_naturalHeight=1080",
@@ -754,11 +754,11 @@ const completedTickets = (games[0].completed ? 20 : 0) +
                         <CardContent className="flex flex-col items-center pt-6">
                           <h3 className="text-xl font-semibold text-center mb-6">{prizes[1].description}</h3>
                           <p className="text-center text-white/80 mb-6">Für die perfekte Erholungspause während des Semesters 🏝️</p>
-                          <div className="w-full overflow-hidden flex items-center justify-center">
+                          <div className="w-full h-36 overflow-hidden flex items-center justify-center">
                             <img
                               src={prizes[1].image || "/placeholder.svg"}
                               alt={prizes[1].title}
-                              className="w-auto max-h-[180px] object-contain mx-auto rounded-xl"
+                              className="w-auto h-32 object-contain mx-auto rounded-xl"
                             />
                           </div>
                         </CardContent>
@@ -780,11 +780,11 @@ const completedTickets = (games[0].completed ? 20 : 0) +
                         <CardContent className="flex flex-col items-center pt-6">
                           <h3 className="text-xl font-semibold text-center mb-6">{prizes[2].description}</h3>
                           <p className="text-center text-white/80 mb-6">We got you! Dein nächster Einkauf geht auf uns 🛍️</p>
-                          <div className="w-full h-40 mt-5 mb-6 overflow-hidden rounded-xl flex items-center justify-center">
+                          <div className="w-full h-36 mt-5 mb-6 overflow-hidden rounded-xl flex items-center justify-center">
                             <img
                               src={prizes[2].image || "/placeholder.svg"}
                               alt={prizes[2].title}
-                              className="w-auto h-full object-contain rounded-xl mx-auto"
+                              className="w-auto h-32 object-contain rounded-xl mx-auto"
                             />
                           </div>
                         </CardContent>
@@ -807,11 +807,11 @@ const completedTickets = (games[0].completed ? 20 : 0) +
                         <CardContent className="flex flex-col items-center pt-6">
                           <h3 className="text-xl font-semibold text-center mb-6">AC Goodie Bag inkl. 10 Dosen Red Bull</h3>
                           <p className="text-center text-white/80 mb-6">Neben coolen Goodies sind 10 Dosen Red Bull für maximale Produktivität enthalten 🚀</p>
-                          <div className="w-full h-40 mt-5 mb-6 overflow-hidden rounded-xl flex items-center justify-center">
+                          <div className="w-full h-32 mt-5 mb-6 overflow-hidden rounded-xl flex items-center justify-center">
                             <img
                               src="https://dosenmatrosen.imgbolt.de/media/c8/c0/15/1691505124/GL005263-24-1-Red-Bull-Energy-Drink.png?ts=1691505124"
                               alt="AC Goodie Bag"
-                              className="w-auto h-full object-contain rounded-xl mx-auto"
+                              className="w-auto h-28 object-contain rounded-xl mx-auto"
                             />
                           </div>
                         </CardContent>
@@ -1399,7 +1399,11 @@ const completedTickets = (games[0].completed ? 20 : 0) +
                           htmlFor="consent"
                           className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                         >
-                          Mit dem Einreichen meiner Lösungen bestätige ich, dass ich die <a href="https://polydactyl-course-f91.notion.site/Teilnahmebedingungen-1cd3d6763f7b80ea9060d5f84e1649d3" target="_blank" rel="noopener noreferrer" className="text-[#993333] hover:underline">AGB</a> akzeptiere.
+                          Mit dem Einreichen meiner Lösungen akzeptiere ich die und 
+                          <a href="https://polydactyl-course-f91.notion.site/Teilnahmebedingungen-1cd3d6763f7b80ea9060d5f84e1649d3" target="_blank" rel="noopener noreferrer" className="text-[#993333] hover:underline"> Teilnahmebedingungen </a> 
+                           und 
+                          <a href="https://polydactyl-course-f91.notion.site/Datenschutzbestimmungen-1d03d6763f7b80af8b50e2362a25c4c7?pvs=74" target="_blank" rel="noopener noreferrer" className="text-[#993333] hover:underline"> Datenschutzbestimmungen</a> 
+                          .
                         </Label>
                       </div>
                       
