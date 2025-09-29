@@ -1,14 +1,14 @@
-import './globals.css'
-import { Inter } from 'next/font/google'
-import Head from 'next/head';
+import './globals.css';
+import { Inter } from 'next/font/google';
 import { Metadata } from 'next';
 import Script from 'next/script';
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: 'Academy Consult Challenge',
-  description: 'Mach mit bei unserer Challenge und gewinne tolle Preise',
+  description:
+    'Mach mit bei unserer Challenge und gewinne tolle Preise',
 };
 
 export default function RootLayout({
