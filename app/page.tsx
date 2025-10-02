@@ -67,21 +67,21 @@ function ChallengeApp() {
     {
       position: "1",
       title: "Hauptpreis",
-      description: "Air Pods Pro 2",
+      description: "Air Pods Pro 3",
       image:
-        "https://cdsassets.apple.com/live/7WUAS350/images/tech-specs/airpods-pro-2.png",
+        "/airpods-pro-compare-202509_FMT_WHH.png",
     },
     {
       position: "2",
       title: "Zweiter Preis",
-      description: "2 Tickets für die BAYERN 3 Beachparty in der Therme Erding",
+      description: "2 Tickets für die Therme Erding",
       image:
-        "https://raw.githubusercontent.com/AcademyConsult/HSM_Game/main/public/Erding.jpeg",
+        "/Erding.jpeg",
         //"https://img.br.de/2dcb69b4-aae2-4d30-97ef-698f0489a175.jpeg?rect=0,60,1920,960&_naturalWidth=1920&_naturalHeight=1080",
         //"https://img.br.de/3b42b4d7-5188-4d0d-a644-51c5aa1df94c.jpeg?_naturalWidth=1920&_naturalHeight=1080&rect=0%2C0%2C1920%2C1080&q=70",
     },
     {
-      position: "3-5",
+      position: "3",
       title: "Dritter Preis",
       description: "Rewe Gutschein im Wert von 50€",
       image:
@@ -99,7 +99,7 @@ function ChallengeApp() {
       location: "Teams",
       description: "Hier erfährst du alles, was Dich bei uns erwartet und kommst mit uns ins Gespräch!",
       eventbride: "https://www.eventbrite.com/e/digitaler-infoabend-academy-consult-tickets-1307910147459?aff=oddtdtcreator",
-      image: "https://raw.githubusercontent.com/AcademyConsult/HSM_Game/main/public/OnlineInfo.jpeg",
+      image: "/OnlineInfo.jpeg",
     },
     /*
     {
@@ -110,7 +110,7 @@ function ChallengeApp() {
       location: "LMU Hauptgebäude, Hörsaal A199",
       description: "Beim Case Training hast du die Möglichkeit, gemeinsam mit erfahrenen AClern zu casen und dich dabei ganz entspannt auszutauschen.",
       eventbride: "none",
-      image: "https://raw.githubusercontent.com/AcademyConsult/HSM_Game/main/public/InfoAbendLMU.jpg",
+      image: "/InfoAbendLMU.jpg",
     },
     */
     {
@@ -121,7 +121,7 @@ function ChallengeApp() {
       location: "AC Büro, Leopoldstraße 62",
       description: "Beim Open Büro Day kannst Du Dir anschauen, wo du zukünftig arbeiten könntest ;)",
       eventbride: "https://www.eventbrite.com/e/open-buro-day-academy-consult-tickets-1308092021449?aff=oddtdtcreator",
-      image: "https://raw.githubusercontent.com/AcademyConsult/HSM_Game/main/public/B%C3%BCro.jpg",
+      image: "/Büro.jpg",
     },
     {
       id: 4,
@@ -131,7 +131,7 @@ function ChallengeApp() {
       location: "Teams",
       description: "Hier erfährst du alles, was Dich bei uns erwartet und kommst mit uns ins Gespräch!",
       eventbride: "https://www.eventbrite.com/e/digitaler-infoabend-academy-consult-tickets-1308099363409?aff=oddtdtcreator",
-      image: "https://raw.githubusercontent.com/AcademyConsult/HSM_Game/main/public/OnlineInfo.jpeg"
+      image: "/OnlineInfo.jpeg"
     },
     {
       id: 5,
@@ -141,7 +141,7 @@ function ChallengeApp() {
       location: "AC Büro, Leopoldstraße 62",
       description: "Beim Case Training hast du die Möglichkeit, gemeinsam mit erfahrenen AClern zu casen und dich dabei ganz entspannt auszutauschen.",
       eventbride: "none",
-      image: "https://raw.githubusercontent.com/AcademyConsult/HSM_Game/main/public/caseTraining.jpg"
+      image: "/caseTraining.jpg"
     },
     {
       id: 6,
@@ -151,7 +151,7 @@ function ChallengeApp() {
       location: "LMU Hauptgebäude, Hörsaal A199",
       description: "Hier erfährst du alles, was Dich bei uns erwartet und danach gehen wir noch ganz locker in eine Bar.",
       eventbride: "https://www.eventbrite.com/e/infoabend-academy-consult-lmu-tickets-1308198560109?aff=oddtdtcreator",
-      image: "https://raw.githubusercontent.com/AcademyConsult/HSM_Game/main/public/LMU.jpg"    
+      image: "/LMU.jpg"    
     },
     {
       id: 7,
@@ -161,7 +161,7 @@ function ChallengeApp() {
       location: "AC Büro, Leopoldstraße 62",
       description: "Beim Bewerbertraining lernst du das wichtigste was du vor einem Bewerbungsprozess wissen musst.",
       eventbride: "none",
-      image: "https://raw.githubusercontent.com/AcademyConsult/HSM_Game/main/public/bewerbertraining.jpg"    
+      image: "/bewerbertraining.jpg"    
     },
     {
       id: 8,
@@ -171,7 +171,7 @@ function ChallengeApp() {
       location: "TUM Stammgelände, Raum 0601",
       description: "Hier erfährst du alles, was Dich bei uns erwartet und danach gehen wir noch ganz locker in eine Bar.",
       eventbride: "https://www.eventbrite.com/e/infoabend-academy-consult-tum-tickets-1308194076699?aff=oddtdtcreator",
-      image: "https://raw.githubusercontent.com/AcademyConsult/HSM_Game/main/public/TUM.jpeg",
+      image: "/TUM.jpeg",
     }
   ];
 
@@ -451,7 +451,7 @@ function ChallengeApp() {
 
   // Funktion zum Überprüfen der Quiz-Antworten
   const checkQuizAnswers = () => {
-    // Richtige Antworten: 1. Frage: B, 2. Frage: C
+    // Richtige Antworten: 1. Frage: C, 2. Frage: C
     const correctAnswers = {
       question1: 'C',
       question2: 'C'
@@ -582,7 +582,7 @@ const completedTickets = (games[0].completed ? 20 : 0) +
                 Academy Consult Challenge
               </h1>
               <p className="text-lg md:text-xl">
-                Denkst du du hast das Zeug zum Gewinner? Beweise es!<br /> Löse die Spiele und gewinne tolle Preise zum Semesterstart
+                Denkst du du hast das Zeug zum Gewinner? Beweise es!<br /> Löse die Spiele und gewinne tolle Preise zum Semesterstart.
               </p>
             </div>
             <div className="mt-20">
@@ -628,7 +628,7 @@ const completedTickets = (games[0].completed ? 20 : 0) +
                       <img
                         src={prizes[0].image || "/placeholder.svg"}
                         alt={prizes[0].title}
-                        className="w-auto h-auto max-h-56 max-w-[80%] object-contain rounded-xl transform scale-110 mt-4"
+                        className="w-auto h-auto max-h-72 max-w-[95%] object-contain rounded-xl transform scale-125 -translate-y-6"
                       />
                     </div>
                   </CardContent>
@@ -641,7 +641,7 @@ const completedTickets = (games[0].completed ? 20 : 0) +
                 >
                   <CardHeader className="relative pb-0 pt-6">
                     <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-[#cd7f32] to-[#dea47e] text-white px-4 py-1 rounded-full shadow-md">
-                      <span className="font-bold">3-5. Platz</span>
+                      <span className="font-bold">3. Platz</span>
                     </div>
                   </CardHeader>
                   <CardContent className="flex flex-col items-center pt-4">
@@ -663,18 +663,18 @@ const completedTickets = (games[0].completed ? 20 : 0) +
                     <div className="flex flex-col md:flex-row md:items-center py-5">
                       <CardHeader className="relative pb-0 md:w-1/4 flex-shrink-0">
                         <div className="md:absolute md:top-1/2 md:-translate-y-1/2 left-1/2 md:-translate-x-1/2 bg-gradient-to-r from-[#a9a9a9] to-[#d3d3d3] text-gray-700 px-10 py-2 rounded-full shadow-md inline-block text-center">
-                          <span className="font-medium">6-10. Platz</span>
+                          <span className="font-medium">4.-10. Platz</span>
                         </div>
                       </CardHeader>
                       <CardContent className="flex items-center md:w-2/4 h-full">
                         <div className="flex flex-col justify-center items-center text-center h-full">
-                          <h3 className="text-lg font-semibold mb-1">AC Goodie Bag</h3>
-                          <p className="text-white/80">Neben coolen Goodies sind 10 Dosen Red Bull für maximale Produktivität enthalten 🚀</p>
+                          <h3 className="text-lg font-semibold mb-1">6 Dosen Red Bull</h3>
+                          <p className="text-white/80">6 Dosen Red Bull für die maximale Produktivität 🚀</p>
                         </div>
                       </CardContent>
                       <div className="md:w-1/4 flex justify-center items-center p-2">
                         <img 
-                          src="https://dosenmatrosen.imgbolt.de/media/c8/c0/15/1691505124/GL005263-24-1-Red-Bull-Energy-Drink.png?ts=1691505124" 
+                          src="/6_Redbull.png" 
                           alt="Red Bull Dosen" 
                           className="h-24 w-auto object-contain"
                         />
@@ -733,7 +733,7 @@ const completedTickets = (games[0].completed ? 20 : 0) +
                             <img
                               src={prizes[0].image || "/placeholder.svg"}
                               alt={prizes[0].title}
-                              className="w-auto max-w-[90%] max-h-[200px] object-contain mx-auto"
+                              className="w-auto max-w-full max-h-[240px] object-contain mx-auto transform scale-110 -translate-y-4"
                             />
                           </div>
                         </CardContent>
@@ -775,7 +775,7 @@ const completedTickets = (games[0].completed ? 20 : 0) +
                       >
                         <CardHeader className="relative pb-0 pt-8">
                           <div className="absolute -top-5 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-[#cd7f32] to-[#dea47e] text-white px-6 py-2 rounded-full shadow-md">
-                            <span className="font-bold text-lg">3-5. Platz</span>
+                            <span className="font-bold text-lg">3. Platz</span>
                           </div>
                         </CardHeader>
                         <CardContent className="flex flex-col items-center pt-6">
@@ -793,7 +793,7 @@ const completedTickets = (games[0].completed ? 20 : 0) +
                     </div>
                   </SwiperSlide>
                   
-                  {/* 6-10. Platz */}
+                  {/* 4-10. Platz */}
                   <SwiperSlide>
                     <div className="flex items-center justify-center h-full">
                       <Card
@@ -802,12 +802,12 @@ const completedTickets = (games[0].completed ? 20 : 0) +
                       >
                         <CardHeader className="relative pb-0 pt-8">
                           <div className="absolute -top-5 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-[#808080] to-[#a9a9a9] text-white px-6 py-2 rounded-full shadow-md">
-                            <span className="font-bold text-lg">6-10. Platz</span>
+                            <span className="font-bold text-lg">4.-10. Platz</span>
                           </div>
                         </CardHeader>
                         <CardContent className="flex flex-col items-center pt-6">
-                          <h3 className="text-xl font-semibold text-center mb-6">AC Goodie Bag inkl. 10 Dosen Red Bull</h3>
-                          <p className="text-center text-white/80 mb-6">Neben coolen Goodies sind 10 Dosen Red Bull für maximale Produktivität enthalten 🚀</p>
+                          <h3 className="text-xl font-semibold text-center mb-6">6 Dosen Red Bull</h3>
+                          <p className="text-center text-white/80 mb-6">6 Dosen Red Bull für maximale Produktivität 🚀</p>
                           <div className="w-full h-32 mt-5 mb-6 overflow-hidden rounded-xl flex items-center justify-center">
                             <img
                               src="https://dosenmatrosen.imgbolt.de/media/c8/c0/15/1691505124/GL005263-24-1-Red-Bull-Energy-Drink.png?ts=1691505124"
@@ -829,16 +829,22 @@ const completedTickets = (games[0].completed ? 20 : 0) +
 
       {/* Sponsoren Sektion */}
       <section className="bg-white py-6 w-screen overflow-hidden relative">
-        <SectionDivider title="Unser Sponsor" />
+        <SectionDivider title="Unsere Sponsoren" />
 
         {/* Mobile: Statische Logos in einem Grid */}
   <div className="md:hidden container mx-auto">
-    <div className="flex justify-center items-center">
+    <div className="flex flex-col items-center gap-8">
       <img
         src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/Logo_TWE_gross.jpg/1200px-Logo_TWE_gross.jpg"
-        alt="Terme Erding Logo"
+        alt="Therme Erding Logo"
         className="rounded-lg"
         style={{ height: "110px", width: "auto", transform: "translateZ(0)" }}
+      />
+      <img
+        src="/e_fellows_logo.svg"
+        alt="e-fellows.net Logo"
+        className="rounded-lg"
+        style={{ height: "90px", width: "auto", transform: "translateZ(0)" }}
       />
     </div>
   </div>
@@ -848,17 +854,13 @@ const completedTickets = (games[0].completed ? 20 : 0) +
     {/* Erster Satz Logos */}
     <div className="ticker-content">
       {Array(10).fill(null).map((_, i) => {
-        // Nur ein Logo im Array
         const logos = [
-          {src: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/Logo_TWE_gross.jpg/1200px-Logo_TWE_gross.jpg", alt: "Therme Erding Logo"},
-          {src: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/Logo_TWE_gross.jpg/1200px-Logo_TWE_gross.jpg", alt: "Therme Erding Logo"},
-          {src: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/Logo_TWE_gross.jpg/1200px-Logo_TWE_gross.jpg", alt: "Therme Erding Logo"},
-          {src: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/Logo_TWE_gross.jpg/1200px-Logo_TWE_gross.jpg", alt: "Therme Erding Logo"}
+          { src: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/Logo_TWE_gross.jpg/1200px-Logo_TWE_gross.jpg", alt: "Therme Erding Logo" },
+          { src: "/e_fellows_logo.svg", alt: "e-fellows.net Logo" }
         ];
-        
-        // Verwende den Modulo-Operator, um durch die Logos zu rotieren
-        const logo = logos[i % 4];
-        
+
+        const logo = logos[i % logos.length];
+
         return (
           <img
             key={`sponsor-2-${i}`}
@@ -875,17 +877,13 @@ const completedTickets = (games[0].completed ? 20 : 0) +
     {/* Zweiter identischer Satz - reduziere auf 6 statt 10 für bessere Performance */}
     <div className="ticker-content">
       {Array(10).fill(null).map((_, i) => {
-        // Nur ein Logo im Array
         const logos = [
-          {src: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/Logo_TWE_gross.jpg/1200px-Logo_TWE_gross.jpg", alt: "Therme Erding Logo"},
-          {src: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/Logo_TWE_gross.jpg/1200px-Logo_TWE_gross.jpg", alt: "Therme Erding Logo"},
-          {src: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/Logo_TWE_gross.jpg/1200px-Logo_TWE_gross.jpg", alt: "Therme Erding Logo"},
-          {src: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/Logo_TWE_gross.jpg/1200px-Logo_TWE_gross.jpg", alt: "Therme Erding Logo"}
+          { src: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/Logo_TWE_gross.jpg/1200px-Logo_TWE_gross.jpg", alt: "Therme Erding Logo" },
+          { src: "/e_fellows_logo.svg", alt: "e-fellows.net Logo" }
         ];
-        
-        // Verwende den Modulo-Operator, um durch die Logos zu rotieren
-        const logo = logos[i % 4];
-        
+
+        const logo = logos[i % logos.length];
+
         return (
           <img
             key={`sponsor-2-${i}`}
@@ -907,7 +905,7 @@ const completedTickets = (games[0].completed ? 20 : 0) +
         <SectionDivider title="Die Challenge" />
         <div className="container mx-auto px-4">
         <p className="text-lg md:text-xl text-center mb-12 max-w-3xl mx-auto">
-          Löse <span className="text-[#993333] font-bold">bis zum 8.11.</span> die folgenden Spiele und reiche deine Ergebnisse ein, um am Gewinnspiel teilzunehmen.
+          Löse <span className="text-[#993333] font-bold">bis zum 31.10.</span> die folgenden Spiele und reiche deine Ergebnisse ein, um am Gewinnspiel teilzunehmen.
           Basierend auf deinen Ergebnissen erhöht sich deine Gewinnwahrscheinlichkeit.
         </p>
 
@@ -995,14 +993,14 @@ const completedTickets = (games[0].completed ? 20 : 0) +
                             {game.id === 1 && (
                               <div className="space-y-4">
                                 <p className="text-lg">
-                                  Klicke auf die Stelle, wo unser Maskottchen Leo zu sehen ist.                                  <img src="https://raw.githubusercontent.com/AcademyConsult/HSM_Game/main/public/leoKopf.png" alt="Leo der Löwe" className="inline-block ml-2 h-8 w-auto align-middle drop-shadow-md" />                                </p>
+                                  Klicke auf die Stelle, wo unser Maskottchen Leo zu sehen ist.                                  <img src="/leoKopf.png" alt="Leo der Löwe" className="inline-block ml-2 h-8 w-auto align-middle drop-shadow-md" />                                </p>
                                 <div
                                   ref={wimmelbildRef}
                                   className="aspect-video relative bg-muted rounded-lg overflow-hidden cursor-crosshair"
                                   onClick={handleWimmelbildClick}
                                 >
                                   <img
-                                    src="https://raw.githubusercontent.com/AcademyConsult/HSM_Game/main/public/AC_Gewinnspiel_Wimmelbild_1.1.jpg"
+                                    src="/AC_Gewinnspiel_Wimmelbild_1.1.jpg"
                                     alt="Wimmelbild"
                                     className="w-full h-full object-cover"
                                   />
@@ -1019,7 +1017,7 @@ const completedTickets = (games[0].completed ? 20 : 0) +
                                       }}
                                     >
                                       <img
-                                        src="https://raw.githubusercontent.com/AcademyConsult/HSM_Game/main/public/lupe_better_centered.png"
+                                        src="/lupe_better_centered.png"
                                         alt="Lupe"
                                         className="w-full h-full object-contain"
                                       />
@@ -1082,7 +1080,7 @@ const completedTickets = (games[0].completed ? 20 : 0) +
                               <div className="space-y-6">
                                 {/* Frage 1 */}
                                 <div className="space-y-3">
-                                  <h3 className="font-semibold text-lg">1. Wie viele Projekte wurden bereits umgesetzt?</h3>
+                                  <h3 className="font-semibold text-lg">1. Wie lautet unsere Vision?</h3>
                                   <div className="space-y-2">
                                     <div className="flex items-center">
                                       <input
@@ -1093,7 +1091,7 @@ const completedTickets = (games[0].completed ? 20 : 0) +
                                         checked={quizAnswers.question1 === 'A'}
                                         onChange={() => setQuizAnswers({ ...quizAnswers, question1: 'A' })}
                                       />
-                                      <label htmlFor="q1-a">A: &lt; 250</label>
+                                      <label htmlFor="q1-a">A: Aus Studierenden werden Fachkräfte für das mittlere Management.</label>
                                     </div>
                                     <div className="flex items-center">
                                       <input
@@ -1104,7 +1102,7 @@ const completedTickets = (games[0].completed ? 20 : 0) +
                                         checked={quizAnswers.question1 === 'B'}
                                         onChange={() => setQuizAnswers({ ...quizAnswers, question1: 'B' })}
                                       />
-                                      <label htmlFor="q1-b">B: 250 bis 500</label>
+                                      <label htmlFor="q1-b">B: Aus Studierenden werden Visionär:innen, die ständig neue Start-up-Ideen pitchen.</label>
                                     </div>
                                     <div className="flex items-center">
                                       <input
@@ -1115,26 +1113,14 @@ const completedTickets = (games[0].completed ? 20 : 0) +
                                         checked={quizAnswers.question1 === 'C'}
                                         onChange={() => setQuizAnswers({ ...quizAnswers, question1: 'C' })}
                                       />
-                                      <label htmlFor="q1-c">C: 500 bis 750</label>
-                                    </div>
-                                    <div className="flex items-center">
-                                      <input
-                                        type="radio"
-                                        id="q1-d"
-                                        name="question1"
-                                        className="mr-2 h-4 w-4 accent-[#993333]"
-                                        checked={quizAnswers.question1 === 'D'}
-                                        onChange={() => setQuizAnswers({ ...quizAnswers, question1: 'D' })}
-                                      />
-                                      <label htmlFor="q1-d">D: &gt; 750</label>
+                                      <label htmlFor="q1-c">C: Aus Studierenden werden unternehmerische Persönlichkeiten.</label>
                                     </div>
                                   </div>
                                 </div>
 
                                 {/* Frage 2 */}
                                 <div className="space-y-3">
-                                  <h3 className="font-semibold text-lg">2. Welcher der folgenden Begriffe entspricht <span className="font-bold">nicht</span> unseren Prinzipien?
-                                  </h3>
+                                  <h3 className="font-semibold text-lg">2. Was ist keines unserer Competence Center?</h3>
                                   <div className="space-y-2">
                                     <div className="flex items-center">
                                       <input
@@ -1145,7 +1131,7 @@ const completedTickets = (games[0].completed ? 20 : 0) +
                                         checked={quizAnswers.question2 === 'A'}
                                         onChange={() => setQuizAnswers({ ...quizAnswers, question2: 'A' })}
                                       />
-                                      <label htmlFor="q2-a">A: Eigeninitiativ</label>
+                                      <label htmlFor="q2-a">A: Technology</label>
                                     </div>
                                     <div className="flex items-center">
                                       <input
@@ -1156,7 +1142,7 @@ const completedTickets = (games[0].completed ? 20 : 0) +
                                         checked={quizAnswers.question2 === 'B'}
                                         onChange={() => setQuizAnswers({ ...quizAnswers, question2: 'B' })}
                                       />
-                                      <label htmlFor="q2-b">B: Verantwortungsbewusst</label>
+                                      <label htmlFor="q2-b">B: Operations</label>
                                     </div>
                                     <div className="flex items-center">
                                       <input
@@ -1167,7 +1153,7 @@ const completedTickets = (games[0].completed ? 20 : 0) +
                                         checked={quizAnswers.question2 === 'C'}
                                         onChange={() => setQuizAnswers({ ...quizAnswers, question2: 'C' })}
                                       />
-                                      <label htmlFor="q2-c">C: Jung, brutal und gutaussehend</label>
+                                      <label htmlFor="q2-c">C: Customer Experience</label>
                                     </div>
                                     <div className="flex items-center">
                                       <input
@@ -1178,7 +1164,7 @@ const completedTickets = (games[0].completed ? 20 : 0) +
                                         checked={quizAnswers.question2 === 'D'}
                                         onChange={() => setQuizAnswers({ ...quizAnswers, question2: 'D' })}
                                       />
-                                      <label htmlFor="q2-d">D: Vielfältig</label>
+                                      <label htmlFor="q2-d">D: Strategy</label>
                                     </div>
                                   </div>
                                 </div>
@@ -1232,7 +1218,7 @@ const completedTickets = (games[0].completed ? 20 : 0) +
                                 <div className="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200">
                                   <div className="aspect-video relative overflow-hidden">
                                     <img
-                                      src="https://github.com/AcademyConsult/HSM_Game/raw/main/public/mitgliederfoto.jpg"
+                                      src="/mitgliederfoto.jpg"
                                       alt="Academy Consult"
                                       className="w-full h-full object-cover"
                                     />
@@ -1262,7 +1248,8 @@ const completedTickets = (games[0].completed ? 20 : 0) +
                                     >
                                       <div className="p-6 rounded-lg">
                                         <p className="font-medium text-xl mb-4 text-black">
-                                          Wie viele Mitglieder hat Academy Consult seit der Gründung bis zum 01.01.2025 aufgenommen?                                        </p>
+                                          Wie viele Start-ups haben unsere Mitglieder schon gegründet?
+                                        </p>
                                         <div className="relative mb-4">
                                           <Input
                                             type="number"
@@ -1281,7 +1268,7 @@ const completedTickets = (games[0].completed ? 20 : 0) +
                                               <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
                                             </svg>
                                           </span>
-                                          <span className="absolute right-2 md:right-3 top-1/2 -translate-y-1/2 text-xs md:text-sm text-gray-600">Mitglieder</span>
+                                          <span className="absolute right-2 md:right-3 top-1/2 -translate-y-1/2 text-xs md:text-sm text-gray-600">Start-ups</span>
                                         </div>
                                       </div>
                                     </div>
@@ -1703,6 +1690,9 @@ const completedTickets = (games[0].completed ? 20 : 0) +
 
             <div className="text-sm opacity-80">
               © {new Date().getFullYear()} Academy Consult. Alle Rechte vorbehalten.
+            </div>
+            <div className="mt-1 text-sm opacity-80">
+              G'macht mit ❤️ in Minga
             </div>
           </div>
         </div>
