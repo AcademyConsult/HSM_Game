@@ -2,11 +2,10 @@
 
 import { useState, useEffect, useRef, FormEvent } from "react";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { Instagram, Linkedin, Youtube, Check, ArrowRight } from "lucide-react";
+import { Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { EventCarousel } from "@/components/ui/event-carousel";
 import { motion, HTMLMotionProps } from "framer-motion";
 import { Separator } from "@/components/ui/separator";
 import { SectionDivider } from "@/components/ui/SectionDivider";
@@ -14,8 +13,8 @@ import { SwiperEventCarousel } from "@/components/ui/SwiperEventCarousel";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 import { Terminal } from "lucide-react";
-import { CustomPagination } from "@/components/ui/SwiperEventCarousel";
-import { TeamSlider } from "@/components/sections/team-slider";
+import CoffeeChats from "./CoffeeChats";
+import type { CoffeeProfile } from "./CoffeeChatCarousel";
 import type { Swiper as SwiperType } from "swiper";
 
 import {
@@ -173,6 +172,54 @@ function ChallengeApp() {
       eventbride: "https://www.eventbrite.com/e/infoabend-academy-consult-tum-tickets-1308194076699?aff=oddtdtcreator",
       image: "/TUM.jpeg",
     }
+  ];
+
+  const coffeeProfiles: CoffeeProfile[] = [
+    {
+      displayName: "Michael",
+      degreeProgram: "Jura",
+      stage: "Bachelor",
+      university: "LMU",
+      currentSemester: 3,
+      imageLink: "/Michael.jpeg",
+      calendarLink: "https://calendly.com/michael-schweizer-academyconsult/30min",
+    },
+    {
+      displayName: "Anna",
+      degreeProgram: "Management & Technology",
+      stage: "Bachelor",
+      university: "TUM",
+      currentSemester: 3,
+      imageLink: "/Anna.jpeg",
+      calendarLink: "https://calendly.com/anna-krieger-academyconsult/30min",
+    },
+    {
+      displayName: "Franziska",
+      degreeProgram: "Volkswirtschaftslehre",
+      stage: "Bachelor",
+      university: "LMU",
+      currentSemester: 3,
+      imageLink: "/Franzi.jpeg",
+      calendarLink: "https://calendly.com/franziska-holzmann-academyconsult/30min",
+    },
+    {
+      displayName: "Philipp",
+      degreeProgram: "Management & Technology",
+      stage: "Bachelor",
+      university: "TUM",
+      currentSemester: 3,
+      imageLink: "/Phillip.jpeg",
+      calendarLink: "https://calendly.com/philipp-liebold/ac",
+    },
+    {
+      displayName: "Jannis",
+      degreeProgram: "Informatik",
+      stage: "Bachelor",
+      university: "TUM",
+      currentSemester: 3,
+      imageLink: "/Jannis.jpeg",
+      calendarLink: "https://calendly.com/jannis-hoeferlin-academyconsult/coffee-chat",
+    },
   ];
 
   const [games, setGames] = useState([
@@ -1609,7 +1656,7 @@ const completedTickets = (games[0].completed ? 20 : 0) +
 
 
       {/* Team-Sektion */}
-      <TeamSlider />
+      <CoffeeChats profiles={coffeeProfiles} />
 
 
       {/* Footer mit Header-Hintergrundbild */}
