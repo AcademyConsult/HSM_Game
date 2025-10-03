@@ -62,20 +62,21 @@ function ChallengeApp() {
   const [estimationError, setEstimationError] = useState<string | null>(null);
   const { executeRecaptcha } = useGoogleReCaptcha();
 
+  const imageBaseUrl = "https://raw.githubusercontent.com/AcademyConsult/HSM_Game/refs/heads/main/public";
+  const placeholderImage = `${imageBaseUrl}/placeholder.svg`;
+
   const prizes = [
     {
       position: "1",
       title: "Hauptpreis",
       description: "Air Pods Pro 3",
-      image:
-        "/airpods-pro-compare-202509_FMT_WHH.png",
+      image: `${imageBaseUrl}/airpods-pro-compare-202509_FMT_WHH.png`,
     },
     {
       position: "2",
       title: "Zweiter Preis",
       description: "2 Tickets für die Therme Erding",
-      image:
-        "/Erding.jpeg",
+      image: `${imageBaseUrl}/Erding.jpeg`,
         //"https://img.br.de/2dcb69b4-aae2-4d30-97ef-698f0489a175.jpeg?rect=0,60,1920,960&_naturalWidth=1920&_naturalHeight=1080",
         //"https://img.br.de/3b42b4d7-5188-4d0d-a644-51c5aa1df94c.jpeg?_naturalWidth=1920&_naturalHeight=1080&rect=0%2C0%2C1920%2C1080&q=70",
     },
@@ -98,7 +99,7 @@ function ChallengeApp() {
       location: "Teams",
       description: "Hier erfährst du alles, was Dich bei uns erwartet und kommst mit uns ins Gespräch!",
       eventbride: "https://www.eventbrite.com/e/digitaler-infoabend-academy-consult-tickets-1307910147459?aff=oddtdtcreator",
-      image: "/OnlineInfo.jpeg",
+      image: `${imageBaseUrl}/OnlineInfo.jpeg`,
     },
     /*
     {
@@ -109,7 +110,7 @@ function ChallengeApp() {
       location: "LMU Hauptgebäude, Hörsaal A199",
       description: "Beim Case Training hast du die Möglichkeit, gemeinsam mit erfahrenen AClern zu casen und dich dabei ganz entspannt auszutauschen.",
       eventbride: "none",
-      image: "/InfoAbendLMU.jpg",
+      image: `${imageBaseUrl}/InfoAbendLMU.jpg`,
     },
     */
     {
@@ -120,7 +121,7 @@ function ChallengeApp() {
       location: "AC Büro, Leopoldstraße 62",
       description: "Beim Open Büro Day kannst Du Dir anschauen, wo du zukünftig arbeiten könntest ;)",
       eventbride: "https://www.eventbrite.com/e/open-buro-day-academy-consult-tickets-1308092021449?aff=oddtdtcreator",
-      image: "/Büro.jpg",
+      image: `${imageBaseUrl}/B%C3%BCro.jpg`,
     },
     {
       id: 4,
@@ -130,7 +131,7 @@ function ChallengeApp() {
       location: "Teams",
       description: "Hier erfährst du alles, was Dich bei uns erwartet und kommst mit uns ins Gespräch!",
       eventbride: "https://www.eventbrite.com/e/digitaler-infoabend-academy-consult-tickets-1308099363409?aff=oddtdtcreator",
-      image: "/OnlineInfo.jpeg"
+      image: `${imageBaseUrl}/OnlineInfo.jpeg`
     },
     {
       id: 5,
@@ -140,7 +141,7 @@ function ChallengeApp() {
       location: "AC Büro, Leopoldstraße 62",
       description: "Beim Case Training hast du die Möglichkeit, gemeinsam mit erfahrenen AClern zu casen und dich dabei ganz entspannt auszutauschen.",
       eventbride: "none",
-      image: "/caseTraining.jpg"
+      image: `${imageBaseUrl}/caseTraining.jpg`
     },
     {
       id: 6,
@@ -150,7 +151,7 @@ function ChallengeApp() {
       location: "LMU Hauptgebäude, Hörsaal A199",
       description: "Hier erfährst du alles, was Dich bei uns erwartet und danach gehen wir noch ganz locker in eine Bar.",
       eventbride: "https://www.eventbrite.com/e/infoabend-academy-consult-lmu-tickets-1308198560109?aff=oddtdtcreator",
-      image: "/LMU.jpg"    
+      image: `${imageBaseUrl}/LMU.jpg`    
     },
     {
       id: 7,
@@ -160,7 +161,7 @@ function ChallengeApp() {
       location: "AC Büro, Leopoldstraße 62",
       description: "Beim Bewerbertraining lernst du das wichtigste was du vor einem Bewerbungsprozess wissen musst.",
       eventbride: "none",
-      image: "/bewerbertraining.jpg"    
+      image: `${imageBaseUrl}/bewerbertraining.jpg`    
     },
     {
       id: 8,
@@ -170,7 +171,7 @@ function ChallengeApp() {
       location: "TUM Stammgelände, Raum 0601",
       description: "Hier erfährst du alles, was Dich bei uns erwartet und danach gehen wir noch ganz locker in eine Bar.",
       eventbride: "https://www.eventbrite.com/e/infoabend-academy-consult-tum-tickets-1308194076699?aff=oddtdtcreator",
-      image: "/TUM.jpeg",
+      image: `${imageBaseUrl}/TUM.jpeg`,
     }
   ];
 
@@ -181,7 +182,7 @@ function ChallengeApp() {
       stage: "Bachelor",
       university: "LMU",
       currentSemester: 3,
-      imageLink: "/Michael.jpeg",
+      imageLink: `${imageBaseUrl}/Michael.jpeg`,
       calendarLink: "https://calendly.com/michael-schweizer-academyconsult/30min",
     },
     {
@@ -190,7 +191,7 @@ function ChallengeApp() {
       stage: "Bachelor",
       university: "TUM",
       currentSemester: 3,
-      imageLink: "/Anna.jpeg",
+      imageLink: `${imageBaseUrl}/Anna.jpeg`,
       calendarLink: "https://calendly.com/anna-krieger-academyconsult/30min",
     },
     {
@@ -199,7 +200,7 @@ function ChallengeApp() {
       stage: "Bachelor",
       university: "LMU",
       currentSemester: 3,
-      imageLink: "/Franzi.jpeg",
+      imageLink: `${imageBaseUrl}/Franzi.jpeg`,
       calendarLink: "https://calendly.com/franziska-holzmann-academyconsult/30min",
     },
     {
@@ -208,7 +209,7 @@ function ChallengeApp() {
       stage: "Bachelor",
       university: "TUM",
       currentSemester: 3,
-      imageLink: "/Phillip.jpeg",
+      imageLink: `${imageBaseUrl}/Phillip.jpeg`,
       calendarLink: "https://calendly.com/philipp-liebold/ac",
     },
     {
@@ -217,7 +218,7 @@ function ChallengeApp() {
       stage: "Bachelor",
       university: "TUM",
       currentSemester: 3,
-      imageLink: "/Jannis.jpeg",
+      imageLink: `${imageBaseUrl}/Jannis.jpeg`,
       calendarLink: "https://calendly.com/jannis-hoeferlin-academyconsult/coffee-chat",
     },
   ];
@@ -650,7 +651,7 @@ const completedTickets = (games[0].completed ? 20 : 0) +
                     <p className="text-center text-white/80 mb-4">Für die perfekte Erholungspause während des Semesters 🏝️</p>
                     <div className="w-full h-32 mt-2 overflow-hidden rounded-xl flex items-center justify-center">
                       <img
-                        src={prizes[1].image || "/placeholder.svg"}
+                        src={prizes[1].image || placeholderImage}
                         alt={prizes[1].title}
                         className="w-auto h-full object-contain rounded-xl mx-auto"
                       />
@@ -673,7 +674,7 @@ const completedTickets = (games[0].completed ? 20 : 0) +
                     <p className="text-center text-white/80 mb-6">Für eine ungestörte Study-Session 🎵 📚</p>
                     <div className="flex-1 w-full flex items-center justify-center overflow-hidden rounded-xl">
                       <img
-                        src={prizes[0].image || "/placeholder.svg"}
+                        src={prizes[0].image || placeholderImage}
                         alt={prizes[0].title}
                         className="w-auto h-auto max-h-72 max-w-[95%] object-contain rounded-xl transform scale-125 -translate-y-6"
                       />
@@ -696,7 +697,7 @@ const completedTickets = (games[0].completed ? 20 : 0) +
                     <p className="text-center text-white/80 mb-4">We got you! Dein nächster Einkauf geht auf uns 🛍️</p>
                     <div className="w-full h-32 mt-2 overflow-hidden rounded-xl flex items-center justify-center">
                       <img
-                        src={prizes[2].image || "/placeholder.svg"}
+                        src={prizes[2].image || placeholderImage}
                         alt={prizes[2].title}
                         className="w-auto h-full object-contain rounded-xl mx-auto"
                       />
@@ -721,7 +722,7 @@ const completedTickets = (games[0].completed ? 20 : 0) +
                       </CardContent>
                       <div className="md:w-1/4 flex justify-center items-center p-2">
                         <img 
-                          src="/6_Redbull.png" 
+                          src={`${imageBaseUrl}/6_Redbull.png`} 
                           alt="Red Bull Dosen" 
                           className="h-24 w-auto object-contain"
                         />
@@ -778,7 +779,7 @@ const completedTickets = (games[0].completed ? 20 : 0) +
                           <p className="text-center text-white/80 mb-5">Für eine ungestörte Study-Session 🎵 📚</p>
                           <div className="flex-1 w-full flex items-center justify-center">
                             <img
-                              src={prizes[0].image || "/placeholder.svg"}
+                              src={prizes[0].image || placeholderImage}
                               alt={prizes[0].title}
                               className="w-auto max-w-full max-h-[240px] object-contain mx-auto transform scale-110 -translate-y-4"
                             />
@@ -804,7 +805,7 @@ const completedTickets = (games[0].completed ? 20 : 0) +
                           <p className="text-center text-white/80 mb-6">Für die perfekte Erholungspause während des Semesters 🏝️</p>
                           <div className="w-full h-36 overflow-hidden flex items-center justify-center">
                             <img
-                              src={prizes[1].image || "/placeholder.svg"}
+                              src={prizes[1].image || placeholderImage}
                               alt={prizes[1].title}
                               className="w-auto h-32 object-contain mx-auto rounded-xl"
                             />
@@ -830,7 +831,7 @@ const completedTickets = (games[0].completed ? 20 : 0) +
                           <p className="text-center text-white/80 mb-6">We got you! Dein nächster Einkauf geht auf uns 🛍️</p>
                           <div className="w-full h-36 mt-5 mb-6 overflow-hidden rounded-xl flex items-center justify-center">
                             <img
-                              src={prizes[2].image || "/placeholder.svg"}
+                              src={prizes[2].image || placeholderImage}
                               alt={prizes[2].title}
                               className="w-auto h-32 object-contain rounded-xl mx-auto"
                             />
@@ -888,7 +889,7 @@ const completedTickets = (games[0].completed ? 20 : 0) +
         style={{ height: "110px", width: "auto", transform: "translateZ(0)" }}
       />
       <img
-        src="/e_fellows_logo.svg"
+        src={`https://www.zeit-verlagsgruppe.de/wp-content/uploads/2025/03/zeit-e-fellows.net_03.svg`}
         alt="e-fellows.net Logo"
         className="rounded-lg"
         style={{ height: "90px", width: "auto", transform: "translateZ(0)" }}
@@ -903,7 +904,7 @@ const completedTickets = (games[0].completed ? 20 : 0) +
       {Array(10).fill(null).map((_, i) => {
         const logos = [
           { src: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/Logo_TWE_gross.jpg/1200px-Logo_TWE_gross.jpg", alt: "Therme Erding Logo" },
-          { src: "/e_fellows_logo.svg", alt: "e-fellows.net Logo" }
+          { src: `https://www.zeit-verlagsgruppe.de/wp-content/uploads/2025/03/zeit-e-fellows.net_03.svg`, alt: "e-fellows.net Logo" }
         ];
 
         const logo = logos[i % logos.length];
@@ -926,7 +927,7 @@ const completedTickets = (games[0].completed ? 20 : 0) +
       {Array(10).fill(null).map((_, i) => {
         const logos = [
           { src: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/Logo_TWE_gross.jpg/1200px-Logo_TWE_gross.jpg", alt: "Therme Erding Logo" },
-          { src: "/e_fellows_logo.svg", alt: "e-fellows.net Logo" }
+          { src: `https://www.zeit-verlagsgruppe.de/wp-content/uploads/2025/03/zeit-e-fellows.net_03.svg`, alt: "e-fellows.net Logo" }
         ];
 
         const logo = logos[i % logos.length];
@@ -1040,14 +1041,14 @@ const completedTickets = (games[0].completed ? 20 : 0) +
                             {game.id === 1 && (
                               <div className="space-y-4">
                                 <p className="text-lg">
-                                  Klicke auf die Stelle, wo unser Maskottchen Leo zu sehen ist.                                  <img src="/leoKopf.png" alt="Leo der Löwe" className="inline-block ml-2 h-8 w-auto align-middle drop-shadow-md" />                                </p>
+                                  Klicke auf die Stelle, wo unser Maskottchen Leo zu sehen ist.                                  <img src={`${imageBaseUrl}/leoKopf.png`} alt="Leo der Löwe" className="inline-block ml-2 h-8 w-auto align-middle drop-shadow-md" />                                </p>
                                 <div
                                   ref={wimmelbildRef}
                                   className="aspect-video relative bg-muted rounded-lg overflow-hidden cursor-crosshair"
                                   onClick={handleWimmelbildClick}
                                 >
                                   <img
-                                    src="/AC_Gewinnspiel_Wimmelbild_1.1.jpg"
+                                    src={`${imageBaseUrl}/AC_Gewinnspiel_Wimmelbild_1.1.jpg`}
                                     alt="Wimmelbild"
                                     className="w-full h-full object-cover"
                                   />
@@ -1064,7 +1065,7 @@ const completedTickets = (games[0].completed ? 20 : 0) +
                                       }}
                                     >
                                       <img
-                                        src="/lupe_better_centered.png"
+                                        src={`${imageBaseUrl}/lupe_better_centered.png`}
                                         alt="Lupe"
                                         className="w-full h-full object-contain"
                                       />
@@ -1265,7 +1266,7 @@ const completedTickets = (games[0].completed ? 20 : 0) +
                                 <div className="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200">
                                   <div className="aspect-video relative overflow-hidden">
                                     <img
-                                      src="/mitgliederfoto.jpg"
+                                      src={`${imageBaseUrl}/mitgliederfoto.jpg`}
                                       alt="Academy Consult"
                                       className="w-full h-full object-cover"
                                     />
