@@ -13,6 +13,8 @@ import 'swiper/css/navigation';
 
 import { CustomPagination } from '@/components/ui/SwiperEventCarousel';
 
+const imageBaseUrl = 'https://raw.githubusercontent.com/AcademyConsult/HSM_Game/refs/heads/main/public';
+
 export type CoffeeProfile = {
   displayName: string;
   degreeProgram: string;
@@ -24,11 +26,10 @@ export type CoffeeProfile = {
 };
 
 const resolveImageSrc = (imagePath: string) => {
-  if (!imagePath) return '/placeholder.svg';
-  if (imagePath.startsWith('http')) return imagePath;
-  if (imagePath.startsWith('/')) return imagePath;
-  const normalizedPath = imagePath.replace(/^\/+/, '');
-  return `/${normalizedPath}`;
+  if (!imagePath) return `${imageBaseUrl}/placeholder.svg`;
+  if (imagePath.startsWith('http') || imagePath.startsWith('data:')) return imagePath;
+  const normalizedPath = imagePath.startsWith('/') ? imagePath.slice(1) : imagePath;
+  return `${imageBaseUrl}/${normalizedPath}`;
 };
 
 export default function CoffeeChatCarousel({

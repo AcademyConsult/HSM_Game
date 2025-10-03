@@ -24,7 +24,7 @@ const teamMembers: TeamMember[] = [
     stage: 'Bachelor',
     university: 'LMU',
     semester: '3',
-    image: '/Michael.jpeg',
+    image: 'https://raw.githubusercontent.com/AcademyConsult/HSM_Game/refs/heads/main/public/Michael.jpeg',
     calendlyLink: 'https://calendly.com/michael-schweizer-academyconsult/30min',
   },
   {
@@ -34,7 +34,7 @@ const teamMembers: TeamMember[] = [
     stage: 'Bachelor',
     university: 'TUM',
     semester: '3',
-    image: '/Anna.jpeg',
+    image: 'https://raw.githubusercontent.com/AcademyConsult/HSM_Game/refs/heads/main/public/Anna.jpeg',
     calendlyLink: 'https://calendly.com/anna-krieger-academyconsult/30min',
   },
   {
@@ -44,7 +44,7 @@ const teamMembers: TeamMember[] = [
     stage: 'Bachelor',
     university: 'LMU',
     semester: '3',
-    image: '/Franzi.jpeg',
+    image: 'https://raw.githubusercontent.com/AcademyConsult/HSM_Game/refs/heads/main/public/Franzi.jpeg',
     calendlyLink: 'https://calendly.com/franziska-holzmann-academyconsult/30min',
   },
   {
@@ -54,7 +54,7 @@ const teamMembers: TeamMember[] = [
     stage: 'Bachelor',
     university: 'TUM',
     semester: '3',
-    image: '/Phillip.jpeg',
+    image: 'https://raw.githubusercontent.com/AcademyConsult/HSM_Game/refs/heads/main/public/Phillip.jpeg',
     calendlyLink: 'https://calendly.com/philipp-liebold/ac',
   },
   {
@@ -63,7 +63,7 @@ const teamMembers: TeamMember[] = [
     study: 'Informatik',
     stage: 'Bachelor',
     university: 'TUM',
-    image: '/Jannis.jpeg',
+    image: 'https://raw.githubusercontent.com/AcademyConsult/HSM_Game/refs/heads/main/public/Jannis.jpeg',
     calendlyLink: 'https://calendly.com/jannis-hoeferlin-academyconsult/coffee-chat',
   },
 ];
