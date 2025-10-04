@@ -1106,11 +1106,17 @@ const completedTickets = (games[0].completed ? 20 : 0) +
                                   className="aspect-video relative bg-muted rounded-lg overflow-hidden cursor-crosshair"
                                   onClick={handleWimmelbildClick}
                                 >
-                                  <img
-                                    src={`${imageBaseUrl}/AC_Gewinnspiel_Wimmelbild_1.1.jpg`}
-                                    alt="Wimmelbild"
-                                    className="w-full h-full object-cover"
-                                  />
+                                  <picture>
+                                    <source
+                                      media="(max-width: 767px)"
+                                      srcSet={`${imageBaseUrl}/AC_Gewinnspiel_Wimmelbild_1.1.jpg`}
+                                    />
+                                    <img
+                                      src={`${imageBaseUrl}/AC_Gewinnspiel_Wimmelbild_1.1.jpg`}
+                                      alt="Wimmelbild"
+                                      className="w-full h-full object-cover"
+                                    />
+                                  </picture>
 
                                   {/* Marker für ausgewählte Position */}
                                   {markerPosition && (
