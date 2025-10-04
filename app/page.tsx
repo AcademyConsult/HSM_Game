@@ -202,7 +202,7 @@ function ChallengeApp() {
     },
     {
       displayName: "Anna",
-      degreeProgram: "Management & Technology (Informatik)",
+      degreeProgram: "Management & Technology",
       stage: "Bachelor",
       university: "TUM",
       currentSemester: 3,
@@ -1666,6 +1666,9 @@ const completedTickets = (games[0].completed ? 20 : 0) +
         </div>
       </section>
 
+      {/* Coffee Chat Sektion */}
+      <CoffeeChats profiles={coffeeProfiles} />
+
       {/* Bewerbung Sektion */}
 <section className="bg-white py-6 w-screen overflow-hidden relative">
   <SectionDivider title="Zur Bewerbung" />
@@ -1710,12 +1713,6 @@ const completedTickets = (games[0].completed ? 20 : 0) +
           <SwiperEventCarousel events={events} />
         </div>
       </section>
-
-
-      {/* Team-Sektion */}
-      <CoffeeChats profiles={coffeeProfiles} />
-
-
       {/* Footer mit Header-Hintergrundbild */}
       <footer className="text-white py-12"
         style={{
