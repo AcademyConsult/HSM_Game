@@ -143,12 +143,12 @@ export default function CoffeeChatCarousel({
               className="pb-4 flex justify-center px-4 !w-auto"
             >
               <div className="group/card flex w-72 flex-col items-stretch">
-                <div className="relative h-[420px] w-full overflow-hidden rounded-2xl bg-black/5 shadow-xl ring-1 ring-black/10 transition-transform duration-500 group-hover/card:scale-[1.02]">
+                <div className="relative h-[420px] w-full overflow-hidden rounded-2xl shadow-xl ring-1 ring-black/10 transition-transform duration-500 group-hover/card:scale-[1.02]">
                   <Image
                     src={resolveImageSrc(profile.imageLink)}
                     alt={profile.displayName}
                     fill
-                    className="object-cover transition-transform duration-700 ease-out scale-[0.94] group-hover/card:scale-105"
+                    className="object-cover transition-transform duration-700 ease-out group-hover/card:scale-105"
                     sizes="(max-width: 768px) 100vw, 33vw"
                     priority
                   />
