@@ -1003,7 +1003,10 @@ const completedTickets = (games[0].completed ? 20 : 0) +
   </div>
 </div>
       </section>
- 
+
+      {/* Coffee Chat Sektion */}
+      <CoffeeChats profiles={coffeeProfiles} />
+
       {/* Games Section */}
       <section id="games-section" className="bg-white pt-14 pb-6 w-screen overflow-hidden relative">
         <SectionDivider title="Die Challenge" />
@@ -1665,9 +1668,6 @@ const completedTickets = (games[0].completed ? 20 : 0) +
           </div>
         </div>
       </section>
-
-      {/* Coffee Chat Sektion */}
-      <CoffeeChats profiles={coffeeProfiles} />
 
       {/* Bewerbung Sektion */}
 <section className="bg-white py-6 w-screen overflow-hidden relative">
