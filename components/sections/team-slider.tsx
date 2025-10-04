@@ -72,8 +72,8 @@ interface TeamMemberCardProps extends TeamMember {}
 
 const TeamMemberCard = ({ name, study, stage, university, semester, image, calendlyLink }: TeamMemberCardProps) => {
   return (
-    <div className="relative mx-auto max-w-xs overflow-hidden rounded-2xl bg-white shadow-xl ring-1 ring-black/5 transition-all duration-500 group">
-      <div className="relative aspect-[2/3] overflow-hidden">
+    <div className="relative overflow-hidden rounded-2xl bg-white shadow-xl ring-1 ring-black/5 transition-all duration-500 group">
+      <div className="relative aspect-[3/4] overflow-hidden">
         <img
           src={image}
           alt={`Portrait von ${name}`}
@@ -91,7 +91,7 @@ const TeamMemberCard = ({ name, study, stage, university, semester, image, calen
           </p>
         </div>
       </div>
-      <div className="p-5">
+      <div className="p-6">
         <Button
           variant="outline"
           className="w-full rounded-full bg-gray-50 border-gray-200 text-neutral-900 hover:bg-gray-100 transition-colors flex items-center justify-center gap-2"
