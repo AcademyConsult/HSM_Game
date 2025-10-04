@@ -49,7 +49,7 @@ const teamMembers: TeamMember[] = [
   },
   {
     id: 4,
-    name: 'Philipp Liebold',
+    name: 'Philipp',
     study: 'Management & Technology',
     stage: 'Bachelor',
     university: 'TUM',
