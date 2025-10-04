@@ -174,7 +174,7 @@ function ChallengeApp() {
 
   const coffeeProfiles: CoffeeProfile[] = [
     {
-      displayName: "Johannes Kask",
+      displayName: "Johannes",
       degreeProgram: "Management & Technology",
       stage: "Bachelor",
       university: "TUM",
@@ -183,16 +183,16 @@ function ChallengeApp() {
       calendarLink: "https://calendly.com/johannes-kask-academyconsult/30min",
     },
     {
-      displayName: "Philipp Liebold",
+      displayName: "Philipp",
       degreeProgram: "Management & Technology",
       stage: "Bachelor",
       university: "TUM",
       currentSemester: 3,
-      imageLink: `${imageBaseUrl}/Philipp.jpg`,
+      imageLink: `${imageBaseUrl}/Philipp.jpeg`,
       calendarLink: "https://calendly.com/philipp-liebold/ac",
     },
     {
-      displayName: "Kalle Kersten",
+      displayName: "Kalle",
       degreeProgram: "Physik",
       stage: "Bachelor",
       university: "TUM",
@@ -201,7 +201,7 @@ function ChallengeApp() {
       calendarLink: "https://calendly.com/kpk2701/30min",
     },
     {
-      displayName: "Anna Krieger",
+      displayName: "Anna",
       degreeProgram: "Management & Technology (Informatik)",
       stage: "Bachelor",
       university: "TUM",
@@ -210,7 +210,7 @@ function ChallengeApp() {
       calendarLink: "https://calendly.com/anna-krieger-academyconsult/30min",
     },
     {
-      displayName: "Vincent Pfeffer",
+      displayName: "Vincent",
       degreeProgram: "BWL",
       stage: "Bachelor",
       university: "LMU",
@@ -219,7 +219,7 @@ function ChallengeApp() {
       calendarLink: "https://calendly.com/vincent-pfeffer-academyconsult/30min",
     },
     {
-      displayName: "Theresa Stolle",
+      displayName: "Theresa",
       degreeProgram: "BWL",
       stage: "Bachelor",
       university: "LMU",
@@ -228,7 +228,7 @@ function ChallengeApp() {
       calendarLink: "https://calendly.com/theresa-stolle-academyconsult/30min",
     },
     {
-      displayName: "Michael Schweizer",
+      displayName: "Michael",
       degreeProgram: "Jura",
       stage: "Bachelor",
       university: "LMU",
@@ -237,7 +237,7 @@ function ChallengeApp() {
       calendarLink: "https://calendly.com/michael-schweizer-academyconsult/30min",
     },
     {
-      displayName: "Maik Wagenblast",
+      displayName: "Maik",
       degreeProgram: "Physik",
       stage: "Bachelor",
       university: "TUM",
@@ -246,7 +246,7 @@ function ChallengeApp() {
       calendarLink: "https://calendly.com/maik-wagenblast-academyconsult/30min",
     },
     {
-      displayName: "Jannis Höferlin",
+      displayName: "Jannis",
       degreeProgram: "Informatik",
       stage: "Bachelor",
       university: "TUM",
@@ -255,25 +255,16 @@ function ChallengeApp() {
       calendarLink: "https://calendly.com/jannis-hoeferlin-academyconsult/coffee-chat",
     },
     {
-      displayName: "Franziska Holzmann",
+      displayName: "Franziska",
       degreeProgram: "VWL",
       stage: "Bachelor",
       university: "LMU",
       currentSemester: 3,
-      imageLink: `${imageBaseUrl}/Franziska.jpg`,
+      imageLink: `${imageBaseUrl}/Franzi.jpeg`,
       calendarLink: "https://calendly.com/franziska-holzmann-academyconsult/30min",
     },
     {
-      displayName: "Finn Bartlick",
-      degreeProgram: "VWL",
-      stage: "Bachelor",
-      university: "LMU",
-      currentSemester: 1,
-      imageLink: `${imageBaseUrl}/Finn.jpg`,
-      calendarLink: "https://calendly.com/finnbartlick2006/coffee-chat",
-    },
-    {
-      displayName: "Linus Weber",
+      displayName: "Linus",
       degreeProgram: "Management & Technology",
       stage: "Master",
       university: "TUM",
@@ -282,7 +273,7 @@ function ChallengeApp() {
       calendarLink: "https://calendly.com/linus-weber-academyconsult/neues-meeting",
     },
     {
-      displayName: "Annalena Pellkofer",
+      displayName: "Annalena",
       degreeProgram: "Management & Technology",
       stage: "Bachelor",
       university: "TUM",
