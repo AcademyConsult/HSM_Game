@@ -1496,9 +1496,9 @@ const completedTickets = (games[0].completed ? 20 : 0) +
                           className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                         >
                           Mit dem Einreichen meiner Lösungen akzeptiere ich die und 
-                          <a href="https://polydactyl-course-f91.notion.site/Teilnahmebedingungen-1cd3d6763f7b80ea9060d5f84e1649d3" target="_blank" rel="noopener noreferrer" className="text-[#993333] hover:underline"> Teilnahmebedingungen </a> 
+                          <a href="https://ac-vibe-hack.notion.site/Teilnahmebedingungen-1cd3d6763f7b80ea9060d5f84e1649d3" target="_blank" rel="noopener noreferrer" className="text-[#993333] hover:underline"> Teilnahmebedingungen </a> 
                            und 
-                          <a href="https://polydactyl-course-f91.notion.site/Datenschutzbestimmungen-1d03d6763f7b80af8b50e2362a25c4c7?pvs=74" target="_blank" rel="noopener noreferrer" className="text-[#993333] hover:underline"> Datenschutzbestimmungen</a> 
+                          <a href="https://ac-vibe-hack.notion.site/Datenschutzbestimmungen-1d03d6763f7b80af8b50e2362a25c4c7?pvs=74" target="_blank" rel="noopener noreferrer" className="text-[#993333] hover:underline"> Datenschutzbestimmungen</a> 
                           .
                         </Label>
                       </div>
