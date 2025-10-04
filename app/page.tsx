@@ -65,12 +65,14 @@ function ChallengeApp() {
   const imageBaseUrl = "https://raw.githubusercontent.com/AcademyConsult/HSM_Game/refs/heads/main/public";
   const placeholderImage = `${imageBaseUrl}/placeholder.svg`;
 
+  const airpodsImage = `${imageBaseUrl}/airpods-pro%203%5B53%5D.png`;
+
   const prizes = [
     {
       position: "1",
       title: "Hauptpreis",
       description: "Air Pods Pro 3",
-      image: `${imageBaseUrl}/airpods-pro-compare-202509_FMT_WHH.png`,
+      image: airpodsImage,
     },
     {
       position: "2",
@@ -956,7 +958,7 @@ const completedTickets = (games[0].completed ? 20 : 0) +
         style={{ height: "110px", width: "auto", transform: "translateZ(0)" }}
       />
       <img
-        src={`https://www.zeit-verlagsgruppe.de/wp-content/uploads/2025/03/zeit-e-fellows.net_03.svg`}
+        src={`${imageBaseUrl}/efellowsmax%5B40%5D.png`}
         alt="e-fellows.net Logo"
         className="rounded-lg"
         style={{ height: "90px", width: "auto", transform: "translateZ(0)" }}
@@ -971,7 +973,7 @@ const completedTickets = (games[0].completed ? 20 : 0) +
       {Array(10).fill(null).map((_, i) => {
         const logos = [
           { src: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/Logo_TWE_gross.jpg/1200px-Logo_TWE_gross.jpg", alt: "Therme Erding Logo" },
-          { src: `https://www.zeit-verlagsgruppe.de/wp-content/uploads/2025/03/zeit-e-fellows.net_03.svg`, alt: "e-fellows.net Logo" }
+          { src: `${imageBaseUrl}/efellowsmax%5B40%5D.png`, alt: "e-fellows.net Logo" }
         ];
 
         const logo = logos[i % logos.length];
@@ -994,7 +996,7 @@ const completedTickets = (games[0].completed ? 20 : 0) +
       {Array(10).fill(null).map((_, i) => {
         const logos = [
           { src: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/Logo_TWE_gross.jpg/1200px-Logo_TWE_gross.jpg", alt: "Therme Erding Logo" },
-          { src: `https://www.zeit-verlagsgruppe.de/wp-content/uploads/2025/03/zeit-e-fellows.net_03.svg`, alt: "e-fellows.net Logo" }
+          { src: `${imageBaseUrl}/efellowsmax%5B40%5D.png`, alt: "e-fellows.net Logo" }
         ];
 
         const logo = logos[i % logos.length];
