@@ -460,13 +460,9 @@ function ChallengeApp() {
       return false;
     }
 
-    // Der korrekte Punkt ist bei exakten Pixelkoordinaten (1270, 598) in einem 1621×1080 Bild
-    // Umrechnung in relative Koordinaten:
-    //const targetX = 1270 / 1621; // ca. 0,7835
-    //const targetY = 598 / 1080;  // ca. 0,5537
-
-    const targetX = 731 / 800;
-    const targetY = 304 / 400;
+    // Der korrekte Punkt ist bei exakten Pixelkoordinaten (2135, 2285) in einem 6000×4000 Bild
+    const targetX = 2135 / 6000;
+    const targetY = 2285 / 4000;
 
     console.log("Klickposition:", {
       x: selectedCoordinates.x.toFixed(4),
@@ -949,7 +945,7 @@ const completedTickets = (games[0].completed ? 20 : 0) +
         style={{ height: "110px", width: "auto", transform: "translateZ(0)" }}
       />
       <img
-        src={`${imageBaseUrl}/efellowsmax%5B40%5D.png`}
+        src={`${imageBaseUrl}/e_fellows_logo.svg`}
         alt="e-fellows.net Logo"
         className="rounded-lg"
         style={{ height: "90px", width: "auto", transform: "translateZ(0)" }}
@@ -964,7 +960,7 @@ const completedTickets = (games[0].completed ? 20 : 0) +
       {Array(10).fill(null).map((_, i) => {
         const logos = [
           { src: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/Logo_TWE_gross.jpg/1200px-Logo_TWE_gross.jpg", alt: "Therme Erding Logo" },
-          { src: `${imageBaseUrl}/efellowsmax%5B40%5D.png`, alt: "e-fellows.net Logo" }
+          { src: `${imageBaseUrl}//e_fellows_logo.svg`, alt: "e-fellows.net Logo" }
         ];
 
         const logo = logos[i % logos.length];
@@ -987,7 +983,7 @@ const completedTickets = (games[0].completed ? 20 : 0) +
       {Array(10).fill(null).map((_, i) => {
         const logos = [
           { src: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/Logo_TWE_gross.jpg/1200px-Logo_TWE_gross.jpg", alt: "Therme Erding Logo" },
-          { src: `${imageBaseUrl}/efellowsmax%5B40%5D.png`, alt: "e-fellows.net Logo" }
+          { src: `${imageBaseUrl}/e_fellows_logo.svg`, alt: "e-fellows.net Logo" }
         ];
 
         const logo = logos[i % logos.length];

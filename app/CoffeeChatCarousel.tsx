@@ -148,7 +148,7 @@ export default function CoffeeChatCarousel({
                     src={resolveImageSrc(profile.imageLink)}
                     alt={profile.displayName}
                     fill
-                    className="object-cover transition-transform duration-700 ease-out group-hover/card:scale-105"
+                    className="object-cover transition-transform duration-700 ease-out scale-[0.94] group-hover/card:scale-105"
                     sizes="(max-width: 768px) 100vw, 33vw"
                     priority
                   />
