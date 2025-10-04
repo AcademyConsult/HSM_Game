@@ -699,7 +699,7 @@ const completedTickets = (games[0].completed ? 20 : 0) +
                 >
                   <CardHeader className="relative pb-0 pt-6">
                     <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-gradient-to-r bg-gradient-to-r from-[#C0C0C0] to-[#E8E8E8] text-gray-800 px-4 py-1 rounded-full shadow-md">
-                      <span className="font-bold">2. Platz</span>
+                      <span className="font-bold">2. Preis</span>
                     </div>
                   </CardHeader>
                   <CardContent className="flex flex-col items-center pt-4">
@@ -722,7 +722,7 @@ const completedTickets = (games[0].completed ? 20 : 0) +
                 >
                   <CardHeader className="relative pb-0 pt-8">
                     <div className="absolute -top-5 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-[#ffd700] to-[#ffec8b] text-gray-800 px-6 py-2 rounded-full shadow-md">
-                      <span className="font-bold text-lg">1. Platz</span>
+                      <span className="font-bold text-lg">1. Preis</span>
                     </div>
                   </CardHeader>
                   <CardContent className="flex flex-col items-center justify-center pt-6 h-full">
@@ -745,7 +745,7 @@ const completedTickets = (games[0].completed ? 20 : 0) +
                 >
                   <CardHeader className="relative pb-0 pt-6">
                     <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-[#cd7f32] to-[#dea47e] text-white px-4 py-1 rounded-full shadow-md">
-                      <span className="font-bold">3. Platz</span>
+                      <span className="font-bold">3. Preis</span>
                     </div>
                   </CardHeader>
                   <CardContent className="flex flex-col items-center pt-4">
@@ -767,7 +767,7 @@ const completedTickets = (games[0].completed ? 20 : 0) +
                     <div className="flex flex-col md:flex-row md:items-center py-5">
                       <CardHeader className="relative pb-0 md:w-1/4 flex-shrink-0">
                         <div className="md:absolute md:top-1/2 md:-translate-y-1/2 left-1/2 md:-translate-x-1/2 bg-gradient-to-r from-[#a9a9a9] to-[#d3d3d3] text-gray-700 px-10 py-2 rounded-full shadow-md inline-block text-center">
-                          <span className="font-medium">4.-10. Platz</span>
+                          <span className="font-medium">4.-10. Preis</span>
                         </div>
                       </CardHeader>
                       <CardContent className="flex items-center md:w-2/4 h-full">
@@ -827,7 +827,7 @@ const completedTickets = (games[0].completed ? 20 : 0) +
                       >
                         <CardHeader className="relative pb-0 pt-8">
                           <div className="absolute -top-5 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-[#ffd700] to-[#ffec8b] text-gray-800 px-6 py-2 rounded-full shadow-md">
-                            <span className="font-bold text-lg">1. Platz</span>
+                            <span className="font-bold text-lg">1. Preis</span>
                           </div>
                         </CardHeader>
                         <CardContent className="flex flex-col items-center justify-center pt-6 h-[320px]">
@@ -853,7 +853,7 @@ const completedTickets = (games[0].completed ? 20 : 0) +
                       >
                         <CardHeader className="relative pb-0 pt-8">
                           <div className="absolute -top-5 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-[#C0C0C0] to-[#E8E8E8] text-gray-800 px-6 py-2 rounded-full shadow-md">
-                            <span className="font-bold text-lg">2. Platz</span>
+                            <span className="font-bold text-lg">2. Preis</span>
                           </div>
                         </CardHeader>
                         <CardContent className="flex flex-col items-center pt-6">
@@ -879,7 +879,7 @@ const completedTickets = (games[0].completed ? 20 : 0) +
                       >
                         <CardHeader className="relative pb-0 pt-8">
                           <div className="absolute -top-5 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-[#cd7f32] to-[#dea47e] text-white px-6 py-2 rounded-full shadow-md">
-                            <span className="font-bold text-lg">3. Platz</span>
+                            <span className="font-bold text-lg">3. Preis</span>
                           </div>
                         </CardHeader>
                         <CardContent className="flex flex-col items-center pt-6">
@@ -906,7 +906,7 @@ const completedTickets = (games[0].completed ? 20 : 0) +
                       >
                         <CardHeader className="relative pb-0 pt-8">
                           <div className="absolute -top-5 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-[#808080] to-[#a9a9a9] text-white px-6 py-2 rounded-full shadow-md">
-                            <span className="font-bold text-lg">4.-10. Platz</span>
+                            <span className="font-bold text-lg">4.-10. Preis</span>
                           </div>
                         </CardHeader>
                         <CardContent className="flex flex-col items-center pt-6">
