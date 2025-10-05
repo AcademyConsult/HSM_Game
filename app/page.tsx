@@ -174,22 +174,58 @@ function ChallengeApp() {
 
   const coffeeProfiles: CoffeeProfile[] = [
     {
-      displayName: "Johannes",
+      displayName: "Annalena",
       degreeProgram: "Management & Technology",
       stage: "Bachelor",
       university: "TUM",
-      currentSemester: 3,
-      imageLink: `${imageBaseUrl}/Johannes.jpg`,
-      calendarLink: "https://calendly.com/johannes-kask-academyconsult/30min",
+      currentSemester: 5,
+      imageLink: `${imageBaseUrl}/Annalena.jpg`,
+      calendarLink: "https://calendly.com/annalena-pellkofer-academyconsult/30min",
     },
     {
-      displayName: "Philipp",
+      displayName: "Linus",
       degreeProgram: "Management & Technology",
+      stage: "Master",
+      university: "TUM",
+      currentSemester: 2,
+      imageLink: `${imageBaseUrl}/Linus.jpg`,
+      calendarLink: "https://calendly.com/linus-weber-academyconsult/neues-meeting",
+    },
+    {
+      displayName: "Franziska",
+      degreeProgram: "VWL",
+      stage: "Bachelor",
+      university: "LMU",
+      currentSemester: 3,
+      imageLink: `${imageBaseUrl}/Franzi.jpeg`,
+      calendarLink: "https://calendly.com/franziska-holzmann-academyconsult/30min",
+    },
+    {
+      displayName: "Maik",
+      degreeProgram: "Physik",
       stage: "Bachelor",
       university: "TUM",
       currentSemester: 3,
-      imageLink: `${imageBaseUrl}/Philipp.jpeg`,
-      calendarLink: "https://calendly.com/philipp-liebold/ac",
+      imageLink: `${imageBaseUrl}/Maik.jpg`,
+      calendarLink: "https://calendly.com/maik-wagenblast-academyconsult/30min",
+    },
+    {
+      displayName: "Michael",
+      degreeProgram: "Jura",
+      stage: "Bachelor",
+      university: "LMU",
+      currentSemester: 3,
+      imageLink: `${imageBaseUrl}/Michael.jpg`,
+      calendarLink: "https://calendly.com/michael-schweizer-academyconsult/30min",
+    },
+    {
+      displayName: "Theresa",
+      degreeProgram: "BWL",
+      stage: "Bachelor",
+      university: "LMU",
+      currentSemester: 3,
+      imageLink: `${imageBaseUrl}/Theresa.jpg`,
+      calendarLink: "https://calendly.com/theresa-stolle-academyconsult/30min",
     },
     {
       displayName: "Kalle",
@@ -210,42 +246,6 @@ function ChallengeApp() {
       calendarLink: "https://calendly.com/anna-krieger-academyconsult/30min",
     },
     {
-      displayName: "Vincent",
-      degreeProgram: "BWL",
-      stage: "Bachelor",
-      university: "LMU",
-      currentSemester: 3,
-      imageLink: `${imageBaseUrl}/Vincent.jpg`,
-      calendarLink: "https://calendly.com/vincent-pfeffer-academyconsult/30min",
-    },
-    {
-      displayName: "Theresa",
-      degreeProgram: "BWL",
-      stage: "Bachelor",
-      university: "LMU",
-      currentSemester: 3,
-      imageLink: `${imageBaseUrl}/Theresa.jpg`,
-      calendarLink: "https://calendly.com/theresa-stolle-academyconsult/30min",
-    },
-    {
-      displayName: "Michael",
-      degreeProgram: "Jura",
-      stage: "Bachelor",
-      university: "LMU",
-      currentSemester: 3,
-      imageLink: `${imageBaseUrl}/Michael.jpg`,
-      calendarLink: "https://calendly.com/michael-schweizer-academyconsult/30min",
-    },
-    {
-      displayName: "Maik",
-      degreeProgram: "Physik",
-      stage: "Bachelor",
-      university: "TUM",
-      currentSemester: 3,
-      imageLink: `${imageBaseUrl}/Maik.jpg`,
-      calendarLink: "https://calendly.com/maik-wagenblast-academyconsult/30min",
-    },
-    {
       displayName: "Jannis",
       degreeProgram: "Informatik",
       stage: "Bachelor",
@@ -255,31 +255,31 @@ function ChallengeApp() {
       calendarLink: "https://calendly.com/jannis-hoeferlin-academyconsult/coffee-chat",
     },
     {
-      displayName: "Franziska",
-      degreeProgram: "VWL",
+      displayName: "Vincent",
+      degreeProgram: "BWL",
       stage: "Bachelor",
       university: "LMU",
       currentSemester: 3,
-      imageLink: `${imageBaseUrl}/Franzi.jpeg`,
-      calendarLink: "https://calendly.com/franziska-holzmann-academyconsult/30min",
+      imageLink: `${imageBaseUrl}/Vincent.jpg`,
+      calendarLink: "https://calendly.com/vincent-pfeffer-academyconsult/30min",
     },
     {
-      displayName: "Linus",
-      degreeProgram: "Management & Technology",
-      stage: "Master",
-      university: "TUM",
-      currentSemester: 2,
-      imageLink: `${imageBaseUrl}/Linus.jpg`,
-      calendarLink: "https://calendly.com/linus-weber-academyconsult/neues-meeting",
-    },
-    {
-      displayName: "Annalena",
+      displayName: "Johannes",
       degreeProgram: "Management & Technology",
       stage: "Bachelor",
       university: "TUM",
-      currentSemester: 5,
-      imageLink: `${imageBaseUrl}/Annalena.jpg`,
-      calendarLink: "https://calendly.com/annalena-pellkofer-academyconsult/30min",
+      currentSemester: 3,
+      imageLink: `${imageBaseUrl}/Johannes.jpg`,
+      calendarLink: "https://calendly.com/johannes-kask-academyconsult/30min",
+    },
+    {
+      displayName: "Philipp",
+      degreeProgram: "Management & Technology",
+      stage: "Bachelor",
+      university: "TUM",
+      currentSemester: 3,
+      imageLink: `${imageBaseUrl}/Philipp.jpeg`,
+      calendarLink: "https://calendly.com/philipp-liebold/ac",
     },
   ];
 
@@ -460,9 +460,9 @@ function ChallengeApp() {
       return false;
     }
 
-    // Der korrekte Punkt ist bei exakten Pixelkoordinaten (2135, 2285) in einem 6000×4000 Bild
-    const targetX = 2135 / 6000;
-    const targetY = 2285 / 4000;
+    // Der korrekte Punkt ist bei exakten Pixelkoordinaten (697, 791) in einem 1280×853 Bild
+    const targetX = 697 / 1280;
+    const targetY = 791 / 853;
 
     console.log("Klickposition:", {
       x: selectedCoordinates.x.toFixed(4),
@@ -474,7 +474,7 @@ function ChallengeApp() {
     });
 
     // Toleranzbereich für höhere Genauigkeit
-    const tolerance = 0.09; // Erhöht auf 0.07
+    const tolerance = 0.09; // ~9 % Toleranz pro Achse
 
     // Berechne den Abstand für bessere Diagnose
     const distanceX = Math.abs(selectedCoordinates.x - targetX);
