@@ -229,6 +229,15 @@ function ChallengeApp() {
       calendarLink: "https://calendly.com/kpk2701/30min",
     },
     {
+      displayName: "Johannes",
+      degreeProgram: "Management & Technology",
+      stage: "Bachelor",
+      university: "TUM",
+      currentSemester: 3,
+      imageLink: `${imageBaseUrl}/Johannes.jpg`,
+      calendarLink: "https://calendly.com/johannes-kask-academyconsult/30min",
+    },
+    {
       displayName: "Anna",
       degreeProgram: "Management & Technology",
       stage: "Bachelor",
@@ -255,15 +264,7 @@ function ChallengeApp() {
       imageLink: `${imageBaseUrl}/Vincent.jpg`,
       calendarLink: "https://calendly.com/vincent-pfeffer-academyconsult/30min",
     },
-    {
-      displayName: "Johannes",
-      degreeProgram: "Management & Technology",
-      stage: "Bachelor",
-      university: "TUM",
-      currentSemester: 3,
-      imageLink: `${imageBaseUrl}/Johannes.jpg`,
-      calendarLink: "https://calendly.com/johannes-kask-academyconsult/30min",
-    },
+    
     {
       displayName: "Philipp",
       degreeProgram: "Management & Technology",
