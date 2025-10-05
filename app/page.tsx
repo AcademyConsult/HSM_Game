@@ -173,15 +173,7 @@ function ChallengeApp() {
   ];
 
   const coffeeProfiles: CoffeeProfile[] = [
-    {
-      displayName: "Annalena",
-      degreeProgram: "Management & Technology",
-      stage: "Bachelor",
-      university: "TUM",
-      currentSemester: 5,
-      imageLink: `${imageBaseUrl}/Annalena.jpg`,
-      calendarLink: "https://calendly.com/annalena-pellkofer-academyconsult/30min",
-    },
+    
     {
       displayName: "Linus",
       degreeProgram: "Management & Technology",
@@ -280,6 +272,15 @@ function ChallengeApp() {
       currentSemester: 3,
       imageLink: `${imageBaseUrl}/Philipp.jpeg`,
       calendarLink: "https://calendly.com/philipp-liebold/ac",
+    },
+    {
+      displayName: "Annalena",
+      degreeProgram: "Management & Technology",
+      stage: "Bachelor",
+      university: "TUM",
+      currentSemester: 5,
+      imageLink: `${imageBaseUrl}/Annalena.jpg`,
+      calendarLink: "https://calendly.com/annalena-pellkofer-academyconsult/30min",
     },
   ];
 
