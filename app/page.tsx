@@ -1105,7 +1105,7 @@ const completedTickets = (games[0].completed ? 20 : 0) +
                                   Klicke auf die Stelle, wo unser Maskottchen Leo zu sehen ist.                                  <img src={`${imageBaseUrl}/leoKopf.png`} alt="Leo der Löwe" className="inline-block ml-2 h-8 w-auto align-middle drop-shadow-md" />                                </p>
                                 <div
                                   ref={wimmelbildRef}
-                                  className="aspect-video relative bg-muted rounded-lg overflow-hidden cursor-crosshair"
+                                  className="relative bg-muted rounded-lg overflow-hidden cursor-crosshair aspect-[1280/853]"
                                   onClick={handleWimmelbildClick}
                                 >
                                   <picture>
