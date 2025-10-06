@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Calendar } from 'lucide-react';
@@ -62,6 +62,12 @@ export default function CoffeeChatCarousel({
   const handlePaginationClick = (index: number) => {
     goToSlide(index);
   };
+
+  useEffect(() => {
+    if (swiperInstance) {
+      swiperInstance.slideToLoop(0, 0);
+    }
+  }, [swiperInstance]);
 
   if (!profiles?.length) {
     return null;
