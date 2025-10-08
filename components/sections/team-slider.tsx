@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, type SVGProps } from 'react';
 import { Calendar } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { SectionDivider } from '@/components/ui/SectionDivider';
@@ -14,7 +14,19 @@ interface TeamMember {
   semester?: string;
   image: string;
   calendlyLink: string;
+  linkedinLink?: string;
 }
+
+const LinkedInIcon = (props: SVGProps<SVGSVGElement>) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    fill="currentColor"
+    {...props}
+  >
+    <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z" />
+  </svg>
+);
 
 const teamMembers: TeamMember[] = [
   {
@@ -26,6 +38,7 @@ const teamMembers: TeamMember[] = [
     semester: '3',
     image: 'https://raw.githubusercontent.com/AcademyConsult/HSM_Game/refs/heads/main/public/Michael.jpeg',
     calendlyLink: 'https://calendly.com/michael-schweizer-academyconsult/30min',
+    linkedinLink: 'https://www.linkedin.com/in/schweizer-michael?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app',
   },
   {
     id: 2,
@@ -36,6 +49,7 @@ const teamMembers: TeamMember[] = [
     semester: '3',
     image: 'https://raw.githubusercontent.com/AcademyConsult/HSM_Game/refs/heads/main/public/Anna.jpeg',
     calendlyLink: 'https://calendly.com/anna-krieger-academyconsult/30min',
+    linkedinLink: 'https://www.linkedin.com/in/anna-krieger-45128830b?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app',
   },
   {
     id: 3,
@@ -46,9 +60,21 @@ const teamMembers: TeamMember[] = [
     semester: '3',
     image: 'https://raw.githubusercontent.com/AcademyConsult/HSM_Game/refs/heads/main/public/Franzi.jpeg',
     calendlyLink: 'https://calendly.com/franziska-holzmann-academyconsult/30min',
+    linkedinLink: 'https://www.linkedin.com/in/franziska-holzmann-884452337?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app',
   },
   {
     id: 4,
+    name: 'Bente',
+    study: 'Maschinenwesen',
+    stage: 'Bachelor',
+    university: 'TUM',
+    semester: '3',
+    image: 'https://raw.githubusercontent.com/AcademyConsult/HSM_Game/refs/heads/main/public/Bente.jpeg',
+    calendlyLink: 'https://calendly.com/academy-consult-munich/coffee-chat',
+    linkedinLink: 'https://www.linkedin.com/in/bentebraun?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app',
+  },
+  {
+    id: 5,
     name: 'Philipp',
     study: 'Management & Technology',
     stage: 'Bachelor',
@@ -56,21 +82,23 @@ const teamMembers: TeamMember[] = [
     semester: '3',
     image: 'https://raw.githubusercontent.com/AcademyConsult/HSM_Game/refs/heads/main/public/Phillip.jpeg',
     calendlyLink: 'https://calendly.com/philipp-liebold/ac',
+    linkedinLink: 'https://www.linkedin.com/in/philipp-liebold?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app',
   },
   {
-    id: 5,
+    id: 6,
     name: 'Jannis',
     study: 'Informatik',
     stage: 'Bachelor',
     university: 'TUM',
     image: 'https://raw.githubusercontent.com/AcademyConsult/HSM_Game/refs/heads/main/public/Jannis.jpeg',
     calendlyLink: 'https://calendly.com/jannis-hoeferlin-academyconsult/coffee-chat',
+    linkedinLink: 'https://www.linkedin.com/in/jannis-hoeferlin?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app',
   },
 ];
 
 interface TeamMemberCardProps extends TeamMember {}
 
-const TeamMemberCard = ({ name, study, stage, university, semester, image, calendlyLink }: TeamMemberCardProps) => {
+const TeamMemberCard = ({ name, study, stage, university, semester, image, calendlyLink, linkedinLink }: TeamMemberCardProps) => {
   return (
     <div className="relative overflow-hidden rounded-2xl bg-white shadow-xl ring-1 ring-black/5 transition-all duration-500 group">
       <div className="relative aspect-[3/4] overflow-hidden">
@@ -102,6 +130,18 @@ const TeamMemberCard = ({ name, study, stage, university, semester, image, calen
             Coffee Chat buchen
           </a>
         </Button>
+        {linkedinLink ? (
+          <Button
+            variant="outline"
+            className="mt-4 w-full rounded-full bg-gray-50 border-gray-200 text-neutral-900 hover:bg-gray-100 transition-colors flex items-center justify-center gap-2"
+            asChild
+          >
+            <a href={linkedinLink} target="_blank" rel="noopener noreferrer">
+              <LinkedInIcon className="mr-2 h-4 w-4" />
+              LinkedIn
+            </a>
+          </Button>
+        ) : null}
       </div>
     </div>
   );
@@ -153,7 +193,7 @@ export const TeamSlider = () => {
       <div className="container mx-auto px-4">
         <div className="mx-auto mb-12 max-w-2xl text-center">
           <p className="text-lg text-neutral-600">
-            Unsere Beraterinnen und Berater freuen sich darauf, dich kennenzulernen. Buche dir direkt einen Coffee Chat und stelle deine Fragen. Der Kaffee wird von unserem Partner LAP Coffee bezhalt.
+            Unsere Beraterinnen und Berater freuen sich darauf, dich kennenzulernen. Buche dir direkt einen Coffee Chat und stelle deine Fragen. Der Kaffee wird von unserem Partner LAP Coffee bezahlt.
           </p>
         </div>
 

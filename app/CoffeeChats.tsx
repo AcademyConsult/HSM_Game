@@ -17,7 +17,7 @@ export default function CoffeeChats({
       <div className="container mx-auto px-4">
         <div className="mx-auto mb-12 max-w-2xl text-center">
           <p className="text-lg text-neutral-600">
-            Unsere Beraterinnen und Berater freuen sich darauf, dich kennenzulernen. Buche dir direkt einen Coffee Chat und stelle deine Fragen. Der Kaffee wird von unserem Partner LAP Coffee bezhalt.
+            Unsere Beraterinnen und Berater freuen sich darauf, dich kennenzulernen. Buche dir direkt einen Coffee Chat und stelle deine Fragen. Der Kaffee wird von unserem Partner LAP Coffee bezahlt.
           </p>
         </div>
       </div>

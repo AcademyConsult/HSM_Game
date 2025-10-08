@@ -182,6 +182,7 @@ function ChallengeApp() {
       currentSemester: 2,
       imageLink: `${imageBaseUrl}/Linus.jpg`,
       calendarLink: "https://calendly.com/linus-weber-academyconsult/neues-meeting",
+      linkedinLink: "https://www.linkedin.com/in/weber-linus?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app",
     },
     {
       displayName: "Franziska",
@@ -191,6 +192,17 @@ function ChallengeApp() {
       currentSemester: 3,
       imageLink: `${imageBaseUrl}/Franzi.jpeg`,
       calendarLink: "https://calendly.com/franziska-holzmann-academyconsult/30min",
+      linkedinLink: "https://www.linkedin.com/in/franziska-holzmann-884452337?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app",
+    },
+    {
+      displayName: "Bente",
+      degreeProgram: "Maschinenwesen",
+      stage: "Bachelor",
+      university: "TUM",
+      currentSemester: 3,
+      imageLink: `${imageBaseUrl}/Bente.jpeg`,
+      calendarLink: "https://calendly.com/academy-consult-munich/coffee-chat",
+      linkedinLink: "https://www.linkedin.com/in/bentebraun?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app",
     },
     {
       displayName: "Maik",
@@ -200,6 +212,7 @@ function ChallengeApp() {
       currentSemester: 3,
       imageLink: `${imageBaseUrl}/Maik.jpg`,
       calendarLink: "https://calendly.com/maik-wagenblast-academyconsult/30min",
+      linkedinLink: "https://www.linkedin.com/in/maik-wagenblast-ba13662b8?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app",
     },
     {
       displayName: "Michael",
@@ -209,6 +222,7 @@ function ChallengeApp() {
       currentSemester: 3,
       imageLink: `${imageBaseUrl}/Michael.jpg`,
       calendarLink: "https://calendly.com/michael-schweizer-academyconsult/30min",
+      linkedinLink: "https://www.linkedin.com/in/schweizer-michael?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app",
     },
     {
       displayName: "Theresa",
@@ -218,6 +232,7 @@ function ChallengeApp() {
       currentSemester: 3,
       imageLink: `${imageBaseUrl}/Theresa.jpg`,
       calendarLink: "https://calendly.com/theresa-stolle-academyconsult/30min",
+      linkedinLink: "https://www.linkedin.com/in/theresa-stolle-455623353?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app",
     },
     {
       displayName: "Kalle",
@@ -227,6 +242,7 @@ function ChallengeApp() {
       currentSemester: 3,
       imageLink: `${imageBaseUrl}/Kalle.jpg`,
       calendarLink: "https://calendly.com/kpk2701/30min",
+      linkedinLink: "https://www.linkedin.com/in/kalle-kersten?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app",
     },
     {
       displayName: "Johannes",
@@ -236,6 +252,7 @@ function ChallengeApp() {
       currentSemester: 3,
       imageLink: `${imageBaseUrl}/Johannes.jpg`,
       calendarLink: "https://calendly.com/johannes-kask-academyconsult/30min",
+      linkedinLink: "https://www.linkedin.com/in/jkask?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app",
     },
     {
       displayName: "Anna",
@@ -245,6 +262,7 @@ function ChallengeApp() {
       currentSemester: 3,
       imageLink: `${imageBaseUrl}/Anna.jpg`,
       calendarLink: "https://calendly.com/anna-krieger-academyconsult/30min",
+      linkedinLink: "https://www.linkedin.com/in/anna-krieger-45128830b?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app",
     },
     {
       displayName: "Jannis",
@@ -254,6 +272,7 @@ function ChallengeApp() {
       currentSemester: 3,
       imageLink: `${imageBaseUrl}/Jannis.jpg`,
       calendarLink: "https://calendly.com/jannis-hoeferlin-academyconsult/coffee-chat",
+      linkedinLink: "https://www.linkedin.com/in/jannis-hoeferlin?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app",
     },
     {
       displayName: "Vincent",
@@ -263,6 +282,7 @@ function ChallengeApp() {
       currentSemester: 3,
       imageLink: `${imageBaseUrl}/Vincent.jpg`,
       calendarLink: "https://calendly.com/vincent-pfeffer-academyconsult/30min",
+      linkedinLink: "https://www.linkedin.com/in/vincent-pfeffer-87b575329?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app",
     },
     
     {
@@ -273,6 +293,7 @@ function ChallengeApp() {
       currentSemester: 3,
       imageLink: `${imageBaseUrl}/Philipp.jpeg`,
       calendarLink: "https://calendly.com/philipp-liebold/ac",
+      linkedinLink: "https://www.linkedin.com/in/philipp-liebold?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app",
     },
     {
       displayName: "Annalena",
@@ -282,6 +303,7 @@ function ChallengeApp() {
       currentSemester: 5,
       imageLink: `${imageBaseUrl}/Annalena.jpg`,
       calendarLink: "https://calendly.com/annalena-pellkofer-academyconsult/30min",
+      linkedinLink: "https://www.linkedin.com/in/annalena-plk?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app",
     },
   ];
 
