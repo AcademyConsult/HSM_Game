@@ -51,6 +51,7 @@ function ChallengeApp() {
   const [lastName, setLastName] = useState("");
   const [openItems, setOpenItems] = useState<{ [key: string]: boolean }>({ game1: true });
   const [consentGiven, setConsentGiven] = useState(false);
+  const [newsletterOptIn, setNewsletterOptIn] = useState(false);
   const [estimationFeedback, setEstimationFeedback] = useState<{ title: string; description: string } | null>(null); const [estimationValue, setEstimationValue] = useState<number | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
@@ -400,11 +401,11 @@ function ChallengeApp() {
         vorname: firstName,
         nachname: lastName,
         schaetzwert: estimationValue,
-        captchaToken: captchaToken // Token zum Payload hinzufügen
+        captchaToken: captchaToken, // Token zum Payload hinzufügen
+        HatWerbungAboniert: newsletterOptIn,
       };
-
       const response = await fetch(
-        "https://prod-95.westeurope.logic.azure.com:443/workflows/bbcb61dde4284b33b6fbf5faaff61a26/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=6xJfQrKL4Vy-uDFGwtHR4OrwRqJHGAid8vpL6Y0L0ag",
+        "https://default3ab5870fec394c60a6bb62df19ce89.95.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/bbcb61dde4284b33b6fbf5faaff61a26/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=F3Iph6RYhy4IPeW0jxgCsgVLS3D6fuAwr0sMYfmmopU",
         {
           method: "POST",
           headers: {
@@ -423,6 +424,7 @@ function ChallengeApp() {
         setLastName("");
         setEmail("");
         setConsentGiven(false);
+        setNewsletterOptIn(false);
       } else {
         // Fehler bei der Einreichung
         const errorData = await response.text();
@@ -563,12 +565,12 @@ function ChallengeApp() {
       if (games.find(g => g.id === 3)?.completed) {
         setEstimationFeedback({
           title: "Schätzwert aktualisiert",
-          description: `Dein aktueller Schätzwert: ${estimationValue} Mitglieder`
+          description: `Dein aktueller Schätzwert: ${estimationValue} Start-ups`
         });
       } else {
         setEstimationFeedback({
           title: "Schätzwert gespeichert",
-          description: `Dein Schätzwert: ${estimationValue} Mitglieder`
+          description: `Dein Schätzwert: ${estimationValue} Start-ups`
         });
       }
 
@@ -1506,6 +1508,41 @@ const completedTickets = (games[0].completed ? 20 : 0) +
                         onChange={(e) => setEmail(e.target.value)}
                         required
                       />
+                      <div className="flex items-start space-x-2 my-4">
+                        <div className="relative flex items-center justify-center">
+                          <Checkbox
+                            id="newsletter"
+                            checked={newsletterOptIn}
+                            onCheckedChange={(checked) => setNewsletterOptIn(checked === true)}
+                            className="border-gray-300 data-[state=checked]:bg-[#993333] data-[state=checked]:border-[#993333] cursor-pointer"
+                          />
+                          {newsletterOptIn && (
+                            <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                              <Check className="h-4 w-4 text-white font-bold" strokeWidth={3} />
+                            </div>
+                          )}
+                        </div>
+                        <Label
+                          htmlFor="newsletter"
+                          className="text-sm font-medium leading-none cursor-pointer"
+                        >
+                          Newsletter abonnieren
+                        </Label>
+                      </div>
+                      {newsletterOptIn ? (
+                        <div className="rounded-md border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-900">
+                          Ja, ich möchte per E-Mail Informationen von Academy Consult e. V. zur Bewerbungsphase erhalten (Fristen, Auswahlverfahren, Events & Vereinsinfos). Ich willige ein, dass Academy Consult e. V. meine E-Mail-Adresse zu diesem Zweck verarbeitet. Widerruf jederzeit über den Abmeldelink oder per Mail an <a href="mailto:hey@academyconsult.de" className="underline font-medium">hey[at]academyconsult.de</a>. Details in der{' '}
+                          <a
+                            href="https://ac-vibe-hack.notion.site/Datenschutzbestimmungen-1d03d6763f7b80af8b50e2362a25c4c7?pvs=74"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-[#993333] underline font-medium"
+                          >
+                            Datenschutzerklärung
+                          </a>
+                          .
+                        </div>
+                      ) : null}
                       <div className="flex items-start space-x-2 my-4">
                         <div className="relative flex items-center justify-center">
                           <Checkbox
