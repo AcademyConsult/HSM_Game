@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Newsletter Abmeldung</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+  <main class="min-h-screen">
+    <section
+      class="h-screen relative flex items-center"
+      style="
+        background-image: url('https://hebbkx1anhila5yf.public.blob.vercel-storage.com/AC%20Hintergrund%202-tH8JYEwhI9ZvKdJvkZJ21BJ3ZHAgrd.png');
+        background-size: cover;
+        background-position: center;
+      "
+    >
+      <div class="container mx-auto px-4 py-24 text-white text-center">
+        <div class="flex flex-col items-center mb-8">
+          <img
+            src="https://spreadly.app/storage/view/-/984a834393716c80e787b227b43cfbe2/avatars/28/TiugXb12LRXMJmTEvyHSDxOH09U0rK0wv3D1OEPB.png"
+            alt="Academy Consult Logo"
+            class="h-32 md:h-48 w-auto mb-6"
+          />
+        </div>
+
+        <div id="greeting">
+          <h1 class="text-4xl md:text-6xl font-bold">
+            Newsletter Abmeldung
+          </h1>
+          <p class="mt-4 text-lg md:text-xl">
+            Wir finden es schade, dich gehen zu lassen – aber natürlich respektieren wir deine Entscheidung.
+          </p>
+        </div>
+
+        <div id="statusMessage" class="mt-6">
+          <div id="spinner" class="flex items-center justify-center">
+            <div class="animate-spin rounded-full h-12 w-12 border-t-4 border-white"></div>
+            <span class="ml-4 text-xl">Verarbeite deine Abmeldung...</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    async function unsubscribeNewsletter() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const token = urlParams.get("token");
+      const statusContainer = document.getElementById("statusMessage");
+      const greetingContainer = document.getElementById("greeting");
+
+      if (!token) {
+        greetingContainer.innerHTML = `
+          <h1 class="text-4xl md:text-6xl font-bold">
+            Kein Abmeldetoken in der URL gefunden.
+          </h1>`;
+        statusContainer.innerHTML = "";
+        return;
+      }
+
+      let userName = "Freundin/Freund";
+
+      try {
+        const responseName = await fetch(
+          "https://prod-243.westeurope.logic.azure.com:443/workflows/1d5a894ef5b84cd1a69e0bc92879cac3/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=YMkhhZcBA0vZAExCoUAJIw8XW1Kl28WJc9rRWwH5bQw",
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ token: token }),
+          }
+        );
+
+        if (responseName.ok) {
+          const data = await responseName.json();
+          userName = data.name || userName;
+        }
+      } catch (err) {
+        console.error("Netzwerkfehler beim Abrufen des Namens:", err);
+      }
+
+      try {
+        const responseUnsubscribe = await fetch(
+          "https://default3ab5870fec394c60a6bb62df19ce89.95.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/884604d38f3a48c9b6de0be41975155d/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=LXoY04-Z5H4s5L47oaH3zYQ1JhE5xqcXiav6hSjSGtc",
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ token: token }),
+          }
+        );
+
+        if (!responseUnsubscribe.ok) {
+          throw new Error("Unsubscribe-Endpoint-Fehler: " + responseUnsubscribe.status);
+        }
+        try {
+          await responseUnsubscribe.json();
+        } catch (e) {}
+
+        statusContainer.innerHTML = `
+          <div class="bg-green-600 text-white p-6 rounded shadow-lg max-w-md mx-auto mt-8 text-center">
+            <div class="flex items-center justify-center space-x-3">
+              <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              <p class="text-xl font-semibold">Abmeldung bestätigt</p>
+            </div>
+            <p class="mt-3 text-lg leading-relaxed">
+              Hey ${userName},<br>
+              du erhältst ab jetzt keine Bewerbungs-Updates mehr von uns. Solltest du es dir anders überlegen, melde dich jederzeit wieder – unsere Tür steht dir offen.
+            </p>
+          </div>
+        `;
+      } catch (err) {
+        console.error("Unsubscribe-Endpoint-Fehler:", err);
+        statusContainer.innerHTML = `
+          <div class="bg-red-600 text-white p-6 rounded shadow-lg max-w-md mx-auto mt-8 text-center">
+            <div class="flex items-center justify-center space-x-3">
+              <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+              <p class="text-xl font-semibold">Abmeldung fehlgeschlagen</p>
+            </div>
+            <p class="mt-3 text-lg">
+              Bitte versuche es später erneut oder schreibe uns an hey[at]academyconsult.de.
+            </p>
+          </div>
+        `;
+      }
+    }
+
+    unsubscribeNewsletter();
+  </script>
+</body>
+</html>
