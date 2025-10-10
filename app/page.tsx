@@ -151,16 +151,6 @@ function ChallengeApp() {
     },
     {
       id: 6,
-      title: "AC Hack the Case",
-      date: "2025-10-23",
-      time: "10:00-22:00",
-      location: "Celonis Office",
-      description: "Tüftle mit uns ganztägig an spannenden Fallstudien im Celonis Office und erlebe den AC Spirit hautnah.",
-      eventbride: "https://luma.com/k3fc75dg",
-      image: `${imageBaseUrl}/ac-hack-the-case.png`,
-    },
-    {
-      id: 7,
       title: "Infoabend TUM",
       date: "2025-10-23",
       time: "19:00-20:00",
@@ -171,7 +161,7 @@ function ChallengeApp() {
       image: `${imageBaseUrl}/TUM.jpeg`,
     },
     {
-      id: 8,
+      id: 7,
       title: "Open Büro Day",
       date: "2025-10-24",
       time: "15:00-18:00",
@@ -1775,7 +1765,7 @@ const completedTickets = (games[0].completed ? 20 : 0) +
                   23. Oktober · Celonis Office · 10:00–22:00 Uhr
                 </div>
                 <h3 className="mt-4 text-3xl font-bold text-neutral-900">
-                  hACk the case – Der Academy Consult Hackathon
+                  hACk the case
                 </h3>
                 <p className="mt-4 text-base leading-relaxed text-neutral-700">
                   Du interessierst dich für Data Analytics, Beratung, Programmierung oder knifflige Problemstellungen? Du studierst in München und möchtest dein Semester mit einem besonderen Erlebnis starten? Dann erlebe gemeinsam mit uns einen ganzen Tag voller Fallstudien, Teamwork und Insights im Celonis Office.
