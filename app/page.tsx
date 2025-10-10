@@ -151,6 +151,16 @@ function ChallengeApp() {
     },
     {
       id: 6,
+      title: "AC Hack the Case",
+      date: "2025-10-23",
+      time: "10:00-22:00",
+      location: "Celonis Office",
+      description: "Tüftle mit uns ganztägig an spannenden Fallstudien im Celonis Office und erlebe den AC Spirit hautnah.",
+      eventbride: "https://luma.com/k3fc75dg",
+      image: `${imageBaseUrl}/ac-hack-the-case.png`,
+    },
+    {
+      id: 7,
       title: "Infoabend TUM",
       date: "2025-10-23",
       time: "19:00-20:00",
@@ -161,7 +171,7 @@ function ChallengeApp() {
       image: `${imageBaseUrl}/TUM.jpeg`,
     },
     {
-      id: 7,
+      id: 8,
       title: "Open Büro Day",
       date: "2025-10-24",
       time: "15:00-18:00",
@@ -226,6 +236,16 @@ function ChallengeApp() {
       linkedinLink: "https://www.linkedin.com/in/schweizer-michael?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app",
     },
     {
+      displayName: "Max",
+      degreeProgram: "Quantum Science & Technology",
+      stage: "Master",
+      university: "TUM & LMU",
+      currentSemester: 3,
+      imageLink: `${imageBaseUrl}/Max.jpg`,
+      calendarLink: "https://calendly.com/maximilian-wolf-academyconsult/30min",
+      linkedinLink: "https://www.linkedin.com/in/maximilian-wolf-215360212/",
+    },
+    {
       displayName: "Theresa",
       degreeProgram: "BWL",
       stage: "Bachelor",
@@ -270,7 +290,7 @@ function ChallengeApp() {
       degreeProgram: "Informatik",
       stage: "Bachelor",
       university: "TUM",
-      currentSemester: 3,
+      currentSemester: 7,
       imageLink: `${imageBaseUrl}/Jannis.jpg`,
       calendarLink: "https://calendly.com/jannis-hoeferlin-academyconsult/coffee-chat",
       linkedinLink: "https://www.linkedin.com/in/jannis-hoeferlin?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app",
@@ -1731,6 +1751,46 @@ const completedTickets = (games[0].completed ? 20 : 0) +
     </div>
   </CardContent>
 </Card>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Spotlight Event */}
+      <section className="bg-white py-16 md:py-24">
+        <SectionDivider title="Spotlight Event" />
+        <div className="container mx-auto px-4">
+          <div className="mx-auto grid max-w-5xl gap-8 rounded-3xl bg-white p-6 shadow-2xl ring-1 ring-black/5 md:grid-cols-[1.1fr,1fr] md:p-10">
+            <div className="relative overflow-hidden rounded-2xl">
+              <img
+                src="https://images.lumacdn.com/cdn-cgi/image/format=auto,fit=cover,dpr=1,background=white,quality=75,width=400,height=400/event-covers/ge/35d2e004-98d1-44a8-85ac-cea7c721e158.png"
+                alt="AC Hack the Case"
+                className="h-full w-full object-cover"
+                loading="lazy"
+              />
+            </div>
+            <div className="flex flex-col justify-between space-y-6">
+              <div>
+                <div className="inline-flex items-center rounded-full bg-[#993333]/10 px-3 py-1 text-sm font-semibold text-[#993333]">
+                  23. Oktober · Celonis Office · 10:00–22:00 Uhr
+                </div>
+                <h3 className="mt-4 text-3xl font-bold text-neutral-900">
+                  hACk the case – Der Academy Consult Hackathon
+                </h3>
+                <p className="mt-4 text-base leading-relaxed text-neutral-700">
+                  Du interessierst dich für Data Analytics, Beratung, Programmierung oder knifflige Problemstellungen? Du studierst in München und möchtest dein Semester mit einem besonderen Erlebnis starten? Dann erlebe gemeinsam mit uns einen ganzen Tag voller Fallstudien, Teamwork und Insights im Celonis Office.
+                </p>
+              </div>
+              <div className="flex flex-wrap items-center gap-3">
+                <a
+                  href="https://luma.com/k3fc75dg"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex w-full items-center justify-center rounded-full bg-[#993333] px-6 py-3 text-base font-semibold text-white shadow-lg transition-transform duration-300 hover:scale-[1.02] hover:bg-[#7a2828] md:w-auto"
+                >
+                  Jetzt Platz sichern
+                </a>
+              </div>
             </div>
           </div>
         </div>
