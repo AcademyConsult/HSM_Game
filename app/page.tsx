@@ -1768,7 +1768,7 @@ const completedTickets = (games[0].completed ? 20 : 0) +
                   hACk the case | Celonis| Lovable 
                 </h3>
                 <p className="mt-4 text-base leading-relaxed text-neutral-700">
-                  Du interessierst dich für Data Analytics, Beratung, Programmierung oder knifflige Problemstellungen? Du studierst in München und möchtest dein Semester mit einem besonderen Erlebnis starten? Dann erlebe gemeinsam mit uns einen ganzen Tag voller Fallstudien, Teamwork und Insights im Celonis Office.
+                  Du interessierst dich für Data Analytics, Beratung, Programmierung oder komplexe Problemstellungen? Du studierst in München und möchtest dein Semester mit einem besonderen Erlebnis starten? Dann erlebe gemeinsam mit uns einen ganzen Tag voller Cases, Teamwork und Insights im Celonis Office.
                 </p>
               </div>
               <div className="flex flex-wrap items-center gap-3">
