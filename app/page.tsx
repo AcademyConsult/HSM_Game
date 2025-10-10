@@ -1765,7 +1765,7 @@ const completedTickets = (games[0].completed ? 20 : 0) +
                   23. Oktober · Celonis Office · 10:00–22:00 Uhr
                 </div>
                 <h3 className="mt-4 text-3xl font-bold text-neutral-900">
-                  hACk the case
+                  hACk the case | Celonis| Lovable 
                 </h3>
                 <p className="mt-4 text-base leading-relaxed text-neutral-700">
                   Du interessierst dich für Data Analytics, Beratung, Programmierung oder knifflige Problemstellungen? Du studierst in München und möchtest dein Semester mit einem besonderen Erlebnis starten? Dann erlebe gemeinsam mit uns einen ganzen Tag voller Fallstudien, Teamwork und Insights im Celonis Office.
