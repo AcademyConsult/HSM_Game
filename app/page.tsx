@@ -231,7 +231,7 @@ function ChallengeApp() {
       stage: "Master",
       university: "TUM & LMU",
       currentSemester: 3,
-      imageLink: `${imageBaseUrl}/Max.jpg`,
+      imageLink: `${imageBaseUrl}/Max.jpeg`,
       calendarLink: "https://calendly.com/maximilian-wolf-academyconsult/30min",
       linkedinLink: "https://www.linkedin.com/in/maximilian-wolf-215360212/",
     },
