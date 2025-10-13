@@ -341,11 +341,9 @@ function ChallengeApp() {
   const [quizAnswers, setQuizAnswers] = useState<{
     question1: string | null;
     question2: string | null;
-    question3: string | null;
   }>({
     question1: null,
-    question2: null,
-    question3: null
+    question2: null
   });
   const [quizFeedback, setQuizFeedback] = useState<{ title: string; description: string; type: 'warning' | 'success' | 'error' } | null>(null);
 
@@ -438,7 +436,7 @@ function ChallengeApp() {
         setEmail("");
         setConsentGiven(false);
         setNewsletterOptIn(false);
-        setQuizAnswers({ question1: null, question2: null, question3: null });
+        setQuizAnswers({ question1: null, question2: null });
         setQuizFeedback(null);
         setGames((prevGames) =>
           prevGames.map((game) => ({ ...game, completed: false }))
@@ -610,15 +608,14 @@ function ChallengeApp() {
     // Richtige Antworten: 1. Frage: C, 2. Frage: C, 3. Frage: A
     const correctAnswers = {
       question1: 'C',
-      question2: 'C',
-      question3: 'B'
+      question2: 'B'
     };
 
     // Prüfen, ob alle Fragen beantwortet wurden
-    if (!quizAnswers.question1 || !quizAnswers.question2 || !quizAnswers.question3) {
+    if (!quizAnswers.question1 || !quizAnswers.question2) {
       setQuizFeedback({
         title: "Bitte beantworten Sie alle Fragen",
-        description: "Alle drei Fragen müssen beantwortet werden.",
+        description: "Beide Fragen müssen beantwortet werden.",
         type: "warning"
       });
       return false;
@@ -627,8 +624,7 @@ function ChallengeApp() {
     // Prüfen, ob die Antworten richtig sind
     const question1Correct = quizAnswers.question1 === correctAnswers.question1;
     const question2Correct = quizAnswers.question2 === correctAnswers.question2;
-    const question3Correct = quizAnswers.question3 === correctAnswers.question3;
-    const allCorrect = question1Correct && question2Correct && question3Correct;
+    const allCorrect = question1Correct && question2Correct;
 
     if (allCorrect) {
       setQuizFeedback({
@@ -642,7 +638,6 @@ function ChallengeApp() {
       const incorrectQuestions: string[] = [];
       if (!question1Correct) incorrectQuestions.push("Frage 1");
       if (!question2Correct) incorrectQuestions.push("Frage 2");
-      if (!question3Correct) incorrectQuestions.push("Frage 3");
 
       setQuizFeedback({
         title: "Leider nicht richtig",
@@ -901,7 +896,7 @@ const completedTickets = (games[0].completed ? 20 : 0) +
                     <div className="flex items-center justify-center h-full">
                       <Card
                         key="prize-1"
-                        className="overflow-visible bg-white/15 backdrop-blur-md text-white border-none shadow-[4px_6px_15px_rgba(0,0,0,0.2)] w-full h-[420px]"
+                        className="overflow-visible bg-white/15 backdrop-blur-md text-white border-none shadow-[4px_6px_15px_rgba(0,0,0,0.2)] w-full h-[480px]"
                       >
                         <CardHeader className="relative pb-0 pt-8">
                           <div className="absolute -top-5 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-[#ffd700] to-[#ffec8b] text-gray-800 px-6 py-2 rounded-full shadow-md">
@@ -927,7 +922,7 @@ const completedTickets = (games[0].completed ? 20 : 0) +
                     <div className="flex items-center justify-center h-full">
                       <Card
                         key="prize-2"
-                        className="overflow-visible bg-white/15 backdrop-blur-md text-white border-none shadow-[4px_6px_15px_rgba(0,0,0,0.2)] w-full h-[420px]"
+                        className="overflow-visible bg-white/15 backdrop-blur-md text-white border-none shadow-[4px_6px_15px_rgba(0,0,0,0.2)] w-full h-[480px]"
                       >
                         <CardHeader className="relative pb-0 pt-8">
                           <div className="absolute -top-5 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-[#C0C0C0] to-[#E8E8E8] text-gray-800 px-6 py-2 rounded-full shadow-md">
@@ -953,7 +948,7 @@ const completedTickets = (games[0].completed ? 20 : 0) +
                     <div className="flex items-center justify-center h-full">
                       <Card
                         key="prize-3"
-                        className="overflow-visible bg-white/15 backdrop-blur-md text-white border-none shadow-[4px_6px_15px_rgba(0,0,0,0.2)] w-full h-[420px]"
+                        className="overflow-visible bg-white/15 backdrop-blur-md text-white border-none shadow-[4px_6px_15px_rgba(0,0,0,0.2)] w-full h-[480px]"
                       >
                         <CardHeader className="relative pb-0 pt-8">
                           <div className="absolute -top-5 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-[#cd7f32] to-[#dea47e] text-white px-6 py-2 rounded-full shadow-md">
@@ -980,7 +975,7 @@ const completedTickets = (games[0].completed ? 20 : 0) +
                     <div className="flex items-center justify-center h-full">
                       <Card
                         key="prize-4"
-                        className="overflow-visible bg-white/15 backdrop-blur-md text-white border-none shadow-[4px_6px_15px_rgba(0,0,0,0.2)] w-full h-[420px]"
+                        className="overflow-visible bg-white/15 backdrop-blur-md text-white border-none shadow-[4px_6px_15px_rgba(0,0,0,0.2)] w-full h-[480px]"
                       >
                         <CardHeader className="relative pb-0 pt-8">
                           <div className="absolute -top-5 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-[#808080] to-[#a9a9a9] text-white px-6 py-2 rounded-full shadow-md">
@@ -1328,7 +1323,9 @@ const completedTickets = (games[0].completed ? 20 : 0) +
 
                                 {/* Frage 2 */}
                                 <div className="space-y-3">
-                                  <h3 className="font-semibold text-lg">2. Was ist keines unserer Competence Center?</h3>
+                                  <h3 className="font-semibold text-lg">
+                                    2. Das Online-Stipendium von e-fellows.net bietet über 50 geldwerte Leistungen – darunter kostenlose Print- und Digital-Abos. Wie viele renommierte Zeitungen und Zeitschriften kannst du als e-fellows.net-Stipendiat:in kostenlos abonnieren?
+                                  </h3>
                                   <div className="space-y-2">
                                     <div className="flex items-center">
                                       <input
@@ -1339,7 +1336,7 @@ const completedTickets = (games[0].completed ? 20 : 0) +
                                         checked={quizAnswers.question2 === 'A'}
                                         onChange={() => setQuizAnswers({ ...quizAnswers, question2: 'A' })}
                                       />
-                                      <label htmlFor="q2-a">A: Technology</label>
+                                      <label htmlFor="q2-a">A: 27</label>
                                     </div>
                                     <div className="flex items-center">
                                       <input
@@ -1350,7 +1347,7 @@ const completedTickets = (games[0].completed ? 20 : 0) +
                                         checked={quizAnswers.question2 === 'B'}
                                         onChange={() => setQuizAnswers({ ...quizAnswers, question2: 'B' })}
                                       />
-                                      <label htmlFor="q2-b">B: Operations</label>
+                                      <label htmlFor="q2-b">B: 16</label>
                                     </div>
                                     <div className="flex items-center">
                                       <input
@@ -1361,7 +1358,7 @@ const completedTickets = (games[0].completed ? 20 : 0) +
                                         checked={quizAnswers.question2 === 'C'}
                                         onChange={() => setQuizAnswers({ ...quizAnswers, question2: 'C' })}
                                       />
-                                      <label htmlFor="q2-c">C: Customer Experience</label>
+                                      <label htmlFor="q2-c">C: 10</label>
                                     </div>
                                     <div className="flex items-center">
                                       <input
@@ -1372,60 +1369,7 @@ const completedTickets = (games[0].completed ? 20 : 0) +
                                         checked={quizAnswers.question2 === 'D'}
                                         onChange={() => setQuizAnswers({ ...quizAnswers, question2: 'D' })}
                                       />
-                                      <label htmlFor="q2-d">D: Strategy</label>
-                                    </div>
-                                  </div>
-                                </div>
-
-                                {/* Frage 3 */}
-                                <div className="space-y-3">
-                                  <h3 className="font-semibold text-lg">
-                                    3. Das Online-Stipendium von e-fellows.net bietet über 50 geldwerte Leistungen – darunter kostenlose Print- und Digital-Abos. Wie viele renommierte Zeitungen und Zeitschriften kannst du als e-fellows.net-Stipendiat:in kostenlos abonnieren?
-                                  </h3>
-                                  <div className="space-y-2">
-                                    <div className="flex items-center">
-                                      <input
-                                        type="radio"
-                                        id="q3-a"
-                                        name="question3"
-                                        className="mr-2 h-4 w-4 accent-[#993333]"
-                                        checked={quizAnswers.question3 === 'A'}
-                                        onChange={() => setQuizAnswers({ ...quizAnswers, question3: 'A' })}
-                                      />
-                                      <label htmlFor="q3-a">A: 27</label>
-                                    </div>
-                                    <div className="flex items-center">
-                                      <input
-                                        type="radio"
-                                        id="q3-b"
-                                        name="question3"
-                                        className="mr-2 h-4 w-4 accent-[#993333]"
-                                        checked={quizAnswers.question3 === 'B'}
-                                        onChange={() => setQuizAnswers({ ...quizAnswers, question3: 'B' })}
-                                      />
-                                      <label htmlFor="q3-b">B: 16</label>
-                                    </div>
-                                    <div className="flex items-center">
-                                      <input
-                                        type="radio"
-                                        id="q3-c"
-                                        name="question3"
-                                        className="mr-2 h-4 w-4 accent-[#993333]"
-                                        checked={quizAnswers.question3 === 'C'}
-                                        onChange={() => setQuizAnswers({ ...quizAnswers, question3: 'C' })}
-                                      />
-                                      <label htmlFor="q3-c">C: 10</label>
-                                    </div>
-                                    <div className="flex items-center">
-                                      <input
-                                        type="radio"
-                                        id="q3-d"
-                                        name="question3"
-                                        className="mr-2 h-4 w-4 accent-[#993333]"
-                                        checked={quizAnswers.question3 === 'D'}
-                                        onChange={() => setQuizAnswers({ ...quizAnswers, question3: 'D' })}
-                                      />
-                                      <label htmlFor="q3-d">D: Keine</label>
+                                      <label htmlFor="q2-d">D: Keine</label>
                                     </div>
                                   </div>
                                 </div>
