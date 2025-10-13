@@ -807,11 +807,11 @@ const completedTickets = (games[0].completed ? 20 : 0) +
                   <CardContent className="flex flex-col items-center pt-4">
                     <h3 className="text-xl font-semibold text-center mb-3">{prizes[2].description}</h3>
                     <p className="text-center text-white/80 mb-4">We got you! Dein nächster Einkauf geht auf uns 🛍️</p>
-                    <div className="w-full h-32 mt-2 overflow-hidden rounded-xl flex items-center justify-center">
+                    <div className="w-full mt-2 flex items-center justify-center">
                       <img
                         src={prizes[2].image || placeholderImage}
                         alt={prizes[2].title}
-                        className="w-auto h-full object-contain rounded-xl mx-auto"
+                        className="w-auto max-w-[90%] max-h-36 object-contain rounded-xl mx-auto"
                       />
                     </div>
                   </CardContent>
@@ -963,11 +963,11 @@ const completedTickets = (games[0].completed ? 20 : 0) +
                         <CardContent className="flex flex-col items-center pt-6">
                           <h3 className="text-xl font-semibold text-center mb-6">{prizes[2].description}</h3>
                           <p className="text-center text-white/80 mb-6">We got you! Dein nächster Einkauf geht auf uns 🛍️</p>
-                          <div className="w-full h-36 mt-5 mb-6 overflow-hidden rounded-xl flex items-center justify-center">
+                          <div className="w-full mt-5 mb-6 flex items-center justify-center">
                             <img
                               src={prizes[2].image || placeholderImage}
                               alt={prizes[2].title}
-                              className="w-auto h-32 object-contain rounded-xl mx-auto"
+                              className="w-auto max-w-[90%] max-h-36 object-contain rounded-xl mx-auto"
                             />
                           </div>
                         </CardContent>
@@ -1002,32 +1002,27 @@ const completedTickets = (games[0].completed ? 20 : 0) +
                     </div>
                   </SwiperSlide>
 
-                  <SwiperSlide>
-                    <div className="flex items-center justify-center h-full">
-                      <Card
-                        key="prize-newsletter"
-                        className="overflow-visible bg-white/15 backdrop-blur-md text-white border-none shadow-[4px_6px_15px_rgba(0,0,0,0.2)] w-full h-[420px]"
-                      >
-                        <CardHeader className="relative pb-0 pt-8">
-                          <div className="absolute -top-5 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-[#ffd700] to-[#ffec8b] text-gray-800 px-6 py-2 rounded-full shadow-md">
-                            <span className="font-bold text-lg">Newsletter</span>
-                          </div>
-                        </CardHeader>
-                        <CardContent className="flex flex-col items-center pt-6">
-                          <h3 className="text-xl font-semibold text-center mb-6">200 € Amazon Gutschein</h3>
-                          <p className="text-center text-white/80 mb-6 px-4">Newsletter- & e-fellows-Gewinnspiel • Buch "Perspektive Unternehmensberatung" inklusive</p>
-                          <div className="w-full h-32 mt-5 mb-6 overflow-hidden rounded-xl flex items-center justify-center">
-                            <img
-                              src={`${imageBaseUrl}/Amazon_200.png`}
-                              alt="Amazon Gutschein 200 Euro"
-                              className="w-auto h-28 object-contain rounded-xl mx-auto"
-                            />
-                          </div>
-                        </CardContent>
-                      </Card>
-                    </div>
-                  </SwiperSlide>
                 </Swiper>
+                <div className="mt-8">
+                  <Card className="overflow-visible bg-white/15 backdrop-blur-md text-white border-none shadow-[4px_6px_15px_rgba(0,0,0,0.2)] w-full h-[420px]">
+                    <CardHeader className="relative pb-0 pt-8">
+                      <div className="absolute -top-5 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-[#ffd700] to-[#ffec8b] text-gray-800 px-6 py-2 rounded-full shadow-md">
+                        <span className="font-bold text-lg">Newsletter</span>
+                      </div>
+                    </CardHeader>
+                    <CardContent className="flex flex-col items-center pt-6">
+                      <h3 className="text-xl font-semibold text-center mb-6">200 € Amazon Gutschein</h3>
+                      <p className="text-center text-white/80 mb-6 px-4">Exklusives Newsletter + e-fellows Gewinnspiel</p>
+                      <div className="w-full h-32 mt-5 mb-6 overflow-hidden rounded-xl flex items-center justify-center">
+                        <img
+                          src={`${imageBaseUrl}/Amazon_200.png`}
+                          alt="Amazon Gutschein 200 Euro"
+                          className="w-auto h-28 object-contain rounded-xl mx-auto"
+                        />
+                      </div>
+                    </CardContent>
+                  </Card>
+                </div>
               </div>
             </div>
 
@@ -1718,7 +1713,7 @@ const completedTickets = (games[0].completed ? 20 : 0) +
                                 <div className="flex-1">
                                   <h3 className="text-lg font-medium text-gray-900">Fast fertig!</h3>
                                   <p className="mt-2 text-sm text-gray-600">
-                                      Danke für deine Teilnahme! Bestätige deine E-Mail, um am Gewinnspiel teilzunehmen. Deine Lösungen sind erfolgreich eingereicht.
+                                      Danke für deine Teilnahme! Bestätige deine E-Mail, um am Gewinnspiel teilzunehmen. Deine Lösungen sind erfolgreich eingereicht. Schau unbedingt auch im Spam-Ordner nach, falls du keine Mail findest.
                                   </p>
                                 </div>
                               </div>
