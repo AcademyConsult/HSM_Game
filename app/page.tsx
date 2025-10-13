@@ -341,9 +341,11 @@ function ChallengeApp() {
   const [quizAnswers, setQuizAnswers] = useState<{
     question1: string | null;
     question2: string | null;
+    question3: string | null;
   }>({
     question1: null,
-    question2: null
+    question2: null,
+    question3: null
   });
   const [quizFeedback, setQuizFeedback] = useState<{ title: string; description: string; type: 'warning' | 'success' | 'error' } | null>(null);
 
@@ -436,6 +438,19 @@ function ChallengeApp() {
         setEmail("");
         setConsentGiven(false);
         setNewsletterOptIn(false);
+        setQuizAnswers({ question1: null, question2: null, question3: null });
+        setQuizFeedback(null);
+        setGames((prevGames) =>
+          prevGames.map((game) => ({ ...game, completed: false }))
+        );
+        setOpenItems({ game1: true });
+        setMarkerPosition(null);
+        setSelectedCoordinates(null);
+        setIncorrectAttempts(0);
+        setWimmelbildAlert(null);
+        setEstimationValue(null);
+        setEstimationFeedback(null);
+        setEstimationError(null);
       } else {
         // Fehler bei der Einreichung
         const errorData = await response.text();
@@ -592,17 +607,18 @@ function ChallengeApp() {
 
   // Funktion zum Überprüfen der Quiz-Antworten
   const checkQuizAnswers = () => {
-    // Richtige Antworten: 1. Frage: C, 2. Frage: C
+    // Richtige Antworten: 1. Frage: C, 2. Frage: C, 3. Frage: A
     const correctAnswers = {
       question1: 'C',
-      question2: 'C'
+      question2: 'C',
+      question3: 'B'
     };
 
-    // Prüfen, ob beide Fragen beantwortet wurden
-    if (!quizAnswers.question1 || !quizAnswers.question2) {
+    // Prüfen, ob alle Fragen beantwortet wurden
+    if (!quizAnswers.question1 || !quizAnswers.question2 || !quizAnswers.question3) {
       setQuizFeedback({
         title: "Bitte beantworten Sie alle Fragen",
-        description: "Beide Fragen müssen beantwortet werden.",
+        description: "Alle drei Fragen müssen beantwortet werden.",
         type: "warning"
       });
       return false;
@@ -611,7 +627,8 @@ function ChallengeApp() {
     // Prüfen, ob die Antworten richtig sind
     const question1Correct = quizAnswers.question1 === correctAnswers.question1;
     const question2Correct = quizAnswers.question2 === correctAnswers.question2;
-    const allCorrect = question1Correct && question2Correct;
+    const question3Correct = quizAnswers.question3 === correctAnswers.question3;
+    const allCorrect = question1Correct && question2Correct && question3Correct;
 
     if (allCorrect) {
       setQuizFeedback({
@@ -622,12 +639,14 @@ function ChallengeApp() {
       markGameAsCompleted(2);
       return true;
     } else {
+      const incorrectQuestions: string[] = [];
+      if (!question1Correct) incorrectQuestions.push("Frage 1");
+      if (!question2Correct) incorrectQuestions.push("Frage 2");
+      if (!question3Correct) incorrectQuestions.push("Frage 3");
+
       setQuizFeedback({
         title: "Leider nicht richtig",
-        description: `Folgende Fragen sind nicht richtig beantwortet: 
-          ${!question1Correct && !question2Correct ? 'Frage 1 und Frage 2' : ''}
-          ${question1Correct ? 'Frage 2' : ''}
-          ${question2Correct ? 'Frage 1' : ''}`,
+        description: `Folgende Fragen sind nicht richtig beantwortet: ${incorrectQuestions.join(', ')}`,
         type: "error"
       });
       return false;
@@ -809,14 +828,36 @@ const completedTickets = (games[0].completed ? 20 : 0) +
                       </CardHeader>
                       <CardContent className="flex items-center md:w-2/4 h-full">
                         <div className="flex flex-col justify-center items-center text-center h-full">
-                          <h3 className="text-lg font-semibold mb-1">6 Dosen Red Bull</h3>
-                          <p className="text-white/80">6 Dosen Red Bull für die maximale Produktivität 🚀</p>
+                          <h3 className="text-lg font-semibold mb-1">6 Dosen Red Bull + Perspektive Unternehmensberatung: Karriere-Ratgeber für den Einstieg ins Consulting</h3>
+                          <p className="text-white/80">Buch "Perspektive Unternehmensberatung" aus der Reihe e-fellows.net – Energie & Inspiration für deinen nächsten Karriere-Sprint!</p>
                         </div>
                       </CardContent>
                       <div className="md:w-1/4 flex justify-center items-center p-2">
                         <img 
-                          src={`${imageBaseUrl}/6_Redbull.png`} 
-                          alt="Red Bull Dosen" 
+                          src={`${imageBaseUrl}/6_Redbull_2.png`} 
+                          alt="Red Bull und Perspektive Unternehmensberatung" 
+                          className="h-24 w-auto object-contain"
+                        />
+                      </div>
+                    </div>
+                  </Card>
+                  <Card className="mt-8 bg-white/10 backdrop-blur-md text-white border-none shadow-[4px_6px_10px_rgba(0,0,0,0.15)] transform transition-transform hover:scale-101 duration-300">
+                    <div className="flex flex-col md:flex-row md:items-center py-8">
+                      <CardHeader className="relative pb-0 md:w-1/4 flex-shrink-0">
+                        <div className="md:absolute md:top-1/2 md:-translate-y-1/2 left-1/2 md:-translate-x-1/2 bg-gradient-to-r from-[#ffd700] to-[#ffec8b] text-gray-800 px-10 py-2 rounded-full shadow-md inline-block text-center">
+                          <span className="font-bold">Newsletter</span>
+                        </div>
+                      </CardHeader>
+                      <CardContent className="flex items-center md:w-2/4 h-full">
+                        <div className="flex flex-col justify-center items-center text-center h-full">
+                          <h3 className="text-lg font-semibold mb-1">200 € Amazon Gutschein</h3>
+                          <p className="text-white/80">Exklusives Newsletter + e-fellows Gewinnspiel</p>
+                        </div>
+                      </CardContent>
+                      <div className="md:w-1/4 flex justify-center items-center p-2">
+                        <img 
+                          src={`${imageBaseUrl}/Amazon_200.png`} 
+                          alt="Amazon Gutschein 200 Euro" 
                           className="h-24 w-auto object-contain"
                         />
                       </div>
@@ -847,7 +888,7 @@ const completedTickets = (games[0].completed ? 20 : 0) +
                     </Button>
                   </div>
 
-                  <div className={`absolute top-1/2 right-2 z-10 transform -translate-y-1/2 ${activeSlide === 3 ? 'hidden' : ''}`}>
+                  <div className={`absolute top-1/2 right-2 z-10 transform -translate-y-1/2 ${mobileSwiper && activeSlide === mobileSwiper.slides.length - 1 ? 'hidden' : ''}`}>
                     <Button 
                       className="h-10 w-10 rounded-full bg-white/20 backdrop-blur-sm hover:bg-white/40"
                       onClick={() => mobileSwiper?.slideNext()}
@@ -947,12 +988,38 @@ const completedTickets = (games[0].completed ? 20 : 0) +
                           </div>
                         </CardHeader>
                         <CardContent className="flex flex-col items-center pt-6">
-                          <h3 className="text-xl font-semibold text-center mb-6">6 Dosen Red Bull</h3>
-                          <p className="text-center text-white/80 mb-6">6 Dosen Red Bull für maximale Produktivität 🚀</p>
+                          <h3 className="text-xl font-semibold text-center mb-6">6 Dosen Red Bull + Perspektive Unternehmensberatung: Karriere-Ratgeber für den Einstieg ins Consulting</h3>
+                          <p className="text-center text-white/80 mb-6">Buch "Perspektive Unternehmensberatung" aus der Reihe e-fellows.net – Energie & Inspiration für deinen nächsten Karriere-Sprint!</p>
                           <div className="w-full h-32 mt-5 mb-6 overflow-hidden rounded-xl flex items-center justify-center">
                             <img
-                              src="https://dosenmatrosen.imgbolt.de/media/c8/c0/15/1691505124/GL005263-24-1-Red-Bull-Energy-Drink.png?ts=1691505124"
-                              alt="AC Goodie Bag"
+                              src={`${imageBaseUrl}/6_Redbull_2.png`}
+                              alt="Red Bull und Perspektive Unternehmensberatung"
+                              className="w-auto h-28 object-contain rounded-xl mx-auto"
+                            />
+                          </div>
+                        </CardContent>
+                      </Card>
+                    </div>
+                  </SwiperSlide>
+
+                  <SwiperSlide>
+                    <div className="flex items-center justify-center h-full">
+                      <Card
+                        key="prize-newsletter"
+                        className="overflow-visible bg-white/15 backdrop-blur-md text-white border-none shadow-[4px_6px_15px_rgba(0,0,0,0.2)] w-full h-[420px]"
+                      >
+                        <CardHeader className="relative pb-0 pt-8">
+                          <div className="absolute -top-5 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-[#ffd700] to-[#ffec8b] text-gray-800 px-6 py-2 rounded-full shadow-md">
+                            <span className="font-bold text-lg">Newsletter</span>
+                          </div>
+                        </CardHeader>
+                        <CardContent className="flex flex-col items-center pt-6">
+                          <h3 className="text-xl font-semibold text-center mb-6">200 € Amazon Gutschein</h3>
+                          <p className="text-center text-white/80 mb-6 px-4">Newsletter- & e-fellows-Gewinnspiel • Buch "Perspektive Unternehmensberatung" inklusive</p>
+                          <div className="w-full h-32 mt-5 mb-6 overflow-hidden rounded-xl flex items-center justify-center">
+                            <img
+                              src={`${imageBaseUrl}/Amazon_200.png`}
+                              alt="Amazon Gutschein 200 Euro"
                               className="w-auto h-28 object-contain rounded-xl mx-auto"
                             />
                           </div>
@@ -1040,10 +1107,6 @@ const completedTickets = (games[0].completed ? 20 : 0) +
   </div>
 </div>
       </section>
-
-      {/* Coffee Chat Sektion */}
-      <CoffeeChats profiles={coffeeProfiles} />
-
       {/* Games Section */}
       <section id="games-section" className="bg-white pt-14 pb-6 w-screen overflow-hidden relative">
         <SectionDivider title="Die Challenge" />
@@ -1319,6 +1382,59 @@ const completedTickets = (games[0].completed ? 20 : 0) +
                                   </div>
                                 </div>
 
+                                {/* Frage 3 */}
+                                <div className="space-y-3">
+                                  <h3 className="font-semibold text-lg">
+                                    3. Das Online-Stipendium von e-fellows.net bietet über 50 geldwerte Leistungen – darunter kostenlose Print- und Digital-Abos. Wie viele renommierte Zeitungen und Zeitschriften kannst du als e-fellows.net-Stipendiat:in kostenlos abonnieren?
+                                  </h3>
+                                  <div className="space-y-2">
+                                    <div className="flex items-center">
+                                      <input
+                                        type="radio"
+                                        id="q3-a"
+                                        name="question3"
+                                        className="mr-2 h-4 w-4 accent-[#993333]"
+                                        checked={quizAnswers.question3 === 'A'}
+                                        onChange={() => setQuizAnswers({ ...quizAnswers, question3: 'A' })}
+                                      />
+                                      <label htmlFor="q3-a">A: 27</label>
+                                    </div>
+                                    <div className="flex items-center">
+                                      <input
+                                        type="radio"
+                                        id="q3-b"
+                                        name="question3"
+                                        className="mr-2 h-4 w-4 accent-[#993333]"
+                                        checked={quizAnswers.question3 === 'B'}
+                                        onChange={() => setQuizAnswers({ ...quizAnswers, question3: 'B' })}
+                                      />
+                                      <label htmlFor="q3-b">B: 16</label>
+                                    </div>
+                                    <div className="flex items-center">
+                                      <input
+                                        type="radio"
+                                        id="q3-c"
+                                        name="question3"
+                                        className="mr-2 h-4 w-4 accent-[#993333]"
+                                        checked={quizAnswers.question3 === 'C'}
+                                        onChange={() => setQuizAnswers({ ...quizAnswers, question3: 'C' })}
+                                      />
+                                      <label htmlFor="q3-c">C: 10</label>
+                                    </div>
+                                    <div className="flex items-center">
+                                      <input
+                                        type="radio"
+                                        id="q3-d"
+                                        name="question3"
+                                        className="mr-2 h-4 w-4 accent-[#993333]"
+                                        checked={quizAnswers.question3 === 'D'}
+                                        onChange={() => setQuizAnswers({ ...quizAnswers, question3: 'D' })}
+                                      />
+                                      <label htmlFor="q3-d">D: Keine</label>
+                                    </div>
+                                  </div>
+                                </div>
+
                                 {/* Feedback-Alert für das Quiz */}
                                 {quizFeedback && (
                                   <Alert
@@ -1537,12 +1653,12 @@ const completedTickets = (games[0].completed ? 20 : 0) +
                           htmlFor="newsletter"
                           className="text-sm font-medium leading-none cursor-pointer"
                         >
-                          Newsletter abonnieren
+                          <span className="text-[#993333] font-semibold">Chance auf 200€:</span> Newsletter abonnieren
                         </Label>
                       </div>
                       {newsletterOptIn ? (
                         <div className="rounded-md border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-900">
-                          Ja, ich möchte per E-Mail Informationen von Academy Consult e. V. zur Bewerbungsphase erhalten (Fristen, Auswahlverfahren, Events & Vereinsinfos). Ich willige ein, dass Academy Consult e. V. meine E-Mail-Adresse zu diesem Zweck verarbeitet. Widerruf jederzeit über den Abmeldelink oder per Mail an <a href="mailto:hey@academyconsult.de" className="underline font-medium">hey[at]academyconsult.de</a>. Details in der{' '}
+                          Ja, ich möchte per E-Mail Informationen von Academy Consult e. V. zur Bewerbungsphase erhalten (Fristen, Auswahlverfahren, Events & Vereinsinfos und Informationen zum Gewinnspiel mit unserem Partner e-fellows). Ich willige ein, dass Academy Consult e. V. meine E-Mail-Adresse zu diesem Zweck verarbeitet. Widerruf jederzeit über den Abmeldelink oder per Mail an <a href="mailto:hey@academyconsult.de" className="underline font-medium">hey[at]academyconsult.de</a>. Details in der{' '}
                           <a
                             href="https://ac-vibe-hack.notion.site/Datenschutzbestimmungen-1d03d6763f7b80af8b50e2362a25c4c7?pvs=74"
                             target="_blank"
@@ -1747,6 +1863,9 @@ const completedTickets = (games[0].completed ? 20 : 0) +
         </div>
       </section>
 
+      {/* Coffee Chat Sektion */}
+      <CoffeeChats profiles={coffeeProfiles} />
+
       {/* Spotlight Event */}
       <section className="bg-white py-16 md:py-24">
         <SectionDivider title="Spotlight Event" />
@@ -1766,7 +1885,7 @@ const completedTickets = (games[0].completed ? 20 : 0) +
                   23. Oktober · Celonis Office · 10:00–22:00 Uhr
                 </div>
                 <h3 className="mt-4 text-3xl font-bold text-neutral-900">
-                  hACk the case | Celonis| Lovable 
+                  hACk the case | Celonis | Lovable
                 </h3>
                 <p className="mt-4 text-base leading-relaxed text-neutral-700">
                   Du interessierst dich für Data Analytics, Beratung, Programmierung oder komplexe Problemstellungen? Du studierst in München und möchtest dein Semester mit einem besonderen Erlebnis starten? Dann erlebe gemeinsam mit uns einen ganzen Tag voller Cases, Teamwork und Insights im Celonis Office.
@@ -1779,7 +1898,7 @@ const completedTickets = (games[0].completed ? 20 : 0) +
                   rel="noopener noreferrer"
                   className="inline-flex w-full items-center justify-center rounded-full bg-[#993333] px-6 py-3 text-base font-semibold text-white shadow-lg transition-transform duration-300 hover:scale-[1.02] hover:bg-[#7a2828] md:w-auto"
                 >
-                  Jetzt Platz sichern
+                  Jetzt anmelden
                 </a>
               </div>
             </div>
