@@ -1039,7 +1039,7 @@ const completedTickets = (games[0].completed ? 20 : 0) +
         style={{ height: "110px", width: "auto", transform: "translateZ(0)" }}
       />
       <img
-        src={`${imageBaseUrl}/e_fellows_logo.svg`}
+        src="/e_fellows_logo.svg"
         alt="e-fellows.net Logo"
         className="rounded-lg"
         style={{ height: "90px", width: "auto", transform: "translateZ(0)" }}
@@ -1054,7 +1054,7 @@ const completedTickets = (games[0].completed ? 20 : 0) +
       {Array(10).fill(null).map((_, i) => {
         const logos = [
           { src: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/Logo_TWE_gross.jpg/1200px-Logo_TWE_gross.jpg", alt: "Therme Erding Logo" },
-          { src: `${imageBaseUrl}//e_fellows_logo.svg`, alt: "e-fellows.net Logo" }
+          { src: "/e_fellows_logo.svg", alt: "e-fellows.net Logo" }
         ];
 
         const logo = logos[i % logos.length];
@@ -1077,7 +1077,7 @@ const completedTickets = (games[0].completed ? 20 : 0) +
       {Array(10).fill(null).map((_, i) => {
         const logos = [
           { src: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/Logo_TWE_gross.jpg/1200px-Logo_TWE_gross.jpg", alt: "Therme Erding Logo" },
-          { src: `${imageBaseUrl}/e_fellows_logo.svg`, alt: "e-fellows.net Logo" }
+          { src: "/e_fellows_logo.svg", alt: "e-fellows.net Logo" }
         ];
 
         const logo = logos[i % logos.length];

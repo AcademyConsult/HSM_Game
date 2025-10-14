@@ -13,7 +13,7 @@ import 'swiper/css/navigation';
 
 import { CustomPagination } from '@/components/ui/SwiperEventCarousel';
 
-const imageBaseUrl = 'https://raw.githubusercontent.com/AcademyConsult/HSM_Game/refs/heads/main/public';
+const imageBaseUrl = '';
 
 export type CoffeeProfile = {
   displayName: string;
