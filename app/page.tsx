@@ -63,10 +63,10 @@ function ChallengeApp() {
   const [estimationError, setEstimationError] = useState<string | null>(null);
   const { executeRecaptcha } = useGoogleReCaptcha();
 
-  const imageBaseUrl = "https://raw.githubusercontent.com/AcademyConsult/HSM_Game/refs/heads/main/public";
+  const imageBaseUrl = "";
   const placeholderImage = `${imageBaseUrl}/placeholder.svg`;
 
-  const airpodsImage = `${imageBaseUrl}/airpods-pro%203%5B53%5D.png`;
+  const airpodsImage = `${imageBaseUrl}/airpods-pro 3[53].png`;
 
   const prizes = [
     {
@@ -169,7 +169,7 @@ function ChallengeApp() {
       description: "Schau bei uns im Büro vorbei, lerne das Team kennen und erhalte einen Eindruck von unserer Arbeitsweise.",
       eventbride:
         "https://www.eventbrite.com/e/open-buro-day-academy-consult-tickets-1754474894639?utm-medium=discovery&utm-campaign=social&utm-content=attendeeshare&utm-source=up&utm-term=user-profile&aff=ebdsshcopyurl",
-      image: `${imageBaseUrl}/B%C3%BCro.jpg`,
+      image: `${imageBaseUrl}/Büro.jpg`,
     },
   ];
 
