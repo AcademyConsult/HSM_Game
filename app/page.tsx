@@ -1830,16 +1830,6 @@ const completedTickets = (games[0].completed ? 20 : 0) +
                   Du interessierst dich für Data Analytics, Beratung, Programmierung oder komplexe Problemstellungen? Du studierst in München und möchtest dein Semester mit einem besonderen Erlebnis starten? Dann erlebe gemeinsam mit uns einen ganzen Tag voller Cases, Teamwork und Insights im Celonis Office.
                 </p>
               </div>
-              <div className="flex flex-wrap items-center gap-3">
-                <a
-                  href="https://luma.com/k3fc75dg"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex w-full items-center justify-center rounded-full bg-[#993333] px-6 py-3 text-base font-semibold text-white shadow-lg transition-transform duration-300 hover:scale-[1.02] hover:bg-[#7a2828] md:w-auto"
-                >
-                  Jetzt anmelden
-                </a>
-              </div>
             </div>
           </div>
         </div>
