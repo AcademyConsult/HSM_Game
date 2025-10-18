@@ -18,11 +18,6 @@ const emailHtml = String.raw`<!DOCTYPE html>
 <title>You’re in — hACk the Case</title>
 </head>
 <body style="margin:0;padding:0;background:#000000;">
-  <!-- Preheader (hidden) -->
-  <div style="display:none;max-height:0;overflow:hidden;opacity:0;">
-    You’re in — hACk the Case on Thursday, 23 October at Celonis (Munich).
-  </div>
-
   <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="background:#000000;">
     <tr>
       <td align="center">
@@ -132,38 +127,6 @@ const emailHtml = String.raw`<!DOCTYPE html>
                         <a href="mailto:hackathon@academyconsult.de" style="color:#993333;text-decoration:underline;">hackathon@academyconsult.de</a>.
                       </li>
                     </ul>
-                  </td>
-                </tr>
-              </table>
-            </td>
-          </tr>
-
-          <!-- Card: Optional Talent Pool + CTA -->
-          <tr>
-            <td style="padding:16px 24px 0 24px;">
-              <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0"
-                     style="border:1px solid #333333;border-radius:12px;background:#000000;">
-                <tr>
-                  <td style="padding:14px 18px 10px 18px;font-family:Verdana, Geneva, sans-serif;">
-                    <div style="font-weight:700;color:#993333;font-size:13pt;line-height:1.3;">Optional: Celonis Talent Pool</div>
-                  </td>
-                </tr>
-                <tr>
-                  <td style="padding:0 18px 16px 18px;font-family:Verdana, Geneva, sans-serif;font-size:11pt;line-height:1.6;color:#ffffff;">
-                    <p style="margin:0 0 12px 0;">
-                      As one of our sponsors, Celonis has a Talent Pool to track where later applicants had their initial contact (e.g., hACk the Case).
-                      You can sign up here. This is not a newsletter; signing up via this link prioritizes your application in Celonis’ process.
-                    </p>
-                    <table role="presentation" cellspacing="0" cellpadding="0" border="0">
-                      <tr>
-                        <td style="background:#993333;border-radius:8px;">
-                          <a href="https://app3.greenhouse.io/e/okotjj"
-                             style="display:inline-block;padding:10px 16px;font-family:Verdana, Geneva, sans-serif;font-size:11pt;color:#ffffff;text-decoration:none;font-weight:700;">
-                             Join Celonis Talent Pool
-                          </a>
-                        </td>
-                      </tr>
-                    </table>
                   </td>
                 </tr>
               </table>
