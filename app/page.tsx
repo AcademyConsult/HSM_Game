@@ -2534,7 +2534,7 @@ function ChallengeApp() {
           <div className="mx-auto grid max-w-5xl gap-8 rounded-3xl bg-white p-6 shadow-2xl ring-1 ring-black/5 md:grid-cols-[1.1fr,1fr] md:p-10">
             <div className="relative overflow-hidden rounded-2xl">
               <img
-                src="https://images.lumacdn.com/cdn-cgi/image/format=auto,fit=cover,dpr=1,background=white,quality=75,width=400,height=400/event-covers/ge/35d2e004-98d1-44a8-85ac-cea7c721e158.png"
+                src="https://images.lumacdn.com/cdn-cgi/image/format=auto,fit=cover,dpr=2,background=white,quality=75,width=400,height=400/event-covers/bk/53f57602-1317-43a6-b310-14ce8409d2df.png"
                 alt="AC Hack the Case"
                 className="h-full w-full object-cover"
                 loading="lazy"
