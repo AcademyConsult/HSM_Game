@@ -101,30 +101,24 @@ function ChallengeApp() {
   const imageBaseUrl = '';
   const placeholderImage = `${imageBaseUrl}/placeholder.svg`;
 
-  const airpodsImage = `${imageBaseUrl}/airpods-pro 3[53].png`;
-
   const prizes = [
     {
       position: '1',
       title: 'Hauptpreis',
-      description: 'Air Pods Pro 3',
-      image: airpodsImage,
+      description: 'Tiny House Trip von Raus.Life',
+      image: placeholderImage,
     },
     {
       position: '2',
       title: 'Zweiter Preis',
-      description: '2 Tickets für die Therme Erding',
-      image: `${imageBaseUrl}/Erding.jpeg`,
-      //"https://img.br.de/2dcb69b4-aae2-4d30-97ef-698f0489a175.jpeg?rect=0,60,1920,960&_naturalWidth=1920&_naturalHeight=1080",
-      //"https://img.br.de/3b42b4d7-5188-4d0d-a644-51c5aa1df94c.jpeg?_naturalWidth=1920&_naturalHeight=1080&rect=0%2C0%2C1920%2C1080&q=70",
+      description: '2 × 100 € Amazon Gutschein von E-Fellows',
+      image: `${imageBaseUrl}/efellowsmax.png`,
     },
     {
       position: '3',
       title: 'Dritter Preis',
-      description: 'Rewe Gutschein im Wert von 50€',
-      image:
-        //"https://kartedirekt.de/images/products/rewe-geschenkkarte-50-eur-1702903315.png",
-        'https://upload.wikimedia.org/wikipedia/commons/5/5a/REWE_Dein_Markt-Logo_neu.png',
+      description: 'Boulderwelt Ticket',
+      image: placeholderImage,
     },
   ];
 
@@ -132,257 +126,190 @@ function ChallengeApp() {
     {
       id: 1,
       title: 'Bewerbertraining',
-      date: '2025-10-13',
-      time: '16:00-18:00',
+      date: '2026-04-15',
+      time: '20:00-21:00',
       location: 'AC Büro, Leopoldstraße 62',
       description:
         'Beim Bewerbertraining lernst du das Wichtigste, was du vor einem Bewerbungsprozess wissen musst.',
-      eventbride:
-        'https://www.eventbrite.com/e/bewerbertraining-academy-consult-tickets-1321104472039?utm-medium=discovery&utm-campaign=social&utm-content=attendeeshare&utm-source=up&utm-term=user-profile&aff=ebdsshcopyurl',
-      image: `${imageBaseUrl}/bewerbertraining.jpg`,
+      eventbride: 'https://luma.com/f8fq8pat',
+      image: 'https://images.lumacdn.com/cdn-cgi/image/format=auto,fit=cover,dpr=2,background=white,quality=75,width=400,height=400/gallery-images/yd/c8ded50f-24e7-4af0-aeb2-9bac97712e4c.png',
     },
     {
       id: 2,
       title: 'Digitaler Infoabend',
-      date: '2025-10-14',
-      time: '19:00-20:00',
+      date: '2026-04-16',
+      time: '18:00-19:00',
       location: 'Online',
       description:
         'Lerne Academy Consult bequem von zu Hause aus kennen und stelle deine Fragen im digitalen Infoabend.',
-      eventbride:
-        'https://www.eventbrite.com/e/digitaler-infoabend-academy-consult-tickets-1764986836139?utm-medium=discovery&utm-campaign=social&utm-content=attendeeshare&utm-source=up&utm-term=user-profile&aff=ebdsshcopyurl',
-      image: `${imageBaseUrl}/OnlineInfo.jpeg`,
+      eventbride: 'https://luma.com/7hur5ig6',
+      image: 'https://images.lumacdn.com/cdn-cgi/image/format=auto,fit=cover,dpr=2,background=white,quality=75,width=400,height=400/gallery-images/x4/232b7986-33f1-4753-928d-84910cd55dd8.png',
     },
     {
       id: 3,
-      title: 'Digitaler Infoabend',
-      date: '2025-10-16',
-      time: '19:00-20:00',
-      location: 'Online',
+      title: 'AC Run Club',
+      date: '2026-04-17',
+      time: '11:00-12:30',
+      location: 'München',
       description:
-        'Erfahre mehr über unsere Projekte, den Bewerbungsprozess und den Verein im digitalen Infoabend.',
-      eventbride:
-        'https://www.eventbrite.com/e/digitaler-infoabend-academy-consult-tickets-1768521127299?utm-medium=discovery&utm-campaign=social&utm-content=attendeeshare&utm-source=up&utm-term=user-profile&aff=ebdsshcopyurl',
-      image: `${imageBaseUrl}/OnlineInfo.jpeg`,
+        'Lauf mit uns! Beim AC Run Club lernst du das Team kennen und startest sportlich in den Tag.',
+      eventbride: 'https://luma.com/bv25uxay',
+      image: 'https://images.lumacdn.com/cdn-cgi/image/format=auto,fit=cover,dpr=2,background=white,quality=75,width=400,height=400/gallery-images/y7/c0802c16-d438-4337-906f-70e71f2506d1',
     },
     {
       id: 4,
-      title: 'Case Workshop',
-      date: '2025-10-21',
-      time: '15:00-18:00',
-      location: 'AC Büro, Leopoldstraße 62',
-      description:
-        'Trainiere gemeinsam mit uns dein Fallstudien-Know-how und erhalte praxisnahe Tipps von erfahrenen Berater:innen.',
-      eventbride:
-        'https://www.eventbrite.com/e/case-workshop-mit-academy-consult-tickets-1768533745039?utm-medium=discovery&utm-campaign=social&utm-content=attendeeshare&utm-source=up&utm-term=user-profile&aff=ebdsshcopyurl',
-      image: `${imageBaseUrl}/caseTraining.jpg`,
-    },
-    {
-      id: 5,
-      title: 'Infoabend LMU',
-      date: '2025-10-21',
-      time: '19:00-20:00',
-      location: 'LMU Hauptgebäude, Hörsaal A199',
-      description:
-        'Lerne uns an der LMU kennen und erfahre alles über deine Einstiegsmöglichkeiten bei Academy Consult.',
-      eventbride:
-        'https://www.eventbrite.com/e/infoabend-academy-consult-lmu-tickets-1754456449469?utm-medium=discovery&utm-campaign=social&utm-content=attendeeshare&utm-source=up&utm-term=user-profile&aff=ebdsshcopyurl',
-      image: `${imageBaseUrl}/LMU.jpg`,
-    },
-    {
-      id: 6,
-      title: 'Infoabend TUM',
-      date: '2025-10-23',
-      time: '19:00-20:00',
-      location: 'TUM Stammgelände, Raum 0601',
-      description:
-        'Triff unser Team an der TUM und erhalte spannende Einblicke in Projekte und den Bewerbungsprozess.',
-      eventbride:
-        'https://www.eventbrite.com/e/infoabend-academy-consult-tum-tickets-1754419619309?utm-medium=discovery&utm-campaign=social&utm-content=attendeeshare&utm-source=up&utm-term=user-profile&aff=ebdsshcopyurl',
-      image: `${imageBaseUrl}/TUM.jpeg`,
-    },
-    {
-      id: 7,
       title: 'Open Büro Day',
-      date: '2025-10-24',
-      time: '15:00-18:00',
+      date: '2026-04-18',
+      time: '13:00-17:00',
       location: 'AC Büro, Leopoldstraße 62',
       description:
         'Schau bei uns im Büro vorbei, lerne das Team kennen und erhalte einen Eindruck von unserer Arbeitsweise.',
-      eventbride:
-        'https://www.eventbrite.com/e/open-buro-day-academy-consult-tickets-1754474894639?utm-medium=discovery&utm-campaign=social&utm-content=attendeeshare&utm-source=up&utm-term=user-profile&aff=ebdsshcopyurl',
-      image: `${imageBaseUrl}/Büro.jpg`,
+      eventbride: 'https://luma.com/axdrxl30',
+      image: 'https://images.lumacdn.com/cdn-cgi/image/format=auto,fit=cover,dpr=2,background=white,quality=75,width=400,height=400/gallery-images/0j/d8aeea63-be66-4dff-afc5-216fa740189f',
+    },
+    {
+      id: 5,
+      title: 'Yoga',
+      date: '2026-04-19',
+      time: '11:00-12:00',
+      location: 'München',
+      description:
+        'Entspann dich mit uns bei einer gemeinsamen Yoga-Session und lerne das AC-Team auf andere Art kennen.',
+      eventbride: 'https://luma.com/8ykfr9n1',
+      image: 'https://images.lumacdn.com/cdn-cgi/image/format=auto,fit=cover,dpr=2,background=white,quality=75,width=400,height=400/gallery-images/v3/4a4a9c1b-eba8-4447-be65-f6b3c4b0a97c.png',
     },
   ];
 
   const coffeeProfiles: CoffeeProfile[] = [
     {
-      displayName: 'Linus',
-      degreeProgram: 'Management & Technology',
+      displayName: 'Katharina',
+      degreeProgram: 'BWL',
+      stage: 'Bachelor',
+      university: 'LMU',
+      currentSemester: 2,
+      imageLink: `${imageBaseUrl}/Katharina.jpg`,
+      calendarLink: 'https://calendly.com/academy-consult-munich/coffee-chat',
+      linkedinLink: 'http://www.linkedin.com/in/katharina-barr',
+    },
+    {
+      displayName: 'Fabian',
+      degreeProgram: 'TUM-BWL',
+      stage: 'Bachelor',
+      university: 'TUM',
+      currentSemester: 4,
+      imageLink: `${imageBaseUrl}/Fabian.jpg`,
+      calendarLink: 'https://calendly.com/academy-consult-munich/coffee-chat',
+      linkedinLink: 'https://www.linkedin.com/in/fabian-kienreich/',
+    },
+    {
+      displayName: 'Paul',
+      degreeProgram: 'Robotics, Cognition, Intelligence',
       stage: 'Master',
       university: 'TUM',
-      currentSemester: 2,
-      imageLink: `${imageBaseUrl}/Linus.jpg`,
-      calendarLink:
-        'https://calendly.com/linus-weber-academyconsult/neues-meeting',
-      linkedinLink:
-        'https://www.linkedin.com/in/weber-linus?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app',
+      currentSemester: 1,
+      imageLink: `${imageBaseUrl}/Paul.jpg`,
+      calendarLink: 'https://calendly.com/academy-consult-munich/coffee-chat',
+      linkedinLink: 'https://www.linkedin.com/in/paul-wirth',
     },
     {
-      displayName: 'Franziska',
-      degreeProgram: 'VWL',
-      stage: 'Bachelor',
-      university: 'LMU',
-      currentSemester: 3,
-      imageLink: `${imageBaseUrl}/Franzi.jpeg`,
-      calendarLink:
-        'https://calendly.com/franziska-holzmann-academyconsult/30min',
-      linkedinLink:
-        'https://www.linkedin.com/in/franziska-holzmann-884452337?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app',
-    },
-    {
-      displayName: 'Bente',
-      degreeProgram: 'Maschinenwesen',
-      stage: 'Bachelor',
-      university: 'TUM',
-      currentSemester: 3,
-      imageLink: `${imageBaseUrl}/Bente.jpeg`,
-      calendarLink:
-        'https://calendly.com/academy-consult-munich/coffee-chat',
-      linkedinLink:
-        'https://www.linkedin.com/in/bentebraun?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app',
-    },
-    {
-      displayName: 'Theresa',
-      degreeProgram: 'BWL',
-      stage: 'Bachelor',
-      university: 'LMU',
-      currentSemester: 3,
-      imageLink: `${imageBaseUrl}/Theresa.jpg`,
-      calendarLink:
-        'https://calendly.com/theresa-stolle-academyconsult/30min',
-      linkedinLink:
-        'https://www.linkedin.com/in/theresa-stolle-455623353?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app',
-    },
-    {
-      displayName: 'Maik',
-      degreeProgram: 'Physik',
-      stage: 'Bachelor',
-      university: 'TUM',
-      currentSemester: 3,
-      imageLink: `${imageBaseUrl}/Maik.jpg`,
-      calendarLink:
-        'https://calendly.com/maik-wagenblast-academyconsult/30min',
-      linkedinLink:
-        'https://www.linkedin.com/in/maik-wagenblast-ba13662b8?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app',
-    },
-    {
-      displayName: 'Anna',
+      displayName: 'Linus',
       degreeProgram: 'Management & Technology',
       stage: 'Bachelor',
       university: 'TUM',
-      currentSemester: 3,
-      imageLink: `${imageBaseUrl}/Anna.jpg`,
-      calendarLink:
-        'https://calendly.com/anna-krieger-academyconsult/30min',
-      linkedinLink:
-        'https://www.linkedin.com/in/anna-krieger-45128830b?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app',
+      currentSemester: 4,
+      imageLink: `${imageBaseUrl}/LinusKlett.jpg`,
+      calendarLink: 'https://calendly.com/academy-consult-munich/coffee-chat',
+      linkedinLink: 'https://www.linkedin.com/in/linusjklett',
     },
-    {
-      displayName: 'Michael',
-      degreeProgram: 'Jura',
-      stage: 'Bachelor',
-      university: 'LMU',
-      currentSemester: 3,
-      imageLink: `${imageBaseUrl}/Michael.jpg`,
-      calendarLink:
-        'https://calendly.com/michael-schweizer-academyconsult/30min',
-      linkedinLink:
-        'https://www.linkedin.com/in/schweizer-michael?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app',
-    },
-
-    {
-      displayName: 'Kalle',
-      degreeProgram: 'Physik',
-      stage: 'Bachelor',
-      university: 'TUM',
-      currentSemester: 3,
-      imageLink: `${imageBaseUrl}/Kalle.jpg`,
-      calendarLink: 'https://calendly.com/kpk2701/30min',
-      linkedinLink:
-        'https://www.linkedin.com/in/kalle-kersten?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app',
-    },
-    {
-      displayName: 'Johannes',
-      degreeProgram: 'Management & Technology',
-      stage: 'Bachelor',
-      university: 'TUM',
-      currentSemester: 3,
-      imageLink: `${imageBaseUrl}/Johannes.jpg`,
-      calendarLink:
-        'https://calendly.com/johannes-kask-academyconsult/30min',
-      linkedinLink:
-        'https://www.linkedin.com/in/jkask?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app',
-    },
-    {
-      displayName: 'Jannis',
-      degreeProgram: 'Informatik',
-      stage: 'Bachelor',
-      university: 'TUM',
-      currentSemester: 7,
-      imageLink: `${imageBaseUrl}/Jannis.jpg`,
-      calendarLink:
-        'https://calendly.com/jannis-hoeferlin-academyconsult/coffee-chat',
-      linkedinLink:
-        'https://www.linkedin.com/in/jannis-hoeferlin?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app',
-    },
-    {
-      displayName: 'Julie',
-      degreeProgram: 'Management & Technology',
-      stage: 'Bachelor',
-      university: 'TUM',
-      currentSemester: 3,
-      imageLink: `${imageBaseUrl}/Julie.jpg`,
-      calendarLink:
-        'https://calendly.com/julie-kappeler-academyconsult/30min',
-      linkedinLink:
-        'https://www.linkedin.com/in/julie-johanna-kappeler-227a25294?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app',
-    },
-    {
-      displayName: 'Vincent',
-      degreeProgram: 'BWL',
-      stage: 'Bachelor',
-      university: 'LMU',
-      currentSemester: 3,
-      imageLink: `${imageBaseUrl}/Vincent.jpg`,
-      calendarLink:
-        'https://calendly.com/vincent-pfeffer-academyconsult/30min',
-      linkedinLink:
-        'https://www.linkedin.com/in/vincent-pfeffer-87b575329?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app',
-    },
-
     {
       displayName: 'Philipp',
       degreeProgram: 'Management & Technology',
       stage: 'Bachelor',
       university: 'TUM',
-      currentSemester: 3,
+      currentSemester: 4,
       imageLink: `${imageBaseUrl}/Philipp.jpeg`,
       calendarLink: 'https://calendly.com/philipp-liebold/ac',
-      linkedinLink:
-        'https://www.linkedin.com/in/philipp-liebold?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app',
+      linkedinLink: 'https://www.linkedin.com/in/philipp-liebold/',
+    },
+    {
+      displayName: 'Lorenz',
+      degreeProgram: 'Engineering Science',
+      stage: 'Bachelor',
+      university: 'TUM',
+      currentSemester: 4,
+      imageLink: placeholderImage,
+      calendarLink: 'https://calendly.com/academy-consult-munich/coffee-chat',
+      linkedinLink: 'https://www.linkedin.com/in/lorenz-thieroff',
     },
     {
       displayName: 'Annalena',
       degreeProgram: 'Management & Technology',
       stage: 'Bachelor',
       university: 'TUM',
-      currentSemester: 5,
+      currentSemester: 6,
       imageLink: `${imageBaseUrl}/Annalena.jpg`,
-      calendarLink:
-        'https://calendly.com/annalena-pellkofer-academyconsult/30min',
-      linkedinLink:
-        'https://www.linkedin.com/in/annalena-plk?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app',
+      calendarLink: 'https://calendly.com/annalena-pellkofer-academyconsult/30min',
+      linkedinLink: 'https://www.linkedin.com/in/annalena-plk/',
+    },
+    {
+      displayName: 'Lukas',
+      degreeProgram: 'Wirtschaftsinformatik',
+      stage: 'Master',
+      university: 'TUM',
+      currentSemester: 4,
+      imageLink: placeholderImage,
+      calendarLink: 'https://calendly.com/academy-consult-munich/coffee-chat',
+      linkedinLink: 'https://www.linkedin.com/in/lukas-rueger/',
+    },
+    {
+      displayName: 'Anna',
+      degreeProgram: 'Rechtswissenschaften',
+      stage: 'Bachelor',
+      university: 'LMU',
+      currentSemester: 4,
+      imageLink: placeholderImage,
+      calendarLink: 'https://calendly.com/academy-consult-munich/coffee-chat',
+      linkedinLink: 'https://www.linkedin.com/in/anna-katharina-kahlert-07046a29b',
+    },
+    {
+      displayName: 'Leon',
+      degreeProgram: 'Management & Technology',
+      stage: 'Bachelor',
+      university: 'TUM',
+      currentSemester: 6,
+      imageLink: placeholderImage,
+      calendarLink: 'https://calendly.com/academy-consult-munich/coffee-chat',
+      linkedinLink: 'https://www.linkedin.com/in/leon-thumm/',
+    },
+    {
+      displayName: 'Anna',
+      degreeProgram: 'Management & Technology',
+      stage: 'Bachelor',
+      university: 'TUM',
+      currentSemester: 4,
+      imageLink: `${imageBaseUrl}/Anna.jpg`,
+      calendarLink: 'https://calendly.com/anna-krieger-academyconsult/30min',
+      linkedinLink: 'https://www.linkedin.com/in/anna-krieger-45128830b',
+    },
+    {
+      displayName: 'Johannes',
+      degreeProgram: 'Management & Technology',
+      stage: 'Bachelor',
+      university: 'TUM',
+      currentSemester: 4,
+      imageLink: `${imageBaseUrl}/Johannes.jpg`,
+      calendarLink: 'https://calendly.com/johannes-kask-academyconsult/30min',
+      linkedinLink: 'https://www.linkedin.com/in/jkask',
+    },
+    {
+      displayName: 'Noah',
+      degreeProgram: 'Wirtschaftsinformatik',
+      stage: 'Master',
+      university: 'TUM',
+      currentSemester: 1,
+      imageLink: placeholderImage,
+      calendarLink: 'https://calendly.com/academy-consult-munich/coffee-chat',
+      linkedinLink: '',
     },
   ];
 
@@ -885,8 +812,8 @@ function ChallengeApp() {
                       {prizes[1].description}
                     </h3>
                     <p className="text-center text-white/80 mb-4">
-                      Für die perfekte Erholungspause während des
-                      Semesters 🏝️
+                      Exklusiv von E-Fellows – je 100 € für deinen nächsten
+                      Amazon-Einkauf 🛒
                     </p>
                     <div className="w-full h-32 mt-2 overflow-hidden rounded-xl flex items-center justify-center">
                       <img
@@ -915,7 +842,7 @@ function ChallengeApp() {
                       {prizes[0].description}
                     </h3>
                     <p className="text-center text-white/80 mb-6">
-                      Für eine ungestörte Study-Session 🎵 📚
+                      2 Nächte für 2 Personen in einer Cabin nach Wahl, einlösbar bis 31.12.2026 🏡
                     </p>
                     <div className="flex-1 w-full flex items-center justify-center overflow-hidden rounded-xl">
                       <img
@@ -942,8 +869,7 @@ function ChallengeApp() {
                       {prizes[2].description}
                     </h3>
                     <p className="text-center text-white/80 mb-4">
-                      We got you! Dein nächster Einkauf geht auf uns
-                      🛍️
+                      Semesterticket oder Einzeltickets zum Klettern 🧗
                     </p>
                     <div className="w-full mt-2 flex items-center justify-center">
                       <img
@@ -955,68 +881,66 @@ function ChallengeApp() {
                   </CardContent>
                 </Card>
               </div>
-              {/* Trostpreis - flacher und unten */}
-              <div className="hidden md:block mt-8 px-4 container mx-auto max-w-5xl">
-                <Card className="bg-white/10 backdrop-blur-md text-white border-none shadow-[4px_6px_10px_rgba(0,0,0,0.15)] transform transition-transform hover:scale-101 duration-300">
-                  <div className="flex flex-col md:flex-row md:items-center py-5">
-                    <CardHeader className="relative pb-0 md:w-1/4 flex-shrink-0">
-                      <div className="md:absolute md:top-1/2 md:-translate-y-1/2 left-1/2 md:-translate-x-1/2 bg-gradient-to-r from-[#a9a9a9] to-[#d3d3d3] text-gray-700 px-10 py-2 rounded-full shadow-md inline-block text-center">
-                        <span className="font-medium">
-                          4.-10. Preis
-                        </span>
-                      </div>
-                    </CardHeader>
-                    <CardContent className="flex items-center md:w-2/4 h-full">
-                      <div className="flex flex-col justify-center items-center text-center h-full">
-                        <h3 className="text-lg font-semibold mb-1">
-                          6 Dosen Red Bull + Perspektive
-                          Unternehmensberatung: Karriere-Ratgeber für
-                          den Einstieg ins Consulting
-                        </h3>
-                        <p className="text-white/80">
-                          Buch "Perspektive Unternehmensberatung" aus
-                          der Reihe e-fellows.net – Energie &
-                          Inspiration für deinen nächsten
-                          Karriere-Sprint!
-                        </p>
-                      </div>
-                    </CardContent>
-                    <div className="md:w-1/4 flex justify-center items-center p-2">
-                      <img
-                        src={`${imageBaseUrl}/6_Redbull_2.png`}
-                        alt="Red Bull und Perspektive Unternehmensberatung"
-                        className="h-24 w-auto object-contain"
-                      />
-                    </div>
+              {/* Weitere Preise */}
+              <div className="hidden md:block mt-10 px-4 container mx-auto max-w-5xl space-y-3">
+                {/* 3.-12. Preis */}
+                <div className="flex items-center gap-4 bg-white/10 backdrop-blur-md rounded-2xl px-6 py-4 text-white shadow-[4px_6px_10px_rgba(0,0,0,0.12)] hover:bg-white/15 transition-colors duration-200">
+                  <div className="flex-shrink-0 w-28 text-center">
+                    <span className="inline-block bg-white/20 text-white text-sm font-semibold px-3 py-1 rounded-full">
+                      3.–12. Platz
+                    </span>
                   </div>
-                </Card>
-                <Card className="mt-8 bg-white/10 backdrop-blur-md text-white border-none shadow-[4px_6px_10px_rgba(0,0,0,0.15)] transform transition-transform hover:scale-101 duration-300">
-                  <div className="flex flex-col md:flex-row md:items-center py-8">
-                    <CardHeader className="relative pb-0 md:w-1/4 flex-shrink-0">
-                      <div className="md:absolute md:top-1/2 md:-translate-y-1/2 left-1/2 md:-translate-x-1/2 bg-gradient-to-r from-[#ffd700] to-[#ffec8b] text-gray-800 px-10 py-2 rounded-full shadow-md inline-block text-center">
-                        <span className="font-bold">Newsletter</span>
-                      </div>
-                    </CardHeader>
-                    <CardContent className="flex items-center md:w-2/4 h-full">
-                      <div className="flex flex-col justify-center items-center text-center h-full">
-                        <h3 className="text-lg font-semibold mb-1">
-                          200 € Amazon Gutschein
-                        </h3>
-                        <p className="text-white/80">
-                          Exklusives Newsletter + e-fellows
-                          Gewinnspiel
-                        </p>
-                      </div>
-                    </CardContent>
-                    <div className="md:w-1/4 flex justify-center items-center p-2">
-                      <img
-                        src={`${imageBaseUrl}/Amazon_200.png`}
-                        alt="Amazon Gutschein 200 Euro"
-                        className="h-24 w-auto object-contain"
-                      />
-                    </div>
+                  <div className="text-3xl flex-shrink-0">🧘</div>
+                  <div className="flex-1">
+                    <p className="font-semibold">10 × 100 % Gutschein – Reformer Pilates For Her</p>
+                    <p className="text-sm text-white/70 mt-0.5">HerSpace Studio</p>
                   </div>
-                </Card>
+                </div>
+                {/* 13.-26. Preis */}
+                <div className="flex items-center gap-4 bg-white/10 backdrop-blur-md rounded-2xl px-6 py-4 text-white shadow-[4px_6px_10px_rgba(0,0,0,0.12)] hover:bg-white/15 transition-colors duration-200">
+                  <div className="flex-shrink-0 w-28 text-center">
+                    <span className="inline-block bg-white/20 text-white text-sm font-semibold px-3 py-1 rounded-full">
+                      13.–26. Platz
+                    </span>
+                  </div>
+                  <div className="flex-shrink-0 h-12 flex items-center">
+                    <img
+                      src={`${imageBaseUrl}/6_Redbull_2.png`}
+                      alt="Red Bull"
+                      className="h-10 w-auto object-contain"
+                    />
+                  </div>
+                  <div className="flex-1">
+                    <p className="font-semibold">14 × 1 Tray Red Bull</p>
+                    <p className="text-sm text-white/70 mt-0.5">Für den Extra-Boost in der Lernphase ⚡</p>
+                  </div>
+                </div>
+                {/* 27.-29. Preis */}
+                <div className="flex items-center gap-4 bg-white/10 backdrop-blur-md rounded-2xl px-6 py-4 text-white shadow-[4px_6px_10px_rgba(0,0,0,0.12)] hover:bg-white/15 transition-colors duration-200">
+                  <div className="flex-shrink-0 w-28 text-center">
+                    <span className="inline-block bg-white/20 text-white text-sm font-semibold px-3 py-1 rounded-full">
+                      27.–29. Platz
+                    </span>
+                  </div>
+                  <div className="text-3xl flex-shrink-0">🎨</div>
+                  <div className="flex-1">
+                    <p className="font-semibold">3 × Malen nach Zahlen Bild</p>
+                    <p className="text-sm text-white/70 mt-0.5">Kreativ entspannen mit Habitus</p>
+                  </div>
+                </div>
+                {/* 30.-44. Preis */}
+                <div className="flex items-center gap-4 bg-white/10 backdrop-blur-md rounded-2xl px-6 py-4 text-white shadow-[4px_6px_10px_rgba(0,0,0,0.12)] hover:bg-white/15 transition-colors duration-200">
+                  <div className="flex-shrink-0 w-28 text-center">
+                    <span className="inline-block bg-white/20 text-white text-sm font-semibold px-3 py-1 rounded-full">
+                      30.–44. Platz
+                    </span>
+                  </div>
+                  <div className="text-3xl flex-shrink-0">🖼️</div>
+                  <div className="flex-1">
+                    <p className="font-semibold">15 × Gutschein Kunsthalle München</p>
+                    <p className="text-sm text-white/70 mt-0.5">Kunst & Kultur für deinen nächsten freien Nachmittag</p>
+                  </div>
+                </div>
               </div>
 
               {/* Mobile-Ansicht: Preise im Carousel */}
@@ -1086,7 +1010,7 @@ function ChallengeApp() {
                             {prizes[0].description}
                           </h3>
                           <p className="text-center text-white/80 mb-6">
-                            Für eine ungestörte Study-Session 🎵 📚
+                            2 Nächte für 2 Personen in einer Cabin nach Wahl, einlösbar bis 31.12.2026 🏡
                           </p>
                           <div className="w-full h-36 overflow-hidden flex items-center justify-center">
                             <img
@@ -1120,8 +1044,7 @@ function ChallengeApp() {
                             {prizes[1].description}
                           </h3>
                           <p className="text-center text-white/80 mb-6">
-                            Für die perfekte Erholungspause während
-                            des Semesters 🏝️
+                            Exklusiv von E-Fellows – je 100 € für deinen nächsten Amazon-Einkauf 🛒
                           </p>
                           <div className="w-full h-36 overflow-hidden flex items-center justify-center">
                             <img
@@ -1155,8 +1078,7 @@ function ChallengeApp() {
                             {prizes[2].description}
                           </h3>
                           <p className="text-center text-white/80 mb-6">
-                            We got you! Dein nächster Einkauf geht auf
-                            uns 🛍️
+                            Semesterticket oder Einzeltickets zum Klettern 🧗
                           </p>
                           <div className="w-full mt-5 mb-6 flex items-center justify-center">
                             <img
@@ -1172,7 +1094,7 @@ function ChallengeApp() {
                     </div>
                   </SwiperSlide>
 
-                  {/* 4-10. Platz */}
+                  {/* 3.-12. Platz */}
                   <SwiperSlide>
                     <div className="flex items-center justify-center h-full">
                       <Card
@@ -1182,59 +1104,48 @@ function ChallengeApp() {
                         <CardHeader className="relative pb-0 pt-8">
                           <div className="absolute -top-5 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-[#808080] to-[#a9a9a9] text-white px-6 py-2 rounded-full shadow-md">
                             <span className="font-bold text-lg">
-                              4.-10. Preis
+                              3.–12. Platz
                             </span>
                           </div>
                         </CardHeader>
                         <CardContent className="flex flex-col items-center pt-6">
+                          <div className="text-5xl mb-6">🧘</div>
                           <h3 className="text-xl font-semibold text-center mb-6">
-                            6 Dosen Red Bull + Perspektive
-                            Unternehmensberatung: Karriere-Ratgeber
-                            für den Einstieg ins Consulting
+                            10 × 100 % Gutschein – Reformer Pilates For Her
                           </h3>
                           <p className="text-center text-white/80 mb-6">
-                            Buch "Perspektive Unternehmensberatung"
-                            aus der Reihe e-fellows.net – Energie &
-                            Inspiration für deinen nächsten
-                            Karriere-Sprint!
+                            HerSpace Studio – dein nächster Pilates-Kurs geht auf uns!
                           </p>
-                          <div className="w-full h-32 mt-5 mb-6 overflow-hidden rounded-xl flex items-center justify-center">
-                            <img
-                              src={`${imageBaseUrl}/6_Redbull_2.png`}
-                              alt="Red Bull und Perspektive Unternehmensberatung"
-                              className="w-auto h-28 object-contain rounded-xl mx-auto"
-                            />
-                          </div>
                         </CardContent>
                       </Card>
                     </div>
                   </SwiperSlide>
                 </Swiper>
-                <div className="mt-8">
-                  <Card className="overflow-visible bg-white/15 backdrop-blur-md text-white border-none shadow-[4px_6px_15px_rgba(0,0,0,0.2)] w-full h-[420px]">
-                    <CardHeader className="relative pb-0 pt-8">
-                      <div className="absolute -top-5 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-[#ffd700] to-[#ffec8b] text-gray-800 px-6 py-2 rounded-full shadow-md">
-                        <span className="font-bold text-lg">
-                          Newsletter
-                        </span>
-                      </div>
-                    </CardHeader>
-                    <CardContent className="flex flex-col items-center pt-6">
-                      <h3 className="text-xl font-semibold text-center mb-6">
-                        200 € Amazon Gutschein
-                      </h3>
-                      <p className="text-center text-white/80 mb-6 px-4">
-                        Exklusives Newsletter + e-fellows Gewinnspiel
-                      </p>
-                      <div className="w-full h-32 mt-5 mb-6 overflow-hidden rounded-xl flex items-center justify-center">
-                        <img
-                          src={`${imageBaseUrl}/Amazon_200.png`}
-                          alt="Amazon Gutschein 200 Euro"
-                          className="w-auto h-28 object-contain rounded-xl mx-auto"
-                        />
-                      </div>
-                    </CardContent>
-                  </Card>
+                <div className="mt-4 space-y-3">
+                  <div className="flex items-center gap-3 bg-white/15 backdrop-blur-md rounded-2xl px-5 py-4 text-white shadow-lg">
+                    <span className="text-sm font-semibold bg-white/20 px-3 py-1 rounded-full whitespace-nowrap">13.–26. Platz</span>
+                    <img src={`${imageBaseUrl}/6_Redbull_2.png`} alt="Red Bull" className="h-8 w-auto object-contain flex-shrink-0" />
+                    <div>
+                      <p className="font-semibold text-sm">14 × 1 Tray Red Bull</p>
+                      <p className="text-xs text-white/70">Extra-Boost in der Lernphase ⚡</p>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-3 bg-white/15 backdrop-blur-md rounded-2xl px-5 py-4 text-white shadow-lg">
+                    <span className="text-sm font-semibold bg-white/20 px-3 py-1 rounded-full whitespace-nowrap">27.–29. Platz</span>
+                    <span className="text-2xl flex-shrink-0">🎨</span>
+                    <div>
+                      <p className="font-semibold text-sm">3 × Malen nach Zahlen Bild</p>
+                      <p className="text-xs text-white/70">Kreativ entspannen mit Habitus</p>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-3 bg-white/15 backdrop-blur-md rounded-2xl px-5 py-4 text-white shadow-lg">
+                    <span className="text-sm font-semibold bg-white/20 px-3 py-1 rounded-full whitespace-nowrap">30.–44. Platz</span>
+                    <span className="text-2xl flex-shrink-0">🖼️</span>
+                    <div>
+                      <p className="font-semibold text-sm">15 × Gutschein Kunsthalle München</p>
+                      <p className="text-xs text-white/70">Kunst & Kultur für deinen freien Nachmittag</p>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -1243,108 +1154,72 @@ function ChallengeApp() {
       </section>
 
       {/* Sponsoren Sektion */}
-      <section className="bg-white py-6 w-screen overflow-hidden relative">
+      <section className="bg-white py-10 w-screen overflow-hidden relative">
         <SectionDivider title="Unsere Sponsoren" />
 
-        {/* Mobile: Statische Logos in einem Grid */}
-        <div className="md:hidden container mx-auto">
-          <div className="flex flex-col items-center gap-8">
-            <img
-              src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/Logo_TWE_gross.jpg/1200px-Logo_TWE_gross.jpg"
-              alt="Therme Erding Logo"
-              className="rounded-lg"
-              style={{
-                height: '110px',
-                width: 'auto',
-                transform: 'translateZ(0)',
-              }}
-            />
-            <img
-              src="/e_fellows_logo.svg"
-              alt="e-fellows.net Logo"
-              className="rounded-lg"
-              style={{
-                height: '90px',
-                width: 'auto',
-                transform: 'translateZ(0)',
-              }}
-            />
-          </div>
-        </div>
+        {(() => {
+          const sponsors = [
+            { name: 'LAP Coffee', logo: '/lap-coffee.png', hasLogo: false },
+            { name: 'Red Bull', logo: '/redbull.svg', hasLogo: true },
+            { name: 'Habitus', logo: '/habitus.png', hasLogo: false },
+            { name: 'e-fellows.net', logo: '/e_fellows_logo.svg', hasLogo: true },
+            { name: 'Raus.Life', logo: '/raus-life.jpg', hasLogo: false },
+            { name: 'Boulderwelt', logo: '/Boulderwelt.jpg', hasLogo: false },
+            { name: 'HerSpace Studio', logo: '/herspace.png', hasLogo: false },
+            { name: 'Kunsthalle München', logo: '/kunsthalle.png', hasLogo: false },
+          ];
 
-        <div className="hidden md:block ticker-container w-screen mt-16">
-          <div className="ticker-track" data-mobile-animation>
-            {/* Erster Satz Logos */}
-            <div className="ticker-content">
-              {Array(10)
-                .fill(null)
-                .map((_, i) => {
-                  const logos = [
-                    {
-                      src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/Logo_TWE_gross.jpg/1200px-Logo_TWE_gross.jpg',
-                      alt: 'Therme Erding Logo',
-                    },
-                    {
-                      src: '/e_fellows_logo.svg',
-                      alt: 'e-fellows.net Logo',
-                    },
-                  ];
-
-                  const logo = logos[i % logos.length];
-
-                  return (
-                    <img
-                      key={`sponsor-2-${i}`}
-                      src={logo.src}
-                      alt={logo.alt}
-                      className="mx-10 rounded-lg"
-                      loading="eager"
-                      style={{
-                        height: '70px',
-                        width: 'auto',
-                        transform: 'translateZ(0)',
-                      }}
-                    />
-                  );
-                })}
+          const SponsorItem = ({ sponsor, keyPrefix }: { sponsor: typeof sponsors[0]; keyPrefix: string }) => (
+            <div
+              key={`${keyPrefix}-${sponsor.name}`}
+              className="mx-8 flex-shrink-0 flex items-center justify-center"
+              style={{ minWidth: '140px', transform: 'translateZ(0)' }}
+            >
+              {sponsor.hasLogo ? (
+                <img
+                  src={sponsor.logo}
+                  alt={`${sponsor.name} Logo`}
+                  loading="eager"
+                  className="object-contain"
+                  style={{ height: '60px', width: 'auto', maxWidth: '140px' }}
+                />
+              ) : (
+                <div className="px-5 py-2 rounded-full border-2 border-[#993333]/30 text-[#993333] font-semibold text-sm whitespace-nowrap">
+                  {sponsor.name}
+                </div>
+              )}
             </div>
+          );
 
-            {/* Zweiter identischer Satz - reduziere auf 6 statt 10 für bessere Performance */}
-            <div className="ticker-content">
-              {Array(10)
-                .fill(null)
-                .map((_, i) => {
-                  const logos = [
-                    {
-                      src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/Logo_TWE_gross.jpg/1200px-Logo_TWE_gross.jpg',
-                      alt: 'Therme Erding Logo',
-                    },
-                    {
-                      src: '/e_fellows_logo.svg',
-                      alt: 'e-fellows.net Logo',
-                    },
-                  ];
+          return (
+            <>
+              {/* Mobile: Grid */}
+              <div className="md:hidden container mx-auto mt-8 px-4">
+                <div className="flex flex-wrap justify-center gap-4">
+                  {sponsors.map((s) => (
+                    <SponsorItem key={s.name} sponsor={s} keyPrefix="mobile" />
+                  ))}
+                </div>
+              </div>
 
-                  const logo = logos[i % logos.length];
-
-                  return (
-                    <img
-                      key={`sponsor-2-${i}`}
-                      src={logo.src}
-                      alt={logo.alt}
-                      className="mx-10 rounded-lg"
-                      loading="eager"
-                      style={{
-                        height: '70px',
-                        width: 'auto',
-                        transform: 'translateZ(0)',
-                      }}
-                    />
-                  );
-                })}
-            </div>
-          </div>
-        </div>
+              {/* Desktop: Ticker */}
+              <div className="hidden md:block ticker-container w-screen mt-12">
+                <div className="ticker-track" data-mobile-animation>
+                  <div className="ticker-content">
+                    {[...sponsors, ...sponsors].map((s, i) => (
+                      <SponsorItem key={`tick-a-${i}`} sponsor={s} keyPrefix={`tick-a-${i}`} />
+                    ))}
+                  </div>
+                  <div className="ticker-content">
+                    {[...sponsors, ...sponsors].map((s, i) => (
+                      <SponsorItem key={`tick-b-${i}`} sponsor={s} keyPrefix={`tick-b-${i}`} />
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </>
+          );
+        })()}
       </section>
       {/* Games Section */}
       <section
@@ -2527,8 +2402,8 @@ function ChallengeApp() {
       {/* Coffee Chat Sektion */}
       <CoffeeChats profiles={coffeeProfiles} />
 
-      {/* Spotlight Event */}
-      <section className="bg-white py-16 md:py-24">
+      {/* Spotlight Event – deaktiviert */}
+      {/* <section className="bg-white py-16 md:py-24">
         <SectionDivider title="Spotlight Event" />
         <div className="container mx-auto px-4">
           <div className="mx-auto grid max-w-5xl gap-8 rounded-3xl bg-white p-6 shadow-2xl ring-1 ring-black/5 md:grid-cols-[1.1fr,1fr] md:p-10">
@@ -2546,8 +2421,7 @@ function ChallengeApp() {
                   23. Oktober · Celonis Office · 10:00–22:00 Uhr
                 </div>
                 <h3 className="mt-4 text-3xl font-bold text-neutral-900">
-                  hACk the case | Celonis | Vestigas | Corbado |
-                  Lovable
+                  hACk the case | Celonis | Vestigas | Corbado | Lovable
                 </h3>
                 <p className="mt-4 text-base leading-relaxed text-neutral-700">
                   Du interessierst dich für Data Analytics, Beratung,
@@ -2561,7 +2435,7 @@ function ChallengeApp() {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Bewerbung Sektion */}
       <section className="bg-white py-6 w-screen overflow-hidden relative">
