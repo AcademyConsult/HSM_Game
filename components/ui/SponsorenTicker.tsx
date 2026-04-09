@@ -1,18 +1,15 @@
-import { useState, useEffect, useRef } from "react";
-
 export default function SponsorTicker() {
-  const tickerTrackRef = useRef<HTMLDivElement>(null);
-  const [trackWidth, setTrackWidth] = useState(0);
-
-  useEffect(() => {
-    if (tickerTrackRef.current) {
-      // Da wir zwei identische Sets rendern, entspricht die Breite eines Sets:
-      const fullWidth = tickerTrackRef.current.scrollWidth;
-      setTrackWidth(fullWidth / 2);
-    }
-  }, []);
-
-  const logos = Array(20).fill(null);
+  const sponsors = [
+    { src: "/redbull.svg", alt: "Red Bull" },
+    { src: "/Amazon_200.png", alt: "Amazon" },
+    { src: "/e_fellows_logo.svg", alt: "e-fellows" },
+    { src: "/2023_BW_Logos_2.png", alt: "BW" },
+    { src: "/230913_habitus_logo_orange.png", alt: "Habitus" },
+    { src: "/KH_Logo_Master_1909_pos.png", alt: "Kienbaum" },
+    { src: "/efn-Logo mit Claim mit Schutzraum für Online 600x350 PNG.png", alt: "efn" },
+    { src: "/herspace-logo_hoch-earth.jpg", alt: "HerSpace" },
+    { src: "/raus_logo_green.png", alt: "RAUS" },
+  ];
 
   return (
     <section className="bg-white py-6 overflow-hidden">
@@ -20,28 +17,24 @@ export default function SponsorTicker() {
         <h2 className="text-3xl font-bold text-center mb-6">Sponsoren</h2>
 
         <div className="ticker-container overflow-hidden relative">
-          <div
-            className="ticker-track animate-ticker flex whitespace-nowrap"
-            ref={tickerTrackRef}
-            style={{ ["--track-width" as string]: `${trackWidth}px` }}
-          >
+          <div className="ticker-track flex whitespace-nowrap">
             {/* Erstes Set */}
-            {logos.map((_, i) => (
+            {sponsors.map((sponsor, i) => (
               <img
                 key={`sponsor-${i}`}
-                src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/Celonis_Logo.png/1280px-Celonis_Logo.png"
-                alt="Celonis Logo"
-                className="mx-8"
+                src={sponsor.src}
+                alt={sponsor.alt}
+                className="mx-8 object-contain"
                 style={{ height: "50px", width: "auto" }}
               />
             ))}
-            {/* Zweites Set (identisch) */}
-            {logos.map((_, i) => (
+            {/* Zweites Set (für nahtloses Loopen) */}
+            {sponsors.map((sponsor, i) => (
               <img
                 key={`sponsor-dup-${i}`}
-                src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/Celonis_Logo.png/1280px-Celonis_Logo.png"
-                alt="Celonis Logo"
-                className="mx-8"
+                src={sponsor.src}
+                alt={sponsor.alt}
+                className="mx-8 object-contain"
                 style={{ height: "50px", width: "auto" }}
               />
             ))}
@@ -55,20 +48,17 @@ export default function SponsorTicker() {
           overflow: hidden;
           position: relative;
         }
-        /* Entferne ggf. die fixe Breite, da wir dynamisch messen */
         .ticker-track {
           display: flex;
+          animation: ticker 20s linear infinite;
         }
         @keyframes ticker {
           0% {
             transform: translateX(0);
           }
           100% {
-            transform: translateX(calc(-1 * var(--track-width)));
+            transform: translateX(-50%);
           }
-        }
-        .animate-ticker {
-          animation: ticker 20s linear infinite;
         }
       `}</style>
     </section>
