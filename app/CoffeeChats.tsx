@@ -15,23 +15,20 @@ export default function CoffeeChats({
     <section className="bg-white py-16 md:py-24">
       <SectionDivider title="Triff uns, wir laden dich auf einen Kaffee ein!" />
       <div className="container mx-auto px-4">
-        <div className="mx-auto mb-12 max-w-2xl text-center">
-          <p className="text-lg text-neutral-600">
+        <div className="mx-auto mb-12 max-w-3xl flex items-center gap-12">
+          {/* Links: Text */}
+          <p className="flex-1 text-lg text-neutral-600">
             Unsere Beraterinnen und Berater freuen sich darauf, dich kennenzulernen. Buche dir direkt einen Coffee Chat und stelle deine Fragen.
           </p>
-          <div className="mt-8 flex justify-center">
-            <div
-              className="inline-flex items-center gap-4 rounded-2xl border border-amber-200 bg-amber-50 px-7 py-4 shadow-sm"
-              style={{ transform: 'rotate(-2.5deg)' }}
-            >
-              <span className="text-sm font-medium text-amber-800">☕ Kaffee gesponsert von</span>
-              <img
-                src="/LAP_Logo.png"
-                alt="LAP Coffee"
-                className="object-contain"
-                style={{ height: '32px', width: 'auto' }}
-              />
-            </div>
+          {/* Rechts: In Kooperation mit + LAP Logo */}
+          <div className="flex-shrink-0 flex flex-col items-center gap-3">
+            <span className="text-xs font-semibold uppercase tracking-widest text-neutral-400">In Kooperation mit</span>
+            <img
+              src="/LAP_Logo.png"
+              alt="LAP Coffee"
+              className="object-contain"
+              style={{ height: '48px', width: 'auto' }}
+            />
           </div>
         </div>
       </div>
