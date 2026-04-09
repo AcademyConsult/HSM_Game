@@ -22,13 +22,15 @@ export default function CoffeeChats({
           </p>
           {/* Rechts: In Kooperation mit + LAP Logo */}
           <div className="flex-shrink-0 flex flex-col items-center gap-3">
-            <span className="px-5 py-2 rounded-full border-2 border-[#993333]/30 text-[#993333] font-semibold text-sm whitespace-nowrap">In Kooperation mit</span>
-            <img
-              src="/LAP_Logo.png"
-              alt="LAP Coffee"
-              className="object-contain"
-              style={{ height: '48px', width: 'auto' }}
-            />
+            <span className="text-xs font-semibold uppercase tracking-widest text-neutral-400">In Kooperation mit</span>
+            <div className="px-5 py-3 rounded-full border-2 border-[#993333]/30 bg-white flex items-center justify-center">
+              <img
+                src="/LAP_Logo.png"
+                alt="LAP Coffee"
+                className="object-contain"
+                style={{ height: '36px', width: 'auto' }}
+              />
+            </div>
           </div>
         </div>
       </div>
