@@ -1159,7 +1159,7 @@ function ChallengeApp() {
 
         {(() => {
           const sponsors = [
-            { name: 'LAP Coffee', logo: '/LAP_Logo.png', hasLogo: true },
+            { name: 'LAP Coffee', logo: '/LAP_Logo.png', hasLogo: false },
             { name: 'Red Bull', logo: '/redbull.svg', hasLogo: true },
             { name: 'Habitus', logo: '/230913_habitus_logo_orange.png', hasLogo: true },
             { name: 'e-fellows.net', logo: '/e_fellows_logo.svg', hasLogo: true },
