@@ -1161,12 +1161,12 @@ function ChallengeApp() {
           const sponsors = [
             { name: 'LAP Coffee', logo: '/lap-coffee.png', hasLogo: false },
             { name: 'Red Bull', logo: '/redbull.svg', hasLogo: true },
-            { name: 'Habitus', logo: '/habitus.png', hasLogo: false },
+            { name: 'Habitus', logo: '/230913_habitus_logo_orange.png', hasLogo: true },
             { name: 'e-fellows.net', logo: '/e_fellows_logo.svg', hasLogo: true },
-            { name: 'Raus.Life', logo: '/raus-life.jpg', hasLogo: false },
-            { name: 'Boulderwelt', logo: '/Boulderwelt.jpg', hasLogo: false },
-            { name: 'HerSpace Studio', logo: '/herspace.png', hasLogo: false },
-            { name: 'Kunsthalle München', logo: '/kunsthalle.png', hasLogo: false },
+            { name: 'Raus.Life', logo: '/raus_logo_green.png', hasLogo: true },
+            { name: 'Boulderwelt', logo: '/2023_BW_Logos_2.png', hasLogo: true },
+            { name: 'HerSpace Studio', logo: '/herspace-logo_hoch-earth.jpg', hasLogo: true },
+            { name: 'Kunsthalle München', logo: '/KH_Logo_Master_1909_pos.png', hasLogo: true },
           ];
 
           const SponsorItem = ({ sponsor, keyPrefix }: { sponsor: typeof sponsors[0]; keyPrefix: string }) => (
