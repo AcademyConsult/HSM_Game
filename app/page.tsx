@@ -375,7 +375,7 @@ function ChallengeApp() {
       university: 'TUM',
       currentSemester: 1,
       imageLink: '/Noah_Straube.jpg',
-      //calendarLink: 'https://calendly.com/academy-consult-munich/coffee-chat',
+      calendarLink: 'https://calendly.com/noahstraube/30min',
       linkedinLink: 'https://www.linkedin.com/in/noah-straube-b2356326b',
     },
   ];
