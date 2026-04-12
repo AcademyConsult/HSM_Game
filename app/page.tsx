@@ -255,8 +255,8 @@ function ChallengeApp() {
       university: 'HM',
       currentSemester: 2,
       imageLink: '/KatharinaBildLAP.jpg',
-      calendarLink: 'https://calendly.com/academy-consult-munich/coffee-chat',
-      linkedinLink: 'http://www.linkedin.com/in/katharina-barr',
+      calendarLink: 'https://calendly.com/katharina-barr17/30min',
+      linkedinLink: 'https://www.linkedin.com/in/katharina-barr',
     },
     {
       displayName: 'Fabian',
@@ -265,7 +265,7 @@ function ChallengeApp() {
       university: 'TUM',
       currentSemester: 4,
       imageLink: '/FabianBildLAP.jpg',
-      calendarLink: 'https://calendly.com/academy-consult-munich/coffee-chat',
+      calendarLink: 'https://calendly.com/fabian-kienreich/30min',
       linkedinLink: 'https://www.linkedin.com/in/fabian-kienreich/',
     },
     {
@@ -275,7 +275,7 @@ function ChallengeApp() {
       university: 'TUM',
       currentSemester: 1,
       imageLink: '/PaulBildLAP.jpg',
-      calendarLink: 'https://calendly.com/academy-consult-munich/coffee-chat',
+      calendarLink: 'https://calendly.com/paul-wirth-luzc/30min',
       linkedinLink: 'https://www.linkedin.com/in/paul-wirth',
     },
     {
@@ -285,7 +285,7 @@ function ChallengeApp() {
       university: 'TUM',
       currentSemester: 4,
       imageLink: '/LinusBildLAP.jpg',
-      calendarLink: 'https://calendly.com/academy-consult-munich/coffee-chat',
+      calendarLink: 'https://calendly.com/linus-j-klett/30min',
       linkedinLink: 'https://www.linkedin.com/in/linusjklett',
     },
     {
@@ -305,19 +305,19 @@ function ChallengeApp() {
       university: 'TUM',
       currentSemester: 4,
       imageLink: '/LorenzBildLAP.jpg',
-      calendarLink: 'https://calendly.com/academy-consult-munich/coffee-chat',
+      calendarLink: 'https://calendly.com/lorenz-thieroff/30min',
       linkedinLink: 'https://www.linkedin.com/in/lorenz-thieroff',
     },
-    {
-      displayName: 'Annalena',
-      degreeProgram: 'Management & Technology',
-      stage: 'Bachelor',
-      university: 'TUM',
-      currentSemester: 6,
-      imageLink: `${imageBaseUrl}/Annalena.jpg`,
-      calendarLink: 'https://calendly.com/annalena-pellkofer-academyconsult/30min',
-      linkedinLink: 'https://www.linkedin.com/in/annalena-plk/',
-    },
+    // {
+    //   displayName: 'Annalena',
+    //   degreeProgram: 'Management & Technology',
+    //   stage: 'Bachelor',
+    //   university: 'TUM',
+    //   currentSemester: 6,
+    //   imageLink: `${imageBaseUrl}/Annalena.jpg`,
+    //   calendarLink: 'https://calendly.com/annalena-pellkofer-academyconsult/30min',
+    //   linkedinLink: 'https://www.linkedin.com/in/annalena-plk/',
+    // },
     {
       displayName: 'Anna',
       degreeProgram: 'Rechtswissenschaften',
@@ -325,7 +325,7 @@ function ChallengeApp() {
       university: 'LMU',
       currentSemester: 4,
       imageLink: '/AnnaKKBildLAP.jpg',
-      calendarLink: 'https://calendly.com/academy-consult-munich/coffee-chat',
+      calendarLink: 'https://calendly.com/anna-kahlert-academyconsult/30min',
       linkedinLink: 'https://www.linkedin.com/in/anna-katharina-kahlert-07046a29b',
     },
     {
@@ -335,7 +335,7 @@ function ChallengeApp() {
       university: 'TUM',
       currentSemester: 6,
       imageLink: '/LeonBildLAP.jpg',
-      calendarLink: 'https://calendly.com/academy-consult-munich/coffee-chat',
+      calendarLink: 'https://calendly.com/thumm-leon/30min',
       linkedinLink: 'https://www.linkedin.com/in/leon-thumm/',
     },
     {
@@ -365,8 +365,8 @@ function ChallengeApp() {
       university: 'TUM',
       currentSemester: 7,
       imageLink: '/ValentinBildLap.jpg',
-      calendarLink: 'https://calendly.com/academy-consult-munich/coffee-chat',
-      linkedinLink: '',
+      //calendarLink: 'https://calendly.com/academy-consult-munich/coffee-chat',
+      linkedinLink: 'https://www.linkedin.com/in/valentin-gr%C3%BCner',
     },
     {
       displayName: 'Noah',
@@ -375,8 +375,8 @@ function ChallengeApp() {
       university: 'TUM',
       currentSemester: 1,
       imageLink: '/Noah_Straube.jpg',
-      calendarLink: 'https://calendly.com/academy-consult-munich/coffee-chat',
-      linkedinLink: '',
+      //calendarLink: 'https://calendly.com/academy-consult-munich/coffee-chat',
+      linkedinLink: 'https://www.linkedin.com/in/noah-straube-b2356326b',
     },
   ];
 
@@ -604,9 +604,9 @@ function ChallengeApp() {
       return false;
     }
 
-    // Der korrekte Punkt ist bei exakten Pixelkoordinaten (697, 791) in einem 1280×853 Bild
-    const targetX = 697 / 1280;
-    const targetY = 791 / 853;
+    // Leo ist ca. 6.5% von rechts und 38% von unten
+    const targetX = 1 - 0.055; // 0.945 von links
+    const targetY = 1 - 0.333;  // 0.667 von oben
 
     console.log('Klickposition:', {
       x: selectedCoordinates.x.toFixed(4),
@@ -618,7 +618,7 @@ function ChallengeApp() {
     });
 
     // Toleranzbereich für höhere Genauigkeit
-    const tolerance = 0.09; // ~9 % Toleranz pro Achse
+    const tolerance = 0.04; // ~4 % Toleranz pro Achse
 
     // Berechne den Abstand für bessere Diagnose
     const distanceX = Math.abs(selectedCoordinates.x - targetX);
@@ -968,10 +968,10 @@ function ChallengeApp() {
                 <h3 className="text-2xl font-bold text-white text-center mb-6">... und noch viele weitere Preise</h3>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                   <div className="flex flex-col items-center gap-3 bg-white/10 backdrop-blur-md rounded-2xl overflow-hidden text-white shadow-[4px_6px_10px_rgba(0,0,0,0.12)] hover:bg-white/15 transition-colors duration-200">
-                    <img src="/herSpaceStudio.webp" alt="HerSpace Studio" className="w-full h-24 object-cover" />
+                    <img src="/herSpaceStudio.webp" alt="Reformer for Her" className="w-full h-24 object-cover" />
                     <div className="px-4 pb-4 text-center">
                       <p className="font-semibold text-sm">10 × 100 % Gutschein Reformer Pilates</p>
-                      <p className="text-xs text-white/70 mt-1">HerSpace Studio</p>
+                      <p className="text-xs text-white/70 mt-1">Reformer for Her</p>
                     </div>
                   </div>
                   <div className="flex flex-col items-center gap-3 bg-white/10 backdrop-blur-md rounded-2xl overflow-hidden text-white shadow-[4px_6px_10px_rgba(0,0,0,0.12)] hover:bg-white/15 transition-colors duration-200">
@@ -1163,10 +1163,10 @@ function ChallengeApp() {
                 <h3 className="text-xl font-bold text-white text-center mt-8 mb-4">... und noch viele weitere Preise</h3>
                 <div className="grid grid-cols-2 gap-3">
                   <div className="flex flex-col items-center bg-white/15 backdrop-blur-md rounded-2xl overflow-hidden text-white shadow-lg">
-                    <img src="/herSpaceStudio.webp" alt="HerSpace Studio" className="w-full h-20 object-cover" />
+                    <img src="/herSpaceStudio.webp" alt="Reformer for Her" className="w-full h-20 object-cover" />
                     <div className="px-3 py-3 text-center">
                       <p className="font-semibold text-xs">10 × Reformer Pilates</p>
-                      <p className="text-xs text-white/70 mt-1">HerSpace Studio</p>
+                      <p className="text-xs text-white/70 mt-1">Reformer for Her</p>
                     </div>
                   </div>
                   <div className="flex flex-col items-center bg-white/15 backdrop-blur-md rounded-2xl overflow-hidden text-white shadow-lg">
@@ -1205,12 +1205,13 @@ function ChallengeApp() {
 
         {(() => {
           const sponsors = [
+            { name: 'LAP Coffee', logo: '/LAP_Logo.png', hasLogo: true },
             { name: 'Red Bull', logo: '/redbull.svg', hasLogo: true },
             { name: 'Habitus', logo: '/230913_habitus_logo_orange.png', hasLogo: true },
             { name: 'e-fellows.net', logo: '/efellowslogoneu.png', hasLogo: true },
             { name: 'Raus.Life', logo: '/raus_logo_green.png', hasLogo: true },
             { name: 'Boulderwelt', logo: '/BW_logo_button.png', hasLogo: true },
-            { name: 'HerSpace Studio', logo: '/herspace-logo_hoch-earth.jpg', hasLogo: true },
+            { name: 'Reformer for Her', logo: '/herspace-logo_hoch-earth.jpg', hasLogo: true },
             { name: 'Kunsthalle München', logo: '/KH_Logo_Master_1909_pos.png', hasLogo: true },
           ];
 
@@ -1463,10 +1464,10 @@ function ChallengeApp() {
                                   <picture>
                                     <source
                                       media="(max-width: 767px)"
-                                      srcSet={`${imageBaseUrl}/AC_Gewinnspiel_Wimmelbild_1.1.jpg`}
+                                      srcSet={`${imageBaseUrl}/AC_Gewinnspiel_Wimmelbild_1.2.jpg`}
                                     />
                                     <img
-                                      src={`${imageBaseUrl}/AC_Gewinnspiel_Wimmelbild_1.1.jpg`}
+                                      src={`${imageBaseUrl}/AC_Gewinnspiel_Wimmelbild_1.2.jpg`}
                                       alt="Wimmelbild"
                                       className="w-full h-full object-cover"
                                     />
@@ -1924,9 +1925,9 @@ function ChallengeApp() {
                                     >
                                       <div className="p-6 rounded-lg">
                                         <p className="font-medium text-xl mb-4 text-black">
-                                          Wie viele Start-ups haben
-                                          unsere Mitglieder schon
-                                          gegründet?
+                                          Wie viele Start-ups wurden
+                                          von Mitgliedern von Academy
+                                          Consult gegründet?
                                         </p>
                                         <div className="relative mb-4">
                                           <Input
@@ -2319,21 +2320,23 @@ function ChallengeApp() {
               </Card>
 
               {/* e-fellows Info */}
-              <div className="rounded-xl border border-gray-200 bg-gray-50 p-4 flex items-center gap-4">
-                <img src="/efellowslogoneu.png" alt="e-fellows.net" className="h-10 w-auto object-contain flex-shrink-0" />
-                <div className="flex-1">
-                  <p className="text-sm text-gray-700">
-                    Du willst dich bei e-fellows registrieren oder direkt zum Stipendium? Dann schau doch{' '}
-                    <a
-                      href="https://www.e-fellows.net/academy-consult-challenge"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="font-semibold underline text-[#993333]"
-                    >
-                      hier vorbei
-                    </a>!
-                  </p>
+              <div className="rounded-2xl border border-gray-200 bg-gradient-to-br from-gray-50 to-white p-5 shadow-sm">
+                <div className="flex items-center gap-3 mb-3">
+                  <img src="/efellowslogoneu.png" alt="e-fellows.net" className="h-7 w-auto object-contain" />
+                  <div className="h-px flex-1 bg-gray-200" />
                 </div>
+                <p className="text-sm text-gray-600 leading-relaxed">
+                  Den e-fellows Preis (2 × 100 € Amazon Gutschein) kannst du nur gewinnen, wenn du zusätzlich am{' '}
+                  <a
+                    href="https://www.e-fellows.net/academy-consult-challenge"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-semibold underline text-[#993333] hover:text-[#7a2929] transition-colors"
+                  >
+                    e-fellows Gewinnspiel
+                  </a>{' '}
+                  teilnimmst. Jetzt registrieren und Chance sichern!
+                </p>
               </div>
 
               {/* Timeline */}
