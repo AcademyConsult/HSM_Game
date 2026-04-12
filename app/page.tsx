@@ -106,33 +106,34 @@ function ChallengeApp() {
       position: '1',
       title: 'Hauptpreis',
       description: 'Tiny House Trip von Raus.Life',
-      image: placeholderImage,
+      image: '/221102_Raus_Cabins_Alt_Kentzlin_0003_HDR_HiRes.jpg',
+      image2: '/230912_RAUS_Lenzen_1584.jpg',
     },
     {
       position: '2',
       title: 'Zweiter Preis',
-      description: '2 × 100 € Amazon Gutschein von E-Fellows',
-      image: `${imageBaseUrl}/efellowsmax.png`,
+      description: '2 × 100 € Amazon Gutschein',
+      image: '/Amazon gutschein.png',
     },
     {
       position: '3',
       title: 'Dritter Preis',
-      description: 'Boulderwelt Ticket',
-      image: placeholderImage,
+      description: 'Semesterticket für die Boulderwelt',
+      image: '/Boulderwelt Bild.jpg',
     },
   ];
 
   const events = [
     {
       id: 1,
-      title: 'Bewerbertraining',
+      title: 'Case Workshop',
       date: '2026-04-15',
       time: '20:00-21:00',
       location: 'AC Büro, Leopoldstraße 62',
       description:
-        'Beim Bewerbertraining lernst du das Wichtigste, was du vor einem Bewerbungsprozess wissen musst.',
-      eventbride: 'https://luma.com/f8fq8pat',
-      image: 'https://images.lumacdn.com/cdn-cgi/image/format=auto,fit=cover,dpr=2,background=white,quality=75,width=400,height=400/gallery-images/yd/c8ded50f-24e7-4af0-aeb2-9bac97712e4c.png',
+        'Lerne im Case Workshop, wie du knifflige Business Cases strukturiert und überzeugend löst.',
+      eventbride: 'https://luma.com/gggo9w72',
+      image: 'https://images.lumacdn.com/cdn-cgi/image/format=auto,fit=cover,dpr=2,background=white,quality=75,width=400,height=400/gallery-images/m7/cc904003-e5aa-4a5a-9e96-87a70d6f36b9.png',
     },
     {
       id: 2,
@@ -178,6 +179,72 @@ function ChallengeApp() {
       eventbride: 'https://luma.com/8ykfr9n1',
       image: 'https://images.lumacdn.com/cdn-cgi/image/format=auto,fit=cover,dpr=2,background=white,quality=75,width=400,height=400/gallery-images/v3/4a4a9c1b-eba8-4447-be65-f6b3c4b0a97c.png',
     },
+    {
+      id: 6,
+      title: 'Reformer Pilates – Female Only',
+      date: '2026-04-20',
+      time: '10:00-11:00',
+      location: 'Reformer For Her, Augustenstraße 102',
+      description:
+        'Beweg dich mit uns und lerne das AC-Team bei einer gemeinsamen Pilates-Session kennen.',
+      eventbride: 'https://luma.com/irfwinah',
+      image: 'https://images.lumacdn.com/cdn-cgi/image/format=auto,fit=cover,dpr=2,background=white,quality=75,width=400,height=400/gallery-images/z1/d80a77db-201a-496f-8be5-be23a61cd7a8.png',
+    },
+    {
+      id: 7,
+      title: 'TUM Infoabend',
+      date: '2026-04-21',
+      time: '19:00-20:00',
+      location: 'TUM, Arcisstraße 21, Raum 0601',
+      description:
+        'Erfahre alles über Academy Consult direkt an der TUM. Wir stellen uns vor und beantworten deine Fragen.',
+      eventbride: 'https://luma.com/lxruosv1',
+      image: 'https://images.lumacdn.com/cdn-cgi/image/format=auto,fit=cover,dpr=2,background=white,quality=75,width=400,height=400/gallery-images/ve/ab94b70b-d954-410a-b686-1a32c74a4d75.png',
+    },
+    {
+      id: 8,
+      title: 'Bewerbertraining',
+      date: '2026-04-22',
+      time: '16:00-17:00',
+      location: 'AC Büro, Leopoldstraße 62',
+      description:
+        'Wir zeigen dir, wie der Bewerbungsprozess bei uns läuft und wie du ihn rockst!',
+      eventbride: 'https://luma.com/f8fq8pat',
+      image: 'https://images.lumacdn.com/cdn-cgi/image/format=auto,fit=cover,dpr=2,background=white,quality=75,width=400,height=400/gallery-images/yd/c8ded50f-24e7-4af0-aeb2-9bac97712e4c.png',
+    },
+    {
+      id: 9,
+      title: 'Digitaler Infoabend',
+      date: '2026-04-22',
+      time: '18:00-19:00',
+      location: 'Online',
+      description:
+        'Lerne Academy Consult bequem von zu Hause aus kennen und stelle deine Fragen im digitalen Infoabend.',
+      eventbride: 'https://luma.com/n91do9ao',
+      image: 'https://images.lumacdn.com/cdn-cgi/image/format=auto,fit=cover,dpr=2,background=white,quality=75,width=400,height=400/gallery-images/x4/232b7986-33f1-4753-928d-84910cd55dd8.png',
+    },
+    {
+      id: 10,
+      title: 'LMU Infoabend',
+      date: '2026-04-23',
+      time: '18:00-19:00',
+      location: 'LMU, Hörsaal A 119, Geschwister-Scholl-Platz 1',
+      description:
+        'Erfahre alles über Academy Consult direkt an der LMU. Wir stellen uns vor und beantworten deine Fragen.',
+      eventbride: 'https://luma.com/d3jacmr3',
+      image: 'https://images.lumacdn.com/cdn-cgi/image/format=auto,fit=cover,dpr=2,background=white,quality=75,width=400,height=400/gallery-images/ve/ab94b70b-d954-410a-b686-1a32c74a4d75.png',
+    },
+    {
+      id: 11,
+      title: 'Barhopping',
+      date: '2026-04-24',
+      time: '21:00-00:00',
+      location: 'München',
+      description:
+        'Lerne uns bei einem kalten Getränk kennen! Barhopping durch München mit dem AC-Team.',
+      eventbride: 'https://luma.com/2bhttjz9',
+      image: 'https://images.lumacdn.com/cdn-cgi/image/format=auto,fit=cover,dpr=2,background=white,quality=75,width=400,height=400/gallery-images/0o/62834236-cf11-42a2-9144-5af45da3348b',
+    },
   ];
 
   const coffeeProfiles: CoffeeProfile[] = [
@@ -185,9 +252,9 @@ function ChallengeApp() {
       displayName: 'Katharina',
       degreeProgram: 'BWL',
       stage: 'Bachelor',
-      university: 'LMU',
+      university: 'HM',
       currentSemester: 2,
-      imageLink: `${imageBaseUrl}/Katharina.jpg`,
+      imageLink: '/KatharinaBildLAP.jpg',
       calendarLink: 'https://calendly.com/academy-consult-munich/coffee-chat',
       linkedinLink: 'http://www.linkedin.com/in/katharina-barr',
     },
@@ -197,7 +264,7 @@ function ChallengeApp() {
       stage: 'Bachelor',
       university: 'TUM',
       currentSemester: 4,
-      imageLink: `${imageBaseUrl}/Fabian.jpg`,
+      imageLink: '/FabianBildLAP.jpg',
       calendarLink: 'https://calendly.com/academy-consult-munich/coffee-chat',
       linkedinLink: 'https://www.linkedin.com/in/fabian-kienreich/',
     },
@@ -207,7 +274,7 @@ function ChallengeApp() {
       stage: 'Master',
       university: 'TUM',
       currentSemester: 1,
-      imageLink: `${imageBaseUrl}/Paul.jpg`,
+      imageLink: '/PaulBildLAP.jpg',
       calendarLink: 'https://calendly.com/academy-consult-munich/coffee-chat',
       linkedinLink: 'https://www.linkedin.com/in/paul-wirth',
     },
@@ -217,7 +284,7 @@ function ChallengeApp() {
       stage: 'Bachelor',
       university: 'TUM',
       currentSemester: 4,
-      imageLink: `${imageBaseUrl}/LinusKlett.jpg`,
+      imageLink: '/LinusBildLAP.jpg',
       calendarLink: 'https://calendly.com/academy-consult-munich/coffee-chat',
       linkedinLink: 'https://www.linkedin.com/in/linusjklett',
     },
@@ -233,11 +300,11 @@ function ChallengeApp() {
     },
     {
       displayName: 'Lorenz',
-      degreeProgram: 'Engineering Science',
+      degreeProgram: 'B.Sc. Engineering Science',
       stage: 'Bachelor',
       university: 'TUM',
       currentSemester: 4,
-      imageLink: placeholderImage,
+      imageLink: '/LorenzBildLAP.jpg',
       calendarLink: 'https://calendly.com/academy-consult-munich/coffee-chat',
       linkedinLink: 'https://www.linkedin.com/in/lorenz-thieroff',
     },
@@ -252,22 +319,12 @@ function ChallengeApp() {
       linkedinLink: 'https://www.linkedin.com/in/annalena-plk/',
     },
     {
-      displayName: 'Lukas',
-      degreeProgram: 'Wirtschaftsinformatik',
-      stage: 'Master',
-      university: 'TUM',
-      currentSemester: 4,
-      imageLink: placeholderImage,
-      calendarLink: 'https://calendly.com/academy-consult-munich/coffee-chat',
-      linkedinLink: 'https://www.linkedin.com/in/lukas-rueger/',
-    },
-    {
       displayName: 'Anna',
       degreeProgram: 'Rechtswissenschaften',
       stage: 'Bachelor',
       university: 'LMU',
       currentSemester: 4,
-      imageLink: placeholderImage,
+      imageLink: '/AnnaKKBildLAP.jpg',
       calendarLink: 'https://calendly.com/academy-consult-munich/coffee-chat',
       linkedinLink: 'https://www.linkedin.com/in/anna-katharina-kahlert-07046a29b',
     },
@@ -277,7 +334,7 @@ function ChallengeApp() {
       stage: 'Bachelor',
       university: 'TUM',
       currentSemester: 6,
-      imageLink: placeholderImage,
+      imageLink: '/LeonBildLAP.jpg',
       calendarLink: 'https://calendly.com/academy-consult-munich/coffee-chat',
       linkedinLink: 'https://www.linkedin.com/in/leon-thumm/',
     },
@@ -287,13 +344,13 @@ function ChallengeApp() {
       stage: 'Bachelor',
       university: 'TUM',
       currentSemester: 4,
-      imageLink: `${imageBaseUrl}/Anna.jpg`,
+      imageLink: '/AnnaBildLAP.jpg',
       calendarLink: 'https://calendly.com/anna-krieger-academyconsult/30min',
       linkedinLink: 'https://www.linkedin.com/in/anna-krieger-45128830b',
     },
     {
       displayName: 'Johannes',
-      degreeProgram: 'Management & Technology',
+      degreeProgram: 'Management and Technology',
       stage: 'Bachelor',
       university: 'TUM',
       currentSemester: 4,
@@ -302,12 +359,22 @@ function ChallengeApp() {
       linkedinLink: 'https://www.linkedin.com/in/jkask',
     },
     {
+      displayName: 'Valentin',
+      degreeProgram: 'Wirtschaftsinformatik',
+      stage: 'Bachelor',
+      university: 'TUM',
+      currentSemester: 7,
+      imageLink: '/ValentinBildLap.jpg',
+      calendarLink: 'https://calendly.com/academy-consult-munich/coffee-chat',
+      linkedinLink: '',
+    },
+    {
       displayName: 'Noah',
       degreeProgram: 'Wirtschaftsinformatik',
       stage: 'Master',
       university: 'TUM',
       currentSemester: 1,
-      imageLink: placeholderImage,
+      imageLink: '/Noah_Straube.jpg',
       calendarLink: 'https://calendly.com/academy-consult-munich/coffee-chat',
       linkedinLink: '',
     },
@@ -812,14 +879,21 @@ function ChallengeApp() {
                       {prizes[1].description}
                     </h3>
                     <p className="text-center text-white/80 mb-4">
-                      Exklusiv von E-Fellows – je 100 € für deinen nächsten
+                      Exklusiv von E-Fellows für deinen nächsten
                       Amazon-Einkauf 🛒
                     </p>
-                    <div className="w-full h-32 mt-2 overflow-hidden rounded-xl flex items-center justify-center">
+                    <div className="w-full relative mt-6" style={{ minHeight: '160px' }}>
                       <img
-                        src={prizes[1].image || placeholderImage}
+                        src={prizes[1].image}
                         alt={prizes[1].title}
-                        className="w-auto h-full object-contain rounded-xl mx-auto"
+                        className="absolute left-2 top-0 w-2/3 h-auto max-h-40 object-contain rounded-xl shadow-lg"
+                        style={{ transform: 'rotate(-4deg)' }}
+                      />
+                      <img
+                        src={prizes[1].image}
+                        alt={`${prizes[1].title} 2`}
+                        className="absolute right-2 top-4 w-2/3 h-auto max-h-40 object-contain rounded-xl shadow-lg"
+                        style={{ transform: 'rotate(3deg)' }}
                       />
                     </div>
                   </CardContent>
@@ -844,11 +918,18 @@ function ChallengeApp() {
                     <p className="text-center text-white/80 mb-6">
                       2 Nächte für 2 Personen in einer Cabin nach Wahl, einlösbar bis 31.12.2026 🏡
                     </p>
-                    <div className="flex-1 w-full flex items-center justify-center overflow-hidden rounded-xl">
+                    <div className="flex-1 w-full relative mt-4" style={{ minHeight: '220px' }}>
                       <img
-                        src={prizes[0].image || placeholderImage}
+                        src={prizes[0].image}
                         alt={prizes[0].title}
-                        className="w-auto h-auto max-h-72 max-w-[95%] object-contain rounded-xl transform scale-125 -translate-y-6"
+                        className="absolute left-2 top-0 w-2/3 h-auto max-h-56 object-cover rounded-xl shadow-lg"
+                        style={{ transform: 'rotate(-4deg)' }}
+                      />
+                      <img
+                        src={(prizes[0] as any).image2}
+                        alt={`${prizes[0].title} 2`}
+                        className="absolute right-2 top-8 w-2/3 h-auto max-h-56 object-cover rounded-xl shadow-lg"
+                        style={{ transform: 'rotate(3deg)' }}
                       />
                     </div>
                   </CardContent>
@@ -869,7 +950,7 @@ function ChallengeApp() {
                       {prizes[2].description}
                     </h3>
                     <p className="text-center text-white/80 mb-4">
-                      Semesterticket oder Einzeltickets zum Klettern 🧗
+                      Die perfekte Möglichkeit einfach mal Bouldern zu gehen 🧗
                     </p>
                     <div className="w-full mt-2 flex items-center justify-center">
                       <img
@@ -882,63 +963,39 @@ function ChallengeApp() {
                 </Card>
               </div>
               {/* Weitere Preise */}
-              <div className="hidden md:block mt-10 px-4 container mx-auto max-w-5xl space-y-3">
-                {/* 3.-12. Preis */}
-                <div className="flex items-center gap-4 bg-white/10 backdrop-blur-md rounded-2xl px-6 py-4 text-white shadow-[4px_6px_10px_rgba(0,0,0,0.12)] hover:bg-white/15 transition-colors duration-200">
-                  <div className="flex-shrink-0 w-28 text-center">
-                    <span className="inline-block bg-white/20 text-white text-sm font-semibold px-3 py-1 rounded-full">
-                      3.–12. Platz
-                    </span>
+              {/* Weitere Preise - ohne Ranking */}
+              <div className="hidden md:block mt-14 px-4 container mx-auto max-w-5xl">
+                <h3 className="text-2xl font-bold text-white text-center mb-6">... und noch viele weitere Preise</h3>
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                  <div className="flex flex-col items-center gap-3 bg-white/10 backdrop-blur-md rounded-2xl overflow-hidden text-white shadow-[4px_6px_10px_rgba(0,0,0,0.12)] hover:bg-white/15 transition-colors duration-200">
+                    <img src="/herSpaceStudio.webp" alt="HerSpace Studio" className="w-full h-24 object-cover" />
+                    <div className="px-4 pb-4 text-center">
+                      <p className="font-semibold text-sm">10 × 100 % Gutschein Reformer Pilates</p>
+                      <p className="text-xs text-white/70 mt-1">HerSpace Studio</p>
+                    </div>
                   </div>
-                  <div className="text-3xl flex-shrink-0">🧘</div>
-                  <div className="flex-1">
-                    <p className="font-semibold">10 × 100 % Gutschein – Reformer Pilates For Her</p>
-                    <p className="text-sm text-white/70 mt-0.5">HerSpace Studio</p>
+                  <div className="flex flex-col items-center gap-3 bg-white/10 backdrop-blur-md rounded-2xl overflow-hidden text-white shadow-[4px_6px_10px_rgba(0,0,0,0.12)] hover:bg-white/15 transition-colors duration-200">
+                    <div className="w-full h-24 bg-gray-200 flex items-center justify-center">
+                      <img src="/6_Redbull.png" alt="Red Bull" className="h-20 w-auto object-contain" />
+                    </div>
+                    <div className="px-4 pb-4 text-center">
+                      <p className="font-semibold text-sm">14 × 1 Tray Red Bull</p>
+                      <p className="text-xs text-white/70 mt-1">Für den Extra-Boost</p>
+                    </div>
                   </div>
-                </div>
-                {/* 13.-26. Preis */}
-                <div className="flex items-center gap-4 bg-white/10 backdrop-blur-md rounded-2xl px-6 py-4 text-white shadow-[4px_6px_10px_rgba(0,0,0,0.12)] hover:bg-white/15 transition-colors duration-200">
-                  <div className="flex-shrink-0 w-28 text-center">
-                    <span className="inline-block bg-white/20 text-white text-sm font-semibold px-3 py-1 rounded-full">
-                      13.–26. Platz
-                    </span>
+                  <div className="flex flex-col items-center gap-3 bg-white/10 backdrop-blur-md rounded-2xl overflow-hidden text-white shadow-[4px_6px_10px_rgba(0,0,0,0.12)] hover:bg-white/15 transition-colors duration-200">
+                    <img src="/HabitusHeaderBild.webp" alt="Habitus" className="w-full h-24 object-cover" />
+                    <div className="px-4 pb-4 text-center">
+                      <p className="font-semibold text-sm">3 × Malen nach Zahlen Bild</p>
+                      <p className="text-xs text-white/70 mt-1">Habitus</p>
+                    </div>
                   </div>
-                  <div className="flex-shrink-0 h-12 flex items-center">
-                    <img
-                      src={`${imageBaseUrl}/6_Redbull_2.png`}
-                      alt="Red Bull"
-                      className="h-10 w-auto object-contain"
-                    />
-                  </div>
-                  <div className="flex-1">
-                    <p className="font-semibold">14 × 1 Tray Red Bull</p>
-                    <p className="text-sm text-white/70 mt-0.5">Für den Extra-Boost in der Lernphase ⚡</p>
-                  </div>
-                </div>
-                {/* 27.-29. Preis */}
-                <div className="flex items-center gap-4 bg-white/10 backdrop-blur-md rounded-2xl px-6 py-4 text-white shadow-[4px_6px_10px_rgba(0,0,0,0.12)] hover:bg-white/15 transition-colors duration-200">
-                  <div className="flex-shrink-0 w-28 text-center">
-                    <span className="inline-block bg-white/20 text-white text-sm font-semibold px-3 py-1 rounded-full">
-                      27.–29. Platz
-                    </span>
-                  </div>
-                  <div className="text-3xl flex-shrink-0">🎨</div>
-                  <div className="flex-1">
-                    <p className="font-semibold">3 × Malen nach Zahlen Bild</p>
-                    <p className="text-sm text-white/70 mt-0.5">Kreativ entspannen mit Habitus</p>
-                  </div>
-                </div>
-                {/* 30.-44. Preis */}
-                <div className="flex items-center gap-4 bg-white/10 backdrop-blur-md rounded-2xl px-6 py-4 text-white shadow-[4px_6px_10px_rgba(0,0,0,0.12)] hover:bg-white/15 transition-colors duration-200">
-                  <div className="flex-shrink-0 w-28 text-center">
-                    <span className="inline-block bg-white/20 text-white text-sm font-semibold px-3 py-1 rounded-full">
-                      30.–44. Platz
-                    </span>
-                  </div>
-                  <div className="text-3xl flex-shrink-0">🖼️</div>
-                  <div className="flex-1">
-                    <p className="font-semibold">15 × Gutschein Kunsthalle München</p>
-                    <p className="text-sm text-white/70 mt-0.5">Kunst & Kultur für deinen nächsten freien Nachmittag</p>
+                  <div className="flex flex-col items-center gap-3 bg-white/10 backdrop-blur-md rounded-2xl overflow-hidden text-white shadow-[4px_6px_10px_rgba(0,0,0,0.12)] hover:bg-white/15 transition-colors duration-200">
+                    <img src="/kunsthalle-munchen.jpg" alt="Kunsthalle München" className="w-full h-24 object-cover" />
+                    <div className="px-4 pb-4 text-center">
+                      <p className="font-semibold text-sm">15 × Gutschein Kunsthalle München</p>
+                      <p className="text-xs text-white/70 mt-1">Kunst & Kultur</p>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -1012,13 +1069,18 @@ function ChallengeApp() {
                           <p className="text-center text-white/80 mb-6">
                             2 Nächte für 2 Personen in einer Cabin nach Wahl, einlösbar bis 31.12.2026 🏡
                           </p>
-                          <div className="w-full h-36 overflow-hidden flex items-center justify-center">
+                          <div className="w-full relative" style={{ height: '140px' }}>
                             <img
-                              src={
-                                prizes[0].image || placeholderImage
-                              }
+                              src={prizes[0].image}
                               alt={prizes[0].title}
-                              className="w-auto h-32 object-contain mx-auto"
+                              className="absolute left-2 top-0 w-3/5 h-auto max-h-32 object-cover rounded-lg shadow-lg"
+                              style={{ transform: 'rotate(-4deg)' }}
+                            />
+                            <img
+                              src={(prizes[0] as any).image2}
+                              alt={`${prizes[0].title} 2`}
+                              className="absolute right-2 top-4 w-3/5 h-auto max-h-32 object-cover rounded-lg shadow-lg"
+                              style={{ transform: 'rotate(3deg)' }}
                             />
                           </div>
                         </CardContent>
@@ -1046,13 +1108,18 @@ function ChallengeApp() {
                           <p className="text-center text-white/80 mb-6">
                             Exklusiv von E-Fellows – je 100 € für deinen nächsten Amazon-Einkauf 🛒
                           </p>
-                          <div className="w-full h-36 overflow-hidden flex items-center justify-center">
+                          <div className="w-full relative" style={{ height: '140px' }}>
                             <img
-                              src={
-                                prizes[1].image || placeholderImage
-                              }
+                              src={prizes[1].image}
                               alt={prizes[1].title}
-                              className="w-auto h-32 object-contain mx-auto rounded-xl"
+                              className="absolute left-2 top-0 w-3/5 h-auto max-h-32 object-contain rounded-lg shadow-lg"
+                              style={{ transform: 'rotate(-4deg)' }}
+                            />
+                            <img
+                              src={prizes[1].image}
+                              alt={`${prizes[1].title} 2`}
+                              className="absolute right-2 top-4 w-3/5 h-auto max-h-32 object-contain rounded-lg shadow-lg"
+                              style={{ transform: 'rotate(3deg)' }}
                             />
                           </div>
                         </CardContent>
@@ -1082,11 +1149,9 @@ function ChallengeApp() {
                           </p>
                           <div className="w-full mt-5 mb-6 flex items-center justify-center">
                             <img
-                              src={
-                                prizes[2].image || placeholderImage
-                              }
+                              src={prizes[2].image}
                               alt={prizes[2].title}
-                              className="w-auto max-w-[90%] max-h-36 object-contain rounded-xl mx-auto"
+                              className="w-auto max-w-[90%] max-h-36 object-cover rounded-xl mx-auto"
                             />
                           </div>
                         </CardContent>
@@ -1094,56 +1159,37 @@ function ChallengeApp() {
                     </div>
                   </SwiperSlide>
 
-                  {/* 3.-12. Platz */}
-                  <SwiperSlide>
-                    <div className="flex items-center justify-center h-full">
-                      <Card
-                        key="prize-4"
-                        className="overflow-visible bg-white/15 backdrop-blur-md text-white border-none shadow-[4px_6px_15px_rgba(0,0,0,0.2)] w-full h-[480px]"
-                      >
-                        <CardHeader className="relative pb-0 pt-8">
-                          <div className="absolute -top-5 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-[#808080] to-[#a9a9a9] text-white px-6 py-2 rounded-full shadow-md">
-                            <span className="font-bold text-lg">
-                              3.–12. Platz
-                            </span>
-                          </div>
-                        </CardHeader>
-                        <CardContent className="flex flex-col items-center pt-6">
-                          <div className="text-5xl mb-6">🧘</div>
-                          <h3 className="text-xl font-semibold text-center mb-6">
-                            10 × 100 % Gutschein – Reformer Pilates For Her
-                          </h3>
-                          <p className="text-center text-white/80 mb-6">
-                            HerSpace Studio – dein nächster Pilates-Kurs geht auf uns!
-                          </p>
-                        </CardContent>
-                      </Card>
-                    </div>
-                  </SwiperSlide>
                 </Swiper>
-                <div className="mt-4 space-y-3">
-                  <div className="flex items-center gap-3 bg-white/15 backdrop-blur-md rounded-2xl px-5 py-4 text-white shadow-lg">
-                    <span className="text-sm font-semibold bg-white/20 px-3 py-1 rounded-full whitespace-nowrap">13.–26. Platz</span>
-                    <img src={`${imageBaseUrl}/6_Redbull_2.png`} alt="Red Bull" className="h-8 w-auto object-contain flex-shrink-0" />
-                    <div>
-                      <p className="font-semibold text-sm">14 × 1 Tray Red Bull</p>
-                      <p className="text-xs text-white/70">Extra-Boost in der Lernphase ⚡</p>
+                <h3 className="text-xl font-bold text-white text-center mt-8 mb-4">... und noch viele weitere Preise</h3>
+                <div className="grid grid-cols-2 gap-3">
+                  <div className="flex flex-col items-center bg-white/15 backdrop-blur-md rounded-2xl overflow-hidden text-white shadow-lg">
+                    <img src="/herSpaceStudio.webp" alt="HerSpace Studio" className="w-full h-20 object-cover" />
+                    <div className="px-3 py-3 text-center">
+                      <p className="font-semibold text-xs">10 × Reformer Pilates</p>
+                      <p className="text-xs text-white/70 mt-1">HerSpace Studio</p>
                     </div>
                   </div>
-                  <div className="flex items-center gap-3 bg-white/15 backdrop-blur-md rounded-2xl px-5 py-4 text-white shadow-lg">
-                    <span className="text-sm font-semibold bg-white/20 px-3 py-1 rounded-full whitespace-nowrap">27.–29. Platz</span>
-                    <span className="text-2xl flex-shrink-0">🎨</span>
-                    <div>
-                      <p className="font-semibold text-sm">3 × Malen nach Zahlen Bild</p>
-                      <p className="text-xs text-white/70">Kreativ entspannen mit Habitus</p>
+                  <div className="flex flex-col items-center bg-white/15 backdrop-blur-md rounded-2xl overflow-hidden text-white shadow-lg">
+                    <div className="w-full h-20 bg-gray-200 flex items-center justify-center">
+                      <img src="/6_Redbull.png" alt="Red Bull" className="h-16 w-auto object-contain" />
+                    </div>
+                    <div className="px-3 py-3 text-center">
+                      <p className="font-semibold text-xs">14 × 1 Tray Red Bull</p>
+                      <p className="text-xs text-white/70 mt-1">Extra-Boost</p>
                     </div>
                   </div>
-                  <div className="flex items-center gap-3 bg-white/15 backdrop-blur-md rounded-2xl px-5 py-4 text-white shadow-lg">
-                    <span className="text-sm font-semibold bg-white/20 px-3 py-1 rounded-full whitespace-nowrap">30.–44. Platz</span>
-                    <span className="text-2xl flex-shrink-0">🖼️</span>
-                    <div>
-                      <p className="font-semibold text-sm">15 × Gutschein Kunsthalle München</p>
-                      <p className="text-xs text-white/70">Kunst & Kultur für deinen freien Nachmittag</p>
+                  <div className="flex flex-col items-center bg-white/15 backdrop-blur-md rounded-2xl overflow-hidden text-white shadow-lg">
+                    <img src="/HabitusHeaderBild.webp" alt="Habitus" className="w-full h-20 object-cover" />
+                    <div className="px-3 py-3 text-center">
+                      <p className="font-semibold text-xs">3 × Malen nach Zahlen</p>
+                      <p className="text-xs text-white/70 mt-1">Habitus</p>
+                    </div>
+                  </div>
+                  <div className="flex flex-col items-center bg-white/15 backdrop-blur-md rounded-2xl overflow-hidden text-white shadow-lg">
+                    <img src="/kunsthalle-munchen.jpg" alt="Kunsthalle München" className="w-full h-20 object-cover" />
+                    <div className="px-3 py-3 text-center">
+                      <p className="font-semibold text-xs">15 × Gutschein Kunsthalle</p>
+                      <p className="text-xs text-white/70 mt-1">Kunst & Kultur</p>
                     </div>
                   </div>
                 </div>
@@ -1159,10 +1205,9 @@ function ChallengeApp() {
 
         {(() => {
           const sponsors = [
-            { name: 'LAP Coffee', logo: '/LAP_Logo.png', hasLogo: false },
             { name: 'Red Bull', logo: '/redbull.svg', hasLogo: true },
             { name: 'Habitus', logo: '/230913_habitus_logo_orange.png', hasLogo: true },
-            { name: 'e-fellows.net', logo: '/e_fellows_logo.svg', hasLogo: true },
+            { name: 'e-fellows.net', logo: '/efellowslogoneu.png', hasLogo: true },
             { name: 'Raus.Life', logo: '/raus_logo_green.png', hasLogo: true },
             { name: 'Boulderwelt', logo: '/BW_logo_button.png', hasLogo: true },
             { name: 'HerSpace Studio', logo: '/herspace-logo_hoch-earth.jpg', hasLogo: true },
@@ -1181,7 +1226,7 @@ function ChallengeApp() {
                   alt={`${sponsor.name} Logo`}
                   loading="eager"
                   className="object-contain"
-                  style={{ height: '60px', width: 'auto', maxWidth: '140px' }}
+                  style={{ height: sponsor.logoHeight || '60px', width: 'auto', maxWidth: '180px' }}
                 />
               ) : (
                 <div className="px-5 py-2 rounded-full border-2 border-[#993333]/30 text-[#993333] font-semibold text-sm whitespace-nowrap">
@@ -1231,7 +1276,7 @@ function ChallengeApp() {
           <p className="text-lg md:text-xl text-center mb-12 max-w-3xl mx-auto">
             Löse{' '}
             <span className="text-[#993333] font-bold">
-              bis zum 31.10.
+              bis zum 29.04.
             </span>{' '}
             die folgenden Spiele und reiche deine Ergebnisse ein, um
             am Gewinnspiel teilzunehmen. Basierend auf deinen
@@ -2273,6 +2318,24 @@ function ChallengeApp() {
                 </form>
               </Card>
 
+              {/* e-fellows Info */}
+              <div className="rounded-xl border border-gray-200 bg-gray-50 p-4 flex items-center gap-4">
+                <img src="/efellowslogoneu.png" alt="e-fellows.net" className="h-10 w-auto object-contain flex-shrink-0" />
+                <div className="flex-1">
+                  <p className="text-sm text-gray-700">
+                    Du willst dich bei e-fellows registrieren oder direkt zum Stipendium? Dann schau doch{' '}
+                    <a
+                      href="https://www.e-fellows.net/academy-consult-challenge"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="font-semibold underline text-[#993333]"
+                    >
+                      hier vorbei
+                    </a>!
+                  </p>
+                </div>
+              </div>
+
               {/* Timeline */}
               <Card>
                 <CardHeader>
@@ -2472,7 +2535,7 @@ function ChallengeApp() {
                 }}
               >
                 <span className="text-white font-bold text-xl md:text-2xl drop-shadow-md">
-                  Jetzt bis zum 26.10. bewerben!
+                  Jetzt bis zum 26.04. bewerben!
                 </span>
               </div>
             </a>
@@ -2487,11 +2550,22 @@ function ChallengeApp() {
       >
         <SectionDivider title="Lerne uns kennen!" />
         <div className="container mx-auto px-4">
-          <p className="text-lg md:text-xl text-center mb-12 max-w-3xl mx-auto">
+          <p className="text-lg md:text-xl text-center mb-8 max-w-3xl mx-auto">
             Auf Infoabenden stellen wir uns genauer vor, klären deine
             Fragen und tauschen uns aus. Melde dich an und füge die
-            Events deinem Kalernder hinzu. 📅
+            Events deinem Kalender hinzu. 📅
           </p>
+          <div className="flex justify-center mb-12">
+            <a
+              href="https://luma.com/academyconsult"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#993333] text-white font-semibold hover:bg-[#7a2929] transition-colors shadow-md"
+            >
+              Alle Events auf Luma
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            </a>
+          </div>
         </div>
         <div className="container mx-auto px-4 mt-12">
           <SwiperEventCarousel events={events} />

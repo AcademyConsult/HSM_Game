@@ -192,22 +192,40 @@ export default function CoffeeChatCarousel({
                     ) : null}
                   </div>
                 </div>
-                {profile.linkedinLink ? (
-                  <Button
-                    variant="outline"
-                    className="mt-4 w-full rounded-full border-gray-200 bg-white/90 text-neutral-900 shadow-md transition-transform duration-300 hover:scale-[1.02] hover:bg-white"
-                    asChild
-                  >
-                    <Link
-                      href={profile.linkedinLink}
-                      target="_blank"
-                      rel="noopener noreferrer"
+                <div className="mt-4 flex w-full gap-2">
+                  {profile.linkedinLink ? (
+                    <Button
+                      variant="outline"
+                      className="flex-1 rounded-full border-gray-200 bg-white/90 text-neutral-900 shadow-md transition-transform duration-300 hover:scale-[1.02] hover:bg-white"
+                      asChild
                     >
-                      <LinkedInIcon className="mr-2 h-4 w-4" />
-                      LinkedIn
-                    </Link>
-                  </Button>
-                ) : null}
+                      <Link
+                        href={profile.linkedinLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <LinkedInIcon className="mr-1.5 h-4 w-4" />
+                        LinkedIn
+                      </Link>
+                    </Button>
+                  ) : null}
+                  {profile.calendarLink ? (
+                    <Button
+                      variant="outline"
+                      className="flex-1 rounded-full border-gray-200 bg-white/90 text-neutral-900 shadow-md transition-transform duration-300 hover:scale-[1.02] hover:bg-white"
+                      asChild
+                    >
+                      <Link
+                        href={profile.calendarLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <svg xmlns="http://www.w3.org/2000/svg" className="mr-1.5 h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                        Calendly
+                      </Link>
+                    </Button>
+                  ) : null}
+                </div>
               </div>
             </SwiperSlide>
           );

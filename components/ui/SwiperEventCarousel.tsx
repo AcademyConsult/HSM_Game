@@ -206,7 +206,7 @@ export function SwiperEventCarousel({ events }: SwiperEventCarouselProps) {
                     </div>
                     {event.eventbride && event.eventbride !== "none" && (
                       <button
-                        className="flex-shrink-0 flex items-center gap-1 bg-white/20 backdrop-blur-sm hover:bg-white/35 text-white text-xs font-medium px-3 py-1.5 rounded-full transition-colors mb-0.5"
+                        className="flex-shrink-0 flex items-center gap-1 bg-[#993333] hover:bg-[#7a2929] text-white text-xs font-medium px-3 py-1.5 rounded-full transition-colors mb-0.5"
                         onClick={() => window.open(event.eventbride, "_blank")}
                       >
                         Anmelden
