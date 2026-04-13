@@ -2177,7 +2177,7 @@ function ChallengeApp() {
                           Mit dem Einreichen meiner Lösungen
                           akzeptiere ich die und
                           <a
-                            href="https://academyconsult.de/unternehmen/datenschutz/"
+                            href="https://ac-event.notion.site/Teilnahmebedingungen-1cd3d6763f7b80ea9060d5f84e1649d3"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="text-[#993333] hover:underline"
