@@ -112,7 +112,7 @@ export default function CookieConsentComponent() {
             consentModal: {
               title: "Wir verwenden Cookies",
               description:
-                'Diese Website verwendet notwendige Cookies, um ihren ordnungsgem\u00e4\u00dfen Betrieb zu gew\u00e4hrleisten, sowie Analyse-Cookies, um zu verstehen, wie Sie mit ihr interagieren. Letztere werden nur nach Ihrer ausdr\u00fccklichen Zustimmung gesetzt. <a href="https://ac-event.notion.site/" data-cc="c-settings">Datenschutzerkl\u00e4rung</a>',
+                'Diese Website verwendet notwendige Cookies, um ihren ordnungsgem\u00e4\u00dfen Betrieb zu gew\u00e4hrleisten, sowie Analyse-Cookies, um zu verstehen, wie Sie mit ihr interagieren. Letztere werden nur nach Ihrer ausdr\u00fccklichen Zustimmung gesetzt. <a href="https://academyconsult.de/unternehmen/datenschutz/" data-cc="c-settings">Datenschutzerkl\u00e4rung</a>',
               acceptAllBtn: "Alle akzeptieren",
               acceptNecessaryBtn: "Alle ablehnen",
               showPreferencesBtn: "Einstellungen verwalten",
@@ -170,7 +170,7 @@ export default function CookieConsentComponent() {
                 {
                   title: "Weitere Informationen",
                   description:
-                    'F\u00fcr weitere Informationen zu unserer Cookie-Richtlinie besuchen Sie bitte unsere <a href="https://ac-event.notion.site/">Datenschutzerkl\u00e4rung</a>.',
+                    'F\u00fcr weitere Informationen zu unserer Cookie-Richtlinie besuchen Sie bitte unsere <a href="https://academyconsult.de/unternehmen/datenschutz/">Datenschutzerkl\u00e4rung</a>.',
                 },
               ],
             },

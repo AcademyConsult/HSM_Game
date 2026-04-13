@@ -496,8 +496,7 @@ function ChallengeApp() {
         captchaToken: captchaToken, // Token zum Payload hinzufügen
         HatWerbungAboniert: newsletterOptIn,
       };
-      const response = await fetch(
-        'https://default3ab5870fec394c60a6bb62df19ce89.95.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/bbcb61dde4284b33b6fbf5faaff61a26/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=F3Iph6RYhy4IPeW0jxgCsgVLS3D6fuAwr0sMYfmmopU',
+      const response = await fetch('/api/submit',
         {
           method: 'POST',
           headers: {
@@ -2142,7 +2141,7 @@ function ChallengeApp() {
                           </a>
                           . Details in der{' '}
                           <a
-                            href="https://ac-event.notion.site/"
+                            href="https://academyconsult.de/unternehmen/datenschutz/"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="text-[#993333] underline font-medium"
@@ -2178,7 +2177,7 @@ function ChallengeApp() {
                           Mit dem Einreichen meiner Lösungen
                           akzeptiere ich die und
                           <a
-                            href="https://ac-event.notion.site/Teilnahmebedingungen-1cd3d6763f7b80ea9060d5f84e1649d3"
+                            href="https://academyconsult.de/unternehmen/datenschutz/"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="text-[#993333] hover:underline"
@@ -2188,7 +2187,7 @@ function ChallengeApp() {
                           </a>
                           und
                           <a
-                            href="https://ac-event.notion.site/"
+                            href="https://academyconsult.de/unternehmen/datenschutz/"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="text-[#993333] hover:underline"
@@ -2687,7 +2686,7 @@ function ChallengeApp() {
             <div className="text-xs opacity-80 mb-4 text-center w-full">
               Diese Seite ist durch reCAPTCHA geschützt.
               <a
-                href="https://policies.google.com/privacy"
+                href="https://academyconsult.de/unternehmen/datenschutz/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="ml-1 underline hover:opacity-90"
@@ -2696,12 +2695,12 @@ function ChallengeApp() {
               </a>
               <span className="mx-1">-</span>
               <a
-                href="https://policies.google.com/terms"
+                href="https://academyconsult.de/unternehmen/impressum/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="underline hover:opacity-90"
               >
-                Nutzungsbedingungen
+                Impressum
               </a>
             </div>
 
