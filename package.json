@@ -60,6 +60,7 @@
     "swiper": "^11.2.4",
     "tailwind-merge": "^2.5.5",
     "tailwindcss-animate": "^1.0.7",
+    "vanilla-cookieconsent": "^3.1.0",
     "vaul": "^0.9.6",
     "zod": "^3.24.1"
   },

@@ -2142,7 +2142,7 @@ function ChallengeApp() {
                           </a>
                           . Details in der{' '}
                           <a
-                            href="https://ac-vibe-hack.notion.site/Datenschutzbestimmungen-1d03d6763f7b80af8b50e2362a25c4c7?pvs=74"
+                            href="https://ac-event.notion.site/"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="text-[#993333] underline font-medium"
