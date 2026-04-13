@@ -12,7 +12,7 @@ export default function CoffeeChats({
   }
 
   return (
-    <section className="bg-white py-16 md:py-24">
+    <section id="coffee-chats" className="bg-white py-16 md:py-24">
       <SectionDivider title="Triff uns, wir laden dich auf einen Kaffee ein!" />
       <div className="container mx-auto px-4">
         <div className="mx-auto mb-12 max-w-3xl flex flex-col md:flex-row items-center gap-8 md:gap-12">
