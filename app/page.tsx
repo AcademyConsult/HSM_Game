@@ -968,7 +968,7 @@ function ChallengeApp() {
                 <h3 className="text-2xl font-bold text-white text-center mb-6">... und noch viele weitere Preise</h3>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                   <div className="flex flex-col items-center gap-3 bg-white/10 backdrop-blur-md rounded-2xl overflow-hidden text-white shadow-[4px_6px_10px_rgba(0,0,0,0.12)] hover:bg-white/15 transition-colors duration-200">
-                    <img src="/herSpaceStudio.webp" alt="Reformer for Her" className="w-full h-24 object-cover" />
+                    <img src="/HerSpaceStudio_cropped.png" alt="Reformer for Her" className="w-full h-24 object-cover" />
                     <div className="px-4 pb-4 text-center">
                       <p className="font-semibold text-sm">10 × 100 % Gutschein Reformer Pilates</p>
                       <p className="text-xs text-white/70 mt-1">Reformer for Her</p>
@@ -1163,7 +1163,7 @@ function ChallengeApp() {
                 <h3 className="text-xl font-bold text-white text-center mt-8 mb-4">... und noch viele weitere Preise</h3>
                 <div className="grid grid-cols-2 gap-3">
                   <div className="flex flex-col items-center bg-white/15 backdrop-blur-md rounded-2xl overflow-hidden text-white shadow-lg">
-                    <img src="/herSpaceStudio.webp" alt="Reformer for Her" className="w-full h-20 object-cover" />
+                    <img src="/HerSpaceStudio_cropped.png" alt="Reformer for Her" className="w-full h-20 object-cover" />
                     <div className="px-3 py-3 text-center">
                       <p className="font-semibold text-xs">10 × Reformer Pilates</p>
                       <p className="text-xs text-white/70 mt-1">Reformer for Her</p>
