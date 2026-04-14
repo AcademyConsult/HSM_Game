@@ -26,14 +26,12 @@ import { Label } from '@/components/ui/label';
 import { Terminal } from 'lucide-react';
 import CoffeeChats from './CoffeeChats';
 import type { CoffeeProfile } from './CoffeeChatCarousel';
-import type { Swiper as SwiperType } from 'swiper';
 
 import {
   Alert,
   AlertDescription,
   AlertTitle,
 } from '@/components/ui/alert';
-import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import {
   GoogleReCaptchaProvider,
@@ -58,10 +56,6 @@ type MotionSpanProps = HTMLMotionProps<'span'> & {
 
 // Wrapper-Komponente für reCAPTCHA v3
 function ChallengeApp() {
-  const [mobileSwiper, setMobileSwiper] = useState<SwiperType | null>(
-    null
-  );
-  const [activeSlide, setActiveSlide] = useState(0);
   const [email, setEmail] = useState('');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -112,8 +106,8 @@ function ChallengeApp() {
     {
       position: '2',
       title: 'Zweiter Preis',
-      description: '2 × 100 € Amazon Gutschein',
-      image: '/Amazon gutschein.png',
+      description: '10 × 100 % Gutschein Reformer Pilates',
+      image: '/HerSpaceStudio_cropped.png',
     },
     {
       position: '3',
@@ -879,7 +873,7 @@ function ChallengeApp() {
                   className="bg-white/10 backdrop-blur-md text-white border-none shadow-[4px_6px_10px_rgba(0,0,0,0.15)] w-full sm:w-1/2 md:w-1/4 h-auto md:h-[380px] transform transition-transform hover:scale-105 duration-300"
                 >
                   <CardHeader className="relative pb-0 pt-6">
-                    <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-gradient-to-r bg-gradient-to-r from-[#C0C0C0] to-[#E8E8E8] text-gray-800 px-4 py-1 rounded-full shadow-md">
+                    <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-[#C0C0C0] to-[#E8E8E8] text-gray-800 px-4 py-1 rounded-full shadow-md">
                       <span className="font-bold">2. Preis</span>
                     </div>
                   </CardHeader>
@@ -888,21 +882,13 @@ function ChallengeApp() {
                       {prizes[1].description}
                     </h3>
                     <p className="text-center text-white/80 mb-4">
-                      Exklusiv von E-Fellows für deinen nächsten
-                      Amazon-Einkauf 🛒
+                      Reformer for Her 🧘‍♀️
                     </p>
-                    <div className="w-full relative mt-6" style={{ minHeight: '160px' }}>
+                    <div className="w-full mt-2 flex items-center justify-center">
                       <img
                         src={prizes[1].image}
                         alt={prizes[1].title}
-                        className="absolute left-2 top-0 w-2/3 h-auto max-h-40 object-contain rounded-xl shadow-lg"
-                        style={{ transform: 'rotate(-4deg)' }}
-                      />
-                      <img
-                        src={prizes[1].image}
-                        alt={`${prizes[1].title} 2`}
-                        className="absolute right-2 top-4 w-2/3 h-auto max-h-40 object-contain rounded-xl shadow-lg"
-                        style={{ transform: 'rotate(3deg)' }}
+                        className="w-auto max-w-[90%] max-h-40 object-cover rounded-xl mx-auto"
                       />
                     </div>
                   </CardContent>
@@ -972,17 +958,9 @@ function ChallengeApp() {
                 </Card>
               </div>
               {/* Weitere Preise */}
-              {/* Weitere Preise - ohne Ranking */}
-              <div className="hidden md:block mt-14 px-4 container mx-auto max-w-5xl">
+              <div className="hidden md:block mt-14 px-4 container mx-auto max-w-4xl">
                 <h3 className="text-2xl font-bold text-white text-center mb-6">... und noch viele weitere Preise</h3>
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                  <div className="flex flex-col items-center gap-3 bg-white/10 backdrop-blur-md rounded-2xl overflow-hidden text-white shadow-[4px_6px_10px_rgba(0,0,0,0.12)] hover:bg-white/15 transition-colors duration-200">
-                    <img src="/HerSpaceStudio_cropped.png" alt="Reformer for Her" className="w-full h-24 object-cover" />
-                    <div className="px-4 pb-4 text-center">
-                      <p className="font-semibold text-sm">10 × 100 % Gutschein Reformer Pilates</p>
-                      <p className="text-xs text-white/70 mt-1">Reformer for Her</p>
-                    </div>
-                  </div>
+                <div className="grid grid-cols-3 gap-4">
                   <div className="flex flex-col items-center gap-3 bg-white/10 backdrop-blur-md rounded-2xl overflow-hidden text-white shadow-[4px_6px_10px_rgba(0,0,0,0.12)] hover:bg-white/15 transition-colors duration-200">
                     <div className="w-full h-24 bg-gray-200 flex items-center justify-center">
                       <img src="/6_Redbull.png" alt="Red Bull" className="h-20 w-auto object-contain" />
@@ -1009,198 +987,163 @@ function ChallengeApp() {
                 </div>
               </div>
 
-              {/* Mobile-Ansicht: Preise im Carousel */}
-
-              <div className="md:hidden px-4">
-                {/* Fixer Container für konsistente Höhe, sodass alle Preise vertikal zentriert angezeigt werden */}
-                <Swiper
-                  initialSlide={0}
-                  spaceBetween={20}
-                  slidesPerView={1}
-                  centeredSlides
-                  onSwiper={setMobileSwiper}
-                  onSlideChange={(swiper) =>
-                    setActiveSlide(swiper.activeIndex)
-                  }
-                  style={{ height: '500px' }}
-                >
-                  {/* Navigationspfeile für mobile Ansicht - nur anzeigen wenn nötig */}
-                  <div
-                    className={`absolute top-1/2 left-2 z-10 transform -translate-y-1/2 ${
-                      activeSlide === 0 ? 'hidden' : ''
-                    }`}
-                  >
-                    <Button
-                      className="h-10 w-10 rounded-full bg-white/20 backdrop-blur-sm hover:bg-white/40"
-                      onClick={() => mobileSwiper?.slidePrev()}
-                    >
-                      <span className="text-2xl text-white">
-                        &lt;
-                      </span>
-                    </Button>
+              {/* Newsletter-Gewinnspiel Banner - Amazon Gutschein */}
+              <div className="hidden md:block mt-14 px-4 container mx-auto max-w-3xl">
+                <h3 className="text-2xl font-bold text-white text-center mb-6">Unser Newsletter-Gewinnspiel</h3>
+                <div className="flex items-center gap-6 bg-white/10 backdrop-blur-md rounded-2xl overflow-hidden text-white shadow-[4px_6px_10px_rgba(0,0,0,0.12)] p-6">
+                  <div className="flex-shrink-0 relative w-48" style={{ minHeight: '120px' }}>
+                    <img
+                      src="/Amazon gutschein.png"
+                      alt="Amazon Gutschein"
+                      className="absolute left-0 top-0 w-4/5 h-auto max-h-28 object-contain rounded-xl shadow-lg"
+                      style={{ transform: 'rotate(-4deg)' }}
+                    />
+                    <img
+                      src="/Amazon gutschein.png"
+                      alt="Amazon Gutschein 2"
+                      className="absolute right-0 top-2 w-4/5 h-auto max-h-28 object-contain rounded-xl shadow-lg"
+                      style={{ transform: 'rotate(3deg)' }}
+                    />
                   </div>
-
-                  <div
-                    className={`absolute top-1/2 right-2 z-10 transform -translate-y-1/2 ${
-                      mobileSwiper &&
-                      activeSlide === mobileSwiper.slides.length - 1
-                        ? 'hidden'
-                        : ''
-                    }`}
-                  >
-                    <Button
-                      className="h-10 w-10 rounded-full bg-white/20 backdrop-blur-sm hover:bg-white/40"
-                      onClick={() => mobileSwiper?.slideNext()}
-                    >
-                      <span className="text-2xl text-white">
-                        &gt;
-                      </span>
-                    </Button>
+                  <div className="flex-1">
+                    <h4 className="text-xl font-semibold mb-2">2 × 100 € Amazon Gutschein</h4>
+                    <p className="text-white/80">
+                      Exklusiv von E-Fellows für deinen nächsten Amazon-Einkauf 🛒
+                    </p>
                   </div>
+                </div>
+              </div>
 
-                  <SwiperSlide>
-                    <div className="flex items-center justify-center h-full">
-                      <Card
-                        key="prize-1"
-                        className="overflow-visible bg-white/15 backdrop-blur-md text-white border-none shadow-[4px_6px_15px_rgba(0,0,0,0.2)] w-full h-[480px]"
-                      >
-                        <CardHeader className="relative pb-0 pt-8">
-                          <div className="absolute -top-5 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-[#ffd700] to-[#ffec8b] text-gray-800 px-6 py-2 rounded-full shadow-md">
-                            <span className="font-bold text-lg">
-                              1. Preis
-                            </span>
-                          </div>
-                        </CardHeader>
-                        <CardContent className="flex flex-col items-center pt-6">
-                          <h3 className="text-xl font-semibold text-center mb-6">
-                            {prizes[0].description}
-                          </h3>
-                          <p className="text-center text-white/80 mb-6">
-                            2 Nächte für 2 Personen in einer Cabin nach Wahl, einlösbar bis 31.12.2026 🏡
-                          </p>
-                          <div className="w-full relative" style={{ height: '140px' }}>
-                            <img
-                              src={prizes[0].image}
-                              alt={prizes[0].title}
-                              className="absolute left-2 top-0 w-3/5 h-auto max-h-32 object-cover rounded-lg shadow-lg"
-                              style={{ transform: 'rotate(-4deg)' }}
-                            />
-                            <img
-                              src={(prizes[0] as any).image2}
-                              alt={`${prizes[0].title} 2`}
-                              className="absolute right-2 top-4 w-3/5 h-auto max-h-32 object-cover rounded-lg shadow-lg"
-                              style={{ transform: 'rotate(3deg)' }}
-                            />
-                          </div>
-                        </CardContent>
-                      </Card>
+              {/* Mobile-Ansicht: Preise gestapelt */}
+              <div className="md:hidden px-4 space-y-6">
+                {/* 1. Preis */}
+                <Card className="overflow-visible bg-white/15 backdrop-blur-md text-white border-none shadow-[4px_6px_15px_rgba(0,0,0,0.2)]">
+                  <CardHeader className="relative pb-0 pt-8">
+                    <div className="absolute -top-5 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-[#ffd700] to-[#ffec8b] text-gray-800 px-6 py-2 rounded-full shadow-md">
+                      <span className="font-bold text-lg">1. Preis</span>
                     </div>
-                  </SwiperSlide>
-
-                  <SwiperSlide>
-                    <div className="flex items-center justify-center h-full">
-                      <Card
-                        key="prize-2"
-                        className="overflow-visible bg-white/15 backdrop-blur-md text-white border-none shadow-[4px_6px_15px_rgba(0,0,0,0.2)] w-full h-[480px]"
-                      >
-                        <CardHeader className="relative pb-0 pt-8">
-                          <div className="absolute -top-5 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-[#C0C0C0] to-[#E8E8E8] text-gray-800 px-6 py-2 rounded-full shadow-md">
-                            <span className="font-bold text-lg">
-                              2. Preis
-                            </span>
-                          </div>
-                        </CardHeader>
-                        <CardContent className="flex flex-col items-center pt-6">
-                          <h3 className="text-xl font-semibold text-center mb-6">
-                            {prizes[1].description}
-                          </h3>
-                          <p className="text-center text-white/80 mb-6">
-                            Exklusiv von E-Fellows – je 100 € für deinen nächsten Amazon-Einkauf 🛒
-                          </p>
-                          <div className="w-full relative" style={{ height: '140px' }}>
-                            <img
-                              src={prizes[1].image}
-                              alt={prizes[1].title}
-                              className="absolute left-2 top-0 w-3/5 h-auto max-h-32 object-contain rounded-lg shadow-lg"
-                              style={{ transform: 'rotate(-4deg)' }}
-                            />
-                            <img
-                              src={prizes[1].image}
-                              alt={`${prizes[1].title} 2`}
-                              className="absolute right-2 top-4 w-3/5 h-auto max-h-32 object-contain rounded-lg shadow-lg"
-                              style={{ transform: 'rotate(3deg)' }}
-                            />
-                          </div>
-                        </CardContent>
-                      </Card>
+                  </CardHeader>
+                  <CardContent className="flex flex-col items-center pt-6">
+                    <h3 className="text-xl font-semibold text-center mb-3">
+                      {prizes[0].description}
+                    </h3>
+                    <p className="text-center text-white/80 mb-4">
+                      2 Nächte für 2 Personen in einer Cabin nach Wahl, einlösbar bis 31.12.2026 🏡
+                    </p>
+                    <div className="w-full relative" style={{ height: '140px' }}>
+                      <img
+                        src={prizes[0].image}
+                        alt={prizes[0].title}
+                        className="absolute left-2 top-0 w-3/5 h-auto max-h-32 object-cover rounded-lg shadow-lg"
+                        style={{ transform: 'rotate(-4deg)' }}
+                      />
+                      <img
+                        src={(prizes[0] as any).image2}
+                        alt={`${prizes[0].title} 2`}
+                        className="absolute right-2 top-4 w-3/5 h-auto max-h-32 object-cover rounded-lg shadow-lg"
+                        style={{ transform: 'rotate(3deg)' }}
+                      />
                     </div>
-                  </SwiperSlide>
+                  </CardContent>
+                </Card>
 
-                  <SwiperSlide>
-                    <div className="flex items-center justify-center h-full">
-                      <Card
-                        key="prize-3"
-                        className="overflow-visible bg-white/15 backdrop-blur-md text-white border-none shadow-[4px_6px_15px_rgba(0,0,0,0.2)] w-full h-[480px]"
-                      >
-                        <CardHeader className="relative pb-0 pt-8">
-                          <div className="absolute -top-5 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-[#cd7f32] to-[#dea47e] text-white px-6 py-2 rounded-full shadow-md">
-                            <span className="font-bold text-lg">
-                              3. Preis
-                            </span>
-                          </div>
-                        </CardHeader>
-                        <CardContent className="flex flex-col items-center pt-6">
-                          <h3 className="text-xl font-semibold text-center mb-6">
-                            {prizes[2].description}
-                          </h3>
-                          <p className="text-center text-white/80 mb-6">
-                            Semesterticket oder Einzeltickets zum Klettern 🧗
-                          </p>
-                          <div className="w-full mt-5 mb-6 flex items-center justify-center">
-                            <img
-                              src={prizes[2].image}
-                              alt={prizes[2].title}
-                              className="w-auto max-w-[90%] max-h-36 object-cover rounded-xl mx-auto"
-                            />
-                          </div>
-                        </CardContent>
-                      </Card>
+                {/* 2. Preis */}
+                <Card className="overflow-visible bg-white/10 backdrop-blur-md text-white border-none shadow-[4px_6px_10px_rgba(0,0,0,0.15)]">
+                  <CardHeader className="relative pb-0 pt-6">
+                    <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-[#C0C0C0] to-[#E8E8E8] text-gray-800 px-4 py-1 rounded-full shadow-md">
+                      <span className="font-bold">2. Preis</span>
                     </div>
-                  </SwiperSlide>
+                  </CardHeader>
+                  <CardContent className="flex flex-col items-center pt-4">
+                    <h3 className="text-lg font-semibold text-center mb-3">
+                      {prizes[1].description}
+                    </h3>
+                    <p className="text-center text-white/80 mb-4">
+                      Reformer for Her 🧘‍♀️
+                    </p>
+                    <div className="w-full flex items-center justify-center">
+                      <img
+                        src={prizes[1].image}
+                        alt={prizes[1].title}
+                        className="w-auto max-w-[90%] max-h-32 object-cover rounded-xl mx-auto"
+                      />
+                    </div>
+                  </CardContent>
+                </Card>
 
-                </Swiper>
+                {/* 3. Preis */}
+                <Card className="overflow-visible bg-white/10 backdrop-blur-md text-white border-none shadow-[4px_6px_10px_rgba(0,0,0,0.15)]">
+                  <CardHeader className="relative pb-0 pt-6">
+                    <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-[#cd7f32] to-[#dea47e] text-white px-4 py-1 rounded-full shadow-md">
+                      <span className="font-bold">3. Preis</span>
+                    </div>
+                  </CardHeader>
+                  <CardContent className="flex flex-col items-center pt-4">
+                    <h3 className="text-lg font-semibold text-center mb-3">
+                      {prizes[2].description}
+                    </h3>
+                    <p className="text-center text-white/80 mb-4">
+                      Die perfekte Möglichkeit einfach mal Bouldern zu gehen 🧗
+                    </p>
+                    <div className="w-full flex items-center justify-center">
+                      <img
+                        src={prizes[2].image}
+                        alt={prizes[2].title}
+                        className="w-auto max-w-[90%] max-h-32 object-cover rounded-xl mx-auto"
+                      />
+                    </div>
+                  </CardContent>
+                </Card>
+
+                {/* Weitere Preise Mobile */}
                 <h3 className="text-xl font-bold text-white text-center mt-8 mb-4">... und noch viele weitere Preise</h3>
-                <div className="grid grid-cols-2 gap-3">
-                  <div className="flex flex-col items-center bg-white/15 backdrop-blur-md rounded-2xl overflow-hidden text-white shadow-lg">
-                    <img src="/HerSpaceStudio_cropped.png" alt="Reformer for Her" className="w-full h-20 object-cover" />
-                    <div className="px-3 py-3 text-center">
-                      <p className="font-semibold text-xs">10 × Reformer Pilates</p>
-                      <p className="text-xs text-white/70 mt-1">Reformer for Her</p>
-                    </div>
-                  </div>
+                <div className="grid grid-cols-3 gap-3">
                   <div className="flex flex-col items-center bg-white/15 backdrop-blur-md rounded-2xl overflow-hidden text-white shadow-lg">
                     <div className="w-full h-20 bg-gray-200 flex items-center justify-center">
                       <img src="/6_Redbull.png" alt="Red Bull" className="h-16 w-auto object-contain" />
                     </div>
-                    <div className="px-3 py-3 text-center">
+                    <div className="px-2 py-3 text-center">
                       <p className="font-semibold text-xs">14 × 1 Tray Red Bull</p>
                       <p className="text-xs text-white/70 mt-1">Extra-Boost</p>
                     </div>
                   </div>
                   <div className="flex flex-col items-center bg-white/15 backdrop-blur-md rounded-2xl overflow-hidden text-white shadow-lg">
                     <img src="/HabitusHeaderBild.webp" alt="Habitus" className="w-full h-20 object-cover" />
-                    <div className="px-3 py-3 text-center">
+                    <div className="px-2 py-3 text-center">
                       <p className="font-semibold text-xs">3 × Malen nach Zahlen</p>
                       <p className="text-xs text-white/70 mt-1">Habitus</p>
                     </div>
                   </div>
                   <div className="flex flex-col items-center bg-white/15 backdrop-blur-md rounded-2xl overflow-hidden text-white shadow-lg">
                     <img src="/kunsthalle-munchen.jpg" alt="Kunsthalle München" className="w-full h-20 object-cover" />
-                    <div className="px-3 py-3 text-center">
+                    <div className="px-2 py-3 text-center">
                       <p className="font-semibold text-xs">15 × Gutschein Kunsthalle</p>
                       <p className="text-xs text-white/70 mt-1">Kunst & Kultur</p>
                     </div>
                   </div>
+                </div>
+
+                {/* Newsletter-Gewinnspiel Banner Mobile */}
+                <h3 className="text-xl font-bold text-white text-center mt-8 mb-4">Unser Newsletter-Gewinnspiel</h3>
+                <div className="flex flex-col items-center bg-white/10 backdrop-blur-md rounded-2xl overflow-hidden text-white shadow-lg p-5">
+                  <div className="w-full relative mb-4" style={{ height: '100px' }}>
+                    <img
+                      src="/Amazon gutschein.png"
+                      alt="Amazon Gutschein"
+                      className="absolute left-4 top-0 w-3/5 h-auto max-h-24 object-contain rounded-lg shadow-lg"
+                      style={{ transform: 'rotate(-4deg)' }}
+                    />
+                    <img
+                      src="/Amazon gutschein.png"
+                      alt="Amazon Gutschein 2"
+                      className="absolute right-4 top-2 w-3/5 h-auto max-h-24 object-contain rounded-lg shadow-lg"
+                      style={{ transform: 'rotate(3deg)' }}
+                    />
+                  </div>
+                  <h4 className="text-lg font-semibold mb-1">2 × 100 € Amazon Gutschein</h4>
+                  <p className="text-sm text-white/80 text-center">
+                    Exklusiv von E-Fellows für deinen nächsten Amazon-Einkauf 🛒
+                  </p>
                 </div>
               </div>
             </div>
@@ -2336,15 +2279,7 @@ function ChallengeApp() {
                 </div>
                 <p className="text-sm text-gray-600 leading-relaxed">
                   Den e-fellows Preis (2 × 100 € Amazon Gutschein) kannst du nur gewinnen, wenn du zusätzlich am{' '}
-                  <a
-                    href="https://www.e-fellows.net/academy-consult-challenge"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="font-semibold underline text-[#993333] hover:text-[#7a2929] transition-colors"
-                  >
-                    e-fellows Gewinnspiel
-                  </a>{' '}
-                  teilnimmst. Jetzt registrieren und Chance sichern!
+                  e-fellows Gewinnspiel teilnimmst. Jetzt registrieren und Chance sichern!
                 </p>
               </div>
 
