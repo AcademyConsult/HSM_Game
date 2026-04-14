@@ -279,6 +279,16 @@ function ChallengeApp() {
       linkedinLink: 'https://www.linkedin.com/in/paul-wirth',
     },
     {
+      displayName: 'Malene',
+      degreeProgram: 'BWL',
+      stage: 'Bachelor',
+      university: 'LMU',
+      currentSemester: 2,
+      imageLink: '/Malene.jpg',
+      calendarLink: 'https://calendly.com/marlene-bookhagen-academyconsult/30min',
+      linkedinLink: 'https://www.linkedin.com/in/marlene-bookhagen-11b34133b/',
+    },
+    {
       displayName: 'Linus',
       degreeProgram: 'Management & Technology',
       stage: 'Bachelor',
