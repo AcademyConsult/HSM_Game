@@ -1,8 +1,20 @@
 import { NextResponse } from "next/server";
 import { supabase } from "@/lib/db";
 import { verifySchema } from "@/lib/validation";
+import { createRateLimiter, getClientIp } from "@/lib/rate-limit";
+
+const verifyLimiter = createRateLimiter({ windowMs: 60_000, maxRequests: 10 });
 
 export async function POST(request: Request) {
+  const ip = getClientIp(request);
+  if (verifyLimiter(ip)) {
+    console.log("[verify] Rate limited");
+    return NextResponse.json(
+      { error: "Zu viele Anfragen. Bitte versuche es später erneut." },
+      { status: 429 }
+    );
+  }
+
   console.log("[verify] Received verification request");
 
   let body: unknown;
@@ -26,7 +38,7 @@ export async function POST(request: Request) {
   }
 
   const { token } = parsed.data;
-  console.log("[verify] Looking up token:", token);
+  console.log("[verify] Looking up token");
 
   // Look up submission by token
   const { data: submission, error: fetchError } = await supabase
@@ -51,7 +63,7 @@ export async function POST(request: Request) {
     );
   }
 
-  console.log("[verify] Found submission id:", submission.id, "is_verified:", submission.is_verified, "expires:", submission.token_expires_at);
+  console.log("[verify] Found submission, is_verified:", submission.is_verified);
 
   // Check expiry
   if (new Date(submission.token_expires_at) < new Date()) {
@@ -83,6 +95,6 @@ export async function POST(request: Request) {
     );
   }
 
-  console.log("[verify] Verification successful for:", submission.first_name);
+  console.log("[verify] Verification successful");
   return NextResponse.json({ name: submission.first_name });
 }

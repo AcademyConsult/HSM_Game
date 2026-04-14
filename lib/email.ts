@@ -1,5 +1,14 @@
 let cachedToken: { token: string; expiresAt: number } | null = null;
 
+function escapeHtml(str: string): string {
+  return str
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
 async function getGraphAccessToken(): Promise<string> {
   if (cachedToken && Date.now() < cachedToken.expiresAt) {
     console.log("[email] Using cached Graph API token");
@@ -14,7 +23,7 @@ async function getGraphAccessToken(): Promise<string> {
     throw new Error("Azure AD credentials are not configured");
   }
 
-  console.log("[email] Requesting new Graph API token for tenant:", tenantId);
+  console.log("[email] Requesting new Graph API token");
   const response = await fetch(
     `https://login.microsoftonline.com/${tenantId}/oauth2/v2.0/token`,
     {
@@ -30,9 +39,8 @@ async function getGraphAccessToken(): Promise<string> {
   );
 
   if (!response.ok) {
-    const error = await response.text();
-    console.error("[email] Token request failed:", response.status, error);
-    throw new Error(`Failed to get Graph API token: ${error}`);
+    console.error("[email] Token request failed:", response.status);
+    throw new Error("Failed to get Graph API token");
   }
 
   const data = await response.json();
@@ -75,7 +83,7 @@ export async function sendMail({
     message.bccRecipients = [{ emailAddress: { address: bcc } }];
   }
 
-  console.log("[email] Sending mail from:", sender, "to:", to, "bcc:", bcc || "none");
+  console.log("[email] Sending mail");
   const response = await fetch(
     `https://graph.microsoft.com/v1.0/users/${sender}/sendMail`,
     {
@@ -89,9 +97,8 @@ export async function sendMail({
   );
 
   if (!response.ok) {
-    const error = await response.text();
-    console.error("[email] Graph API sendMail failed:", response.status, error);
-    throw new Error(`Failed to send email: ${response.status} ${error}`);
+    console.error("[email] Graph API sendMail failed:", response.status);
+    throw new Error(`Failed to send email: ${response.status}`);
   }
 
   console.log("[email] Mail sent successfully");
@@ -106,7 +113,7 @@ export function buildVerificationEmailHtml({
   verificationUrl: string;
   hatWerbungAboniert: boolean;
 }): string {
-  const greeting = vorname ? `Hey ${vorname},` : "Hey,";
+  const greeting = vorname ? `Hey ${escapeHtml(vorname)},` : "Hey,";
   const newsletterMention = hatWerbungAboniert ? " und das Newsletter-Abo" : "";
   const eFellowsBlock = hatWerbungAboniert
     ? `<p><strong>e-fellows Gewinnspiel:</strong><br/>

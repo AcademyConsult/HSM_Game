@@ -2175,7 +2175,7 @@ function ChallengeApp() {
                           className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                         >
                           Mit dem Einreichen meiner Lösungen
-                          akzeptiere ich die und
+                          akzeptiere ich die
                           <a
                             href="https://ac-event.notion.site/Teilnahmebedingungen-1cd3d6763f7b80ea9060d5f84e1649d3"
                             target="_blank"
@@ -2684,12 +2684,29 @@ function ChallengeApp() {
 
             {/* reCAPTCHA Hinweis */}
             <div className="text-xs opacity-80 mb-4 text-center w-full">
-              Diese Seite ist durch reCAPTCHA geschützt.
+              Diese Seite ist durch reCAPTCHA geschützt. Es gelten die
+              <a
+                href="https://policies.google.com/privacy"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="ml-1 underline hover:opacity-90"
+              >
+                Datenschutzbestimmungen
+              </a>{' '}und{' '}
+              <a
+                href="https://policies.google.com/terms"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline hover:opacity-90"
+              >
+                Nutzungsbedingungen
+              </a>{' '}von Google.
+              <span className="mx-1">|</span>
               <a
                 href="https://academyconsult.de/unternehmen/datenschutz/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="ml-1 underline hover:opacity-90"
+                className="underline hover:opacity-90"
               >
                 Datenschutz
               </a>

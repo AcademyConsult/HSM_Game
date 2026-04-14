@@ -3,8 +3,20 @@ import { supabase } from "@/lib/db";
 import { submitSchema } from "@/lib/validation";
 import { verifyRecaptcha } from "@/lib/recaptcha";
 import { sendMail, buildVerificationEmailHtml } from "@/lib/email";
+import { createRateLimiter, getClientIp } from "@/lib/rate-limit";
+
+const submitLimiter = createRateLimiter({ windowMs: 60_000, maxRequests: 5 });
 
 export async function POST(request: Request) {
+  const ip = getClientIp(request);
+  if (submitLimiter(ip)) {
+    console.log("[submit] Rate limited");
+    return NextResponse.json(
+      { error: "Zu viele Anfragen. Bitte versuche es später erneut." },
+      { status: 429 }
+    );
+  }
+
   console.log("[submit] Received submission request");
 
   let body: unknown;
@@ -31,19 +43,19 @@ export async function POST(request: Request) {
   const { email, vorname, nachname, schaetzwert, captchaToken, HatWerbungAboniert } =
     parsed.data;
 
-  console.log("[submit] Validated input for email:", email);
+  console.log("[submit] Input validated");
 
   // Verify reCAPTCHA
   console.log("[submit] Verifying reCAPTCHA token...");
   const recaptchaResult = await verifyRecaptcha(captchaToken);
   if (!recaptchaResult.success) {
-    console.log("[submit] reCAPTCHA failed:", recaptchaResult.error, "score:", recaptchaResult.score);
+    console.log("[submit] reCAPTCHA failed");
     return NextResponse.json(
       { error: recaptchaResult.error },
       { status: 400 }
     );
   }
-  console.log("[submit] reCAPTCHA passed, score:", recaptchaResult.score);
+  console.log("[submit] reCAPTCHA passed");
 
   // Check duplicate email
   console.log("[submit] Checking for duplicate email...");
@@ -75,7 +87,7 @@ export async function POST(request: Request) {
   console.log("[submit] Generated verification token, expires:", tokenExpiresAt);
 
   // Send verification email
-  console.log("[submit] Sending verification email to:", email);
+  console.log("[submit] Sending verification email");
   try {
     await sendMail({
       to: email,
@@ -117,6 +129,6 @@ export async function POST(request: Request) {
     );
   }
 
-  console.log("[submit] Submission created successfully for:", email);
+  console.log("[submit] Submission created successfully");
   return NextResponse.json({ message: "Item created successfully" });
 }
