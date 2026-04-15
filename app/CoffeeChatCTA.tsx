@@ -45,7 +45,7 @@ export default function CoffeeChatCTA() {
     >
       <button
         onClick={handleClick}
-        className="relative w-full flex items-center gap-3 rounded-2xl bg-white px-4 py-3 shadow-[0_4px_24px_rgba(0,0,0,0.12)] ring-1 ring-black/5 transition-transform active:scale-[0.98] md:hover:shadow-[0_8px_32px_rgba(0,0,0,0.16)] md:hover:scale-[1.01]"
+        className="relative w-full flex items-center gap-3 rounded-2xl bg-white px-4 py-10 shadow-[0_4px_24px_rgba(0,0,0,0.12)] ring-1 ring-black/5 transition-transform active:scale-[0.98] md:hover:shadow-[0_8px_32px_rgba(0,0,0,0.16)] md:hover:scale-[1.01]"
       >
         {/* Coffee icon */}
         <span className="flex-shrink-0 flex items-center justify-center w-10 h-10 rounded-full bg-[#993333]/10">
