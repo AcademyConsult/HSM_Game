@@ -25,6 +25,7 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { Label } from '@/components/ui/label';
 import { Terminal } from 'lucide-react';
 import CoffeeChats from './CoffeeChats';
+import CoffeeChatCTA from './CoffeeChatCTA';
 import type { CoffeeProfile } from './CoffeeChatCarousel';
 
 import {
@@ -1146,6 +1147,29 @@ function ChallengeApp() {
                   </p>
                 </div>
               </div>
+            </div>
+
+            {/* Secondary CTA: Coffee Chats teaser */}
+            <div className="mt-10 md:mt-14 flex justify-center">
+              <button
+                onClick={() => {
+                  document.getElementById('coffee-chats')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }}
+                className="group inline-flex items-center gap-2 rounded-full bg-white/10 backdrop-blur-sm px-5 py-2.5 text-white/90 transition-all hover:bg-white/20 hover:text-white active:scale-95 ring-1 ring-white/20"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4 opacity-80">
+                  <path d="M17 8h1a4 4 0 1 1 0 8h-1" />
+                  <path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z" />
+                  <line x1="6" y1="2" x2="6" y2="4" />
+                  <line x1="10" y1="2" x2="10" y2="4" />
+                  <line x1="14" y1="2" x2="14" y2="4" />
+                </svg>
+                <span className="text-sm font-medium">Lerne uns bei einem Coffee Chat kennen</span>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-3.5 h-3.5 transition-transform group-hover:translate-y-0.5 opacity-60">
+                  <path d="M12 5v14" />
+                  <path d="m19 12-7 7-7-7" />
+                </svg>
+              </button>
             </div>
           </div>
         </div>
@@ -2676,6 +2700,9 @@ function ChallengeApp() {
           </div>
         </div>
       </footer>
+
+      {/* Floating Coffee Chat CTA */}
+      <CoffeeChatCTA />
     </main>
   );
 }
