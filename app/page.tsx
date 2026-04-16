@@ -274,7 +274,7 @@ function ChallengeApp() {
       linkedinLink: 'https://www.linkedin.com/in/paul-wirth',
     },
     {
-      displayName: 'Malene',
+      displayName: 'Marlene',
       degreeProgram: 'BWL',
       stage: 'Bachelor',
       university: 'LMU',
