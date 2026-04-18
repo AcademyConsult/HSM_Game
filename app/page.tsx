@@ -383,6 +383,16 @@ function ChallengeApp() {
       calendarLink: 'https://calendly.com/noahstraube/30min',
       linkedinLink: 'https://www.linkedin.com/in/noah-straube-b2356326b',
     },
+    {
+      displayName: 'Julie',
+      degreeProgram: 'Management & Technology',
+      stage: 'Bachelor',
+      university: 'TUM',
+      currentSemester: 4,
+      imageLink: '/Julie.jpg',
+      calendarLink: 'https://calendly.com/julie-kappeler-academyconsult/30min',
+      linkedinLink: 'https://www.linkedin.com/in/julie-johanna-kappeler-227a25294',
+    },
   ];
 
   const [games, setGames] = useState([
