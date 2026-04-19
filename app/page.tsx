@@ -389,7 +389,7 @@ function ChallengeApp() {
       stage: 'Bachelor',
       university: 'TUM',
       currentSemester: 4,
-      imageLink: '/Julie.jpg',
+      imageLink: '/JulieKappeler.jpg',
       calendarLink: 'https://calendly.com/julie-kappeler-academyconsult/30min',
       linkedinLink: 'https://www.linkedin.com/in/julie-johanna-kappeler-227a25294',
     },
