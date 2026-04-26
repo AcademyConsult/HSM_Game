@@ -1,7 +1,9 @@
 import { supabase } from "../lib/db";
-import { sendMail } from "../lib/email";
+import { sendMail, GraphSendMailError } from "../lib/email";
 import { buildUnsubscribeUrl } from "../lib/unsubscribe-token";
 import readline from "node:readline/promises";
+import { writeFileSync } from "node:fs";
+import { resolve } from "node:path";
 
 // === ANSI helpers ===
 const RESET = "\x1b[0m";
@@ -33,14 +35,20 @@ Flags:
   (none)     Test mode. No emails sent. Logs preview + recipient lists.
   --live     Live mode. Sends emails. Persists sent addresses per term.
   --debug    Test mode + live filter. Previews exactly what live mode would do.
+  --html     Export recipient tables + email previews to a self-contained HTML file. No emails sent.
   -h, --help Show this help.
 `);
   process.exit(0);
 }
 const liveMode = args.includes("--live");
 const debugMode = args.includes("--debug");
+const htmlMode = args.includes("--html");
 if (liveMode && debugMode) {
   console.error(color.red("Error: --live and --debug are mutually exclusive."));
+  process.exit(1);
+}
+if (htmlMode && liveMode) {
+  console.error(color.red("Error: --html and --live are mutually exclusive."));
   process.exit(1);
 }
 const mode: "test" | "live" | "debug" = liveMode ? "live" : debugMode ? "debug" : "test";
@@ -143,18 +151,14 @@ function publicAssetUrl(path: string): string {
 function buildEmailHeader(): string {
   // /logo_text.png has its wordmark stacked vertically — can't flatten via CSS.
   // Compose: square triangle mark (logo.png) + wordmark as HTML text, one line.
-  return `<table cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse; margin:8px 0 24px; font-family: Verdana, Geneva, sans-serif;">
-    <tr>
-      <td style="vertical-align:middle; padding-right:14px;">
-        <img src="${publicAssetUrl("/logo.png")}" alt="Academy Consult" width="48" height="48" style="display:block; border:0;" />
-      </td>
-      <td style="vertical-align:middle; white-space:nowrap;">
-        <span style="font-size: 20pt; font-weight: bold; letter-spacing: -0.3px;">
-          <span style="color:#993333;">academy</span>&nbsp;<span style="color:#8a8d96;">consult</span>
-        </span>
-      </td>
-    </tr>
-  </table>`;
+  // Use a <div> (not <table>) so the header sits at the same left edge as the
+  // <p> body text in clients that treat tables and paragraphs differently.
+  return `<div style="margin:8px 0 24px; padding:0; font-family: Verdana, Geneva, sans-serif; line-height:1; white-space:nowrap;">
+    <img src="${publicAssetUrl("/logo.png")}" alt="Academy Consult" width="48" height="48" style="display:inline-block; vertical-align:middle; border:0; margin:0 14px 0 0;" />
+    <span style="display:inline-block; vertical-align:middle; font-size:20pt; font-weight:bold; letter-spacing:-0.3px;">
+      <span style="color:#993333;">academy</span>&nbsp;<span style="color:#8a8d96;">consult</span>
+    </span>
+  </div>`;
 }
 
 function buildEmailFooter(unsubscribeUrl: string): string {
@@ -177,7 +181,7 @@ function buildCurrentTermEmail(input: {
   unsubscribeUrl: string;
 }): { subject: string; html: string } {
   const { vorname, currentYear, applyUrl, unsubscribeUrl } = input;
-  const subject = `Letzte Chance: Bewerbung bei Academy Consult endet heute Abend`;
+  const subject = `Letzte Chance: Bewerbung bei Academy Consult endet heute um 23:59 Uhr`;
   const html = `<div style="font-family: Verdana, Geneva, sans-serif; font-size: 11pt; color: #222; line-height: 1.6; padding: 0 24px;">
   ${buildEmailHeader()}
 
@@ -185,7 +189,7 @@ function buildCurrentTermEmail(input: {
 
   <p>vielen Dank, dass du bei der <strong>Academy Consult Challenge ${currentYear}</strong> dabei warst — wir hoffen, du hattest Spaß!</p>
 
-  <p><strong>Heute Abend endet unsere Bewerbungsphase.</strong> Falls du dich noch nicht beworben hast, ist jetzt der perfekte Moment: Mit einer Bewerbung sicherst du dir die Chance, Teil von Academy Consult zu werden, an spannenden Beratungsprojekten mitzuarbeiten und ein starkes Netzwerk aufzubauen.</p>
+  <p><strong>Heute Abend um 23:59 Uhr endet unsere Bewerbungsphase.</strong> Falls du dich noch nicht beworben hast, ist jetzt der perfekte Moment: Mit einer Bewerbung sicherst du dir die Chance, Teil von Academy Consult zu werden, an spannenden Beratungsprojekten mitzuarbeiten und ein starkes Netzwerk aufzubauen.</p>
 
   <p>
     <a href="${applyUrl}" style="background:#993333; color:#fff; padding:12px 24px; text-decoration:none; border-radius:4px; display:inline-block; font-weight:bold;">Jetzt bewerben</a>
@@ -407,6 +411,130 @@ function bucketRecipients(
   return recipients;
 }
 
+// === HTML export ===
+function escapeAttr(html: string): string {
+  return html.replace(/&/g, "&amp;").replace(/"/g, "&quot;");
+}
+
+function buildHtmlRecipientTable(headers: string[], rows: string[][]): string {
+  const ths = headers.map((h) => `<th>${escapeHtml(h)}</th>`).join("");
+  const trs = rows
+    .map(
+      (r) =>
+        `<tr>${r.map((cell) => `<td>${escapeHtml(cell ?? "")}</td>`).join("")}</tr>`,
+    )
+    .join("\n");
+  return `<table>\n  <thead><tr>${ths}</tr></thead>\n  <tbody>${trs}</tbody>\n</table>`;
+}
+
+function buildHtmlExport(opts: {
+  semester: SemesterInfo;
+  generatedAt: Date;
+  filterEnabled: boolean;
+  alreadySentCount: number;
+  currentBucket: Recipient[];
+  previousBucket: Recipient[];
+  t1Mail: { subject: string; html: string } | null;
+  t2Mail: { subject: string; html: string } | null;
+}): string {
+  const { semester, generatedAt, filterEnabled, alreadySentCount, currentBucket, previousBucket, t1Mail, t2Mail } = opts;
+  const total = currentBucket.length + previousBucket.length;
+  const pad2 = (n: number) => String(n).padStart(2, "0");
+  const dateStr = `${generatedAt.getFullYear()}-${pad2(generatedAt.getMonth() + 1)}-${pad2(generatedAt.getDate())} ${pad2(generatedAt.getHours())}:${pad2(generatedAt.getMinutes())}`;
+
+  const currentTable =
+    currentBucket.length > 0
+      ? buildHtmlRecipientTable(
+          ["#", "Vorname", "Email"],
+          currentBucket.map((r, i) => [String(i + 1), r.firstName, r.email]),
+        )
+      : "<p><em>Keine Empfänger.</em></p>";
+
+  const previousTable =
+    previousBucket.length > 0
+      ? buildHtmlRecipientTable(
+          ["#", "Vorname", "Email", "Letztes Semester"],
+          previousBucket.map((r, i) => [
+            String(i + 1),
+            r.firstName,
+            r.email,
+            r.referencedSemester.label,
+          ]),
+        )
+      : "<p><em>Keine Empfänger.</em></p>";
+
+  const previewSection = (
+    label: string,
+    mail: { subject: string; html: string } | null,
+    sampleEmail: string,
+    fallback: string,
+  ) =>
+    mail
+      ? `<div class="preview-meta">
+        <span class="label">Betreff:</span> ${escapeHtml(mail.subject)}<br>
+        <span class="label">Vorschau für:</span> ${escapeHtml(sampleEmail)}
+      </div>
+      <iframe srcdoc="${escapeAttr(mail.html)}" class="email-frame"></iframe>`
+      : `<p><em>${fallback}</em></p>`;
+
+  return `<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Newsletter Preview — ${escapeHtml(semester.label)}</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 14px; color: #222; background: #f5f5f5; margin: 0; padding: 24px; }
+    .container { max-width: 900px; margin: 0 auto; }
+    h1 { font-size: 22px; margin: 0 0 16px; color: #111; }
+    h2 { font-size: 16px; margin: 32px 0 12px; padding-bottom: 6px; border-bottom: 2px solid #993333; color: #993333; }
+    .meta { background: #fff; border: 1px solid #ddd; border-radius: 6px; padding: 16px 20px; margin-bottom: 24px; }
+    .meta dl { margin: 0; display: grid; grid-template-columns: max-content 1fr; gap: 4px 16px; }
+    .meta dt { font-weight: 600; color: #555; }
+    .meta dd { margin: 0; }
+    .badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 12px; font-weight: 600; }
+    .badge-t1 { background: #e0f0ff; color: #0055aa; }
+    .badge-t2 { background: #f3e8ff; color: #6600aa; }
+    table { width: 100%; border-collapse: collapse; background: #fff; border: 1px solid #ddd; border-radius: 6px; overflow: hidden; margin-bottom: 8px; }
+    thead tr { background: #993333; color: #fff; }
+    th { text-align: left; padding: 10px 14px; font-size: 13px; }
+    td { padding: 8px 14px; border-top: 1px solid #eee; font-size: 13px; }
+    tr:nth-child(even) td { background: #fafafa; }
+    .preview-meta { background: #fff; border: 1px solid #ddd; border-radius: 6px 6px 0 0; padding: 12px 16px; font-size: 13px; }
+    .label { font-weight: 600; color: #555; }
+    .email-frame { width: 100%; height: 700px; border: 1px solid #ddd; border-top: none; border-radius: 0 0 6px 6px; background: #fff; display: block; }
+    .count { color: #666; font-weight: normal; font-size: 14px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Newsletter Reminder — Vorschau</h1>
+    <div class="meta">
+      <dl>
+        <dt>Semester</dt><dd>${escapeHtml(semester.label)}</dd>
+        <dt>Erstellt am</dt><dd>${escapeHtml(dateStr)}</dd>
+        <dt>Filter</dt><dd>${filterEnabled ? `aktiv (${alreadySentCount} bereits gesendet dieses Semester)` : "deaktiviert (Test-Modus)"}</dd>
+        <dt>Gesamt Empfänger</dt><dd>${total} <span class="badge badge-t1">${currentBucket.length} T1</span> <span class="badge badge-t2">${previousBucket.length} T2</span></dd>
+      </dl>
+    </div>
+
+    <h2>Template 1 — Current-term <span class="count">(${currentBucket.length})</span></h2>
+    ${currentTable}
+
+    <h2>Template 2 — Previous-term <span class="count">(${previousBucket.length})</span></h2>
+    ${previousTable}
+
+    <h2>Vorschau Template 1</h2>
+    ${previewSection("T1", t1Mail, currentBucket[0]?.email ?? "", "Keine current-term Empfänger — keine Vorschau verfügbar.")}
+
+    <h2>Vorschau Template 2</h2>
+    ${previewSection("T2", t2Mail, previousBucket[0]?.email ?? "", "Keine previous-term Empfänger — keine Vorschau verfügbar.")}
+  </div>
+</body>
+</html>`;
+}
+
 // === Main ===
 async function main() {
   const banner = "Academy Consult — Newsletter Reminder";
@@ -521,9 +649,12 @@ async function main() {
 
   // === Email previews ===
   const rule = color.gray("─".repeat(80));
+  let t1Mail: { subject: string; html: string } | null = null;
+  let t2Mail: { subject: string; html: string } | null = null;
+
   if (currentBucket.length > 0) {
     const sample = currentBucket[0];
-    const mail = buildCurrentTermEmail({
+    t1Mail = buildCurrentTermEmail({
       vorname: sample.firstName || "Teilnehmer:in",
       currentYear: currentSemester.year,
       applyUrl: APPLY_URL,
@@ -533,14 +664,14 @@ async function main() {
       color.bold("Template 1 preview ") + color.gray(`(rendered for ${sample.email})`),
     );
     console.log(rule);
-    console.log(`${color.bold("Subject:")} ${mail.subject}`);
+    console.log(`${color.bold("Subject:")} ${t1Mail.subject}`);
     console.log(rule);
     console.log("");
   }
 
   if (previousBucket.length > 0) {
     const sample = previousBucket[0];
-    const mail = buildPreviousTermEmail({
+    t2Mail = buildPreviousTermEmail({
       vorname: sample.firstName || "Teilnehmer:in",
       pastSemesterLabel: sample.referencedSemester.label,
       currentYear: currentSemester.year,
@@ -553,9 +684,33 @@ async function main() {
       color.bold("Template 2 preview ") + color.gray(`(rendered for ${sample.email})`),
     );
     console.log(rule);
-    console.log(`${color.bold("Subject:")} ${mail.subject}`);
+    console.log(`${color.bold("Subject:")} ${t2Mail.subject}`);
     console.log(rule);
     console.log("");
+  }
+
+  // === HTML export (--html flag) ===
+  if (htmlMode) {
+    const pad2 = (n: number) => String(n).padStart(2, "0");
+    const ts = `${now.getFullYear()}${pad2(now.getMonth() + 1)}${pad2(now.getDate())}-${pad2(now.getHours())}${pad2(now.getMinutes())}${pad2(now.getSeconds())}`;
+    const filename = `newsletter-preview-${ts}.html`;
+    const filepath = resolve(process.cwd(), filename);
+    writeFileSync(
+      filepath,
+      buildHtmlExport({
+        semester: currentSemester,
+        generatedAt: now,
+        filterEnabled: useFilter,
+        alreadySentCount: alreadySent.size,
+        currentBucket,
+        previousBucket,
+        t1Mail,
+        t2Mail,
+      }),
+      "utf-8",
+    );
+    console.log(color.greenBold(`HTML export written to: ${filename}`));
+    return;
   }
 
   // === Confirm ===
@@ -637,6 +792,17 @@ async function main() {
       console.log(
         `  ${color.red("✗")} ${color.gray(prefix)} ${tag} ${r.email} — ${color.red((e as Error).message ?? String(e))}`,
       );
+      // 429 from Microsoft Graph means we hit a per-mailbox throttle. Honour
+      // the Retry-After header so the rest of the batch doesn't cascade-fail.
+      // The current row stays counted as "failed" and will be retried on the
+      // next run (it's not in ac_challenge_reminders yet).
+      if (e instanceof GraphSendMailError && e.status === 429) {
+        const waitMs = (e.retryAfter ?? 60) * 1000;
+        console.log(
+          `     ${color.yellow(`⚠  Throttled (429). Microsoft Graph Retry-After: ${e.retryAfter ?? "unspecified"}s. Pausing batch for ${Math.ceil(waitMs / 1000)}s before continuing.`)}`,
+        );
+        await sleep(waitMs);
+      }
     }
   }
 
