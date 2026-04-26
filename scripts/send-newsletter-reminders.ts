@@ -1,6 +1,9 @@
 import { supabase } from "../lib/db";
 import { sendMail, GraphSendMailError } from "../lib/email";
-import { buildUnsubscribeUrl } from "../lib/unsubscribe-token";
+import {
+  buildUnsubscribeUrl,
+  buildOneClickUnsubscribeUrl,
+} from "../lib/unsubscribe-token";
 import readline from "node:readline/promises";
 import { writeFileSync } from "node:fs";
 import { resolve } from "node:path";
@@ -149,15 +152,12 @@ function publicAssetUrl(path: string): string {
 }
 
 function buildEmailHeader(): string {
-  // /logo_text.png has its wordmark stacked vertically — can't flatten via CSS.
-  // Compose: square triangle mark (logo.png) + wordmark as HTML text, one line.
-  // Use a <div> (not <table>) so the header sits at the same left edge as the
-  // <p> body text in clients that treat tables and paragraphs differently.
-  return `<div style="margin:8px 0 24px; padding:0; font-family: Verdana, Geneva, sans-serif; line-height:1; white-space:nowrap;">
-    <img src="${publicAssetUrl("/logo.png")}" alt="Academy Consult" width="48" height="48" style="display:inline-block; vertical-align:middle; border:0; margin:0 14px 0 0;" />
-    <span style="display:inline-block; vertical-align:middle; font-size:20pt; font-weight:bold; letter-spacing:-0.3px;">
-      <span style="color:#993333;">academy</span>&nbsp;<span style="color:#8a8d96;">consult</span>
-    </span>
+  // logo_text.png is the official wordmark (2015×680, ≈3:1). Explicit width +
+  // height attributes prevent iOS Mail from rendering it at native size and
+  // overflowing the viewport. <div> wrapper keeps the same left edge as the
+  // <p> body text below.
+  return `<div style="margin:8px 0 24px; padding:0;">
+    <img src="${publicAssetUrl("/logo_text.png")}" alt="Academy Consult" width="190" height="64" style="display:block; border:0; margin:0; width:190px; height:64px;" />
   </div>`;
 }
 
@@ -772,8 +772,33 @@ async function main() {
           });
     const prefix = `[${i + 1}/${recipients.length}]`;
     const tag = r.bucket === "current" ? color.cyan("T1") : color.magenta("T2");
+    // RFC 8058 / Gmail-Yahoo bulk-sender unsubscribe headers, set as MAPI
+    // extended properties because Microsoft Graph rejects them in
+    // `internetMessageHeaders` (those are restricted to "x-…").
+    //
+    //   List-Unsubscribe       → tagged property String 0x1045 (PidTagListUnsubscribe)
+    //   List-Unsubscribe-Post  → named property in the PS_INTERNET_HEADERS GUID
+    //
+    // The HTTPS URI in List-Unsubscribe is the one-click endpoint; combined
+    // with List-Unsubscribe-Post, MUAs POST `List-Unsubscribe=One-Click` to
+    // it without any user interaction. The in-body link still points at the
+    // user-facing /unsubscribe page (see unsubscribeUrl above).
+    const oneClickUrl = buildOneClickUnsubscribeUrl(r.id);
+    const PS_INTERNET_HEADERS = "{00020386-0000-0000-C000-000000000046}";
+    const extendedProperties = [
+      { id: "String 0x1045", value: `<${oneClickUrl}>` },
+      {
+        id: `String ${PS_INTERNET_HEADERS} Name List-Unsubscribe-Post`,
+        value: "List-Unsubscribe=One-Click",
+      },
+    ];
     try {
-      await sendMail({ to: r.email, subject: mail.subject, htmlBody: mail.html });
+      await sendMail({
+        to: r.email,
+        subject: mail.subject,
+        htmlBody: mail.html,
+        extendedProperties,
+      });
       sent++;
       console.log(`  ${color.green("✓")} ${color.gray(prefix)} ${tag} ${r.email}`);
       try {

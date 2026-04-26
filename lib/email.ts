@@ -58,6 +58,13 @@ interface SendMailOptions {
   subject: string;
   htmlBody: string;
   bcc?: string;
+  // Single-value extended (MAPI) properties. Use this to set headers that
+  // Graph's `internetMessageHeaders` rejects because they don't start with
+  // "x-" — notably List-Unsubscribe (PidTagListUnsubscribe, "String 0x1045")
+  // and List-Unsubscribe-Post, which has no tagged property and must be set
+  // via the PS_INTERNET_HEADERS named-property namespace
+  // ({00020386-0000-0000-C000-000000000046}).
+  extendedProperties?: Array<{ id: string; value: string }>;
 }
 
 export class GraphSendMailError extends Error {
@@ -79,6 +86,7 @@ export async function sendMail({
   subject,
   htmlBody,
   bcc,
+  extendedProperties,
 }: SendMailOptions): Promise<void> {
   const accessToken = await getGraphAccessToken();
   const sender = process.env.GRAPH_MAIL_SENDER;
@@ -95,6 +103,10 @@ export async function sendMail({
 
   if (bcc) {
     message.bccRecipients = [{ emailAddress: { address: bcc } }];
+  }
+
+  if (extendedProperties && extendedProperties.length > 0) {
+    message.singleValueExtendedProperties = extendedProperties;
   }
 
   console.log("[email] Sending mail");

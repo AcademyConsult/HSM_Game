@@ -33,3 +33,13 @@ export function buildUnsubscribeUrl(id: string | number, baseUrl?: string): stri
   const token = generateUnsubscribeToken(id);
   return `${base}/unsubscribe?id=${encodeURIComponent(String(id))}&token=${token}`;
 }
+
+// RFC 8058 one-click endpoint. Goes in the List-Unsubscribe mail header so
+// Gmail/Yahoo can POST `List-Unsubscribe=One-Click` and unsubscribe without
+// any human interaction. Distinct from buildUnsubscribeUrl(), which points at
+// the user-facing confirmation page used inside the email body.
+export function buildOneClickUnsubscribeUrl(id: string | number, baseUrl?: string): string {
+  const base = baseUrl || process.env.NEXT_PUBLIC_BASE_URL || "https://challenge.academyconsult.de";
+  const token = generateUnsubscribeToken(id);
+  return `${base}/api/unsubscribe/one-click?id=${encodeURIComponent(String(id))}&token=${token}`;
+}
