@@ -15,6 +15,11 @@ export async function verifyRecaptcha(
   token: string,
   expectedAction = "form_submit"
 ): Promise<{ success: boolean; score?: number; error?: string }> {
+  if (process.env.NODE_ENV === "development") {
+    console.log("[recaptcha] Dev mode — skipping verification");
+    return { success: true, score: 1.0 };
+  }
+
   const secretKey = process.env.RECAPTCHA_SECRET_KEY;
   if (!secretKey) {
     console.error("[recaptcha] RECAPTCHA_SECRET_KEY is not configured");
