@@ -21,5 +21,11 @@ export const verifySchema = z.object({
   token: z.string().uuid("Ungültiges Token-Format"),
 });
 
+export const unsubscribeSchema = z.object({
+  id: z.union([z.string().min(1), z.number().int()]),
+  token: z.string().regex(/^[0-9a-f]{64}$/i, "Ungültiges Token-Format"),
+});
+
 export type SubmitInput = z.infer<typeof submitSchema>;
 export type VerifyInput = z.infer<typeof verifySchema>;
+export type UnsubscribeInput = z.infer<typeof unsubscribeSchema>;
