@@ -1,50 +1,46 @@
-'use client';
+"use client";
 
-import { useState, useEffect, useRef, FormEvent } from 'react';
+import { useState, useEffect, useRef, FormEvent } from "react";
 import {
   Card,
   CardContent,
   CardFooter,
   CardHeader,
   CardTitle,
-} from '@/components/ui/card';
-import { Check } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
+} from "@/components/ui/card";
+import { Check } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from '@/components/ui/accordion';
-import { motion, HTMLMotionProps } from 'framer-motion';
-import { Separator } from '@/components/ui/separator';
-import { SectionDivider } from '@/components/ui/SectionDivider';
-import { SwiperEventCarousel } from '@/components/ui/SwiperEventCarousel';
-import { Checkbox } from '@/components/ui/checkbox';
-import { Label } from '@/components/ui/label';
-import { Terminal } from 'lucide-react';
-import CoffeeChats from './CoffeeChats';
-import CoffeeChatCTA from './CoffeeChatCTA';
-import type { CoffeeProfile } from './CoffeeChatCarousel';
+} from "@/components/ui/accordion";
+import { motion, HTMLMotionProps } from "framer-motion";
+import { Separator } from "@/components/ui/separator";
+import { SectionDivider } from "@/components/ui/SectionDivider";
+import { SwiperEventCarousel } from "@/components/ui/SwiperEventCarousel";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Label } from "@/components/ui/label";
+import { Terminal } from "lucide-react";
+import CoffeeChats from "./CoffeeChats";
+import CoffeeChatCTA from "./CoffeeChatCTA";
+import type { CoffeeProfile } from "./CoffeeChatCarousel";
 
-import {
-  Alert,
-  AlertDescription,
-  AlertTitle,
-} from '@/components/ui/alert';
-import 'swiper/css';
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import "swiper/css";
 import {
   GoogleReCaptchaProvider,
   useGoogleReCaptcha,
-} from 'react-google-recaptcha-v3';
+} from "react-google-recaptcha-v3";
 
 // Typdefinition für AccordionRenderProps
 type AccordionRenderProps = {
   open: boolean;
 };
 
-type MotionSpanProps = HTMLMotionProps<'span'> & {
+type MotionSpanProps = HTMLMotionProps<"span"> & {
   className: string;
   animate: {
     rotate: number;
@@ -57,9 +53,9 @@ type MotionSpanProps = HTMLMotionProps<'span'> & {
 
 // Wrapper-Komponente für reCAPTCHA v3
 function ChallengeApp() {
-  const [email, setEmail] = useState('');
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
+  const [email, setEmail] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [openItems, setOpenItems] = useState<{
     [key: string]: boolean;
   }>({ game1: true });
@@ -69,9 +65,7 @@ function ChallengeApp() {
     title: string;
     description: string;
   } | null>(null);
-  const [estimationValue, setEstimationValue] = useState<
-    number | null
-  >(null);
+  const [estimationValue, setEstimationValue] = useState<number | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
@@ -88,230 +82,240 @@ function ChallengeApp() {
     title: string;
     description: string;
   } | null>(null);
-  const [estimationError, setEstimationError] = useState<
-    string | null
-  >(null);
+  const [estimationError, setEstimationError] = useState<string | null>(null);
   const { executeRecaptcha } = useGoogleReCaptcha();
 
-  const imageBaseUrl = '';
+  const imageBaseUrl = "";
   const placeholderImage = `${imageBaseUrl}/placeholder.svg`;
 
   const prizes = [
     {
-      position: '1',
-      title: 'Hauptpreis',
-      description: 'Tiny House Trip von Raus.Life',
-      image: '/221102_Raus_Cabins_Alt_Kentzlin_0003_HDR_HiRes.jpg',
-      image2: '/230912_RAUS_Lenzen_1584.jpg',
+      position: "1",
+      title: "Hauptpreis",
+      description: "Tiny House Trip von Raus.Life",
+      image: "/221102_Raus_Cabins_Alt_Kentzlin_0003_HDR_HiRes.jpg",
+      image2: "/230912_RAUS_Lenzen_1584.jpg",
     },
     {
-      position: '2',
-      title: 'Zweiter Preis',
-      description: '10 × 100 % Gutschein Reformer Pilates',
-      image: '/HerSpaceStudio_cropped.png',
+      position: "2",
+      title: "Zweiter Preis",
+      description: "10 × 100 % Gutschein Reformer Pilates",
+      image: "/HerSpaceStudio_cropped.png",
     },
     {
-      position: '3',
-      title: 'Dritter Preis',
-      description: 'Semesterticket für die Boulderwelt',
-      image: '/Boulderwelt Bild.jpg',
+      position: "3",
+      title: "Dritter Preis",
+      description: "Semesterticket für die Boulderwelt",
+      image: "/Boulderwelt Bild.jpg",
     },
   ];
 
   const events = [
     {
       id: 1,
-      title: 'Case Workshop',
-      date: '2026-04-15',
-      time: '20:00-21:00',
-      location: 'AC Büro, Leopoldstraße 62',
+      title: "Case Workshop",
+      date: "2026-04-15",
+      time: "20:00-21:00",
+      location: "AC Büro, Leopoldstraße 62",
       description:
-        'Lerne im Case Workshop, wie du knifflige Business Cases strukturiert und überzeugend löst.',
-      eventbride: 'https://luma.com/gggo9w72',
-      image: 'https://images.lumacdn.com/cdn-cgi/image/format=auto,fit=cover,dpr=2,background=white,quality=75,width=400,height=400/gallery-images/m7/cc904003-e5aa-4a5a-9e96-87a70d6f36b9.png',
+        "Lerne im Case Workshop, wie du knifflige Business Cases strukturiert und überzeugend löst.",
+      eventbride: "https://luma.com/gggo9w72",
+      image:
+        "https://images.lumacdn.com/cdn-cgi/image/format=auto,fit=cover,dpr=2,background=white,quality=75,width=400,height=400/gallery-images/m7/cc904003-e5aa-4a5a-9e96-87a70d6f36b9.png",
     },
     {
       id: 2,
-      title: 'Digitaler Infoabend',
-      date: '2026-04-16',
-      time: '18:00-19:00',
-      location: 'Online',
+      title: "Digitaler Infoabend",
+      date: "2026-04-16",
+      time: "18:00-19:00",
+      location: "Online",
       description:
-        'Lerne Academy Consult bequem von zu Hause aus kennen und stelle deine Fragen im digitalen Infoabend.',
-      eventbride: 'https://luma.com/7hur5ig6',
-      image: 'https://images.lumacdn.com/cdn-cgi/image/format=auto,fit=cover,dpr=2,background=white,quality=75,width=400,height=400/gallery-images/x4/232b7986-33f1-4753-928d-84910cd55dd8.png',
+        "Lerne Academy Consult bequem von zu Hause aus kennen und stelle deine Fragen im digitalen Infoabend.",
+      eventbride: "https://luma.com/7hur5ig6",
+      image:
+        "https://images.lumacdn.com/cdn-cgi/image/format=auto,fit=cover,dpr=2,background=white,quality=75,width=400,height=400/gallery-images/x4/232b7986-33f1-4753-928d-84910cd55dd8.png",
     },
     {
       id: 3,
-      title: 'AC Run Club',
-      date: '2026-04-17',
-      time: '11:00-12:30',
-      location: 'München',
+      title: "AC Run Club",
+      date: "2026-04-17",
+      time: "11:00-12:30",
+      location: "München",
       description:
-        'Lauf mit uns! Beim AC Run Club lernst du das Team kennen und startest sportlich in den Tag.',
-      eventbride: 'https://luma.com/bv25uxay',
-      image: 'https://images.lumacdn.com/cdn-cgi/image/format=auto,fit=cover,dpr=2,background=white,quality=75,width=400,height=400/gallery-images/y7/c0802c16-d438-4337-906f-70e71f2506d1',
+        "Lauf mit uns! Beim AC Run Club lernst du das Team kennen und startest sportlich in den Tag.",
+      eventbride: "https://luma.com/bv25uxay",
+      image:
+        "https://images.lumacdn.com/cdn-cgi/image/format=auto,fit=cover,dpr=2,background=white,quality=75,width=400,height=400/gallery-images/y7/c0802c16-d438-4337-906f-70e71f2506d1",
     },
     {
       id: 4,
-      title: 'Open Büro Day',
-      date: '2026-04-18',
-      time: '13:00-17:00',
-      location: 'AC Büro, Leopoldstraße 62',
+      title: "Open Büro Day",
+      date: "2026-04-18",
+      time: "13:00-17:00",
+      location: "AC Büro, Leopoldstraße 62",
       description:
-        'Schau bei uns im Büro vorbei, lerne das Team kennen und erhalte einen Eindruck von unserer Arbeitsweise.',
-      eventbride: 'https://luma.com/axdrxl30',
-      image: 'https://images.lumacdn.com/cdn-cgi/image/format=auto,fit=cover,dpr=2,background=white,quality=75,width=400,height=400/gallery-images/0j/d8aeea63-be66-4dff-afc5-216fa740189f',
+        "Schau bei uns im Büro vorbei, lerne das Team kennen und erhalte einen Eindruck von unserer Arbeitsweise.",
+      eventbride: "https://luma.com/axdrxl30",
+      image:
+        "https://images.lumacdn.com/cdn-cgi/image/format=auto,fit=cover,dpr=2,background=white,quality=75,width=400,height=400/gallery-images/0j/d8aeea63-be66-4dff-afc5-216fa740189f",
     },
     {
       id: 5,
-      title: 'Yoga',
-      date: '2026-04-19',
-      time: '11:00-12:00',
-      location: 'München',
+      title: "Yoga",
+      date: "2026-04-19",
+      time: "11:00-12:00",
+      location: "München",
       description:
-        'Entspann dich mit uns bei einer gemeinsamen Yoga-Session und lerne das AC-Team auf andere Art kennen.',
-      eventbride: 'https://luma.com/8ykfr9n1',
-      image: 'https://images.lumacdn.com/cdn-cgi/image/format=auto,fit=cover,dpr=2,background=white,quality=75,width=400,height=400/gallery-images/v3/4a4a9c1b-eba8-4447-be65-f6b3c4b0a97c.png',
+        "Entspann dich mit uns bei einer gemeinsamen Yoga-Session und lerne das AC-Team auf andere Art kennen.",
+      eventbride: "https://luma.com/8ykfr9n1",
+      image:
+        "https://images.lumacdn.com/cdn-cgi/image/format=auto,fit=cover,dpr=2,background=white,quality=75,width=400,height=400/gallery-images/v3/4a4a9c1b-eba8-4447-be65-f6b3c4b0a97c.png",
     },
     {
       id: 6,
-      title: 'Reformer Pilates – Female Only',
-      date: '2026-04-20',
-      time: '10:00-11:00',
-      location: 'Reformer For Her, Augustenstraße 102',
+      title: "Reformer Pilates – Female Only",
+      date: "2026-04-20",
+      time: "10:00-11:00",
+      location: "Reformer For Her, Augustenstraße 102",
       description:
-        'Beweg dich mit uns und lerne das AC-Team bei einer gemeinsamen Pilates-Session kennen.',
-      eventbride: 'https://luma.com/irfwinah',
-      image: 'https://images.lumacdn.com/cdn-cgi/image/format=auto,fit=cover,dpr=2,background=white,quality=75,width=400,height=400/gallery-images/z1/d80a77db-201a-496f-8be5-be23a61cd7a8.png',
+        "Beweg dich mit uns und lerne das AC-Team bei einer gemeinsamen Pilates-Session kennen.",
+      eventbride: "https://luma.com/irfwinah",
+      image:
+        "https://images.lumacdn.com/cdn-cgi/image/format=auto,fit=cover,dpr=2,background=white,quality=75,width=400,height=400/gallery-images/z1/d80a77db-201a-496f-8be5-be23a61cd7a8.png",
     },
     {
       id: 7,
-      title: 'TUM Infoabend',
-      date: '2026-04-21',
-      time: '19:00-20:00',
-      location: 'TUM, Arcisstraße 21, Raum 0601',
+      title: "TUM Infoabend",
+      date: "2026-04-21",
+      time: "19:00-20:00",
+      location: "TUM, Arcisstraße 21, Raum 0601",
       description:
-        'Erfahre alles über Academy Consult direkt an der TUM. Wir stellen uns vor und beantworten deine Fragen.',
-      eventbride: 'https://luma.com/lxruosv1',
-      image: 'https://images.lumacdn.com/cdn-cgi/image/format=auto,fit=cover,dpr=2,background=white,quality=75,width=400,height=400/gallery-images/ve/ab94b70b-d954-410a-b686-1a32c74a4d75.png',
+        "Erfahre alles über Academy Consult direkt an der TUM. Wir stellen uns vor und beantworten deine Fragen.",
+      eventbride: "https://luma.com/lxruosv1",
+      image:
+        "https://images.lumacdn.com/cdn-cgi/image/format=auto,fit=cover,dpr=2,background=white,quality=75,width=400,height=400/gallery-images/ve/ab94b70b-d954-410a-b686-1a32c74a4d75.png",
     },
     {
       id: 8,
-      title: 'Bewerbertraining',
-      date: '2026-04-22',
-      time: '16:00-17:00',
-      location: 'AC Büro, Leopoldstraße 62',
+      title: "Bewerbertraining",
+      date: "2026-04-22",
+      time: "16:00-17:00",
+      location: "AC Büro, Leopoldstraße 62",
       description:
-        'Wir zeigen dir, wie der Bewerbungsprozess bei uns läuft und wie du ihn rockst!',
-      eventbride: 'https://luma.com/f8fq8pat',
-      image: 'https://images.lumacdn.com/cdn-cgi/image/format=auto,fit=cover,dpr=2,background=white,quality=75,width=400,height=400/gallery-images/yd/c8ded50f-24e7-4af0-aeb2-9bac97712e4c.png',
+        "Wir zeigen dir, wie der Bewerbungsprozess bei uns läuft und wie du ihn rockst!",
+      eventbride: "https://luma.com/f8fq8pat",
+      image:
+        "https://images.lumacdn.com/cdn-cgi/image/format=auto,fit=cover,dpr=2,background=white,quality=75,width=400,height=400/gallery-images/yd/c8ded50f-24e7-4af0-aeb2-9bac97712e4c.png",
     },
     {
       id: 9,
-      title: 'Digitaler Infoabend',
-      date: '2026-04-22',
-      time: '18:00-19:00',
-      location: 'Online',
+      title: "Digitaler Infoabend",
+      date: "2026-04-22",
+      time: "18:00-19:00",
+      location: "Online",
       description:
-        'Lerne Academy Consult bequem von zu Hause aus kennen und stelle deine Fragen im digitalen Infoabend.',
-      eventbride: 'https://luma.com/n91do9ao',
-      image: 'https://images.lumacdn.com/cdn-cgi/image/format=auto,fit=cover,dpr=2,background=white,quality=75,width=400,height=400/gallery-images/x4/232b7986-33f1-4753-928d-84910cd55dd8.png',
+        "Lerne Academy Consult bequem von zu Hause aus kennen und stelle deine Fragen im digitalen Infoabend.",
+      eventbride: "https://luma.com/n91do9ao",
+      image:
+        "https://images.lumacdn.com/cdn-cgi/image/format=auto,fit=cover,dpr=2,background=white,quality=75,width=400,height=400/gallery-images/x4/232b7986-33f1-4753-928d-84910cd55dd8.png",
     },
     {
       id: 10,
-      title: 'LMU Infoabend',
-      date: '2026-04-23',
-      time: '18:00-19:00',
-      location: 'LMU, Hörsaal A 119, Geschwister-Scholl-Platz 1',
+      title: "LMU Infoabend",
+      date: "2026-04-23",
+      time: "18:00-19:00",
+      location: "LMU, Hörsaal A 119, Geschwister-Scholl-Platz 1",
       description:
-        'Erfahre alles über Academy Consult direkt an der LMU. Wir stellen uns vor und beantworten deine Fragen.',
-      eventbride: 'https://luma.com/d3jacmr3',
-      image: 'https://images.lumacdn.com/cdn-cgi/image/format=auto,fit=cover,dpr=2,background=white,quality=75,width=400,height=400/gallery-images/ve/ab94b70b-d954-410a-b686-1a32c74a4d75.png',
+        "Erfahre alles über Academy Consult direkt an der LMU. Wir stellen uns vor und beantworten deine Fragen.",
+      eventbride: "https://luma.com/d3jacmr3",
+      image:
+        "https://images.lumacdn.com/cdn-cgi/image/format=auto,fit=cover,dpr=2,background=white,quality=75,width=400,height=400/gallery-images/ve/ab94b70b-d954-410a-b686-1a32c74a4d75.png",
     },
     {
       id: 11,
-      title: 'Barhopping',
-      date: '2026-04-24',
-      time: '21:00-00:00',
-      location: 'München',
+      title: "Barhopping",
+      date: "2026-04-24",
+      time: "21:00-00:00",
+      location: "München",
       description:
-        'Lerne uns bei einem kalten Getränk kennen! Barhopping durch München mit dem AC-Team.',
-      eventbride: 'https://luma.com/2bhttjz9',
-      image: 'https://images.lumacdn.com/cdn-cgi/image/format=auto,fit=cover,dpr=2,background=white,quality=75,width=400,height=400/gallery-images/0o/62834236-cf11-42a2-9144-5af45da3348b',
+        "Lerne uns bei einem kalten Getränk kennen! Barhopping durch München mit dem AC-Team.",
+      eventbride: "https://luma.com/2bhttjz9",
+      image:
+        "https://images.lumacdn.com/cdn-cgi/image/format=auto,fit=cover,dpr=2,background=white,quality=75,width=400,height=400/gallery-images/0o/62834236-cf11-42a2-9144-5af45da3348b",
     },
   ];
 
   const coffeeProfiles: CoffeeProfile[] = [
     {
-      displayName: 'Katharina',
-      degreeProgram: 'BWL',
-      stage: 'Bachelor',
-      university: 'HM',
+      displayName: "Katharina",
+      degreeProgram: "BWL",
+      stage: "Bachelor",
+      university: "HM",
       currentSemester: 2,
-      imageLink: '/KatharinaBildLAP.jpg',
-      calendarLink: 'https://calendly.com/katharina-barr17/30min',
-      linkedinLink: 'https://www.linkedin.com/in/katharina-barr',
+      imageLink: "/KatharinaBildLAP.jpg",
+      calendarLink: "https://calendly.com/katharina-barr17/30min",
+      linkedinLink: "https://www.linkedin.com/in/katharina-barr",
     },
     {
-      displayName: 'Fabian',
-      degreeProgram: 'TUM-BWL',
-      stage: 'Bachelor',
-      university: 'TUM',
+      displayName: "Fabian",
+      degreeProgram: "TUM-BWL",
+      stage: "Bachelor",
+      university: "TUM",
       currentSemester: 4,
-      imageLink: '/FabianBildLAP.jpg',
-      calendarLink: 'https://calendly.com/fabian-kienreich/30min',
-      linkedinLink: 'https://www.linkedin.com/in/fabian-kienreich/',
+      imageLink: "/FabianBildLAP.jpg",
+      calendarLink: "https://calendly.com/fabian-kienreich/30min",
+      linkedinLink: "https://www.linkedin.com/in/fabian-kienreich/",
     },
     {
-      displayName: 'Paul',
-      degreeProgram: 'Robotics, Cognition, Intelligence',
-      stage: 'Master',
-      university: 'TUM',
+      displayName: "Paul",
+      degreeProgram: "Robotics, Cognition, Intelligence",
+      stage: "Master",
+      university: "TUM",
       currentSemester: 1,
-      imageLink: '/PaulBildLAP.jpg',
-      calendarLink: 'https://calendly.com/paul-wirth-luzc/30min',
-      linkedinLink: 'https://www.linkedin.com/in/paul-wirth',
+      imageLink: "/PaulBildLAP.jpg",
+      calendarLink: "https://calendly.com/paul-wirth-luzc/30min",
+      linkedinLink: "https://www.linkedin.com/in/paul-wirth",
     },
     {
-      displayName: 'Marlene',
-      degreeProgram: 'BWL',
-      stage: 'Bachelor',
-      university: 'LMU',
+      displayName: "Marlene",
+      degreeProgram: "BWL",
+      stage: "Bachelor",
+      university: "LMU",
       currentSemester: 2,
-      imageLink: '/Malene.jpg',
-      calendarLink: 'https://calendly.com/marlene-bookhagen-academyconsult/30min',
-      linkedinLink: 'https://www.linkedin.com/in/marlene-bookhagen-11b34133b/',
+      imageLink: "/Malene.jpg",
+      calendarLink:
+        "https://calendly.com/marlene-bookhagen-academyconsult/30min",
+      linkedinLink: "https://www.linkedin.com/in/marlene-bookhagen-11b34133b/",
     },
     {
-      displayName: 'Linus',
-      degreeProgram: 'Management & Technology',
-      stage: 'Bachelor',
-      university: 'TUM',
+      displayName: "Linus",
+      degreeProgram: "Management & Technology",
+      stage: "Bachelor",
+      university: "TUM",
       currentSemester: 4,
-      imageLink: '/LinusBildLAP.jpg',
-      calendarLink: 'https://calendly.com/linus-j-klett/30min',
-      linkedinLink: 'https://www.linkedin.com/in/linusjklett',
+      imageLink: "/LinusBildLAP.jpg",
+      calendarLink: "https://calendly.com/linus-j-klett/30min",
+      linkedinLink: "https://www.linkedin.com/in/linusjklett",
     },
     {
-      displayName: 'Philipp',
-      degreeProgram: 'Management & Technology',
-      stage: 'Bachelor',
-      university: 'TUM',
+      displayName: "Philipp",
+      degreeProgram: "Management & Technology",
+      stage: "Bachelor",
+      university: "TUM",
       currentSemester: 4,
       imageLink: `${imageBaseUrl}/Philipp.jpeg`,
-      calendarLink: 'https://calendly.com/philipp-liebold/ac',
-      linkedinLink: 'https://www.linkedin.com/in/philipp-liebold/',
+      calendarLink: "https://calendly.com/philipp-liebold/ac",
+      linkedinLink: "https://www.linkedin.com/in/philipp-liebold/",
     },
     {
-      displayName: 'Lorenz',
-      degreeProgram: 'B.Sc. Engineering Science',
-      stage: 'Bachelor',
-      university: 'TUM',
+      displayName: "Lorenz",
+      degreeProgram: "B.Sc. Engineering Science",
+      stage: "Bachelor",
+      university: "TUM",
       currentSemester: 4,
-      imageLink: '/LorenzBildLAP.jpg',
-      calendarLink: 'https://calendly.com/lorenz-thieroff/30min',
-      linkedinLink: 'https://www.linkedin.com/in/lorenz-thieroff',
+      imageLink: "/LorenzBildLAP.jpg",
+      calendarLink: "https://calendly.com/lorenz-thieroff/30min",
+      linkedinLink: "https://www.linkedin.com/in/lorenz-thieroff",
     },
     // {
     //   displayName: 'Annalena',
@@ -324,91 +328,93 @@ function ChallengeApp() {
     //   linkedinLink: 'https://www.linkedin.com/in/annalena-plk/',
     // },
     {
-      displayName: 'Anna',
-      degreeProgram: 'Rechtswissenschaften',
-      stage: 'Bachelor',
-      university: 'LMU',
+      displayName: "Anna",
+      degreeProgram: "Rechtswissenschaften",
+      stage: "Bachelor",
+      university: "LMU",
       currentSemester: 4,
-      imageLink: '/AnnaKKBildLAP.jpg',
-      calendarLink: 'https://calendly.com/anna-kahlert-academyconsult/30min',
-      linkedinLink: 'https://www.linkedin.com/in/anna-katharina-kahlert-07046a29b',
+      imageLink: "/AnnaKKBildLAP.jpg",
+      calendarLink: "https://calendly.com/anna-kahlert-academyconsult/30min",
+      linkedinLink:
+        "https://www.linkedin.com/in/anna-katharina-kahlert-07046a29b",
     },
     {
-      displayName: 'Leon',
-      degreeProgram: 'Management & Technology',
-      stage: 'Bachelor',
-      university: 'TUM',
+      displayName: "Leon",
+      degreeProgram: "Management & Technology",
+      stage: "Bachelor",
+      university: "TUM",
       currentSemester: 6,
-      imageLink: '/LeonBildLAP.jpg',
-      calendarLink: 'https://calendly.com/thumm-leon/30min',
-      linkedinLink: 'https://www.linkedin.com/in/leon-thumm/',
+      imageLink: "/LeonBildLAP.jpg",
+      calendarLink: "https://calendly.com/thumm-leon/30min",
+      linkedinLink: "https://www.linkedin.com/in/leon-thumm/",
     },
     {
-      displayName: 'Anna',
-      degreeProgram: 'Management & Technology',
-      stage: 'Bachelor',
-      university: 'TUM',
+      displayName: "Anna",
+      degreeProgram: "Management & Technology",
+      stage: "Bachelor",
+      university: "TUM",
       currentSemester: 4,
-      imageLink: '/AnnaBildLAP.jpg',
-      calendarLink: 'https://calendly.com/anna-krieger-academyconsult/30min',
-      linkedinLink: 'https://www.linkedin.com/in/anna-krieger-45128830b',
+      imageLink: "/AnnaBildLAP.jpg",
+      calendarLink: "https://calendly.com/anna-krieger-academyconsult/30min",
+      linkedinLink: "https://www.linkedin.com/in/anna-krieger-45128830b",
     },
     {
-      displayName: 'Johannes',
-      degreeProgram: 'Management and Technology',
-      stage: 'Bachelor',
-      university: 'TUM',
+      displayName: "Johannes",
+      degreeProgram: "Management and Technology",
+      stage: "Bachelor",
+      university: "TUM",
       currentSemester: 4,
       imageLink: `${imageBaseUrl}/Johannes.jpg`,
-      calendarLink: 'https://calendly.com/johannes-kask-academyconsult/30min',
-      linkedinLink: 'https://www.linkedin.com/in/jkask',
+      calendarLink: "https://calendly.com/johannes-kask-academyconsult/30min",
+      linkedinLink: "https://www.linkedin.com/in/jkask",
     },
     {
-      displayName: 'Valentin',
-      degreeProgram: 'Wirtschaftsinformatik',
-      stage: 'Bachelor',
-      university: 'TUM',
+      displayName: "Valentin",
+      degreeProgram: "Wirtschaftsinformatik",
+      stage: "Bachelor",
+      university: "TUM",
       currentSemester: 7,
-      imageLink: '/ValentinBildLap.jpg',
+      imageLink: "/ValentinBildLap.jpg",
       //calendarLink: 'https://calendly.com/academy-consult-munich/coffee-chat',
-      linkedinLink: 'https://www.linkedin.com/in/valentin-gr%C3%BCner',
+      linkedinLink: "https://www.linkedin.com/in/valentin-gr%C3%BCner",
     },
     {
-      displayName: 'Noah',
-      degreeProgram: 'Wirtschaftsinformatik',
-      stage: 'Master',
-      university: 'TUM',
+      displayName: "Noah",
+      degreeProgram: "Wirtschaftsinformatik",
+      stage: "Master",
+      university: "TUM",
       currentSemester: 1,
-      imageLink: '/Noah_Straube.jpg',
-      calendarLink: 'https://calendly.com/noahstraube/30min',
-      linkedinLink: 'https://www.linkedin.com/in/noah-straube-b2356326b',
+      imageLink: "/Noah_Straube.jpg",
+      calendarLink: "https://calendly.com/noahstraube/30min",
+      linkedinLink: "https://www.linkedin.com/in/noah-straube-b2356326b",
     },
     {
-      displayName: 'Julie',
-      degreeProgram: 'Management & Technology',
-      stage: 'Bachelor',
-      university: 'TUM',
+      displayName: "Julie",
+      degreeProgram: "Management & Technology",
+      stage: "Bachelor",
+      university: "TUM",
       currentSemester: 4,
-      imageLink: '/JulieKappeler.jpg',
-      calendarLink: 'https://calendly.com/julie-kappeler-academyconsult/30min',
-      linkedinLink: 'https://www.linkedin.com/in/julie-johanna-kappeler-227a25294',
+      imageLink: "/JulieKappeler.jpg",
+      calendarLink: "https://calendly.com/julie-kappeler-academyconsult/30min",
+      linkedinLink:
+        "https://www.linkedin.com/in/julie-johanna-kappeler-227a25294",
     },
   ];
 
   const [games, setGames] = useState([
     {
       id: 1,
-      title: 'Wimmelbild: Finde Leo den Löwen (einfach)',
+      title: "Wimmelbild: Finde Leo den Löwen (einfach)",
       completed: false,
     },
     {
       id: 2,
-      title: 'Multiple Choice Quiz (medium)',
+      title: "Multiple Choice Quiz (medium)",
       completed: false,
     },
     {
       id: 3,
-      title: 'Estimation Case (hard)',
+      title: "Estimation Case (hard)",
       completed: false,
     },
   ]);
@@ -424,7 +430,7 @@ function ChallengeApp() {
   const [quizFeedback, setQuizFeedback] = useState<{
     title: string;
     description: string;
-    type: 'warning' | 'success' | 'error';
+    type: "warning" | "success" | "error";
   } | null>(null);
 
   const allGamesCompleted = games.every((game) => game.completed);
@@ -432,8 +438,8 @@ function ChallengeApp() {
   const markGameAsCompleted = (gameId: number) => {
     setGames(
       games.map((game) =>
-        game.id === gameId ? { ...game, completed: true } : game
-      )
+        game.id === gameId ? { ...game, completed: true } : game,
+      ),
     );
   };
 
@@ -455,16 +461,12 @@ function ChallengeApp() {
       const itemWidth = container.clientWidth / 3;
       const index = Math.floor(scrollLeft / itemWidth);
       setActiveEventIndex(
-        Math.min(
-          Math.floor(index / 3),
-          Math.ceil(events.length / 3) - 1
-        )
+        Math.min(Math.floor(index / 3), Math.ceil(events.length / 3) - 1),
       );
     };
 
-    container.addEventListener('scroll', handleScroll);
-    return () =>
-      container.removeEventListener('scroll', handleScroll);
+    container.addEventListener("scroll", handleScroll);
+    return () => container.removeEventListener("scroll", handleScroll);
   }, [events.length]);
 
   // Überprüfung für beide Bedingungen (Spiele abgeschlossen und Einwilligung gegeben)
@@ -478,19 +480,14 @@ function ChallengeApp() {
 
     if (!executeRecaptcha) {
       setSubmitError(
-        'reCAPTCHA konnte nicht geladen werden. Bitte laden Sie die Seite neu.'
+        "reCAPTCHA konnte nicht geladen werden. Bitte laden Sie die Seite neu.",
       );
       return;
     }
 
     // Validieren, dass alle erforderlichen Felder ausgefüllt sind
-    if (
-      !firstName ||
-      !lastName ||
-      !email ||
-      estimationValue === null
-    ) {
-      setSubmitError('Bitte füllen Sie alle Felder aus.');
+    if (!firstName || !lastName || !email || estimationValue === null) {
+      setSubmitError("Bitte füllen Sie alle Felder aus.");
       return;
     }
 
@@ -500,7 +497,7 @@ function ChallengeApp() {
 
     try {
       // reCAPTCHA v3 Token im Hintergrund abrufen
-      const captchaToken = await executeRecaptcha('form_submit');
+      const captchaToken = await executeRecaptcha("form_submit");
 
       // Submission Payload erstellen
       const payload = {
@@ -511,30 +508,28 @@ function ChallengeApp() {
         captchaToken: captchaToken, // Token zum Payload hinzufügen
         HatWerbungAboniert: newsletterOptIn,
       };
-      const response = await fetch('/api/submit',
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(payload),
-        }
-      );
+      const response = await fetch("/api/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
 
       if (response.ok) {
         // Erfolgreiche Einreichung
         setSubmitSuccess(true);
 
         // Formular zurücksetzen
-        setFirstName('');
-        setLastName('');
-        setEmail('');
+        setFirstName("");
+        setLastName("");
+        setEmail("");
         setConsentGiven(false);
         setNewsletterOptIn(false);
         setQuizAnswers({ question1: null, question2: null });
         setQuizFeedback(null);
         setGames((prevGames) =>
-          prevGames.map((game) => ({ ...game, completed: false }))
+          prevGames.map((game) => ({ ...game, completed: false })),
         );
         setOpenItems({ game1: true });
         setMarkerPosition(null);
@@ -549,15 +544,13 @@ function ChallengeApp() {
         const errorData = await response.text();
 
         // Spezifische Fehlermeldung für E-Mail innerhalb der 3-Monats-Sperre
-        if (
-          errorData.includes('This email has recently taken part.')
-        ) {
+        if (errorData.includes("This email has recently taken part.")) {
           setSubmitError(
-            'Mit dieser E-Mail wurde innerhalb der letzten 3 Monate bereits an der Challenge teilgenommen.'
+            "Mit dieser E-Mail wurde bereits an der Challenge teilgenommen.",
           );
         } else {
           setSubmitError(
-            `Fehler beim Einreichen, überprüfe deine Daten und versuche es erneut.`
+            `Fehler beim Einreichen, überprüfe deine Daten und versuche es erneut.`,
           );
           //setSubmitError(`Fehler beim Einreichen: ${errorData || response.statusText}`);
         }
@@ -566,7 +559,7 @@ function ChallengeApp() {
       setSubmitError(
         `Netzwerkfehler: ${
           error instanceof Error ? error.message : String(error)
-        }`
+        }`,
       );
     } finally {
       setIsSubmitting(false);
@@ -576,7 +569,7 @@ function ChallengeApp() {
   // Aktualisiere den Schätzwert, nur für numerische Eingaben
   const handleEstimationChange = (value: string) => {
     // Wenn leer, auf null setzen
-    if (value === '') {
+    if (value === "") {
       setEstimationValue(null);
       return;
     }
@@ -590,9 +583,7 @@ function ChallengeApp() {
 
   const wimmelbildRef = useRef<HTMLDivElement>(null);
 
-  const handleWimmelbildClick = (
-    e: React.MouseEvent<HTMLDivElement>
-  ) => {
+  const handleWimmelbildClick = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!wimmelbildRef.current) return;
 
     const rect = wimmelbildRef.current.getBoundingClientRect();
@@ -611,22 +602,21 @@ function ChallengeApp() {
   const checkWimmelbildSolution = () => {
     if (!selectedCoordinates) {
       setWimmelbildAlert({
-        title: 'Bitte wählen Sie einen Punkt',
-        description:
-          'Bitte wähle zuerst einen Punkt auf dem Bild aus.',
+        title: "Bitte wählen Sie einen Punkt",
+        description: "Bitte wähle zuerst einen Punkt auf dem Bild aus.",
       });
       return false;
     }
 
     // Leo ist ca. 6.5% von rechts und 38% von unten
     const targetX = 1 - 0.055; // 0.945 von links
-    const targetY = 1 - 0.333;  // 0.667 von oben
+    const targetY = 1 - 0.333; // 0.667 von oben
 
-    console.log('Klickposition:', {
+    console.log("Klickposition:", {
       x: selectedCoordinates.x.toFixed(4),
       y: selectedCoordinates.y.toFixed(4),
     });
-    console.log('Zielposition:', {
+    console.log("Zielposition:", {
       x: targetX.toFixed(4),
       y: targetY.toFixed(4),
     });
@@ -637,7 +627,7 @@ function ChallengeApp() {
     // Berechne den Abstand für bessere Diagnose
     const distanceX = Math.abs(selectedCoordinates.x - targetX);
     const distanceY = Math.abs(selectedCoordinates.y - targetY);
-    console.log('Abstand:', {
+    console.log("Abstand:", {
       x: distanceX.toFixed(4),
       y: distanceY.toFixed(4),
       tolerance: tolerance.toFixed(4),
@@ -647,8 +637,8 @@ function ChallengeApp() {
     const isCorrectY = distanceY <= tolerance;
     const isCorrect = isCorrectX && isCorrectY;
 
-    console.log('Treffer X:', isCorrectX, 'Treffer Y:', isCorrectY);
-    console.log('Ist korrekt:', isCorrect);
+    console.log("Treffer X:", isCorrectX, "Treffer Y:", isCorrectY);
+    console.log("Ist korrekt:", isCorrect);
 
     if (isCorrect) {
       markGameAsCompleted(1);
@@ -659,9 +649,8 @@ function ChallengeApp() {
 
       // Feedback anzeigen
       setWimmelbildAlert({
-        title: 'Leider nicht richtig',
-        description:
-          'Versuche es noch einmal! Der Löwe ist gut versteckt.',
+        title: "Leider nicht richtig",
+        description: "Versuche es noch einmal! Der Löwe ist gut versteckt.",
       });
       return false;
     }
@@ -675,8 +664,8 @@ function ChallengeApp() {
       // Wenn die Lösung korrekt ist, zeige einen Erfolgs-Alert an
       if (isCorrect) {
         setWimmelbildAlert({
-          title: 'Super! Lösung gefunden',
-          description: 'Du hast Leo den Löwen gefunden!',
+          title: "Super! Lösung gefunden",
+          description: "Du hast Leo den Löwen gefunden!",
         });
         markGameAsCompleted(1);
       }
@@ -687,7 +676,7 @@ function ChallengeApp() {
       // Für Spiel 3 prüfen, ob eine Schätzung eingegeben wurde
       if (estimationValue === null) {
         // Zeige Warnung nur bei Game 3
-        setEstimationError('Bitte gib eine Schätzung ein!');
+        setEstimationError("Bitte gib eine Schätzung ein!");
         return;
       }
 
@@ -697,12 +686,12 @@ function ChallengeApp() {
       // Wenn das Spiel bereits abgeschlossen ist, zeige Feedback zum aktuellen Schätzwert
       if (games.find((g) => g.id === 3)?.completed) {
         setEstimationFeedback({
-          title: 'Schätzwert aktualisiert',
+          title: "Schätzwert aktualisiert",
           description: `Dein aktueller Schätzwert: ${estimationValue} Start-ups`,
         });
       } else {
         setEstimationFeedback({
-          title: 'Schätzwert gespeichert',
+          title: "Schätzwert gespeichert",
           description: `Dein Schätzwert: ${estimationValue} Start-ups`,
         });
       }
@@ -716,46 +705,44 @@ function ChallengeApp() {
   const checkQuizAnswers = () => {
     // Richtige Antworten: 1. Frage: C, 2. Frage: C, 3. Frage: A
     const correctAnswers = {
-      question1: 'C',
-      question2: 'B',
+      question1: "C",
+      question2: "B",
     };
 
     // Prüfen, ob alle Fragen beantwortet wurden
     if (!quizAnswers.question1 || !quizAnswers.question2) {
       setQuizFeedback({
-        title: 'Bitte beantworten Sie alle Fragen',
-        description: 'Beide Fragen müssen beantwortet werden.',
-        type: 'warning',
+        title: "Bitte beantworten Sie alle Fragen",
+        description: "Beide Fragen müssen beantwortet werden.",
+        type: "warning",
       });
       return false;
     }
 
     // Prüfen, ob die Antworten richtig sind
-    const question1Correct =
-      quizAnswers.question1 === correctAnswers.question1;
-    const question2Correct =
-      quizAnswers.question2 === correctAnswers.question2;
+    const question1Correct = quizAnswers.question1 === correctAnswers.question1;
+    const question2Correct = quizAnswers.question2 === correctAnswers.question2;
     const allCorrect = question1Correct && question2Correct;
 
     if (allCorrect) {
       setQuizFeedback({
-        title: 'Super! Lösung gefunden',
-        description: 'Alle Antworten sind richtig!',
-        type: 'success',
+        title: "Super! Lösung gefunden",
+        description: "Alle Antworten sind richtig!",
+        type: "success",
       });
       markGameAsCompleted(2);
       return true;
     } else {
       const incorrectQuestions: string[] = [];
-      if (!question1Correct) incorrectQuestions.push('Frage 1');
-      if (!question2Correct) incorrectQuestions.push('Frage 2');
+      if (!question1Correct) incorrectQuestions.push("Frage 1");
+      if (!question2Correct) incorrectQuestions.push("Frage 2");
 
       setQuizFeedback({
-        title: 'Leider nicht richtig',
+        title: "Leider nicht richtig",
         description: `Folgende Fragen sind nicht richtig beantwortet: ${incorrectQuestions.join(
-          ', '
+          ", ",
         )}`,
-        type: 'error',
+        type: "error",
       });
       return false;
     }
@@ -763,39 +750,29 @@ function ChallengeApp() {
 
   // Füge diese Scroll-Funktion zu den anderen Funktionen hinzu
   const scrollToFooter = () => {
-    document
-      .querySelector('footer')
-      ?.scrollIntoView({ behavior: 'smooth' });
+    document.querySelector("footer")?.scrollIntoView({ behavior: "smooth" });
   };
 
   // Animation für Sponsorensektion - optimierte Version
   useEffect(() => {
-    const tickerTrack = document.querySelector(
-      '[data-mobile-animation]'
-    );
+    const tickerTrack = document.querySelector("[data-mobile-animation]");
 
     if (!tickerTrack) return;
 
     // Bestehende Animationen entfernen
-    tickerTrack.classList.remove(
-      'animate-ticker',
-      'animate-ticker-fast'
-    );
+    tickerTrack.classList.remove("animate-ticker", "animate-ticker-fast");
 
     // Animation basierend auf Gerät setzen
     const setAnimation = () => {
       const isMobile = window.innerWidth < 768;
 
       // Sanfter Wechsel durch Entfernen der alten Animation
-      tickerTrack.classList.remove(
-        'animate-ticker',
-        'animate-ticker-fast'
-      );
+      tickerTrack.classList.remove("animate-ticker", "animate-ticker-fast");
 
       // Kurze Verzögerung für flüssigeren Übergang
       requestAnimationFrame(() => {
         tickerTrack.classList.add(
-          isMobile ? 'animate-ticker-fast' : 'animate-ticker'
+          isMobile ? "animate-ticker-fast" : "animate-ticker",
         );
       });
     };
@@ -810,28 +787,22 @@ function ChallengeApp() {
       resizeTimeout = setTimeout(setAnimation, 250);
     };
 
-    window.addEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
 
     // Browser Visibility API nutzen, um Animation zu pausieren/fortzusetzen
     const handleVisibilityChange = () => {
       if (document.hidden) {
-        tickerTrack.classList.add('paused');
+        tickerTrack.classList.add("paused");
       } else {
-        tickerTrack.classList.remove('paused');
+        tickerTrack.classList.remove("paused");
       }
     };
 
-    document.addEventListener(
-      'visibilitychange',
-      handleVisibilityChange
-    );
+    document.addEventListener("visibilitychange", handleVisibilityChange);
 
     return () => {
-      window.removeEventListener('resize', handleResize);
-      document.removeEventListener(
-        'visibilitychange',
-        handleVisibilityChange
-      );
+      window.removeEventListener("resize", handleResize);
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
       if (resizeTimeout) clearTimeout(resizeTimeout);
     };
   }, []);
@@ -849,9 +820,9 @@ function ChallengeApp() {
         className="min-h-[600px] relative flex items-center"
         style={{
           backgroundImage:
-            'url(https://hebbkx1anhila5yf.public.blob.vercel-storage.com/AC%20Hintergrund%202-tH8JYEwhI9ZvKdJvkZJ21BJ3ZHAgrd.png)',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
+            "url(https://hebbkx1anhila5yf.public.blob.vercel-storage.com/AC%20Hintergrund%202-tH8JYEwhI9ZvKdJvkZJ21BJ3ZHAgrd.png)",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
         }}
       >
         <div className="container mx-auto px-4 py-24 text-white">
@@ -912,9 +883,7 @@ function ChallengeApp() {
                 >
                   <CardHeader className="relative pb-0 pt-8">
                     <div className="absolute -top-5 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-[#ffd700] to-[#ffec8b] text-gray-800 px-6 py-2 rounded-full shadow-md">
-                      <span className="font-bold text-lg">
-                        1. Preis
-                      </span>
+                      <span className="font-bold text-lg">1. Preis</span>
                     </div>
                   </CardHeader>
                   <CardContent className="flex flex-col items-center justify-center pt-6 h-full">
@@ -922,20 +891,24 @@ function ChallengeApp() {
                       {prizes[0].description}
                     </h3>
                     <p className="text-center text-white/80 mb-6">
-                      2 Nächte für 2 Personen in einer Cabin nach Wahl, einlösbar bis 31.12.2026 🏡
+                      2 Nächte für 2 Personen in einer Cabin nach Wahl,
+                      einlösbar bis 31.12.2026 🏡
                     </p>
-                    <div className="flex-1 w-full relative mt-4" style={{ minHeight: '220px' }}>
+                    <div
+                      className="flex-1 w-full relative mt-4"
+                      style={{ minHeight: "220px" }}
+                    >
                       <img
                         src={prizes[0].image}
                         alt={prizes[0].title}
                         className="absolute left-2 top-0 w-2/3 h-auto max-h-56 object-cover rounded-xl shadow-lg"
-                        style={{ transform: 'rotate(-4deg)' }}
+                        style={{ transform: "rotate(-4deg)" }}
                       />
                       <img
                         src={(prizes[0] as any).image2}
                         alt={`${prizes[0].title} 2`}
                         className="absolute right-2 top-8 w-2/3 h-auto max-h-56 object-cover rounded-xl shadow-lg"
-                        style={{ transform: 'rotate(3deg)' }}
+                        style={{ transform: "rotate(3deg)" }}
                       />
                     </div>
                   </CardContent>
@@ -970,29 +943,53 @@ function ChallengeApp() {
               </div>
               {/* Weitere Preise */}
               <div className="hidden md:block mt-14 px-4 container mx-auto max-w-4xl">
-                <h3 className="text-2xl font-bold text-white text-center mb-6">... und noch viele weitere Preise</h3>
+                <h3 className="text-2xl font-bold text-white text-center mb-6">
+                  ... und noch viele weitere Preise
+                </h3>
                 <div className="grid grid-cols-3 gap-4">
                   <div className="flex flex-col items-center gap-3 bg-white/10 backdrop-blur-md rounded-2xl overflow-hidden text-white shadow-[4px_6px_10px_rgba(0,0,0,0.12)] hover:bg-white/15 transition-colors duration-200">
                     <div className="w-full h-24 bg-gray-200 flex items-center justify-center">
-                      <img src="/6_Redbull.png" alt="Red Bull" className="h-20 w-auto object-contain" />
+                      <img
+                        src="/6_Redbull.png"
+                        alt="Red Bull"
+                        className="h-20 w-auto object-contain"
+                      />
                     </div>
                     <div className="px-4 pb-4 text-center">
-                      <p className="font-semibold text-sm">14 × 1 Tray Red Bull</p>
-                      <p className="text-xs text-white/70 mt-1">Für den Extra-Boost</p>
+                      <p className="font-semibold text-sm">
+                        14 × 1 Tray Red Bull
+                      </p>
+                      <p className="text-xs text-white/70 mt-1">
+                        Für den Extra-Boost
+                      </p>
                     </div>
                   </div>
                   <div className="flex flex-col items-center gap-3 bg-white/10 backdrop-blur-md rounded-2xl overflow-hidden text-white shadow-[4px_6px_10px_rgba(0,0,0,0.12)] hover:bg-white/15 transition-colors duration-200">
-                    <img src="/HabitusHeaderBild.webp" alt="Habitus" className="w-full h-24 object-cover" />
+                    <img
+                      src="/HabitusHeaderBild.webp"
+                      alt="Habitus"
+                      className="w-full h-24 object-cover"
+                    />
                     <div className="px-4 pb-4 text-center">
-                      <p className="font-semibold text-sm">3 × Malen nach Zahlen Bild</p>
+                      <p className="font-semibold text-sm">
+                        3 × Malen nach Zahlen Bild
+                      </p>
                       <p className="text-xs text-white/70 mt-1">Habitus</p>
                     </div>
                   </div>
                   <div className="flex flex-col items-center gap-3 bg-white/10 backdrop-blur-md rounded-2xl overflow-hidden text-white shadow-[4px_6px_10px_rgba(0,0,0,0.12)] hover:bg-white/15 transition-colors duration-200">
-                    <img src="/kunsthalle-munchen.jpg" alt="Kunsthalle München" className="w-full h-24 object-cover" />
+                    <img
+                      src="/kunsthalle-munchen.jpg"
+                      alt="Kunsthalle München"
+                      className="w-full h-24 object-cover"
+                    />
                     <div className="px-4 pb-4 text-center">
-                      <p className="font-semibold text-sm">15 × Gutschein Kunsthalle München</p>
-                      <p className="text-xs text-white/70 mt-1">Kunst & Kultur</p>
+                      <p className="font-semibold text-sm">
+                        15 × Gutschein Kunsthalle München
+                      </p>
+                      <p className="text-xs text-white/70 mt-1">
+                        Kunst & Kultur
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -1000,26 +997,34 @@ function ChallengeApp() {
 
               {/* Newsletter-Gewinnspiel Banner - Amazon Gutschein */}
               <div className="hidden md:block mt-14 px-4 container mx-auto max-w-3xl">
-                <h3 className="text-2xl font-bold text-white text-center mb-6">Unser Newsletter-Gewinnspiel</h3>
+                <h3 className="text-2xl font-bold text-white text-center mb-6">
+                  Unser Newsletter-Gewinnspiel
+                </h3>
                 <div className="flex items-center gap-6 bg-white/10 backdrop-blur-md rounded-2xl overflow-hidden text-white shadow-[4px_6px_10px_rgba(0,0,0,0.12)] p-6">
-                  <div className="flex-shrink-0 relative w-48" style={{ minHeight: '120px' }}>
+                  <div
+                    className="flex-shrink-0 relative w-48"
+                    style={{ minHeight: "120px" }}
+                  >
                     <img
                       src="/Amazon gutschein.png"
                       alt="Amazon Gutschein"
                       className="absolute left-0 top-0 w-4/5 h-auto max-h-28 object-contain rounded-xl shadow-lg"
-                      style={{ transform: 'rotate(-4deg)' }}
+                      style={{ transform: "rotate(-4deg)" }}
                     />
                     <img
                       src="/Amazon gutschein.png"
                       alt="Amazon Gutschein 2"
                       className="absolute right-0 top-2 w-4/5 h-auto max-h-28 object-contain rounded-xl shadow-lg"
-                      style={{ transform: 'rotate(3deg)' }}
+                      style={{ transform: "rotate(3deg)" }}
                     />
                   </div>
                   <div className="flex-1">
-                    <h4 className="text-xl font-semibold mb-2">2 × 100 € Amazon Gutschein</h4>
+                    <h4 className="text-xl font-semibold mb-2">
+                      2 × 100 € Amazon Gutschein
+                    </h4>
                     <p className="text-white/80">
-                      Exklusiv von E-Fellows für deinen nächsten Amazon-Einkauf 🛒
+                      Exklusiv von E-Fellows für deinen nächsten Amazon-Einkauf
+                      🛒
                     </p>
                   </div>
                 </div>
@@ -1039,20 +1044,24 @@ function ChallengeApp() {
                       {prizes[0].description}
                     </h3>
                     <p className="text-center text-white/80 mb-4">
-                      2 Nächte für 2 Personen in einer Cabin nach Wahl, einlösbar bis 31.12.2026 🏡
+                      2 Nächte für 2 Personen in einer Cabin nach Wahl,
+                      einlösbar bis 31.12.2026 🏡
                     </p>
-                    <div className="w-full relative" style={{ height: '140px' }}>
+                    <div
+                      className="w-full relative"
+                      style={{ height: "140px" }}
+                    >
                       <img
                         src={prizes[0].image}
                         alt={prizes[0].title}
                         className="absolute left-2 top-0 w-3/5 h-auto max-h-32 object-cover rounded-lg shadow-lg"
-                        style={{ transform: 'rotate(-4deg)' }}
+                        style={{ transform: "rotate(-4deg)" }}
                       />
                       <img
                         src={(prizes[0] as any).image2}
                         alt={`${prizes[0].title} 2`}
                         className="absolute right-2 top-4 w-3/5 h-auto max-h-32 object-cover rounded-lg shadow-lg"
-                        style={{ transform: 'rotate(3deg)' }}
+                        style={{ transform: "rotate(3deg)" }}
                       />
                     </div>
                   </CardContent>
@@ -1107,51 +1116,80 @@ function ChallengeApp() {
                 </Card>
 
                 {/* Weitere Preise Mobile */}
-                <h3 className="text-xl font-bold text-white text-center mt-8 mb-4">... und noch viele weitere Preise</h3>
+                <h3 className="text-xl font-bold text-white text-center mt-8 mb-4">
+                  ... und noch viele weitere Preise
+                </h3>
                 <div className="grid grid-cols-3 gap-3">
                   <div className="flex flex-col items-center bg-white/15 backdrop-blur-md rounded-2xl overflow-hidden text-white shadow-lg">
                     <div className="w-full h-20 bg-gray-200 flex items-center justify-center">
-                      <img src="/6_Redbull.png" alt="Red Bull" className="h-16 w-auto object-contain" />
+                      <img
+                        src="/6_Redbull.png"
+                        alt="Red Bull"
+                        className="h-16 w-auto object-contain"
+                      />
                     </div>
                     <div className="px-2 py-3 text-center">
-                      <p className="font-semibold text-xs">14 × 1 Tray Red Bull</p>
+                      <p className="font-semibold text-xs">
+                        14 × 1 Tray Red Bull
+                      </p>
                       <p className="text-xs text-white/70 mt-1">Extra-Boost</p>
                     </div>
                   </div>
                   <div className="flex flex-col items-center bg-white/15 backdrop-blur-md rounded-2xl overflow-hidden text-white shadow-lg">
-                    <img src="/HabitusHeaderBild.webp" alt="Habitus" className="w-full h-20 object-cover" />
+                    <img
+                      src="/HabitusHeaderBild.webp"
+                      alt="Habitus"
+                      className="w-full h-20 object-cover"
+                    />
                     <div className="px-2 py-3 text-center">
-                      <p className="font-semibold text-xs">3 × Malen nach Zahlen</p>
+                      <p className="font-semibold text-xs">
+                        3 × Malen nach Zahlen
+                      </p>
                       <p className="text-xs text-white/70 mt-1">Habitus</p>
                     </div>
                   </div>
                   <div className="flex flex-col items-center bg-white/15 backdrop-blur-md rounded-2xl overflow-hidden text-white shadow-lg">
-                    <img src="/kunsthalle-munchen.jpg" alt="Kunsthalle München" className="w-full h-20 object-cover" />
+                    <img
+                      src="/kunsthalle-munchen.jpg"
+                      alt="Kunsthalle München"
+                      className="w-full h-20 object-cover"
+                    />
                     <div className="px-2 py-3 text-center">
-                      <p className="font-semibold text-xs">15 × Gutschein Kunsthalle</p>
-                      <p className="text-xs text-white/70 mt-1">Kunst & Kultur</p>
+                      <p className="font-semibold text-xs">
+                        15 × Gutschein Kunsthalle
+                      </p>
+                      <p className="text-xs text-white/70 mt-1">
+                        Kunst & Kultur
+                      </p>
                     </div>
                   </div>
                 </div>
 
                 {/* Newsletter-Gewinnspiel Banner Mobile */}
-                <h3 className="text-xl font-bold text-white text-center mt-8 mb-4">Unser Newsletter-Gewinnspiel</h3>
+                <h3 className="text-xl font-bold text-white text-center mt-8 mb-4">
+                  Unser Newsletter-Gewinnspiel
+                </h3>
                 <div className="flex flex-col items-center bg-white/10 backdrop-blur-md rounded-2xl overflow-hidden text-white shadow-lg p-5">
-                  <div className="w-full relative mb-4" style={{ height: '100px' }}>
+                  <div
+                    className="w-full relative mb-4"
+                    style={{ height: "100px" }}
+                  >
                     <img
                       src="/Amazon gutschein.png"
                       alt="Amazon Gutschein"
                       className="absolute left-4 top-0 w-3/5 h-auto max-h-24 object-contain rounded-lg shadow-lg"
-                      style={{ transform: 'rotate(-4deg)' }}
+                      style={{ transform: "rotate(-4deg)" }}
                     />
                     <img
                       src="/Amazon gutschein.png"
                       alt="Amazon Gutschein 2"
                       className="absolute right-4 top-2 w-3/5 h-auto max-h-24 object-contain rounded-lg shadow-lg"
-                      style={{ transform: 'rotate(3deg)' }}
+                      style={{ transform: "rotate(3deg)" }}
                     />
                   </div>
-                  <h4 className="text-lg font-semibold mb-1">2 × 100 € Amazon Gutschein</h4>
+                  <h4 className="text-lg font-semibold mb-1">
+                    2 × 100 € Amazon Gutschein
+                  </h4>
                   <p className="text-sm text-white/80 text-center">
                     Exklusiv von E-Fellows für deinen nächsten Amazon-Einkauf 🛒
                   </p>
@@ -1163,19 +1201,41 @@ function ChallengeApp() {
             <div className="mt-10 md:mt-14 flex justify-center">
               <button
                 onClick={() => {
-                  document.getElementById('coffee-chats')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                  document
+                    .getElementById("coffee-chats")
+                    ?.scrollIntoView({ behavior: "smooth", block: "start" });
                 }}
                 className="group inline-flex items-center gap-2 rounded-full bg-white/10 backdrop-blur-sm px-5 py-2.5 text-white/90 transition-all hover:bg-white/20 hover:text-white active:scale-95 ring-1 ring-white/20"
               >
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4 opacity-80">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="w-4 h-4 opacity-80"
+                >
                   <path d="M17 8h1a4 4 0 1 1 0 8h-1" />
                   <path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z" />
                   <line x1="6" y1="2" x2="6" y2="4" />
                   <line x1="10" y1="2" x2="10" y2="4" />
                   <line x1="14" y1="2" x2="14" y2="4" />
                 </svg>
-                <span className="text-sm font-medium">Lerne uns bei einem Coffee Chat kennen</span>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-3.5 h-3.5 transition-transform group-hover:translate-y-0.5 opacity-60">
+                <span className="text-sm font-medium">
+                  Lerne uns bei einem Coffee Chat kennen
+                </span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="w-3.5 h-3.5 transition-transform group-hover:translate-y-0.5 opacity-60"
+                >
                   <path d="M12 5v14" />
                   <path d="m19 12-7 7-7-7" />
                 </svg>
@@ -1191,21 +1251,43 @@ function ChallengeApp() {
 
         {(() => {
           const sponsors = [
-            { name: 'LAP Coffee', logo: '/LAP_Logo.png', hasLogo: true },
-            { name: 'Red Bull', logo: '/redbull.svg', hasLogo: true },
-            { name: 'Habitus', logo: '/230913_habitus_logo_orange.png', hasLogo: true },
-            { name: 'e-fellows.net', logo: '/efellowslogoneu.png', hasLogo: true },
-            { name: 'Raus.Life', logo: '/raus_logo_green.png', hasLogo: true },
-            { name: 'Boulderwelt', logo: '/BW_logo_button.png', hasLogo: true },
-            { name: 'Reformer for Her', logo: '/herspace-logo_hoch-earth.jpg', hasLogo: true },
-            { name: 'Kunsthalle München', logo: '/KH_Logo_Master_1909_pos.png', hasLogo: true },
+            { name: "LAP Coffee", logo: "/LAP_Logo.png", hasLogo: true },
+            { name: "Red Bull", logo: "/redbull.svg", hasLogo: true },
+            {
+              name: "Habitus",
+              logo: "/230913_habitus_logo_orange.png",
+              hasLogo: true,
+            },
+            {
+              name: "e-fellows.net",
+              logo: "/efellowslogoneu.png",
+              hasLogo: true,
+            },
+            { name: "Raus.Life", logo: "/raus_logo_green.png", hasLogo: true },
+            { name: "Boulderwelt", logo: "/BW_logo_button.png", hasLogo: true },
+            {
+              name: "Reformer for Her",
+              logo: "/herspace-logo_hoch-earth.jpg",
+              hasLogo: true,
+            },
+            {
+              name: "Kunsthalle München",
+              logo: "/KH_Logo_Master_1909_pos.png",
+              hasLogo: true,
+            },
           ];
 
-          const SponsorItem = ({ sponsor, keyPrefix }: { sponsor: typeof sponsors[0]; keyPrefix: string }) => (
+          const SponsorItem = ({
+            sponsor,
+            keyPrefix,
+          }: {
+            sponsor: (typeof sponsors)[0];
+            keyPrefix: string;
+          }) => (
             <div
               key={`${keyPrefix}-${sponsor.name}`}
               className="mx-8 flex-shrink-0 flex items-center justify-center"
-              style={{ minWidth: '140px', transform: 'translateZ(0)' }}
+              style={{ minWidth: "140px", transform: "translateZ(0)" }}
             >
               {sponsor.hasLogo ? (
                 <img
@@ -1213,7 +1295,11 @@ function ChallengeApp() {
                   alt={`${sponsor.name} Logo`}
                   loading="eager"
                   className="object-contain"
-                  style={{ height: sponsor.logoHeight || '60px', width: 'auto', maxWidth: '180px' }}
+                  style={{
+                    height: sponsor.logoHeight || "60px",
+                    width: "auto",
+                    maxWidth: "180px",
+                  }}
                 />
               ) : (
                 <div className="px-5 py-2 rounded-full border-2 border-[#993333]/30 text-[#993333] font-semibold text-sm whitespace-nowrap">
@@ -1239,12 +1325,20 @@ function ChallengeApp() {
                 <div className="ticker-track" data-mobile-animation>
                   <div className="ticker-content">
                     {[...sponsors, ...sponsors].map((s, i) => (
-                      <SponsorItem key={`tick-a-${i}`} sponsor={s} keyPrefix={`tick-a-${i}`} />
+                      <SponsorItem
+                        key={`tick-a-${i}`}
+                        sponsor={s}
+                        keyPrefix={`tick-a-${i}`}
+                      />
                     ))}
                   </div>
                   <div className="ticker-content">
                     {[...sponsors, ...sponsors].map((s, i) => (
-                      <SponsorItem key={`tick-b-${i}`} sponsor={s} keyPrefix={`tick-b-${i}`} />
+                      <SponsorItem
+                        key={`tick-b-${i}`}
+                        sponsor={s}
+                        keyPrefix={`tick-b-${i}`}
+                      />
                     ))}
                   </div>
                 </div>
@@ -1261,13 +1355,11 @@ function ChallengeApp() {
         <SectionDivider title="Die Challenge" />
         <div className="container mx-auto px-4">
           <p className="text-lg md:text-xl text-center mb-12 max-w-3xl mx-auto">
-            Löse{' '}
-            <span className="text-[#993333] font-bold">
-              bis zum 29.04.
-            </span>{' '}
-            die folgenden Spiele und reiche deine Ergebnisse ein, um
-            am Gewinnspiel teilzunehmen. Basierend auf deinen
-            Ergebnissen erhöht sich deine Gewinnwahrscheinlichkeit.
+            Löse{" "}
+            <span className="text-[#993333] font-bold">bis zum 29.04.</span> die
+            folgenden Spiele und reiche deine Ergebnisse ein, um am Gewinnspiel
+            teilzunehmen. Basierend auf deinen Ergebnissen erhöht sich deine
+            Gewinnwahrscheinlichkeit.
           </p>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -1281,22 +1373,16 @@ function ChallengeApp() {
                 onValueChange={(value) => {
                   const newOpenItems: { [key: string]: boolean } = {};
                   games.forEach((_, idx) => {
-                    newOpenItems[`game${idx + 1}`] =
-                      `game${idx + 1}` === value;
+                    newOpenItems[`game${idx + 1}`] = `game${idx + 1}` === value;
                   });
                   setOpenItems(newOpenItems);
                 }}
               >
                 {games.map((game, index) => (
-                  <Card
-                    key={index}
-                    className="overflow-hidden accordion-card"
-                  >
+                  <Card key={index} className="overflow-hidden accordion-card">
                     <div
                       className={`border-l-4 ${
-                        game.completed
-                          ? 'border-green-500'
-                          : 'border-[#993333]'
+                        game.completed ? "border-green-500" : "border-[#993333]"
                       }`}
                     >
                       <AccordionItem
@@ -1308,10 +1394,7 @@ function ChallengeApp() {
                             <CardHeader className="p-0 flex-1">
                               <div className="flex items-center">
                                 <CardTitle className="text-2xl text-left">
-                                  {game.title.replace(
-                                    /\s*\([^)]*\)\s*/,
-                                    ''
-                                  )}
+                                  {game.title.replace(/\s*\([^)]*\)\s*/, "")}
                                 </CardTitle>
 
                                 {/* Sterne rechts neben dem Titel */}
@@ -1331,8 +1414,8 @@ function ChallengeApp() {
                                   <svg
                                     className={`w-5 h-5 ms-1 ${
                                       game.id >= 2
-                                        ? 'text-yellow-300'
-                                        : 'text-gray-300'
+                                        ? "text-yellow-300"
+                                        : "text-gray-300"
                                     }`}
                                     aria-hidden="true"
                                     xmlns="http://www.w3.org/2000/svg"
@@ -1346,8 +1429,8 @@ function ChallengeApp() {
                                   <svg
                                     className={`w-5 h-5 ms-1 ${
                                       game.id >= 3
-                                        ? 'text-yellow-300'
-                                        : 'text-gray-300'
+                                        ? "text-yellow-300"
+                                        : "text-gray-300"
                                     }`}
                                     aria-hidden="true"
                                     xmlns="http://www.w3.org/2000/svg"
@@ -1365,31 +1448,25 @@ function ChallengeApp() {
                               <motion.span
                                 className="absolute bg-black"
                                 initial={{
-                                  width: '12px',
-                                  height: '2px',
+                                  width: "12px",
+                                  height: "2px",
                                   rotate: 45,
                                   y: -4,
                                   x: 2,
                                 }}
                                 animate={{
-                                  rotate: openItems[
-                                    `game${index + 1}`
-                                  ]
+                                  rotate: openItems[`game${index + 1}`]
                                     ? 45
                                     : 45,
                                   width: openItems[`game${index + 1}`]
-                                    ? '20px'
-                                    : '12px',
-                                  y: openItems[`game${index + 1}`]
-                                    ? 0
-                                    : -4,
-                                  x: openItems[`game${index + 1}`]
-                                    ? 0
-                                    : 2,
+                                    ? "20px"
+                                    : "12px",
+                                  y: openItems[`game${index + 1}`] ? 0 : -4,
+                                  x: openItems[`game${index + 1}`] ? 0 : 2,
                                 }}
                                 transition={{
                                   duration: 0.3,
-                                  ease: 'easeInOut',
+                                  ease: "easeInOut",
                                 }}
                               />
 
@@ -1397,31 +1474,25 @@ function ChallengeApp() {
                               <motion.span
                                 className="absolute bg-black"
                                 initial={{
-                                  width: '12px',
-                                  height: '2px',
+                                  width: "12px",
+                                  height: "2px",
                                   rotate: -45,
                                   y: 4,
                                   x: 2,
                                 }}
                                 animate={{
-                                  rotate: openItems[
-                                    `game${index + 1}`
-                                  ]
+                                  rotate: openItems[`game${index + 1}`]
                                     ? -45
                                     : -45,
                                   width: openItems[`game${index + 1}`]
-                                    ? '20px'
-                                    : '12px',
-                                  y: openItems[`game${index + 1}`]
-                                    ? 0
-                                    : 4,
-                                  x: openItems[`game${index + 1}`]
-                                    ? 0
-                                    : 2,
+                                    ? "20px"
+                                    : "12px",
+                                  y: openItems[`game${index + 1}`] ? 0 : 4,
+                                  x: openItems[`game${index + 1}`] ? 0 : 2,
                                 }}
                                 transition={{
                                   duration: 0.3,
-                                  ease: 'easeInOut',
+                                  ease: "easeInOut",
                                 }}
                               />
                             </div>
@@ -1434,13 +1505,13 @@ function ChallengeApp() {
                             {game.id === 1 && (
                               <div className="space-y-4">
                                 <p className="text-lg">
-                                  Klicke auf die Stelle, wo unser
-                                  Maskottchen Leo zu sehen ist.{' '}
+                                  Klicke auf die Stelle, wo unser Maskottchen
+                                  Leo zu sehen ist.{" "}
                                   <img
                                     src={`${imageBaseUrl}/leoKopf.png`}
                                     alt="Leo der Löwe"
                                     className="inline-block ml-2 h-8 w-auto align-middle drop-shadow-md"
-                                  />{' '}
+                                  />{" "}
                                 </p>
                                 <div
                                   ref={wimmelbildRef}
@@ -1466,10 +1537,8 @@ function ChallengeApp() {
                                       style={{
                                         left: markerPosition.left,
                                         top: markerPosition.top,
-                                        width:
-                                          'clamp(60px, 15%, 100px)', // Min 60px, Max 100px, ideal 15% der Container-Breite
-                                        height:
-                                          'clamp(60px, 15%, 100px)', // Min 60px, Max 100px, ideal 15% der Container-Breite
+                                        width: "clamp(60px, 15%, 100px)", // Min 60px, Max 100px, ideal 15% der Container-Breite
+                                        height: "clamp(60px, 15%, 100px)", // Min 60px, Max 100px, ideal 15% der Container-Breite
                                       }}
                                     >
                                       <img
@@ -1487,26 +1556,26 @@ function ChallengeApp() {
                                     className={`mt-4 border-l-4 ${
                                       wimmelbildAlert.title
                                         .toLowerCase()
-                                        .includes('nicht') ||
+                                        .includes("nicht") ||
                                       wimmelbildAlert.title
                                         .toLowerCase()
-                                        .includes('bitte')
-                                        ? 'border-amber-500 bg-amber-50'
+                                        .includes("bitte")
+                                        ? "border-amber-500 bg-amber-50"
                                         : wimmelbildAlert.title
-                                            .toLowerCase()
-                                            .includes('super')
-                                        ? 'border-green-500 bg-green-50'
-                                        : 'border-[#993333] bg-red-50'
+                                              .toLowerCase()
+                                              .includes("super")
+                                          ? "border-green-500 bg-green-50"
+                                          : "border-[#993333] bg-red-50"
                                     } shadow-sm`}
                                     variant="default"
                                   >
                                     <div className="flex">
                                       {wimmelbildAlert.title
                                         .toLowerCase()
-                                        .includes('nicht') ||
+                                        .includes("nicht") ||
                                       wimmelbildAlert.title
                                         .toLowerCase()
-                                        .includes('bitte') ? (
+                                        .includes("bitte") ? (
                                         <svg
                                           className="h-5 w-5 text-amber-600 mr-2"
                                           xmlns="http://www.w3.org/2000/svg"
@@ -1521,7 +1590,7 @@ function ChallengeApp() {
                                         </svg>
                                       ) : wimmelbildAlert.title
                                           .toLowerCase()
-                                          .includes('super') ? (
+                                          .includes("super") ? (
                                         <svg
                                           className="h-5 w-5 text-green-600 mr-2"
                                           xmlns="http://www.w3.org/2000/svg"
@@ -1553,16 +1622,16 @@ function ChallengeApp() {
                                           className={`font-semibold ${
                                             wimmelbildAlert.title
                                               .toLowerCase()
-                                              .includes('nicht') ||
+                                              .includes("nicht") ||
                                             wimmelbildAlert.title
                                               .toLowerCase()
-                                              .includes('bitte')
-                                              ? 'text-amber-900'
+                                              .includes("bitte")
+                                              ? "text-amber-900"
                                               : wimmelbildAlert.title
-                                                  .toLowerCase()
-                                                  .includes('super')
-                                              ? 'text-green-900'
-                                              : 'text-[#993333]'
+                                                    .toLowerCase()
+                                                    .includes("super")
+                                                ? "text-green-900"
+                                                : "text-[#993333]"
                                           }`}
                                         >
                                           {wimmelbildAlert.title}
@@ -1571,21 +1640,19 @@ function ChallengeApp() {
                                           className={
                                             wimmelbildAlert.title
                                               .toLowerCase()
-                                              .includes('nicht') ||
+                                              .includes("nicht") ||
                                             wimmelbildAlert.title
                                               .toLowerCase()
-                                              .includes('bitte')
-                                              ? 'text-amber-800'
+                                              .includes("bitte")
+                                              ? "text-amber-800"
                                               : wimmelbildAlert.title
-                                                  .toLowerCase()
-                                                  .includes('super')
-                                              ? 'text-green-800'
-                                              : 'text-[#7a2828]'
+                                                    .toLowerCase()
+                                                    .includes("super")
+                                                ? "text-green-800"
+                                                : "text-[#7a2828]"
                                           }
                                         >
-                                          {
-                                            wimmelbildAlert.description
-                                          }
+                                          {wimmelbildAlert.description}
                                         </AlertDescription>
                                       </div>
                                     </div>
@@ -1608,21 +1675,17 @@ function ChallengeApp() {
                                         id="q1-a"
                                         name="question1"
                                         className="mr-2 h-4 w-4 accent-[#993333]"
-                                        checked={
-                                          quizAnswers.question1 ===
-                                          'A'
-                                        }
+                                        checked={quizAnswers.question1 === "A"}
                                         onChange={() =>
                                           setQuizAnswers({
                                             ...quizAnswers,
-                                            question1: 'A',
+                                            question1: "A",
                                           })
                                         }
                                       />
                                       <label htmlFor="q1-a">
-                                        A: Aus Studierenden werden
-                                        Fachkräfte für das mittlere
-                                        Management.
+                                        A: Aus Studierenden werden Fachkräfte
+                                        für das mittlere Management.
                                       </label>
                                     </div>
                                     <div className="flex items-center">
@@ -1631,21 +1694,18 @@ function ChallengeApp() {
                                         id="q1-b"
                                         name="question1"
                                         className="mr-2 h-4 w-4 accent-[#993333]"
-                                        checked={
-                                          quizAnswers.question1 ===
-                                          'B'
-                                        }
+                                        checked={quizAnswers.question1 === "B"}
                                         onChange={() =>
                                           setQuizAnswers({
                                             ...quizAnswers,
-                                            question1: 'B',
+                                            question1: "B",
                                           })
                                         }
                                       />
                                       <label htmlFor="q1-b">
                                         B: Aus Studierenden werden
-                                        Visionär:innen, die ständig
-                                        neue Start-up-Ideen pitchen.
+                                        Visionär:innen, die ständig neue
+                                        Start-up-Ideen pitchen.
                                       </label>
                                     </div>
                                     <div className="flex items-center">
@@ -1654,21 +1714,17 @@ function ChallengeApp() {
                                         id="q1-c"
                                         name="question1"
                                         className="mr-2 h-4 w-4 accent-[#993333]"
-                                        checked={
-                                          quizAnswers.question1 ===
-                                          'C'
-                                        }
+                                        checked={quizAnswers.question1 === "C"}
                                         onChange={() =>
                                           setQuizAnswers({
                                             ...quizAnswers,
-                                            question1: 'C',
+                                            question1: "C",
                                           })
                                         }
                                       />
                                       <label htmlFor="q1-c">
                                         C: Aus Studierenden werden
-                                        unternehmerische
-                                        Persönlichkeiten.
+                                        unternehmerische Persönlichkeiten.
                                       </label>
                                     </div>
                                   </div>
@@ -1677,15 +1733,13 @@ function ChallengeApp() {
                                 {/* Frage 2 */}
                                 <div className="space-y-3">
                                   <h3 className="font-semibold text-lg">
-                                    2. Das Online-Stipendium von
-                                    e-fellows.net bietet über 50
-                                    geldwerte Leistungen – darunter
-                                    kostenlose Print- und
-                                    Digital-Abos. Wie viele
-                                    renommierte Zeitungen und
+                                    2. Das Online-Stipendium von e-fellows.net
+                                    bietet über 50 geldwerte Leistungen –
+                                    darunter kostenlose Print- und Digital-Abos.
+                                    Wie viele renommierte Zeitungen und
                                     Zeitschriften kannst du als
-                                    e-fellows.net-Stipendiat:in
-                                    kostenlos abonnieren?
+                                    e-fellows.net-Stipendiat:in kostenlos
+                                    abonnieren?
                                   </h3>
                                   <div className="space-y-2">
                                     <div className="flex items-center">
@@ -1694,20 +1748,15 @@ function ChallengeApp() {
                                         id="q2-a"
                                         name="question2"
                                         className="mr-2 h-4 w-4 accent-[#993333]"
-                                        checked={
-                                          quizAnswers.question2 ===
-                                          'A'
-                                        }
+                                        checked={quizAnswers.question2 === "A"}
                                         onChange={() =>
                                           setQuizAnswers({
                                             ...quizAnswers,
-                                            question2: 'A',
+                                            question2: "A",
                                           })
                                         }
                                       />
-                                      <label htmlFor="q2-a">
-                                        A: 27
-                                      </label>
+                                      <label htmlFor="q2-a">A: 27</label>
                                     </div>
                                     <div className="flex items-center">
                                       <input
@@ -1715,20 +1764,15 @@ function ChallengeApp() {
                                         id="q2-b"
                                         name="question2"
                                         className="mr-2 h-4 w-4 accent-[#993333]"
-                                        checked={
-                                          quizAnswers.question2 ===
-                                          'B'
-                                        }
+                                        checked={quizAnswers.question2 === "B"}
                                         onChange={() =>
                                           setQuizAnswers({
                                             ...quizAnswers,
-                                            question2: 'B',
+                                            question2: "B",
                                           })
                                         }
                                       />
-                                      <label htmlFor="q2-b">
-                                        B: 16
-                                      </label>
+                                      <label htmlFor="q2-b">B: 16</label>
                                     </div>
                                     <div className="flex items-center">
                                       <input
@@ -1736,20 +1780,15 @@ function ChallengeApp() {
                                         id="q2-c"
                                         name="question2"
                                         className="mr-2 h-4 w-4 accent-[#993333]"
-                                        checked={
-                                          quizAnswers.question2 ===
-                                          'C'
-                                        }
+                                        checked={quizAnswers.question2 === "C"}
                                         onChange={() =>
                                           setQuizAnswers({
                                             ...quizAnswers,
-                                            question2: 'C',
+                                            question2: "C",
                                           })
                                         }
                                       />
-                                      <label htmlFor="q2-c">
-                                        C: 10
-                                      </label>
+                                      <label htmlFor="q2-c">C: 10</label>
                                     </div>
                                     <div className="flex items-center">
                                       <input
@@ -1757,20 +1796,15 @@ function ChallengeApp() {
                                         id="q2-d"
                                         name="question2"
                                         className="mr-2 h-4 w-4 accent-[#993333]"
-                                        checked={
-                                          quizAnswers.question2 ===
-                                          'D'
-                                        }
+                                        checked={quizAnswers.question2 === "D"}
                                         onChange={() =>
                                           setQuizAnswers({
                                             ...quizAnswers,
-                                            question2: 'D',
+                                            question2: "D",
                                           })
                                         }
                                       />
-                                      <label htmlFor="q2-d">
-                                        D: Keine
-                                      </label>
+                                      <label htmlFor="q2-d">D: Keine</label>
                                     </div>
                                   </div>
                                 </div>
@@ -1779,18 +1813,16 @@ function ChallengeApp() {
                                 {quizFeedback && (
                                   <Alert
                                     className={`mt-4 border-l-4 ${
-                                      quizFeedback.type === 'warning'
-                                        ? 'border-amber-500 bg-amber-50'
-                                        : quizFeedback.type ===
-                                          'success'
-                                        ? 'border-green-500 bg-green-50'
-                                        : 'border-[#993333] bg-red-50'
+                                      quizFeedback.type === "warning"
+                                        ? "border-amber-500 bg-amber-50"
+                                        : quizFeedback.type === "success"
+                                          ? "border-green-500 bg-green-50"
+                                          : "border-[#993333] bg-red-50"
                                     } shadow-sm`}
                                     variant="default"
                                   >
                                     <div className="flex">
-                                      {quizFeedback.type ===
-                                      'warning' ? (
+                                      {quizFeedback.type === "warning" ? (
                                         <svg
                                           className="h-5 w-5 text-amber-600 mr-2"
                                           xmlns="http://www.w3.org/2000/svg"
@@ -1803,8 +1835,7 @@ function ChallengeApp() {
                                             clipRule="evenodd"
                                           />
                                         </svg>
-                                      ) : quizFeedback.type ===
-                                        'success' ? (
+                                      ) : quizFeedback.type === "success" ? (
                                         <svg
                                           className="h-5 w-5 text-green-600 mr-2"
                                           xmlns="http://www.w3.org/2000/svg"
@@ -1834,26 +1865,22 @@ function ChallengeApp() {
                                       <div>
                                         <AlertTitle
                                           className={`font-semibold ${
-                                            quizFeedback.type ===
-                                            'warning'
-                                              ? 'text-amber-900'
-                                              : quizFeedback.type ===
-                                                'success'
-                                              ? 'text-green-900'
-                                              : 'text-[#993333]'
+                                            quizFeedback.type === "warning"
+                                              ? "text-amber-900"
+                                              : quizFeedback.type === "success"
+                                                ? "text-green-900"
+                                                : "text-[#993333]"
                                           }`}
                                         >
                                           {quizFeedback.title}
                                         </AlertTitle>
                                         <AlertDescription
                                           className={
-                                            quizFeedback.type ===
-                                            'warning'
-                                              ? 'text-amber-800'
-                                              : quizFeedback.type ===
-                                                'success'
-                                              ? 'text-green-800'
-                                              : 'text-[#7a2828]'
+                                            quizFeedback.type === "warning"
+                                              ? "text-amber-800"
+                                              : quizFeedback.type === "success"
+                                                ? "text-green-800"
+                                                : "text-[#7a2828]"
                                           }
                                         >
                                           {quizFeedback.description}
@@ -1880,8 +1907,8 @@ function ChallengeApp() {
                                           Academy Consult
                                         </h3>
                                         <p className="text-sm opacity-90">
-                                          Eine starke Gemeinschaft
-                                          kann alles erreichen!
+                                          Eine starke Gemeinschaft kann alles
+                                          erreichen!
                                         </p>
                                       </div>
                                     </div>
@@ -1889,43 +1916,40 @@ function ChallengeApp() {
 
                                   <div className="p-5 space-y-4">
                                     <p className="text-sm text-gray-600">
-                                      Mit einer genauen Schätzung
-                                      kannst du deine Gewinnchancen
-                                      deutlich erhöhen! Recherchiere
-                                      und nutze die{' '}
+                                      Mit einer genauen Schätzung kannst du
+                                      deine Gewinnchancen deutlich erhöhen!
+                                      Recherchiere und nutze die{" "}
                                       <span
                                         className="text-[#993333] font-medium underline cursor-pointer"
                                         onClick={scrollToFooter}
                                       >
                                         bereitgestellten Informationen
-                                      </span>{' '}
+                                      </span>{" "}
                                       unserer Websites im Footer.
                                     </p>
 
                                     <div
                                       className="rounded-lg border border-gray-200 overflow-hidden shadow-md"
                                       style={{
-                                        backgroundColor: '#f3f4f6',
-                                        borderRadius: '0.5rem',
+                                        backgroundColor: "#f3f4f6",
+                                        borderRadius: "0.5rem",
                                       }}
                                     >
                                       <div className="p-6 rounded-lg">
                                         <p className="font-medium text-xl mb-4 text-black">
-                                          Wie viele Start-ups wurden
-                                          von Mitgliedern von Academy
-                                          Consult gegründet?
+                                          Wie viele Start-ups wurden von
+                                          Mitgliedern von Academy Consult
+                                          gegründet?
                                         </p>
                                         <div className="relative mb-4">
                                           <Input
                                             type="number"
                                             placeholder="Deine Schätzung"
                                             className="pl-2 md:pl-2 pr-10 md:pr-20 py-2 md:py-6 text-base md:text-lg [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none bg-white/95 backdrop-blur-sm rounded-md border border-gray-200 shadow-md"
-                                            value={
-                                              estimationValue || ''
-                                            }
+                                            value={estimationValue || ""}
                                             onChange={(e) =>
                                               handleEstimationChange(
-                                                e.target.value
+                                                e.target.value,
                                               )
                                             }
                                             min="0"
@@ -1981,14 +2005,10 @@ function ChallengeApp() {
                                           </svg>
                                           <div>
                                             <AlertTitle className="font-semibold text-amber-900">
-                                              {
-                                                estimationFeedback.title
-                                              }
+                                              {estimationFeedback.title}
                                             </AlertTitle>
                                             <AlertDescription className="text-amber-800">
-                                              {
-                                                estimationFeedback.description
-                                              }
+                                              {estimationFeedback.description}
                                             </AlertDescription>
                                           </div>
                                         </div>
@@ -2022,24 +2042,22 @@ function ChallengeApp() {
                           {/* CardFooter mit korrektem Button-Text und Farbe */}
                           <CardFooter className="pt-4 px-0 pb-0">
                             <Button
-                              onClick={() =>
-                                handleGameCompletion(game.id)
-                              }
+                              onClick={() => handleGameCompletion(game.id)}
                               className={`${
                                 game.id === 1 || game.id === 2
                                   ? game.completed
-                                    ? 'bg-green-500 hover:bg-green-600'
-                                    : 'bg-[#993333] hover:bg-[#993333]/90'
+                                    ? "bg-green-500 hover:bg-green-600"
+                                    : "bg-[#993333] hover:bg-[#993333]/90"
                                   : game.completed
-                                  ? 'bg-green-500 hover:bg-green-600'
-                                  : 'bg-[#993333] hover:bg-[#993333]/90'
+                                    ? "bg-green-500 hover:bg-green-600"
+                                    : "bg-[#993333] hover:bg-[#993333]/90"
                               } transition-all duration-300`}
                             >
                               {game.id === 1 || game.id === 2
-                                ? 'Lösung überprüfen'
+                                ? "Lösung überprüfen"
                                 : game.completed
-                                ? 'Schätzung aktualisieren'
-                                : 'Meine Schätzung einreichen'}
+                                  ? "Schätzung aktualisieren"
+                                  : "Meine Schätzung einreichen"}
                             </Button>
                           </CardFooter>
                         </AccordionContent>
@@ -2105,28 +2123,27 @@ function ChallengeApp() {
                         >
                           <span className="text-[#993333] font-semibold">
                             Chance auf 200€:
-                          </span>{' '}
+                          </span>{" "}
                           Newsletter abonnieren
                         </Label>
                       </div>
                       {newsletterOptIn ? (
                         <div className="rounded-md border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-900">
-                          Ja, ich möchte per E-Mail Informationen von
-                          Academy Consult e. V. zur Bewerbungsphase
-                          erhalten (Fristen, Auswahlverfahren, Events
-                          & Vereinsinfos und Informationen zum
-                          Gewinnspiel mit unserem Partner e-fellows).
-                          Ich willige ein, dass Academy Consult e. V.
-                          meine E-Mail-Adresse zu diesem Zweck
-                          verarbeitet. Widerruf jederzeit über den
-                          Abmeldelink oder per Mail an{' '}
+                          Ja, ich möchte per E-Mail Informationen von Academy
+                          Consult e. V. zur Bewerbungsphase erhalten (Fristen,
+                          Auswahlverfahren, Events & Vereinsinfos und
+                          Informationen zum Gewinnspiel mit unserem Partner
+                          e-fellows). Ich willige ein, dass Academy Consult e.
+                          V. meine E-Mail-Adresse zu diesem Zweck verarbeitet.
+                          Widerruf jederzeit über den Abmeldelink oder per Mail
+                          an{" "}
                           <a
                             href="mailto:hey@academyconsult.de"
                             className="underline font-medium"
                           >
                             hey[at]academyconsult.de
                           </a>
-                          . Details in der{' '}
+                          . Details in der{" "}
                           <a
                             href="https://academyconsult.de/unternehmen/datenschutz/"
                             target="_blank"
@@ -2161,16 +2178,15 @@ function ChallengeApp() {
                           htmlFor="consent"
                           className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                         >
-                          Mit dem Einreichen meiner Lösungen
-                          akzeptiere ich die
+                          Mit dem Einreichen meiner Lösungen akzeptiere ich die
                           <a
                             href="https://ac-event.notion.site/Teilnahmebedingungen-1cd3d6763f7b80ea9060d5f84e1649d3"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="text-[#993333] hover:underline"
                           >
-                            {' '}
-                            Teilnahmebedingungen{' '}
+                            {" "}
+                            Teilnahmebedingungen{" "}
                           </a>
                           und
                           <a
@@ -2179,7 +2195,7 @@ function ChallengeApp() {
                             rel="noopener noreferrer"
                             className="text-[#993333] hover:underline"
                           >
-                            {' '}
+                            {" "}
                             Datenschutzbestimmungen
                           </a>
                           .
@@ -2221,22 +2237,18 @@ function ChallengeApp() {
                                     Fast fertig!
                                   </h3>
                                   <p className="mt-2 text-sm text-gray-600">
-                                    Danke für deine Teilnahme!
-                                    Bestätige deine E-Mail, um am
-                                    Gewinnspiel teilzunehmen. Deine
-                                    Lösungen sind erfolgreich
-                                    eingereicht. Schau unbedingt auch
-                                    im Spam-Ordner nach, falls du
-                                    keine Mail findest.
+                                    Danke für deine Teilnahme! Bestätige deine
+                                    E-Mail, um am Gewinnspiel teilzunehmen.
+                                    Deine Lösungen sind erfolgreich eingereicht.
+                                    Schau unbedingt auch im Spam-Ordner nach,
+                                    falls du keine Mail findest.
                                   </p>
                                 </div>
                               </div>
                               <div className="bg-white px-5 py-3 rounded-b-lg flex justify-center">
                                 <Button
                                   type="button"
-                                  onClick={() =>
-                                    setSubmitSuccess(false)
-                                  }
+                                  onClick={() => setSubmitSuccess(false)}
                                   className="bg-[#993333] hover:bg-[#7a2828] text-white"
                                 >
                                   Schließen
@@ -2298,7 +2310,7 @@ function ChallengeApp() {
                           Wird eingereicht...
                         </div>
                       ) : (
-                        'Lösungen einreichen'
+                        "Lösungen einreichen"
                       )}
                     </Button>
                   </CardFooter>
@@ -2308,12 +2320,17 @@ function ChallengeApp() {
               {/* e-fellows Info */}
               <div className="rounded-2xl border border-gray-200 bg-gradient-to-br from-gray-50 to-white p-5 shadow-sm">
                 <div className="flex items-center gap-3 mb-3">
-                  <img src="/efellowslogoneu.png" alt="e-fellows.net" className="h-7 w-auto object-contain" />
+                  <img
+                    src="/efellowslogoneu.png"
+                    alt="e-fellows.net"
+                    className="h-7 w-auto object-contain"
+                  />
                   <div className="h-px flex-1 bg-gray-200" />
                 </div>
                 <p className="text-sm text-gray-600 leading-relaxed">
-                  Den e-fellows Preis (2 × 100 € Amazon Gutschein) kannst du nur gewinnen, wenn du zusätzlich am{' '}
-                  e-fellows Gewinnspiel teilnimmst. Jetzt registrieren und Chance sichern!
+                  Den e-fellows Preis (2 × 100 € Amazon Gutschein) kannst du nur
+                  gewinnen, wenn du zusätzlich am e-fellows Gewinnspiel
+                  teilnimmst. Jetzt registrieren und Chance sichern!
                 </p>
               </div>
 
@@ -2324,8 +2341,8 @@ function ChallengeApp() {
                     Fortschritt & Gewinntickets
                   </CardTitle>
                   <p className="text-sm text-gray-600 mt-1 mb-3">
-                    Mit jedem Spiel sammelst du Gewinntickets. Maximal
-                    100 Tickets sind möglich!
+                    Mit jedem Spiel sammelst du Gewinntickets. Maximal 100
+                    Tickets sind möglich!
                   </p>
                 </CardHeader>
 
@@ -2342,8 +2359,8 @@ function ChallengeApp() {
                             className={`h-7 w-7 rounded-full flex items-center justify-center overflow-hidden mr-3
               ${
                 game.completed
-                  ? 'bg-green-500 text-white'
-                  : 'border border-gray-300 bg-gray-100'
+                  ? "bg-green-500 text-white"
+                  : "border border-gray-300 bg-gray-100"
               }`}
                           >
                             {game.completed ? (
@@ -2362,9 +2379,7 @@ function ChallengeApp() {
                                 <polyline points="20 6 9 17 4 12"></polyline>
                               </svg>
                             ) : (
-                              <span className="text-xs">
-                                {index + 1}
-                              </span>
+                              <span className="text-xs">{index + 1}</span>
                             )}
                           </div>
 
@@ -2372,14 +2387,11 @@ function ChallengeApp() {
                             <p
                               className={`font-medium ${
                                 game.completed
-                                  ? 'text-green-600'
-                                  : 'text-gray-700'
+                                  ? "text-green-600"
+                                  : "text-gray-700"
                               } truncate`}
                             >
-                              {game.title.replace(
-                                /\s*\([^)]*\)\s*/,
-                                ''
-                              )}
+                              {game.title.replace(/\s*\([^)]*\)\s*/, "")}
                             </p>
                           </div>
 
@@ -2392,31 +2404,29 @@ function ChallengeApp() {
                               />
                               <span className="text-xs font-medium">
                                 {game.id === 1 &&
-                                  (games[0].completed ? '20' : '0')}
+                                  (games[0].completed ? "20" : "0")}
                                 {game.id === 2 &&
-                                  (games[1].completed ? '20' : '0')}
+                                  (games[1].completed ? "20" : "0")}
                                 {game.id === 3 &&
-                                  (games[2].completed ? '?' : '0')}
-                                {game.id === 1 || game.id === 2
-                                  ? '/20'
-                                  : '/60'}
+                                  (games[2].completed ? "?" : "0")}
+                                {game.id === 1 || game.id === 2 ? "/20" : "/60"}
                               </span>
                             </div>
 
                             <span
                               className={`px-2 py-0.5 text-xs font-medium rounded-full text-white inline-flex justify-center min-w-[60px] ${
                                 game.id === 1
-                                  ? 'bg-green-500'
+                                  ? "bg-green-500"
                                   : game.id === 2
-                                  ? 'bg-yellow-500'
-                                  : 'bg-red-500'
+                                    ? "bg-yellow-500"
+                                    : "bg-red-500"
                               }`}
                             >
                               {game.id === 1
-                                ? 'Leicht'
+                                ? "Leicht"
                                 : game.id === 2
-                                ? 'Mittel'
-                                : 'Schwer'}
+                                  ? "Mittel"
+                                  : "Schwer"}
                             </span>
                           </div>
                         </div>
@@ -2425,11 +2435,9 @@ function ChallengeApp() {
                         {game.id === 3 && game.completed && (
                           <div className="bg-amber-50 px-3 py-2 border-t border-amber-100">
                             <p className="text-xs text-amber-800">
-                              <span className="font-medium">
-                                Schätzung:
-                              </span>{' '}
-                              Je näher an der korrekten Zahl, desto
-                              mehr Tickets erhältst du (bis zu 60).
+                              <span className="font-medium">Schätzung:</span> Je
+                              näher an der korrekten Zahl, desto mehr Tickets
+                              erhältst du (bis zu 60).
                             </p>
                           </div>
                         )}
@@ -2486,13 +2494,13 @@ function ChallengeApp() {
         <SectionDivider title="Zur Bewerbung" />
         <div className="container mx-auto px-4">
           <p className="text-lg md:text-xl text-center mb-12 max-w-3xl mx-auto">
-            Du studierst in München und willst neben deinem eher
-            theoretischen Studium echte Beratungserfahrung sammeln und
-            dich persönlich weiterentwickeln?
+            Du studierst in München und willst neben deinem eher theoretischen
+            Studium echte Beratungserfahrung sammeln und dich persönlich
+            weiterentwickeln?
             <br />
-            Dann ist Academy Consult genau das richtige für dich!
-            Lerne uns bei einem unserer Events näher kennen oder
-            bewerbe dich direkt über den folgenden Link.
+            Dann ist Academy Consult genau das richtige für dich! Lerne uns bei
+            einem unserer Events näher kennen oder bewerbe dich direkt über den
+            folgenden Link.
             <br />
             <span className="text-[#993333] font-bold">
               Wir freuen uns auf dich!
@@ -2510,9 +2518,9 @@ function ChallengeApp() {
                 className="px-8 py-4 rounded-xl shadow-lg text-center"
                 style={{
                   backgroundImage:
-                    'url(https://hebbkx1anhila5yf.public.blob.vercel-storage.com/AC%20Hintergrund%202-tH8JYEwhI9ZvKdJvkZJ21BJ3ZHAgrd.png)',
-                  backgroundSize: 'cover',
-                  backgroundPosition: 'center',
+                    "url(https://hebbkx1anhila5yf.public.blob.vercel-storage.com/AC%20Hintergrund%202-tH8JYEwhI9ZvKdJvkZJ21BJ3ZHAgrd.png)",
+                  backgroundSize: "cover",
+                  backgroundPosition: "center",
                 }}
               >
                 <span className="text-white font-bold text-xl md:text-2xl drop-shadow-md">
@@ -2525,16 +2533,13 @@ function ChallengeApp() {
       </section>
 
       {/* Event-Sektion – Hintergrund weiß */}
-      <section
-        id="events-section"
-        className="bg-white py-12 md:py-24"
-      >
+      <section id="events-section" className="bg-white py-12 md:py-24">
         <SectionDivider title="Lerne uns kennen!" />
         <div className="container mx-auto px-4">
           <p className="text-lg md:text-xl text-center mb-8 max-w-3xl mx-auto">
-            Auf Infoabenden stellen wir uns genauer vor, klären deine
-            Fragen und tauschen uns aus. Melde dich an und füge die
-            Events deinem Kalender hinzu. 📅
+            Auf Infoabenden stellen wir uns genauer vor, klären deine Fragen und
+            tauschen uns aus. Melde dich an und füge die Events deinem Kalender
+            hinzu. 📅
           </p>
           <div className="flex justify-center mb-12">
             <a
@@ -2544,7 +2549,21 @@ function ChallengeApp() {
               className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#993333] text-white font-semibold hover:bg-[#7a2929] transition-colors shadow-md"
             >
               Alle Events auf Luma
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                <polyline points="15 3 21 3 21 9" />
+                <line x1="10" y1="14" x2="21" y2="3" />
+              </svg>
             </a>
           </div>
         </div>
@@ -2557,9 +2576,9 @@ function ChallengeApp() {
         className="text-white py-12"
         style={{
           backgroundImage:
-            'url(https://hebbkx1anhila5yf.public.blob.vercel-storage.com/AC%20Hintergrund%202-tH8JYEwhI9ZvKdJvkZJ21BJ3ZHAgrd.png)',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
+            "url(https://hebbkx1anhila5yf.public.blob.vercel-storage.com/AC%20Hintergrund%202-tH8JYEwhI9ZvKdJvkZJ21BJ3ZHAgrd.png)",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
         }}
       >
         <div className="container mx-auto px-4">
@@ -2671,7 +2690,8 @@ function ChallengeApp() {
                 className="ml-1 underline hover:opacity-90"
               >
                 Datenschutzbestimmungen
-              </a>{' '}und{' '}
+              </a>{" "}
+              und{" "}
               <a
                 href="https://policies.google.com/terms"
                 target="_blank"
@@ -2679,7 +2699,8 @@ function ChallengeApp() {
                 className="underline hover:opacity-90"
               >
                 Nutzungsbedingungen
-              </a>{' '}von Google.
+              </a>{" "}
+              von Google.
               <span className="mx-1">|</span>
               <a
                 href="https://academyconsult.de/unternehmen/datenschutz/"
@@ -2701,8 +2722,8 @@ function ChallengeApp() {
             </div>
 
             <div className="text-sm opacity-80">
-              © {new Date().getFullYear()} Academy Consult. Alle
-              Rechte vorbehalten.
+              © {new Date().getFullYear()} Academy Consult. Alle Rechte
+              vorbehalten.
             </div>
             <div className="mt-1 text-sm opacity-80">
               G'macht mit ❤️ in Minga
@@ -2725,12 +2746,12 @@ export default function Home() {
       scriptProps={{
         async: true,
         defer: true,
-        appendTo: 'head',
+        appendTo: "head",
       }}
       language="de"
       container={{
         parameters: {
-          badge: 'inline', // Badge komplett ausblenden
+          badge: "inline", // Badge komplett ausblenden
         },
       }}
     >
