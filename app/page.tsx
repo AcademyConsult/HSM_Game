@@ -548,12 +548,12 @@ function ChallengeApp() {
         // Fehler bei der Einreichung
         const errorData = await response.text();
 
-        // Spezifische Fehlermeldung für bereits teilgenommene E-Mail
+        // Spezifische Fehlermeldung für E-Mail innerhalb der 3-Monats-Sperre
         if (
-          errorData.includes('This email has already taken part.')
+          errorData.includes('This email has recently taken part.')
         ) {
           setSubmitError(
-            'Diese E-Mail hat bereits an der Challenge teilgenommen.'
+            'Mit dieser E-Mail wurde innerhalb der letzten 3 Monate bereits an der Challenge teilgenommen.'
           );
         } else {
           setSubmitError(

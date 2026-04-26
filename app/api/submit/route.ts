@@ -57,26 +57,6 @@ export async function POST(request: Request) {
   }
   console.log("[submit] reCAPTCHA passed");
 
-  // Check duplicate email
-  console.log("[submit] Checking for duplicate email...");
-  const { data: existing, error: lookupError } = await supabase
-    .from("ac_challenge_submissions")
-    .select("id")
-    .eq("email", email.toLowerCase())
-    .maybeSingle();
-
-  if (lookupError) {
-    console.error("[submit] Duplicate check query failed:", lookupError);
-  }
-
-  if (existing) {
-    console.log("[submit] Duplicate email found, returning 409");
-    return NextResponse.json(
-      { error: "This email has already taken part." },
-      { status: 409 }
-    );
-  }
-
   // Generate verification token
   const verificationToken = crypto.randomUUID();
   const tokenExpiresAt = new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString();
@@ -86,7 +66,83 @@ export async function POST(request: Request) {
 
   console.log("[submit] Generated verification token, expires:", tokenExpiresAt);
 
-  // Send verification email
+  const emailLower = email.toLowerCase();
+  const COOLDOWN_MS = 90 * 24 * 60 * 60 * 1000; // 3 months
+  const cooldownThresholdISO = new Date(Date.now() - COOLDOWN_MS).toISOString();
+
+  // Insert first, then check for any concurrent / pre-existing entry within the
+  // cooldown window. Inserting before checking shrinks the race window from
+  // "however long the email send takes" down to the few ms between INSERT
+  // commit and SELECT — and lets the loser delete itself deterministically.
+  console.log("[submit] Inserting submission row");
+  const { data: inserted, error: insertError } = await supabase
+    .from("ac_challenge_submissions")
+    .insert({
+      email: emailLower,
+      first_name: vorname,
+      last_name: nachname,
+      estimation_value: schaetzwert,
+      is_verified: false,
+      verification_token: verificationToken,
+      has_newsletter: HatWerbungAboniert,
+      token_expires_at: tokenExpiresAt,
+    })
+    .select("id, created_at")
+    .single();
+
+  if (insertError || !inserted) {
+    console.error("[submit] Insert failed:", insertError);
+    return NextResponse.json(
+      { error: "Daten konnten nicht gespeichert werden." },
+      { status: 500 }
+    );
+  }
+
+  const ourId = inserted.id;
+  const rollback = async (reason: string) => {
+    const { error: rollbackError } = await supabase
+      .from("ac_challenge_submissions")
+      .delete()
+      .eq("id", ourId);
+    if (rollbackError) {
+      console.error(`[submit] Rollback (${reason}) failed:`, rollbackError);
+    }
+  };
+
+  // Earliest entry in the cooldown window for this email is the legitimate
+  // raffle entry. If that's not us — either an older row blocks us, or a
+  // concurrent submission beat us — we delete ourselves and return 409.
+  console.log("[submit] Checking for cooldown / concurrent entries");
+  const { data: winners, error: checkError } = await supabase
+    .from("ac_challenge_submissions")
+    .select("id")
+    .eq("email", emailLower)
+    .gt("created_at", cooldownThresholdISO)
+    .order("created_at", { ascending: true })
+    .order("id", { ascending: true })
+    .limit(1);
+
+  if (checkError) {
+    console.error("[submit] Cooldown check failed:", checkError);
+    await rollback("cooldown check error");
+    return NextResponse.json(
+      { error: "Daten konnten nicht gespeichert werden." },
+      { status: 500 }
+    );
+  }
+
+  const winnerId = winners?.[0]?.id;
+  if (winnerId !== ourId) {
+    console.log("[submit] Cooldown active or race lost, returning 409");
+    await rollback("cooldown / lost race");
+    return NextResponse.json(
+      { error: "This email has recently taken part." },
+      { status: 409 }
+    );
+  }
+
+  // Send verification email; roll back if delivery fails so the user can retry
+  // without being blocked by their own pending entry.
   console.log("[submit] Sending verification email");
   try {
     await sendMail({
@@ -102,29 +158,9 @@ export async function POST(request: Request) {
     console.log("[submit] Email sent successfully");
   } catch (err) {
     console.error("[submit] Email sending failed:", err);
+    await rollback("email send failure");
     return NextResponse.json(
       { error: "E-Mail konnte nicht gesendet werden. Bitte versuche es später erneut." },
-      { status: 500 }
-    );
-  }
-
-  // Store submission
-  console.log("[submit] Inserting submission into database...");
-  const { error: insertError } = await supabase.from("ac_challenge_submissions").insert({
-    email: email.toLowerCase(),
-    first_name: vorname,
-    last_name: nachname,
-    estimation_value: schaetzwert,
-    is_verified: false,
-    verification_token: verificationToken,
-    has_newsletter: HatWerbungAboniert,
-    token_expires_at: tokenExpiresAt,
-  });
-
-  if (insertError) {
-    console.error("[submit] Database insert failed:", insertError);
-    return NextResponse.json(
-      { error: "Daten konnten nicht gespeichert werden." },
       { status: 500 }
     );
   }
