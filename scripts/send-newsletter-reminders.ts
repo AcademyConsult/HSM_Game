@@ -57,6 +57,14 @@ const PUBLIC_ASSET_BASE = "https://challenge.academyconsult.de";
 // Update this each term to match the landing-page deadline.
 const CHALLENGE_DEADLINE = "29.04.";
 
+// Pace live sends so we stay well under Microsoft Graph's per-mailbox throttle
+// (~30 messages/min on Exchange Online). 2s ⇒ ~30/min including the send latency
+// itself, with comfortable headroom against transient 429s. Bumping this is
+// safe; lowering it risks throttling mid-batch.
+const SEND_INTERVAL_MS = 2_000;
+
+const sleep = (ms: number) => new Promise<void>((resolve) => setTimeout(resolve, ms));
+
 // Top 3 prizes (mirrors landing page); image filenames live in /public.
 const PRIZES: Array<{
   rank: string;
@@ -133,9 +141,20 @@ function publicAssetUrl(path: string): string {
 }
 
 function buildEmailHeader(): string {
-  return `<div style="text-align:left; padding:8px 0 24px;">
-    <img src="${publicAssetUrl("/logo_text.png")}" alt="Academy Consult" style="height:64px; width:auto; display:inline-block; border:0;" />
-  </div>`;
+  // /logo_text.png has its wordmark stacked vertically — can't flatten via CSS.
+  // Compose: square triangle mark (logo.png) + wordmark as HTML text, one line.
+  return `<table cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse; margin:8px 0 24px; font-family: Verdana, Geneva, sans-serif;">
+    <tr>
+      <td style="vertical-align:middle; padding-right:14px;">
+        <img src="${publicAssetUrl("/logo.png")}" alt="Academy Consult" width="48" height="48" style="display:block; border:0;" />
+      </td>
+      <td style="vertical-align:middle; white-space:nowrap;">
+        <span style="font-size: 20pt; font-weight: bold; letter-spacing: -0.3px;">
+          <span style="color:#993333;">academy</span>&nbsp;<span style="color:#8a8d96;">consult</span>
+        </span>
+      </td>
+    </tr>
+  </table>`;
 }
 
 function buildEmailFooter(unsubscribeUrl: string): string {
@@ -540,9 +559,18 @@ async function main() {
   }
 
   // === Confirm ===
+  // ETA assumes one send every SEND_INTERVAL_MS plus ~500ms call latency.
+  const etaSec = Math.ceil(
+    (recipients.length * (SEND_INTERVAL_MS + 500)) / 1000,
+  );
+  const etaStr =
+    etaSec >= 60
+      ? `~${Math.floor(etaSec / 60)}m ${etaSec % 60}s`
+      : `~${etaSec}s`;
+
   const prompt =
     mode === "live"
-      ? `${color.redBold("⚠  LIVE MODE — emails will be sent for real.")}\nProceed and send ${color.bold(String(recipients.length))} email(s) (${currentBucket.length} T1 · ${previousBucket.length} T2)? Type ${color.yellow('"yes"')} to confirm: `
+      ? `${color.redBold("⚠  LIVE MODE — emails will be sent for real.")}\nProceed and send ${color.bold(String(recipients.length))} email(s) (${currentBucket.length} T1 · ${previousBucket.length} T2)? ${color.gray(`ETA ${etaStr} at ${SEND_INTERVAL_MS}ms intervals.`)}\nType ${color.yellow('"yes"')} to confirm: `
       : `Proceed with ${color.cyan(mode === "debug" ? "test send (with live filter)" : "test send")} for ${color.bold(String(recipients.length))} recipient(s)? Type ${color.yellow('"yes"')} to confirm: `;
 
   if (!(await confirm(prompt))) {
@@ -568,6 +596,7 @@ async function main() {
   const failedAddresses: string[] = [];
 
   for (let i = 0; i < recipients.length; i++) {
+    if (i > 0) await sleep(SEND_INTERVAL_MS);
     const r = recipients[i];
     const mail =
       r.bucket === "current"

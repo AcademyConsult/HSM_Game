@@ -60,6 +60,20 @@ interface SendMailOptions {
   bcc?: string;
 }
 
+export class GraphSendMailError extends Error {
+  constructor(
+    public status: number,
+    public retryAfter: number | null,
+    public body: string,
+  ) {
+    super(
+      `Graph sendMail failed: ${status}` +
+        (retryAfter !== null ? ` (Retry-After: ${retryAfter}s)` : ""),
+    );
+    this.name = "GraphSendMailError";
+  }
+}
+
 export async function sendMail({
   to,
   subject,
@@ -97,8 +111,20 @@ export async function sendMail({
   );
 
   if (!response.ok) {
-    console.error("[email] Graph API sendMail failed:", response.status);
-    throw new Error(`Failed to send email: ${response.status}`);
+    const body = await response.text().catch(() => "");
+    const retryAfterHeader = response.headers.get("Retry-After");
+    let retryAfter: number | null = null;
+    if (retryAfterHeader) {
+      const n = parseInt(retryAfterHeader, 10);
+      // Microsoft Graph returns delta-seconds, not HTTP-dates.
+      if (!Number.isNaN(n)) retryAfter = n;
+    }
+    console.error(
+      `[email] Graph API sendMail failed: ${response.status}` +
+        (retryAfter !== null ? ` (Retry-After: ${retryAfter}s)` : ""),
+    );
+    if (body) console.error(`[email] Response body: ${body.slice(0, 500)}`);
+    throw new GraphSendMailError(response.status, retryAfter, body);
   }
 
   console.log("[email] Mail sent successfully");
