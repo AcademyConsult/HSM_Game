@@ -49,7 +49,7 @@ Semester detection is automatic: April–September → Sommersemester, October�
 
 **Template 2** — re-engagement. References the semester they last participated in, showcases the top prizes, and includes CTAs for both the challenge and the application.
 
-Both templates include personalised first name, a footer with an unsubscribe link, and RFC 8058 one-click unsubscribe headers (sent as MAPI extended properties to work around Microsoft Graph restrictions).
+Both templates include personalised first name, a footer with an unsubscribe link, and RFC 8058 one-click unsubscribe headers (sent as MAPI extended properties to work around Microsoft Graph restrictions). The headers can be disabled via `NEWSLETTER_UNSUBSCRIBE_HEADERS=false` (see Configuration); the in-body unsubscribe link is unaffected.
 
 ## Dedup / persistence
 
@@ -80,3 +80,9 @@ Update these constants at the top of the script each term:
 | `CHALLENGE_DEADLINE` | Date shown in Template 2 copy (e.g. `"29.04."`). |
 | `PRIZES`             | Top-3 prize list mirroring the landing page.     |
 | `APPLY_URL`          | Direct application link.                         |
+
+### Environment variables
+
+| Var                              | Default | Purpose                                                                                                                                                                          |
+| -------------------------------- | ------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `NEWSLETTER_UNSUBSCRIBE_HEADERS` | `true`  | Set to `false` to suppress the RFC 8058 `List-Unsubscribe` / `List-Unsubscribe-Post` headers (sent as MAPI extended properties). The in-body unsubscribe link is always rendered regardless. Useful when debugging Graph send errors or A/B-testing deliverability. |

@@ -74,6 +74,14 @@ const CHALLENGE_DEADLINE = "29.04.";
 // safe; lowering it risks throttling mid-batch.
 const SEND_INTERVAL_MS = 2_000;
 
+// Toggle for the RFC 8058 one-click `List-Unsubscribe` / `List-Unsubscribe-Post`
+// headers (set as MAPI extended properties). The in-body unsubscribe link is
+// always rendered; this flag only controls the headers. Default: on. Set
+// NEWSLETTER_UNSUBSCRIBE_HEADERS=false to suppress them (e.g. while debugging
+// MAPI/Graph errors or A/B-testing deliverability).
+const INCLUDE_UNSUBSCRIBE_HEADERS =
+  process.env.NEWSLETTER_UNSUBSCRIBE_HEADERS !== "false";
+
 const sleep = (ms: number) => new Promise<void>((resolve) => setTimeout(resolve, ms));
 
 // Top 3 prizes (mirrors landing page); image filenames live in /public.
@@ -583,6 +591,13 @@ async function main() {
   } else {
     console.log(`${color.bold("Filter:")}           ${color.gray("disabled (test mode)")}`);
   }
+  console.log(
+    `${color.bold("Unsub headers:")}    ${
+      INCLUDE_UNSUBSCRIBE_HEADERS
+        ? color.green("on")
+        : color.yellow("off (NEWSLETTER_UNSUBSCRIBE_HEADERS=false)")
+    }`,
+  );
 
   console.log("");
   console.log(color.dim("Querying Supabase…"));
@@ -794,15 +809,16 @@ async function main() {
     // with List-Unsubscribe-Post, MUAs POST `List-Unsubscribe=One-Click` to
     // it without any user interaction. The in-body link still points at the
     // user-facing /unsubscribe page (see unsubscribeUrl above).
-    const oneClickUrl = buildOneClickUnsubscribeUrl(r.id);
     const PS_INTERNET_HEADERS = "{00020386-0000-0000-C000-000000000046}";
-    const extendedProperties = [
-      { id: "String 0x1045", value: `<${oneClickUrl}>` },
-      {
-        id: `String ${PS_INTERNET_HEADERS} Name List-Unsubscribe-Post`,
-        value: "List-Unsubscribe=One-Click",
-      },
-    ];
+    const extendedProperties = INCLUDE_UNSUBSCRIBE_HEADERS
+      ? [
+          { id: "String 0x1045", value: `<${buildOneClickUnsubscribeUrl(r.id)}>` },
+          {
+            id: `String ${PS_INTERNET_HEADERS} Name List-Unsubscribe-Post`,
+            value: "List-Unsubscribe=One-Click",
+          },
+        ]
+      : undefined;
     try {
       await sendMail({
         to: r.email,
