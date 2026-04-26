@@ -189,7 +189,12 @@ function buildCurrentTermEmail(input: {
 
   <p>vielen Dank, dass du bei der <strong>Academy Consult Challenge ${currentYear}</strong> dabei warst — wir hoffen, du hattest Spaß!</p>
 
-  <p><strong>Heute Abend um 23:59 Uhr endet unsere Bewerbungsphase.</strong> Falls du dich noch nicht beworben hast, ist jetzt der perfekte Moment: Mit einer Bewerbung sicherst du dir die Chance, Teil von Academy Consult zu werden, an spannenden Beratungsprojekten mitzuarbeiten und ein starkes Netzwerk aufzubauen.</p>
+  <div style="background:#fff3f3; border-left:4px solid #993333; border-radius:4px; padding:16px 20px; margin:16px 0 20px;">
+    <div style="font-size:13pt; font-weight:bold; color:#993333; margin-bottom:4px;">⏰ Bewerbungsphase endet heute um 23:59 Uhr!</div>
+    <div style="font-size:10pt; color:#444; line-height:1.5;">Wenn du Teil von Academy Consult werden möchtest, ist heute deine letzte Chance. Bewirb dich jetzt und werde Teil der größten studentischen Unternehmensberatung Deutschlands.</div>
+  </div>
+
+  <p>Falls du dich noch nicht beworben hast, ist jetzt der perfekte Moment: Mit einer Bewerbung sicherst du dir die Chance, an spannenden Beratungsprojekten mitzuarbeiten und ein starkes Netzwerk aufzubauen.</p>
 
   <p>
     <a href="${applyUrl}" style="background:#993333; color:#fff; padding:12px 24px; text-decoration:none; border-radius:4px; display:inline-block; font-weight:bold;">Jetzt bewerben</a>
@@ -246,12 +251,18 @@ function buildPreviousTermEmail(input: {
 
   <p>Auch dieses Semester findet die Academy Consult Challenge wieder statt — und du kannst noch bis zum <strong>${escapeHtml(challengeDeadline)}</strong> teilnehmen. Es warten wieder tolle Preise auf dich:</p>
 
+  <div style="background:#fff3f3; border-left:4px solid #993333; border-radius:4px; padding:16px 20px; margin:0 0 20px;">
+    <div style="font-size:13pt; font-weight:bold; color:#993333; margin-bottom:4px;">⏰ Bewerbungsphase endet heute um 23:59 Uhr!</div>
+    <div style="font-size:10pt; color:#444; line-height:1.5;">Wenn du Teil von Academy Consult werden möchtest, ist heute deine letzte Chance. Bewirb dich jetzt und sichere dir deinen Platz in unserem Team.</div>
+  </div>
+
   <table cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse; margin:16px 0 8px;">
     ${prizesHtml}
   </table>
   <p style="font-size:10pt; color:#777; font-style:italic; margin:0 0 16px;">… und viele weitere Preise</p>
 
   <h3 style="font-size:13pt; font-weight:bold; margin:28px 0 12px; color:#222;">Unser Newsletter-Gewinnspiel</h3>
+
   <table cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse; margin:0 0 16px;">
     <tr>
       <td style="vertical-align:top; padding:12px 16px 12px 0; width:160px;">
@@ -266,7 +277,7 @@ function buildPreviousTermEmail(input: {
 
   <p style="margin-top:24px;"><strong>Was du tun kannst:</strong></p>
   <ol style="padding-left:20px;">
-    <li style="margin-bottom:8px;"><a href="${applyUrl}" style="color:#993333; font-weight:bold;">Bewirb dich</a> direkt bei Academy Consult und werde Teil unserer Beratung.</li>
+    <li style="margin-bottom:8px;"><a href="${applyUrl}" style="color:#993333; font-weight:bold;">Bewirb dich</a> und werde Teil der größten studentischen Unternehmensberatung Deutschlands.</li>
     <li><a href="${challengeUrl}" style="color:#993333; font-weight:bold;">Mach bei der Challenge mit</a> und sichere dir die Chance auf einen der Preise oben.</li>
   </ol>
 
