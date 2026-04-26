@@ -54,7 +54,11 @@ if (htmlMode && liveMode) {
   console.error(color.red("Error: --html and --live are mutually exclusive."));
   process.exit(1);
 }
-const mode: "test" | "live" | "debug" = liveMode ? "live" : debugMode ? "debug" : "test";
+const mode: "test" | "live" | "debug" = liveMode
+  ? "live"
+  : debugMode
+    ? "debug"
+    : "test";
 
 // === Constants ===
 const CHALLENGE_URL =
@@ -82,7 +86,8 @@ const SEND_INTERVAL_MS = 2_000;
 const INCLUDE_UNSUBSCRIBE_HEADERS =
   process.env.NEWSLETTER_UNSUBSCRIBE_HEADERS !== "false";
 
-const sleep = (ms: number) => new Promise<void>((resolve) => setTimeout(resolve, ms));
+const sleep = (ms: number) =>
+  new Promise<void>((resolve) => setTimeout(resolve, ms));
 
 // Top 3 prizes (mirrors landing page); image filenames live in /public.
 const PRIZES: Array<{
@@ -94,7 +99,8 @@ const PRIZES: Array<{
   {
     rank: "1. Preis",
     title: "Tiny House Trip von Raus.Life",
-    description: "Ein Wochenende abschalten in einem Tiny House mitten in der Natur.",
+    description:
+      "Ein Wochenende abschalten in einem Tiny House mitten in der Natur.",
     image: "/221102_Raus_Cabins_Alt_Kentzlin_0003_HDR_HiRes.jpg",
   },
   {
@@ -195,7 +201,7 @@ function buildCurrentTermEmail(input: {
 
   <p>Hey ${escapeHtml(vorname)},</p>
 
-  <p>vielen Dank, dass du bei der <strong>Academy Consult Challenge ${currentYear}</strong> dabei warst — wir hoffen, du hattest Spaß!</p>
+  <p>vielen Dank, dass du bei der <strong>Academy Consult Challenge ${currentYear}</strong> dabei warst. Wir hoffen, du hattest Spaß!</p>
 
   <div style="background:#fff3f3; border-left:4px solid #993333; border-radius:4px; padding:16px 20px; margin:16px 0 20px;">
     <div style="font-size:13pt; font-weight:bold; color:#993333; margin-bottom:4px;">⏰ Bewerbungsphase endet heute um 23:59 Uhr!</div>
@@ -247,7 +253,7 @@ function buildPreviousTermEmail(input: {
         <div style="font-size:12pt; font-weight:bold; margin-top:2px;">${escapeHtml(p.title)}</div>
         <div style="font-size:10pt; color:#555; margin-top:4px;">${escapeHtml(p.description)}</div>
       </td>
-    </tr>`
+    </tr>`,
   ).join("");
 
   const html = `<div style="font-family: Verdana, Geneva, sans-serif; font-size: 11pt; color: #222; line-height: 1.6; max-width:640px; padding: 0 24px;">
@@ -255,7 +261,7 @@ function buildPreviousTermEmail(input: {
 
   <p>Hey ${escapeHtml(vorname)},</p>
 
-  <p>im <strong>${escapeHtml(pastSemesterLabel)}</strong> hast du bei der <strong>Academy Consult Challenge</strong> mitgemacht — schön, dass du damals dabei warst!</p>
+  <p>im <strong>${escapeHtml(pastSemesterLabel)}</strong> hast du bei der <strong>Academy Consult Challenge</strong> mitgemacht. Schön, dass du damals dabei warst!</p>
 
   <p>Auch dieses Semester findet die Academy Consult Challenge wieder statt — und du kannst noch bis zum <strong>${escapeHtml(challengeDeadline)}</strong> teilnehmen. Es warten wieder tolle Preise auf dich:</p>
 
@@ -308,7 +314,9 @@ async function loadAlreadySentEmails(term: string): Promise<Set<string>> {
     .select("email")
     .eq("term", term);
   if (error) {
-    console.error(color.red(`Failed to load reminder history: ${error.message}`));
+    console.error(
+      color.red(`Failed to load reminder history: ${error.message}`),
+    );
     process.exit(1);
   }
   return new Set((data ?? []).map((r) => (r.email as string).toLowerCase()));
@@ -354,7 +362,10 @@ function renderTable(headers: string[], rows: string[][]): string {
 
 // === Confirmation ===
 async function confirm(prompt: string): Promise<boolean> {
-  const rl = readline.createInterface({ input: process.stdin, output: process.stdout });
+  const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout,
+  });
   const answer = (await rl.question(prompt)).trim().toLowerCase();
   rl.close();
   return answer === "yes" || answer === "y";
@@ -456,7 +467,16 @@ function buildHtmlExport(opts: {
   t1Mail: { subject: string; html: string } | null;
   t2Mail: { subject: string; html: string } | null;
 }): string {
-  const { semester, generatedAt, filterEnabled, alreadySentCount, currentBucket, previousBucket, t1Mail, t2Mail } = opts;
+  const {
+    semester,
+    generatedAt,
+    filterEnabled,
+    alreadySentCount,
+    currentBucket,
+    previousBucket,
+    t1Mail,
+    t2Mail,
+  } = opts;
   const total = currentBucket.length + previousBucket.length;
   const pad2 = (n: number) => String(n).padStart(2, "0");
   const dateStr = `${generatedAt.getFullYear()}-${pad2(generatedAt.getMonth() + 1)}-${pad2(generatedAt.getDate())} ${pad2(generatedAt.getHours())}:${pad2(generatedAt.getMinutes())}`;
@@ -589,7 +609,9 @@ async function main() {
       `${color.bold("Already sent:")}     ${color.yellow(String(alreadySent.size))} address(es) in ${color.gray(currentSemester.key)}`,
     );
   } else {
-    console.log(`${color.bold("Filter:")}           ${color.gray("disabled (test mode)")}`);
+    console.log(
+      `${color.bold("Filter:")}           ${color.gray("disabled (test mode)")}`,
+    );
   }
   console.log(
     `${color.bold("Unsub headers:")}    ${
@@ -645,7 +667,11 @@ async function main() {
 
   // === Recipient tables (one per bucket) ===
   if (currentBucket.length > 0) {
-    console.log(color.cyanBold(`Template 1 — current-term recipients (${currentBucket.length}):`));
+    console.log(
+      color.cyanBold(
+        `Template 1 — current-term recipients (${currentBucket.length}):`,
+      ),
+    );
     console.log(
       renderTable(
         ["#", "Vorname", "Email"],
@@ -657,7 +683,9 @@ async function main() {
 
   if (previousBucket.length > 0) {
     console.log(
-      color.cyanBold(`Template 2 — previous-term recipients (${previousBucket.length}):`),
+      color.cyanBold(
+        `Template 2 — previous-term recipients (${previousBucket.length}):`,
+      ),
     );
     console.log(
       renderTable(
@@ -687,7 +715,8 @@ async function main() {
       unsubscribeUrl: buildUnsubscribeUrl(sample.id),
     });
     console.log(
-      color.bold("Template 1 preview ") + color.gray(`(rendered for ${sample.email})`),
+      color.bold("Template 1 preview ") +
+        color.gray(`(rendered for ${sample.email})`),
     );
     console.log(rule);
     console.log(`${color.bold("Subject:")} ${t1Mail.subject}`);
@@ -707,7 +736,8 @@ async function main() {
       unsubscribeUrl: buildUnsubscribeUrl(sample.id),
     });
     console.log(
-      color.bold("Template 2 preview ") + color.gray(`(rendered for ${sample.email})`),
+      color.bold("Template 2 preview ") +
+        color.gray(`(rendered for ${sample.email})`),
     );
     console.log(rule);
     console.log(`${color.bold("Subject:")} ${t2Mail.subject}`);
@@ -812,7 +842,10 @@ async function main() {
     const PS_INTERNET_HEADERS = "{00020386-0000-0000-C000-000000000046}";
     const extendedProperties = INCLUDE_UNSUBSCRIBE_HEADERS
       ? [
-          { id: "String 0x1045", value: `<${buildOneClickUnsubscribeUrl(r.id)}>` },
+          {
+            id: "String 0x1045",
+            value: `<${buildOneClickUnsubscribeUrl(r.id)}>`,
+          },
           {
             id: `String ${PS_INTERNET_HEADERS} Name List-Unsubscribe-Post`,
             value: "List-Unsubscribe=One-Click",
@@ -827,7 +860,9 @@ async function main() {
         extendedProperties,
       });
       sent++;
-      console.log(`  ${color.green("✓")} ${color.gray(prefix)} ${tag} ${r.email}`);
+      console.log(
+        `  ${color.green("✓")} ${color.gray(prefix)} ${tag} ${r.email}`,
+      );
       try {
         await markReminderSent(r.email, currentSemester.key, r.id);
       } catch (e) {
