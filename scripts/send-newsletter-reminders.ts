@@ -132,6 +132,12 @@ function publicAssetUrl(path: string): string {
   return `${PUBLIC_ASSET_BASE}${encoded}`;
 }
 
+function buildEmailHeader(): string {
+  return `<div style="text-align:left; padding:8px 0 24px;">
+    <img src="${publicAssetUrl("/logo_text.png")}" alt="Academy Consult" style="height:64px; width:auto; display:inline-block; border:0;" />
+  </div>`;
+}
+
 function buildEmailFooter(unsubscribeUrl: string): string {
   return `<hr style="border:none; border-top:1px solid #ccc; margin:24px 0;" />
   <p style="font-size: 9pt; color: #666; line-height: 1.5;">
@@ -153,7 +159,9 @@ function buildCurrentTermEmail(input: {
 }): { subject: string; html: string } {
   const { vorname, currentYear, applyUrl, unsubscribeUrl } = input;
   const subject = `Letzte Chance: Bewerbung bei Academy Consult endet heute Abend`;
-  const html = `<div style="font-family: Verdana, Geneva, sans-serif; font-size: 11pt; color: #222; line-height: 1.6;">
+  const html = `<div style="font-family: Verdana, Geneva, sans-serif; font-size: 11pt; color: #222; line-height: 1.6; padding: 0 24px;">
+  ${buildEmailHeader()}
+
   <p>Hey ${escapeHtml(vorname)},</p>
 
   <p>vielen Dank, dass du bei der <strong>Academy Consult Challenge ${currentYear}</strong> dabei warst — wir hoffen, du hattest Spaß!</p>
@@ -206,7 +214,9 @@ function buildPreviousTermEmail(input: {
     </tr>`
   ).join("");
 
-  const html = `<div style="font-family: Verdana, Geneva, sans-serif; font-size: 11pt; color: #222; line-height: 1.6; max-width:640px;">
+  const html = `<div style="font-family: Verdana, Geneva, sans-serif; font-size: 11pt; color: #222; line-height: 1.6; max-width:640px; padding: 0 24px;">
+  ${buildEmailHeader()}
+
   <p>Hey ${escapeHtml(vorname)},</p>
 
   <p>im <strong>${escapeHtml(pastSemesterLabel)}</strong> hast du bei der <strong>Academy Consult Challenge</strong> mitgemacht — schön, dass du damals dabei warst!</p>
@@ -505,8 +515,6 @@ async function main() {
     );
     console.log(rule);
     console.log(`${color.bold("Subject:")} ${mail.subject}`);
-    console.log(`${color.bold("Body (HTML):")}`);
-    console.log(mail.html);
     console.log(rule);
     console.log("");
   }
@@ -527,8 +535,6 @@ async function main() {
     );
     console.log(rule);
     console.log(`${color.bold("Subject:")} ${mail.subject}`);
-    console.log(`${color.bold("Body (HTML):")}`);
-    console.log(mail.html);
     console.log(rule);
     console.log("");
   }
