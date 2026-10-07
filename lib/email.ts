@@ -153,13 +153,11 @@ export function buildVerificationEmailHtml({
 }): string {
   const greeting = vorname ? `Hey ${escapeHtml(vorname)},` : "Hey,";
   const newsletterMention = hatWerbungAboniert ? " und das Newsletter-Abo" : "";
-  const eFellowsBlock = hatWerbungAboniert
-    ? `<p><strong>e-fellows Gewinnspiel:</strong><br/>
-  Um final am Gewinnspiel für den 200&nbsp;€ Amazon-Gutschein teilzunehmen, musst du dich noch bei unserem Partner e-fellows registrieren.
+  const eFellowsBlock = `<p><strong>e-fellows Gewinnspiel:</strong><br/>
+  Um am Gewinnspiel für den 100&nbsp;€ Amazon-Gutschein teilzunehmen, musst du dich noch bei unserem Partner e-fellows registrieren.
   Alle Infos findest du hier:
   <a href="https://www.e-fellows.net/academy-consult-challenge">https://www.e-fellows.net/academy-consult-challenge</a>
-</p>`
-    : "";
+</p>`;
 
   return `<div style="font-family: Verdana, Geneva, sans-serif; font-size: 11pt;">
   <p>${greeting}</p>

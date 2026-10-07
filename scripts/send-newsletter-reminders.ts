@@ -98,22 +98,21 @@ const PRIZES: Array<{
 }> = [
   {
     rank: "1. Preis",
-    title: "Tiny House Trip von Raus.Life",
-    description:
-      "Ein Wochenende abschalten in einem Tiny House mitten in der Natur.",
-    image: "/221102_Raus_Cabins_Alt_Kentzlin_0003_HDR_HiRes.jpg",
+    title: "AirPods 5",
+    description: "Die neuesten AirPods von Apple.",
+    image: "/airpods-5.png",
   },
   {
     rank: "2. Preis",
-    title: "10 × 100 % Gutschein Reformer Pilates",
-    description: "Reformer-Pilates-Sessions im HerSpaceStudio.",
-    image: "/HerSpaceStudio_cropped.png",
+    title: "Amazon Gutschein",
+    description: "Für deinen nächsten Einkauf.",
+    image: "/amazon-gutschein-flyer.png",
   },
   {
     rank: "3. Preis",
-    title: "Semesterticket für die Boulderwelt",
-    description: "Ein ganzes Semester unbegrenzt klettern.",
-    image: "/Boulderwelt Bild.jpg",
+    title: "IKEA Gutschein",
+    description: "Für deine erste eigene Wohnung.",
+    image: "/ikea-gutschein.png",
   },
 ];
 
@@ -283,8 +282,8 @@ function buildPreviousTermEmail(input: {
         <img src="${publicAssetUrl("/Amazon gutschein.png")}" alt="Amazon Gutschein" style="width:160px; height:120px; object-fit:contain; border-radius:6px; display:block;" />
       </td>
       <td style="vertical-align:top; padding:12px 0;">
-        <div style="font-size:12pt; font-weight:bold; margin-top:2px;">2 × 100 € Amazon Gutschein</div>
-        <div style="font-size:10pt; color:#555; margin-top:4px;">Exklusiv von E-Fellows für deinen nächsten Amazon-Einkauf 🛒</div>
+        <div style="font-size:12pt; font-weight:bold; margin-top:2px;">100 € Amazon Gutschein</div>
+        <div style="font-size:10pt; color:#555; margin-top:4px;">Exklusiv von E-Fellows für deinen nächsten Amazon-Einkauf</div>
       </td>
     </tr>
   </table>

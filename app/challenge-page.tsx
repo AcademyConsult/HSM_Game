@@ -92,21 +92,20 @@ function ChallengeApp() {
     {
       position: "1",
       title: "Hauptpreis",
-      description: "Tiny House Trip von Raus.Life",
-      image: "/221102_Raus_Cabins_Alt_Kentzlin_0003_HDR_HiRes.jpg",
-      image2: "/230912_RAUS_Lenzen_1584.jpg",
+      description: "AirPods 5",
+      image: "/airpods-5.png",
     },
     {
       position: "2",
       title: "Zweiter Preis",
-      description: "10 × 100 % Gutschein Reformer Pilates",
-      image: "/HerSpaceStudio_cropped.png",
+      description: "Amazon Gutschein",
+      image: "/amazon-gutschein-flyer.png",
     },
     {
       position: "3",
       title: "Dritter Preis",
-      description: "Semesterticket für die Boulderwelt",
-      image: "/Boulderwelt Bild.jpg",
+      description: "IKEA Gutschein",
+      image: "/ikea-gutschein.png",
     },
   ];
 
@@ -864,13 +863,13 @@ function ChallengeApp() {
                       {prizes[1].description}
                     </h3>
                     <p className="text-center text-white/80 mb-4">
-                      Reformer for Her 🧘‍♀️
+                      Für deinen nächsten Einkauf
                     </p>
                     <div className="w-full mt-2 flex items-center justify-center">
                       <img
                         src={prizes[1].image}
                         alt={prizes[1].title}
-                        className="w-auto max-w-[90%] max-h-40 object-cover rounded-xl mx-auto"
+                        className="w-auto max-w-[90%] max-h-40 object-contain rounded-xl mx-auto"
                       />
                     </div>
                   </CardContent>
@@ -891,24 +890,13 @@ function ChallengeApp() {
                       {prizes[0].description}
                     </h3>
                     <p className="text-center text-white/80 mb-6">
-                      2 Nächte für 2 Personen in einer Cabin nach Wahl,
-                      einlösbar bis 31.12.2026 🏡
+                      Die neuesten AirPods von Apple
                     </p>
-                    <div
-                      className="flex-1 w-full relative mt-4"
-                      style={{ minHeight: "220px" }}
-                    >
+                    <div className="flex-1 w-full flex items-center justify-center mt-4">
                       <img
                         src={prizes[0].image}
                         alt={prizes[0].title}
-                        className="absolute left-2 top-0 w-2/3 h-auto max-h-56 object-cover rounded-xl shadow-lg"
-                        style={{ transform: "rotate(-4deg)" }}
-                      />
-                      <img
-                        src={(prizes[0] as any).image2}
-                        alt={`${prizes[0].title} 2`}
-                        className="absolute right-2 top-8 w-2/3 h-auto max-h-56 object-cover rounded-xl shadow-lg"
-                        style={{ transform: "rotate(3deg)" }}
+                        className="w-auto max-w-[80%] max-h-56 object-contain mx-auto drop-shadow-xl"
                       />
                     </div>
                   </CardContent>
@@ -929,7 +917,7 @@ function ChallengeApp() {
                       {prizes[2].description}
                     </h3>
                     <p className="text-center text-white/80 mb-4">
-                      Die perfekte Möglichkeit einfach mal Bouldern zu gehen 🧗
+                      Für deine erste eigene Wohnung
                     </p>
                     <div className="w-full mt-2 flex items-center justify-center">
                       <img
@@ -941,7 +929,7 @@ function ChallengeApp() {
                   </CardContent>
                 </Card>
               </div>
-              {/* Weitere Preise */}
+              {/* Weitere Preise – aktuell ausgeblendet
               <div className="hidden md:block mt-14 px-4 container mx-auto max-w-4xl">
                 <h3 className="text-2xl font-bold text-white text-center mb-6">
                   ... und noch viele weitere Preise
@@ -994,6 +982,7 @@ function ChallengeApp() {
                   </div>
                 </div>
               </div>
+              */}
 
               {/* Newsletter-Gewinnspiel Banner - Amazon Gutschein */}
               <div className="hidden md:block mt-14 px-4 container mx-auto max-w-3xl">
@@ -1001,30 +990,20 @@ function ChallengeApp() {
                   Unser Newsletter-Gewinnspiel
                 </h3>
                 <div className="flex items-center gap-6 bg-white/10 backdrop-blur-md rounded-2xl overflow-hidden text-white shadow-[4px_6px_10px_rgba(0,0,0,0.12)] p-6">
-                  <div
-                    className="flex-shrink-0 relative w-48"
-                    style={{ minHeight: "120px" }}
-                  >
+                  <div className="flex-shrink-0 w-48 flex items-center justify-center">
                     <img
                       src="/Amazon gutschein.png"
                       alt="Amazon Gutschein"
-                      className="absolute left-0 top-0 w-4/5 h-auto max-h-28 object-contain rounded-xl shadow-lg"
+                      className="w-full h-auto max-h-28 object-contain rounded-xl shadow-lg"
                       style={{ transform: "rotate(-4deg)" }}
-                    />
-                    <img
-                      src="/Amazon gutschein.png"
-                      alt="Amazon Gutschein 2"
-                      className="absolute right-0 top-2 w-4/5 h-auto max-h-28 object-contain rounded-xl shadow-lg"
-                      style={{ transform: "rotate(3deg)" }}
                     />
                   </div>
                   <div className="flex-1">
                     <h4 className="text-xl font-semibold mb-2">
-                      2 × 100 € Amazon Gutschein
+                      100 € Amazon Gutschein
                     </h4>
                     <p className="text-white/80">
                       Exklusiv von E-Fellows für deinen nächsten Amazon-Einkauf
-                      🛒
                     </p>
                   </div>
                 </div>
@@ -1044,24 +1023,13 @@ function ChallengeApp() {
                       {prizes[0].description}
                     </h3>
                     <p className="text-center text-white/80 mb-4">
-                      2 Nächte für 2 Personen in einer Cabin nach Wahl,
-                      einlösbar bis 31.12.2026 🏡
+                      Die neuesten AirPods von Apple
                     </p>
-                    <div
-                      className="w-full relative"
-                      style={{ height: "140px" }}
-                    >
+                    <div className="w-full flex items-center justify-center">
                       <img
                         src={prizes[0].image}
                         alt={prizes[0].title}
-                        className="absolute left-2 top-0 w-3/5 h-auto max-h-32 object-cover rounded-lg shadow-lg"
-                        style={{ transform: "rotate(-4deg)" }}
-                      />
-                      <img
-                        src={(prizes[0] as any).image2}
-                        alt={`${prizes[0].title} 2`}
-                        className="absolute right-2 top-4 w-3/5 h-auto max-h-32 object-cover rounded-lg shadow-lg"
-                        style={{ transform: "rotate(3deg)" }}
+                        className="w-auto max-w-[70%] max-h-40 object-contain mx-auto drop-shadow-xl"
                       />
                     </div>
                   </CardContent>
@@ -1079,13 +1047,13 @@ function ChallengeApp() {
                       {prizes[1].description}
                     </h3>
                     <p className="text-center text-white/80 mb-4">
-                      Reformer for Her 🧘‍♀️
+                      Für deinen nächsten Einkauf
                     </p>
                     <div className="w-full flex items-center justify-center">
                       <img
                         src={prizes[1].image}
                         alt={prizes[1].title}
-                        className="w-auto max-w-[90%] max-h-32 object-cover rounded-xl mx-auto"
+                        className="w-auto max-w-[90%] max-h-32 object-contain rounded-xl mx-auto"
                       />
                     </div>
                   </CardContent>
@@ -1103,19 +1071,19 @@ function ChallengeApp() {
                       {prizes[2].description}
                     </h3>
                     <p className="text-center text-white/80 mb-4">
-                      Die perfekte Möglichkeit einfach mal Bouldern zu gehen 🧗
+                      Für deine erste eigene Wohnung
                     </p>
                     <div className="w-full flex items-center justify-center">
                       <img
                         src={prizes[2].image}
                         alt={prizes[2].title}
-                        className="w-auto max-w-[90%] max-h-32 object-cover rounded-xl mx-auto"
+                        className="w-auto max-w-[90%] max-h-32 object-contain rounded-xl mx-auto"
                       />
                     </div>
                   </CardContent>
                 </Card>
 
-                {/* Weitere Preise Mobile */}
+                {/* Weitere Preise – aktuell ausgeblendet
                 <h3 className="text-xl font-bold text-white text-center mt-8 mb-4">
                   ... und noch viele weitere Preise
                 </h3>
@@ -1164,34 +1132,26 @@ function ChallengeApp() {
                     </div>
                   </div>
                 </div>
+                */}
 
                 {/* Newsletter-Gewinnspiel Banner Mobile */}
                 <h3 className="text-xl font-bold text-white text-center mt-8 mb-4">
                   Unser Newsletter-Gewinnspiel
                 </h3>
                 <div className="flex flex-col items-center bg-white/10 backdrop-blur-md rounded-2xl overflow-hidden text-white shadow-lg p-5">
-                  <div
-                    className="w-full relative mb-4"
-                    style={{ height: "100px" }}
-                  >
+                  <div className="w-full flex items-center justify-center mb-4">
                     <img
                       src="/Amazon gutschein.png"
                       alt="Amazon Gutschein"
-                      className="absolute left-4 top-0 w-3/5 h-auto max-h-24 object-contain rounded-lg shadow-lg"
+                      className="w-3/5 h-auto max-h-24 object-contain rounded-lg shadow-lg"
                       style={{ transform: "rotate(-4deg)" }}
-                    />
-                    <img
-                      src="/Amazon gutschein.png"
-                      alt="Amazon Gutschein 2"
-                      className="absolute right-4 top-2 w-3/5 h-auto max-h-24 object-contain rounded-lg shadow-lg"
-                      style={{ transform: "rotate(3deg)" }}
                     />
                   </div>
                   <h4 className="text-lg font-semibold mb-1">
-                    2 × 100 € Amazon Gutschein
+                    100 € Amazon Gutschein
                   </h4>
                   <p className="text-sm text-white/80 text-center">
-                    Exklusiv von E-Fellows für deinen nächsten Amazon-Einkauf 🛒
+                    Exklusiv von E-Fellows für deinen nächsten Amazon-Einkauf
                   </p>
                 </div>
               </div>
@@ -1245,7 +1205,7 @@ function ChallengeApp() {
         </div>
       </section>
 
-      {/* Sponsoren Sektion */}
+      {/* Sponsoren Sektion – aktuell ausgeblendet
       <section className="bg-white py-10 w-screen overflow-hidden relative">
         <SectionDivider title="Unsere Sponsoren" />
 
@@ -1311,7 +1271,7 @@ function ChallengeApp() {
 
           return (
             <>
-              {/* Mobile: Grid */}
+              {/- Mobile: Grid -/}
               <div className="md:hidden container mx-auto mt-8 px-4">
                 <div className="flex flex-wrap justify-center gap-4">
                   {sponsors.map((s) => (
@@ -1320,7 +1280,7 @@ function ChallengeApp() {
                 </div>
               </div>
 
-              {/* Desktop: Ticker */}
+              {/- Desktop: Ticker -/}
               <div className="hidden md:block ticker-container w-screen mt-12">
                 <div className="ticker-track" data-mobile-animation>
                   <div className="ticker-content">
@@ -1347,6 +1307,7 @@ function ChallengeApp() {
           );
         })()}
       </section>
+      */}
       {/* Games Section */}
       <section
         id="games-section"
@@ -2121,9 +2082,6 @@ function ChallengeApp() {
                           htmlFor="newsletter"
                           className="text-sm font-medium leading-none cursor-pointer"
                         >
-                          <span className="text-[#993333] font-semibold">
-                            Chance auf 200€:
-                          </span>{" "}
                           Newsletter abonnieren
                         </Label>
                       </div>
@@ -2245,13 +2203,41 @@ function ChallengeApp() {
                                   </p>
                                 </div>
                               </div>
-                              <div className="bg-white px-5 py-3 rounded-b-lg flex justify-center">
+                              {/* e-fellows Gewinnspiel (separat vom Newsletter) */}
+                              <div className="mx-5 mb-2 rounded-lg border border-gray-200 bg-gray-50 p-4">
+                                <img
+                                  src="/efellowslogoneu.png"
+                                  alt="e-fellows.net"
+                                  className="h-6 w-auto object-contain mb-2"
+                                />
+                                <p className="text-sm font-semibold text-gray-900">
+                                  Chance auf einen 100 € Amazon Gutschein
+                                </p>
+                                <p className="mt-1 text-sm text-gray-600">
+                                  Nimm zusätzlich am Gewinnspiel unseres Partners
+                                  e-fellows teil.
+                                </p>
+                              </div>
+                              <div className="bg-white px-5 py-3 rounded-b-lg flex flex-col-reverse sm:flex-row gap-2 justify-center">
                                 <Button
                                   type="button"
+                                  variant="outline"
                                   onClick={() => setSubmitSuccess(false)}
-                                  className="bg-[#993333] hover:bg-[#7a2828] text-white"
                                 >
                                   Schließen
+                                </Button>
+                                <Button
+                                  asChild
+                                  className="bg-[#993333] hover:bg-[#7a2828] text-white"
+                                >
+                                  <a
+                                    href="https://www.e-fellows.net/academy-consult-challenge"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    onClick={() => setSubmitSuccess(false)}
+                                  >
+                                    Hier geht&apos;s zu e-fellows
+                                  </a>
                                 </Button>
                               </div>
                             </div>
@@ -2328,7 +2314,7 @@ function ChallengeApp() {
                   <div className="h-px flex-1 bg-gray-200" />
                 </div>
                 <p className="text-sm text-gray-600 leading-relaxed">
-                  Den e-fellows Preis (2 × 100 € Amazon Gutschein) kannst du nur
+                  Den e-fellows Preis (100 € Amazon Gutschein) kannst du nur
                   gewinnen, wenn du zusätzlich am e-fellows Gewinnspiel
                   teilnimmst. Jetzt registrieren und Chance sichern!
                 </p>
@@ -2524,7 +2510,7 @@ function ChallengeApp() {
                 }}
               >
                 <span className="text-white font-bold text-xl md:text-2xl drop-shadow-md">
-                  Jetzt bis zum 26.04. bewerben!
+                  Jetzt bis zum 25.10. bewerben!
                 </span>
               </div>
             </a>
