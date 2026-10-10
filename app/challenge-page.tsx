@@ -112,135 +112,123 @@ function ChallengeApp() {
   const events = [
     {
       id: 1,
-      title: "Case Workshop",
-      date: "2026-04-15",
-      time: "20:00-21:00",
-      location: "AC Büro, Leopoldstraße 62",
+      title: "Digitaler Infoabend",
+      date: "2026-10-16",
+      time: "17:00-19:00",
+      location: "Online",
       description:
-        "Lerne im Case Workshop, wie du knifflige Business Cases strukturiert und überzeugend löst.",
-      eventbride: "https://luma.com/gggo9w72",
+        "Erfahre bequem von zu Hause aus alles Wichtige über Academy Consult und wie du Teil davon werden kannst.",
+      eventbride: "https://luma.com/stdhhgvk",
       image:
-        "https://images.lumacdn.com/cdn-cgi/image/format=auto,fit=cover,dpr=2,background=white,quality=75,width=400,height=400/gallery-images/m7/cc904003-e5aa-4a5a-9e96-87a70d6f36b9.png",
+        "https://images.lumacdn.com/cdn-cgi/image/format=auto,fit=cover,dpr=2,background=white,quality=75,width=400,height=400/uploads/df/735bd13e-5fd9-42cb-a728-e0f23f7ae0ff.png",
     },
     {
       id: 2,
-      title: "Digitaler Infoabend",
-      date: "2026-04-16",
-      time: "18:00-19:00",
-      location: "Online",
+      title: "Bar-Tour",
+      date: "2026-10-16",
+      time: "20:30-00:30",
+      location: "Bar Fredo, Amalienstraße 87",
       description:
-        "Lerne Academy Consult bequem von zu Hause aus kennen und stelle deine Fragen im digitalen Infoabend.",
-      eventbride: "https://luma.com/7hur5ig6",
+        "Lerne uns bei einem Kaltgetränk kennen! Bartour durch München mit dem AC-Team, Treffpunkt ab 20:30 Uhr in der Bar Fredo.",
+      eventbride: "https://luma.com/1nvg3vgn",
       image:
-        "https://images.lumacdn.com/cdn-cgi/image/format=auto,fit=cover,dpr=2,background=white,quality=75,width=400,height=400/gallery-images/x4/232b7986-33f1-4753-928d-84910cd55dd8.png",
+        "https://images.lumacdn.com/cdn-cgi/image/format=auto,fit=cover,dpr=2,background=white,quality=75,width=400,height=400/uploads/cv/e23a7bfb-a208-4379-a879-7d0d4bc364b6.png",
     },
     {
       id: 3,
-      title: "AC Run Club",
-      date: "2026-04-17",
-      time: "11:00-12:30",
-      location: "München",
+      title: "Case-Study",
+      date: "2026-10-17",
+      time: "10:00-12:00",
+      location: "AC Büro, Leopoldstraße 62",
       description:
-        "Lauf mit uns! Beim AC Run Club lernst du das Team kennen und startest sportlich in den Tag.",
-      eventbride: "https://luma.com/bv25uxay",
+        "Cases knacken, aber richtig! Im Workshop lernst du, wie du Cases systematisch angehst und überzeugend löst.",
+      eventbride: "https://luma.com/makbqvhu",
       image:
-        "https://images.lumacdn.com/cdn-cgi/image/format=auto,fit=cover,dpr=2,background=white,quality=75,width=400,height=400/gallery-images/y7/c0802c16-d438-4337-906f-70e71f2506d1",
+        "https://images.lumacdn.com/cdn-cgi/image/format=auto,fit=cover,dpr=2,background=white,quality=75,width=400,height=400/uploads/bm/c101af1e-1545-46ff-b7cf-c6e7cf142f32.png",
     },
     {
       id: 4,
-      title: "Open Büro Day",
-      date: "2026-04-18",
-      time: "13:00-17:00",
+      title: "AC-Runclub",
+      date: "2026-10-18",
+      time: "10:00-12:00",
       location: "AC Büro, Leopoldstraße 62",
       description:
-        "Schau bei uns im Büro vorbei, lerne das Team kennen und erhalte einen Eindruck von unserer Arbeitsweise.",
-      eventbride: "https://luma.com/axdrxl30",
+        "Laufen, Kaffee, Englischer Garten: Wir joggen gemeinsam eine entspannte Runde und danach gibt's Kaffee auf uns!",
+      eventbride: "https://luma.com/3x1tb3cl",
       image:
-        "https://images.lumacdn.com/cdn-cgi/image/format=auto,fit=cover,dpr=2,background=white,quality=75,width=400,height=400/gallery-images/0j/d8aeea63-be66-4dff-afc5-216fa740189f",
+        "https://images.lumacdn.com/cdn-cgi/image/format=auto,fit=cover,dpr=2,background=white,quality=75,width=400,height=400/uploads/h3/798f56c5-23e4-4cd2-9b10-c6feadfc3059.png",
     },
     {
       id: 5,
-      title: "Yoga",
-      date: "2026-04-19",
-      time: "11:00-12:00",
-      location: "München",
+      title: "Open Office Day",
+      date: "2026-10-19",
+      time: "14:00-17:00",
+      location: "AC Büro, Leopoldstraße 62",
       description:
-        "Entspann dich mit uns bei einer gemeinsamen Yoga-Session und lerne das AC-Team auf andere Art kennen.",
-      eventbride: "https://luma.com/8ykfr9n1",
+        "Schau dir unser Büro an und komm in lockerer Runde mit unseren Mitgliedern ins Gespräch. Kaffee, Snacks und Softdrinks inklusive.",
+      eventbride: "https://luma.com/l4oa9arv",
       image:
-        "https://images.lumacdn.com/cdn-cgi/image/format=auto,fit=cover,dpr=2,background=white,quality=75,width=400,height=400/gallery-images/v3/4a4a9c1b-eba8-4447-be65-f6b3c4b0a97c.png",
+        "https://images.lumacdn.com/cdn-cgi/image/format=auto,fit=cover,dpr=2,background=white,quality=75,width=400,height=400/uploads/yu/8b65f621-638d-45eb-9aad-11550ef0348f.png",
     },
     {
       id: 6,
-      title: "Reformer Pilates – Female Only",
-      date: "2026-04-20",
-      time: "10:00-11:00",
-      location: "Reformer For Her, Augustenstraße 102",
+      title: "LMU-Infoabend",
+      date: "2026-10-19",
+      time: "18:00-20:00",
+      location: "LMU, Hörsaal A 017, Geschwister-Scholl-Platz 1",
       description:
-        "Beweg dich mit uns und lerne das AC-Team bei einer gemeinsamen Pilates-Session kennen.",
-      eventbride: "https://luma.com/irfwinah",
+        "Beim Infoabend an der LMU stellen wir uns vor, beantworten deine Fragen und geben dir einen umfangreichen Einblick in den Verein.",
+      eventbride: "https://luma.com/1lgu5ib3",
       image:
-        "https://images.lumacdn.com/cdn-cgi/image/format=auto,fit=cover,dpr=2,background=white,quality=75,width=400,height=400/gallery-images/z1/d80a77db-201a-496f-8be5-be23a61cd7a8.png",
+        "https://images.lumacdn.com/cdn-cgi/image/format=auto,fit=cover,dpr=2,background=white,quality=75,width=400,height=400/uploads/p4/a30577dc-f9db-4270-96f6-9d2cfee024d2.png",
     },
     {
       id: 7,
-      title: "TUM Infoabend",
-      date: "2026-04-21",
-      time: "19:00-20:00",
-      location: "TUM, Arcisstraße 21, Raum 0601",
+      title: "Bewerbertraining",
+      date: "2026-10-20",
+      time: "16:00-18:00",
+      location: "AC Büro, Leopoldstraße 62",
       description:
-        "Erfahre alles über Academy Consult direkt an der TUM. Wir stellen uns vor und beantworten deine Fragen.",
-      eventbride: "https://luma.com/lxruosv1",
+        "Wir zeigen dir, wie ein guter CV aussieht, wie du das perfekte Motivationsschreiben verfasst und wie du unseren Bewerbungsprozess rockst!",
+      eventbride: "https://luma.com/t95u55va",
       image:
-        "https://images.lumacdn.com/cdn-cgi/image/format=auto,fit=cover,dpr=2,background=white,quality=75,width=400,height=400/gallery-images/ve/ab94b70b-d954-410a-b686-1a32c74a4d75.png",
+        "https://images.lumacdn.com/cdn-cgi/image/format=auto,fit=cover,dpr=2,background=white,quality=75,width=400,height=400/uploads/0n/cb9a46b4-6adf-429b-9671-31fb73da9ecb.png",
     },
     {
       id: 8,
-      title: "Bewerbertraining",
-      date: "2026-04-22",
-      time: "16:00-17:00",
-      location: "AC Büro, Leopoldstraße 62",
+      title: "Infoabend TUM",
+      date: "2026-10-22",
+      time: "18:00-20:00",
+      location: "TUM, Raum 0534, Arcisstraße 21",
       description:
-        "Wir zeigen dir, wie der Bewerbungsprozess bei uns läuft und wie du ihn rockst!",
-      eventbride: "https://luma.com/f8fq8pat",
+        "Beim Infoabend an der TUM stellen wir uns vor, beantworten deine Fragen und geben dir einen umfangreichen Einblick in den Verein.",
+      eventbride: "https://luma.com/97m8nzmr",
       image:
-        "https://images.lumacdn.com/cdn-cgi/image/format=auto,fit=cover,dpr=2,background=white,quality=75,width=400,height=400/gallery-images/yd/c8ded50f-24e7-4af0-aeb2-9bac97712e4c.png",
+        "https://images.lumacdn.com/cdn-cgi/image/format=auto,fit=cover,dpr=2,background=white,quality=75,width=400,height=400/uploads/54/7473e80d-18f7-4462-9bad-a46919734856.png",
     },
     {
       id: 9,
-      title: "Digitaler Infoabend",
-      date: "2026-04-22",
-      time: "18:00-19:00",
-      location: "Online",
+      title: "Paint & Sip - WIB x AC - Female Only",
+      date: "2026-10-23",
+      time: "16:00-18:00",
+      location: "AC Büro, Leopoldstraße 62",
       description:
-        "Lerne Academy Consult bequem von zu Hause aus kennen und stelle deine Fragen im digitalen Infoabend.",
-      eventbride: "https://luma.com/n91do9ao",
+        "Werde kreativ und erfahre bei einem entspannten Paint & Sip mehr über Academy Consult und Women in Business.",
+      eventbride: "https://luma.com/9qy0adnj",
       image:
-        "https://images.lumacdn.com/cdn-cgi/image/format=auto,fit=cover,dpr=2,background=white,quality=75,width=400,height=400/gallery-images/x4/232b7986-33f1-4753-928d-84910cd55dd8.png",
+        "https://images.lumacdn.com/cdn-cgi/image/format=auto,fit=cover,dpr=2,background=white,quality=75,width=400,height=400/uploads/68/a82b10f4-41e5-4f73-920d-319c70211d44.png",
     },
     {
       id: 10,
-      title: "LMU Infoabend",
-      date: "2026-04-23",
-      time: "18:00-19:00",
-      location: "LMU, Hörsaal A 119, Geschwister-Scholl-Platz 1",
+      title: "Digitaler Infoabend",
+      date: "2026-10-23",
+      time: "17:00-19:00",
+      location: "Online",
       description:
-        "Erfahre alles über Academy Consult direkt an der LMU. Wir stellen uns vor und beantworten deine Fragen.",
-      eventbride: "https://luma.com/d3jacmr3",
+        "Beim digitalen Infoabend stellen wir uns vor, beantworten deine Fragen und geben dir einen umfangreichen Einblick in den Verein.",
+      eventbride: "https://luma.com/pflu6aup",
       image:
-        "https://images.lumacdn.com/cdn-cgi/image/format=auto,fit=cover,dpr=2,background=white,quality=75,width=400,height=400/gallery-images/ve/ab94b70b-d954-410a-b686-1a32c74a4d75.png",
-    },
-    {
-      id: 11,
-      title: "Barhopping",
-      date: "2026-04-24",
-      time: "21:00-00:00",
-      location: "München",
-      description:
-        "Lerne uns bei einem kalten Getränk kennen! Barhopping durch München mit dem AC-Team.",
-      eventbride: "https://luma.com/2bhttjz9",
-      image:
-        "https://images.lumacdn.com/cdn-cgi/image/format=auto,fit=cover,dpr=2,background=white,quality=75,width=400,height=400/gallery-images/0o/62834236-cf11-42a2-9144-5af45da3348b",
+        "https://images.lumacdn.com/cdn-cgi/image/format=auto,fit=cover,dpr=2,background=white,quality=75,width=400,height=400/uploads/df/735bd13e-5fd9-42cb-a728-e0f23f7ae0ff.png",
     },
   ];
 
@@ -607,9 +595,9 @@ function ChallengeApp() {
       return false;
     }
 
-    // Leo ist ca. 6.5% von rechts und 38% von unten
-    const targetX = 1 - 0.055; // 0.945 von links
-    const targetY = 1 - 0.333; // 0.667 von oben
+    // Leo ist ca. 80% von links und 48% von oben
+    const targetX = 0.802;
+    const targetY = 0.483;
 
     console.log("Klickposition:", {
       x: selectedCoordinates.x.toFixed(4),
@@ -702,7 +690,7 @@ function ChallengeApp() {
 
   // Funktion zum Überprüfen der Quiz-Antworten
   const checkQuizAnswers = () => {
-    // Richtige Antworten: 1. Frage: C, 2. Frage: C, 3. Frage: A
+    // Richtige Antworten: 1. Frage: C, 2. Frage: B (1999)
     const correctAnswers = {
       question1: "C",
       question2: "B",
@@ -1156,51 +1144,6 @@ function ChallengeApp() {
                 </div>
               </div>
             </div>
-
-            {/* Secondary CTA: Coffee Chats teaser */}
-            <div className="mt-10 md:mt-14 flex justify-center">
-              <button
-                onClick={() => {
-                  document
-                    .getElementById("coffee-chats")
-                    ?.scrollIntoView({ behavior: "smooth", block: "start" });
-                }}
-                className="group inline-flex items-center gap-2 rounded-full bg-white/10 backdrop-blur-sm px-5 py-2.5 text-white/90 transition-all hover:bg-white/20 hover:text-white active:scale-95 ring-1 ring-white/20"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="w-4 h-4 opacity-80"
-                >
-                  <path d="M17 8h1a4 4 0 1 1 0 8h-1" />
-                  <path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z" />
-                  <line x1="6" y1="2" x2="6" y2="4" />
-                  <line x1="10" y1="2" x2="10" y2="4" />
-                  <line x1="14" y1="2" x2="14" y2="4" />
-                </svg>
-                <span className="text-sm font-medium">
-                  Lerne uns bei einem Coffee Chat kennen
-                </span>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="w-3.5 h-3.5 transition-transform group-hover:translate-y-0.5 opacity-60"
-                >
-                  <path d="M12 5v14" />
-                  <path d="m19 12-7 7-7-7" />
-                </svg>
-              </button>
-            </div>
           </div>
         </div>
       </section>
@@ -1317,7 +1260,7 @@ function ChallengeApp() {
         <div className="container mx-auto px-4">
           <p className="text-lg md:text-xl text-center mb-12 max-w-3xl mx-auto">
             Löse{" "}
-            <span className="text-[#993333] font-bold">bis zum 29.04.</span> die
+            <span className="text-[#993333] font-bold">bis zum 25.10.2026</span> die
             folgenden Spiele und reiche deine Ergebnisse ein, um am Gewinnspiel
             teilzunehmen. Basierend auf deinen Ergebnissen erhöht sich deine
             Gewinnwahrscheinlichkeit.
@@ -1469,23 +1412,23 @@ function ChallengeApp() {
                                   Klicke auf die Stelle, wo unser Maskottchen
                                   Leo zu sehen ist.{" "}
                                   <img
-                                    src={`${imageBaseUrl}/leoKopf.png`}
+                                    src={`${imageBaseUrl}/leoKopf_pink.png`}
                                     alt="Leo der Löwe"
                                     className="inline-block ml-2 h-8 w-auto align-middle drop-shadow-md"
                                   />{" "}
                                 </p>
                                 <div
                                   ref={wimmelbildRef}
-                                  className="relative bg-muted rounded-lg overflow-hidden cursor-crosshair aspect-[1280/853]"
+                                  className="relative bg-muted rounded-lg overflow-hidden cursor-crosshair aspect-[3/2]"
                                   onClick={handleWimmelbildClick}
                                 >
                                   <picture>
                                     <source
                                       media="(max-width: 767px)"
-                                      srcSet={`${imageBaseUrl}/AC_Gewinnspiel_Wimmelbild_1.2.jpg`}
+                                      srcSet={`${imageBaseUrl}/AC_Gewinnspiel_Wimmelbild_2.jpg`}
                                     />
                                     <img
-                                      src={`${imageBaseUrl}/AC_Gewinnspiel_Wimmelbild_1.2.jpg`}
+                                      src={`${imageBaseUrl}/AC_Gewinnspiel_Wimmelbild_2.jpg`}
                                       alt="Wimmelbild"
                                       className="w-full h-full object-cover"
                                     />
@@ -1510,6 +1453,9 @@ function ChallengeApp() {
                                     </div>
                                   )}
                                 </div>
+                                <p className="text-center text-lg font-semibold">
+                                  Finde den Löwen!
+                                </p>
 
                                 {/* Alert für Wimmelbild-Feedback */}
                                 {wimmelbildAlert && (
@@ -1694,13 +1640,8 @@ function ChallengeApp() {
                                 {/* Frage 2 */}
                                 <div className="space-y-3">
                                   <h3 className="font-semibold text-lg">
-                                    2. Das Online-Stipendium von e-fellows.net
-                                    bietet über 50 geldwerte Leistungen –
-                                    darunter kostenlose Print- und Digital-Abos.
-                                    Wie viele renommierte Zeitungen und
-                                    Zeitschriften kannst du als
-                                    e-fellows.net-Stipendiat:in kostenlos
-                                    abonnieren?
+                                    2. In welchem Jahr wurde Academy Consult
+                                    gegründet?
                                   </h3>
                                   <div className="space-y-2">
                                     <div className="flex items-center">
@@ -1717,7 +1658,7 @@ function ChallengeApp() {
                                           })
                                         }
                                       />
-                                      <label htmlFor="q2-a">A: 27</label>
+                                      <label htmlFor="q2-a">A: 1995</label>
                                     </div>
                                     <div className="flex items-center">
                                       <input
@@ -1733,7 +1674,7 @@ function ChallengeApp() {
                                           })
                                         }
                                       />
-                                      <label htmlFor="q2-b">B: 16</label>
+                                      <label htmlFor="q2-b">B: 1999</label>
                                     </div>
                                     <div className="flex items-center">
                                       <input
@@ -1749,7 +1690,7 @@ function ChallengeApp() {
                                           })
                                         }
                                       />
-                                      <label htmlFor="q2-c">C: 10</label>
+                                      <label htmlFor="q2-c">C: 2003</label>
                                     </div>
                                     <div className="flex items-center">
                                       <input
@@ -1765,7 +1706,7 @@ function ChallengeApp() {
                                           })
                                         }
                                       />
-                                      <label htmlFor="q2-d">D: Keine</label>
+                                      <label htmlFor="q2-d">D: 2008</label>
                                     </div>
                                   </div>
                                 </div>
@@ -2594,7 +2535,7 @@ function ChallengeApp() {
 
                 {/* YouTube */}
                 <a
-                  href="https://www.youtube.com/channel/UCCJetCDqnmoOtOu E5hv0Z1Q"
+                  href="https://www.youtube.com/@academyconsultmunchene.v.1619"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hover:opacity-80 transition-opacity"

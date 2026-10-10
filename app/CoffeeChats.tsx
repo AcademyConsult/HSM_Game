@@ -20,11 +20,11 @@ export default function CoffeeChats({
           <p className="flex-1 text-lg text-neutral-600 text-center">
             Wir freuen uns darauf, dich kennenzulernen. Buche dir direkt einen Coffee Chat und stelle deine Fragen.
           </p>
-          {/* Rechts: DINATALE als modernes Badge (TODO: Logo ergänzen) */}
+          {/* Rechts: DINATALE als modernes Badge */}
           <div className="flex-shrink-0 flex items-center gap-3 bg-gradient-to-r from-neutral-50 to-neutral-100 rounded-2xl px-6 py-4 shadow-sm border border-neutral-200/60">
-            <div className="flex flex-col">
+            <div className="flex flex-col items-center text-center">
               <span className="text-[10px] font-medium uppercase tracking-wider text-neutral-400 leading-none">in Kooperation mit</span>
-              <span className="text-sm font-bold text-neutral-700 mt-0.5">DINATALE</span>
+              <img src="/dinatale-logo.jpg" alt="DINATALE Cafe" className="h-20 w-20 my-2 rounded-md" />
               <span className="text-xs text-neutral-500">Amalienstraße</span>
             </div>
           </div>

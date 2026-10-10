@@ -37,7 +37,11 @@ const createCalendarLinks = (event: Event) => {
   
   // Enddatum und -zeit
   const endDate = new Date(`${event.date}T${endTime}:00`);
-  
+  // Events über Mitternacht enden am Folgetag
+  if (endDate <= startDate) {
+    endDate.setDate(endDate.getDate() + 1);
+  }
+
   // Beschreibung mit Anmeldelink ergänzen, wenn verfügbar
   let description = event.description;
   if (event.eventbride && event.eventbride !== "none") {
