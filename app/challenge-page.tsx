@@ -2163,8 +2163,20 @@ function ChallengeApp() {
                 <p className="text-sm text-gray-600 leading-relaxed">
                   Den e-fellows Preis (100 € Amazon Gutschein) kannst du nur
                   gewinnen, wenn du zusätzlich am e-fellows Gewinnspiel
-                  teilnimmst. Jetzt registrieren und Chance sichern!
+                  teilnimmst.
                 </p>
+                <Button
+                  asChild
+                  className="mt-4 w-full bg-[#993333] hover:bg-[#7a2828] text-white"
+                >
+                  <a
+                    href="https://www.e-fellows.net/academy-consult-challenge"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Jetzt registrieren und Chance sichern
+                  </a>
+                </Button>
               </div>
 
               {/* Timeline */}
