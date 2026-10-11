@@ -2575,7 +2575,7 @@ function ChallengeApp() {
 export default function Home() {
   return (
     <GoogleReCaptchaProvider
-      reCaptchaKey="6LfoKugqAAAAAKc5SE8o6yJQXuI_zTxcmmy_tZjm"
+      reCaptchaKey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY ?? ""}
       scriptProps={{
         async: true,
         defer: true,
