@@ -292,6 +292,35 @@ function ChallengeApp() {
       calendarLink: "https://calendly.com/julius-baum-academyconsult/30min",
       linkedinLink: "https://www.linkedin.com/in/julius-baum-2b3528255/",
     },
+    {
+      displayName: "Bente",
+      degreeProgram: "Maschinenwesen",
+      stage: "Master",
+      university: "TUM",
+      currentSemester: 1,
+      imageLink: "/Bente_Braun.jpg",
+      calendarLink: "https://calendly.com/academy-consult-munich/coffee-chat",
+      linkedinLink: "https://www.linkedin.com/in/bentebraun/",
+    },
+    {
+      displayName: "Jennifer",
+      degreeProgram: "BWL",
+      stage: "Master",
+      currentSemester: 5,
+      imageLink: "/Jennifer_Nesterov.jpg",
+      calendarLink: "https://calendly.com/jennifer-nesterov-academyconsult/30min",
+      linkedinLink: "https://www.linkedin.com/in/jennifer-nesterov",
+    },
+    {
+      displayName: "Leon",
+      degreeProgram: "Management & Technology",
+      stage: "Bachelor",
+      university: "TUM",
+      currentSemester: 6,
+      imageLink: "/Leon_Thumm.jpg",
+      calendarLink: "https://calendly.com/leon-thumm-academyconsult/30min",
+      linkedinLink: "https://www.linkedin.com/in/leon-thumm/",
+    },
   ];
 
   const [games, setGames] = useState([
