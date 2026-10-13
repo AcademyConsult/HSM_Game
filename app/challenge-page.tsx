@@ -67,7 +67,6 @@ function ChallengeApp() {
   } | null>(null);
   const [estimationValue, setEstimationValue] = useState<number | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitSuccess, setSubmitSuccess] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [markerPosition, setMarkerPosition] = useState<{
     left: string;
@@ -439,28 +438,11 @@ function ChallengeApp() {
       });
 
       if (response.ok) {
-        // Erfolgreiche Einreichung
-        setSubmitSuccess(true);
-
-        // Formular zurücksetzen
-        setFirstName("");
-        setLastName("");
-        setEmail("");
-        setConsentGiven(false);
-        setNewsletterOptIn(false);
-        setQuizAnswers({ question1: null, question2: null });
-        setQuizFeedback(null);
-        setGames((prevGames) =>
-          prevGames.map((game) => ({ ...game, completed: false })),
+        // Erfolgreiche Einreichung: direkt zum e-fellows Gewinnspiel weiterleiten
+        window.location.assign(
+          "https://www.e-fellows.net/academy-consult-challenge",
         );
-        setOpenItems({ game1: true });
-        setMarkerPosition(null);
-        setSelectedCoordinates(null);
-        setIncorrectAttempts(0);
-        setWimmelbildAlert(null);
-        setEstimationValue(null);
-        setEstimationFeedback(null);
-        setEstimationError(null);
+        return;
       } else {
         // Fehler bei der Einreichung
         const errorData = await response.text();
@@ -2035,91 +2017,6 @@ function ChallengeApp() {
                           .
                         </Label>
                       </div>
-
-                      {/* Bestehenden Success-Alert entfernen und durch Modal ersetzen */}
-                      {submitSuccess && (
-                        <>
-                          {/* Overlay mit Hintergrundverdunkelung */}
-                          <div
-                            className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center"
-                            onClick={() => setSubmitSuccess(false)}
-                          >
-                            {/* Modal-Inhalt, stoppt Klick-Propagation */}
-                            <div
-                              className="bg-white rounded-lg shadow-xl max-w-md w-full mx-4 animate-in fade-in duration-300"
-                              onClick={(e) => e.stopPropagation()}
-                            >
-                              <div className="p-5 flex items-start">
-                                <div className="mr-4 bg-green-100 p-2 rounded-full">
-                                  <svg
-                                    className="h-6 w-6 text-green-600"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    stroke="currentColor"
-                                  >
-                                    <path
-                                      strokeLinecap="round"
-                                      strokeLinejoin="round"
-                                      strokeWidth="2"
-                                      d="M5 13l4 4L19 7"
-                                    />
-                                  </svg>
-                                </div>
-                                <div className="flex-1">
-                                  <h3 className="text-lg font-medium text-gray-900">
-                                    Fast fertig!
-                                  </h3>
-                                  <p className="mt-2 text-sm text-gray-600">
-                                    Danke für deine Teilnahme! Bestätige deine
-                                    E-Mail, um am Gewinnspiel teilzunehmen.
-                                    Deine Lösungen sind erfolgreich eingereicht.
-                                    Schau unbedingt auch im Spam-Ordner nach,
-                                    falls du keine Mail findest.
-                                  </p>
-                                </div>
-                              </div>
-                              {/* e-fellows Gewinnspiel (separat vom Newsletter) */}
-                              <div className="mx-5 mb-2 rounded-lg border border-gray-200 bg-gray-50 p-4">
-                                <img
-                                  src="/efellowslogoneu.png"
-                                  alt="e-fellows.net"
-                                  className="h-6 w-auto object-contain mb-2"
-                                />
-                                <p className="text-sm font-semibold text-gray-900">
-                                  Chance auf einen 100 € Amazon Gutschein
-                                </p>
-                                <p className="mt-1 text-sm text-gray-600">
-                                  Nimm zusätzlich am Gewinnspiel unseres Partners
-                                  e-fellows teil.
-                                </p>
-                              </div>
-                              <div className="bg-white px-5 py-3 rounded-b-lg flex flex-col-reverse sm:flex-row gap-2 justify-center">
-                                <Button
-                                  type="button"
-                                  variant="outline"
-                                  onClick={() => setSubmitSuccess(false)}
-                                >
-                                  Schließen
-                                </Button>
-                                <Button
-                                  asChild
-                                  className="bg-[#993333] hover:bg-[#7a2828] text-white"
-                                >
-                                  <a
-                                    href="https://www.e-fellows.net/academy-consult-challenge"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    onClick={() => setSubmitSuccess(false)}
-                                  >
-                                    Hier geht&apos;s zu e-fellows
-                                  </a>
-                                </Button>
-                              </div>
-                            </div>
-                          </div>
-                        </>
-                      )}
 
                       {/* Fehlermeldung anzeigen */}
                       {submitError && (
