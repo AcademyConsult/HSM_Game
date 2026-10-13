@@ -320,6 +320,15 @@ function ChallengeApp() {
       calendarLink: "https://calendly.com/leon-thumm-academyconsult/30min",
       linkedinLink: "https://www.linkedin.com/in/leon-thumm/",
     },
+    {
+      displayName: "Berenike",
+      degreeProgram: "BWL",
+      stage: "Bachelor",
+      currentSemester: 3,
+      imageLink: "/Berenike_Keller.jpg",
+      calendarLink: "https://calendly.com/berenike-keller-academyconsult/30min",
+      linkedinLink: "https://www.linkedin.com/in/berenike-keller-abbb63332/",
+    },
   ];
 
   const [games, setGames] = useState([
