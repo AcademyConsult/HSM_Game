@@ -329,6 +329,15 @@ function ChallengeApp() {
       calendarLink: "https://calendly.com/berenike-keller-academyconsult/30min",
       linkedinLink: "https://www.linkedin.com/in/berenike-keller-abbb63332/",
     },
+    {
+      displayName: "Konstantin",
+      degreeProgram: "Politikwissenschaften",
+      stage: "Bachelor",
+      currentSemester: 3,
+      imageLink: "/Konstantin_Seidel.jpg",
+      calendarLink: "https://calendly.com/konstantin-seidel/30min",
+      linkedinLink: "https://www.linkedin.com/in/konstantin-seidel-a849b62a2/",
+    },
   ];
 
   const [games, setGames] = useState([
