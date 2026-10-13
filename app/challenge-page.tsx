@@ -338,6 +338,16 @@ function ChallengeApp() {
       calendarLink: "https://calendly.com/konstantin-seidel/30min",
       linkedinLink: "https://www.linkedin.com/in/konstantin-seidel-a849b62a2/",
     },
+    {
+      displayName: "Linus",
+      degreeProgram: "Management & Technology (Chemie)",
+      stage: "Master",
+      university: "TUM",
+      currentSemester: 4,
+      imageLink: "/Linus_Weber.jpeg",
+      calendarLink: "https://calendly.com/linus-weber-academyconsult/ac-coffee-chat",
+      linkedinLink: "https://www.linkedin.com/in/weber-linus/",
+    },
   ];
 
   const [games, setGames] = useState([
